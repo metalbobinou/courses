@@ -1,6 +1,5 @@
 # Courses / Cours
-Computer Science courses (mainly in french)
-Cours d'Informatique (principalement en français)
+My Computer Science courses (mainly in french) / Mes cours d'Informatique (principalement en français)
 
 The courses are given with their sources and/or the original files for creating the pictures.
 You can reuse them as long as you cite the origin.
