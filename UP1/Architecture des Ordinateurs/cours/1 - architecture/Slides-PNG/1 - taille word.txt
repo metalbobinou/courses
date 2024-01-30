@@ -1,0 +1,22 @@
+Diminutifs :
+Bus d'@ = Bus d'adresses
+Bus de données = Taille d'une donnée
+(8 bits, 16 bits, 32 bits, 64 bits)
+
+WORD = mot = taille d'une donnée "normale"
+DWORD = double word = 2 fois la taille d'un WORD
+QWORD = quad word = 4 fois la taille d'un WORD
+
+Si WORD = 8 bits, alors DWORD = 16 bits, et QWORD = 32 bits
+Si WORD = 16 bits, alors DWORD = 32 bits, et QWORD = 64 bits
+Si WORD = 32 bits, alors DWORD = 64 bits
+...
+
+La taille d'un WORD est définie dans la documentation de chaque processeur.
+
+1 bit peut prendre 2 valeurs : 0 ou 1
+
+8 bits = 1 octet
+1 octet peut prendre 256 valeurs (2^8) :
+de 0 à 255 s'il est "non-signé"
+de -128 à +128 s'il est "signé" (de -(2^7) à (2^7) - 1)

@@ -1,0 +1,269 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Tableaux}
+\newcommand{\NumeroTD}{TD2}
+\newcommand{\DateCours}{Septembre 2023}
+\newcommand{\AnneeScolaire}{2023-2024}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique Algorithmes Tableaux}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les tableaux et les chaînes de caractères.
+
+\bigskip
+
+Ces deux types de données sont fortement liés selon les langages de développement utilisés.
+Vous devez connaître les contraintes et spécificités de chacun d'entre eux.
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tableaux}
+
+\bigskip
+
+Les tableaux en algorithmique, et dans la plupart des langages de programmation, sont simplement des vecteurs.
+C'est-à-dire qu'il s'agit de tableaux à une seule dimension.
+La plupart des langages de programmation font démarrer leurs tableaux à la position $ 0 $.
+Ceci implique qu'un tableau de taille $ 5 $ (donc qui contient $ 5 $ cases) démarre de la case $ 0 $ et finit à la case $ 4 $ ($ 0 1 2 3 4 $).
+Dans vos algorithmes, vous manipulerez donc souvent les cases de $ 0 $ à \textit{longueur du tableau - 1}, avec comme condition \textit{tant que (iterateur < longueur)} (on s'arrête lorsque l'itérateur atteint la longueur, donc après la dernière case du tableau).
+Il existe cependant quelques langages où les tableaux démarrent à la case $ 1 $, donc finissent à la case \textit{longueur du tableau} : vérifiez toujours quel est l'index (le numéro de case) de la première case dans chacun des langages de programmation que vous utiliserez.
+
+%\medskip
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{| c | c | c | c | c |}
+  \hline
+$ 42 $ & $ 14 $ & $ 18 $ & $ 666 $ & $ 1337 $ \\
+  \hline
+% 0    &   1    &    2   &    3    &    4     \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} & \textit{4} \\
+  \hline
+  \end{tabular}
+\end{table}
+
+%\medskip
+\bigskip
+
+Les tableaux contiennent parfois des éléments de types différents (des entiers, des flottants, et des chaînes de caractères), mais il est fréquent qu'ils ne peuvent contenir qu'un seul et unique type à la fois (uniquement des entiers, ou uniquement des flottants, ou uniquement un type précis).
+Dans les exercices de ce sujet, nos tableaux ne pourront contenir qu'un seul et unique type à chaque fois.
+Si vous déclarez un tableau d'entiers, alors on ne peut y mettre que des entiers et rien d'autre.
+
+\bigskip
+
+Pour accéder à une case précise d'un tableau, on indique l'index entre crochets.
+Par exemple, pour un tableau d'entiers stocké dans la variable \textit{tab}, on accède à la première case en écrivant : \textit{tab[0]}.
+On peut récupérer le contenu de la case pour le mettre dans une variable en écrivant \textit{var = tab[2]}.
+On peut écrire une valeur dans une case d'un tableau en écrivant \textit{tab[2] = 42}.
+
+\bigskip
+
+L'index peut également être une variable, mais celle-ci doit être un entier (on ne peut pas accéder à une case dont l'index est un flottant ou un caractère).
+Ainsi, on ne peut ni faire \textit{tab[0,42]} ni \textit{tab['a']} ni \textit{tab["trois"]}, mais si une variable $ n $ contient un entier (par exemple : $ n = 3 $), on peut écrire \textit{tab[n]}.
+
+\bigskip
+
+Toujours concernant les index des cases, si on essaye d'accéder à une case inexistante (par exemple un index négatif comme $ -1 $ ou au delà de la taille du tableau), une erreur est renvoyée.
+Par exemple, pour un tableau de taille $ 5 $ (index de 0 à 4), on peut accéder à la case $ 4 $ (\textit{tab[4]}) mais pas à la case $ 5 $ (\textit{tab[5]}).
+
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Chaînes de caractères}
+
+Les chaînes de caractères (c'est-à-dire les suites de caractères) sont en réalité des tableaux contenant des caractères.
+Le format standard des chaînes de caractères implique qu'une chaîne finisse par un unique caractère spécial : '\textit{\textbackslash 0}'.
+Ainsi, la chaîne de caractères standard "lol" est en réalité un tableau de taille $ 4 $ dont la dernière case contient '\textbackslash 0'.
+Grâce à cette convention, on n'a plus besoin d'embarquer la taille de la chaîne, il suffit juste de chercher un '\textbackslash 0' pour comprendre qu'il n'y a rien après.
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{| c | c | c | c |}
+  \hline
+'l' & 'o' & 'l' & '\textbackslash 0' \\
+  \hline
+% 0  &  1  &  2  &  3 \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\bigskip
+
+Vous pouvez néanmoins rencontrer des chaînes de caractères non-standards, c'est-à-dire qu'elles ne finissent pas nécessairement par '\textbackslash 0', et peuvent même en contenir dans la chaîne elle-même.
+Dans ce cas très précis, on vous fournira toujours la taille de la chaîne de caractère en plus du tableau.
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+  \hline
+'A' & 'b' & 'C' & '\textbackslash 0' & 'D' & 'e' & 'F' \\
+  \hline
+% 0  &  1  &  2  &          3         &  4  &  5  &  6  \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} & \textit{4} & \textit{5} & \textit{6} \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\bigskip
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercices variés}
+
+\bigskip
+
+
+\question{Écrivez maintenant une fonction vérifiant que les éléments d'un tableau forment un palindrome (la longueur est donnée en paramètre). \textit{PalindromeTab(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction testant si une chaîne de caractères est un palindrome (le '\textbackslash 0' final ne sera bien entendu pas pris en compte dans le palindrome). \textit{PalindromeStr(str)} }
+
+\bigskip
+
+\question{Écrivez une fonction comparant deux tableaux. Si les tableaux sont les mêmes, alors vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. \textit{CompareTab(tab1, tab2, len1, len2)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui renvoie la valeur la plus grande/petite du tableau. Vous ferez une version itérative et une version récursive pour Min et Max. \textit{MinTabIter(tab, len)} \textit{MaxTabIter(tab, len)} \textit{MinTabRec(tab, len)} \textit{MaxTabRec(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui calcule la somme de tous les éléments d'un tableau. Vous ferez une version itérative et une version récursive. \textit{SommeTabIter(tab, len)} \textit{SommeTabRec(tab, len)} }
+
+Améliorez l'algorithme pour n'utiliser qu'un seul itérateur tout en ajoutant à chaque fois le début et la fin du tableau (n'oubliez pas de vous arrêter là où il faut et de ne pas ajouter trop d'éléments).
+
+\bigskip
+
+\question{Écrivez une fonction qui calcule la taille d'une chaîne de caractères (sans compter le '\textbackslash 0' final : "lol" a une taille de $ 3 $). Vous ferez une version itérative et une version récursive. \textit{StrlenIter(str)} \textit{StrlenRec(str)} }
+
+%\bigskip
+\clearpage
+
+\question{Écrivez une fonction qui compare deux chaînes de caractères et renvoie \textit{vrai} si elles sont similaires et \textit{faux} si elles diffèrent. Vous ferez une version itérative et une version récursive. \textit{StrcmpIter(str1, str2)} \textit{StrcmpRec(str1, str2)} }
+
+Essayez d'écrire une version itérative qui teste d'abord la longueur des chaînes, puis, une autre version sans ce test.
+
+\bigskip
+
+\question{Écrivez une fonction qui recherche un élément dans un tableau. Vous ferez une version itérative et une version récursive. \textit{RechercheEltTabIter(tab, len, elt)} \textit{RechercheEltTabRec(tab, len, elt)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui compare deux tableaux. Si les deux tableaux contiennent les mêmes éléments aux mêmes positions, vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. Vous ferez une version itérative et une version récursive. \textit{CompareTabIter(tab1, tab2, len1, len2)} \textit{CompareTabRec(tab1, tab2, len1, len2)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui teste si les éléments d'un tableau sont tous en ordre croissant. Si tous les éléments sont ordonnés du plus petit au plus grand, alors vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. Si les éléments sont tous égaux, alors le résultat sera \textit{vrai}. Vous ferez une version itérative et une version récursive. \textit{TestCroissantTabIter(tab, len)} \textit{TestCroissantTabRec(tab, len)} }
+
+Faites la même chose pour tester la décroissance.
+
+\bigskip
+
+\question{Écrivez une fonction qui insère un élément dans un tableau à une position précise, et décale les éléments vers la fin. Le dernier élément qui devrait disparaître du tableau sera renvoyé par la fonction. Par exemple, pour un tableau contenant [ A B C D ], si l'on y insère 'Z' en position $ 1 $, le tableau doit devenir [ A Z B C ] et la fonction doit renvoyer D. \textit{InsertionTab(tab, len, elt, pos)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui supprime un élément dans un tableau à une position précise, et décale les éléments vers le début. L'élément supprimé du tableau sera renvoyé par la fonction. De plus, pour éviter que le dernier élément soit dupliqué, vous prendrez un élément en paramètre qui sera inséré à la fin. Par exemple, pour un tableau contenant [ A B C D ], si l'on supprime l'élément en position $ 1 $ tout en ajoutant 'Z', le tableau doit devenir [ A C D Z ] et la fonction doit renvoyer B. \textit{SuppressionTab(tab, len, pos, elt)} }
+
+\bigskip
+
+\question{Écrivez une procédure qui inverse la position de tous les éléments. Vous ne devez pas construire de nouveau tableau, mais uniquement modifier en place le tableau (en utilisant des variables temporaires). Par exemple, pour un tableau contenant [ A B C D ], si l'on inverse la position des éléments, le tableau doit devenir [ D C B A ]. \textit{InverserTab(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est bien un préfixe d'une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si le prefixe est bon et \textit{faux} si ce n'est pas le cas. Par exemple, "abc" est un préfixe à "abcdef", mais pas "bcd" ni "def". Vous ferez une version itérative et une version récursive. \textit{PrefixStrIter(str, prefix)} \textit{PrefixStrRec(str, prefix)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est bien un suffixe d'une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si le suffixe est bon et \textit{faux} si ce n'est pas le cas. Par exemple, "def" est un suffixe à "abcdef", mais pas "cde" ni "abc". Vous ferez une version itérative et une version récursive. \textit{SuffixStrIter(str, suffix)} \textit{SuffixStrRec(str, suffix)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est contenue dans une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si la sous-chaîne est contenue dans la chaîne principale et \textit{faux} si ce n'est pas le cas. Par exemple, "abc" est contenue dans "ababc", mais pas "cde" ni "cba". Vous ferez une version itérative et une version récursive. \textit{SubStrIter(str, sub)} \textit{SubStrRec(str, sub)} }
+
+Attention, certains cas sont difficiles à détecter.
+Dans certains cas, il sera plus difficile de détecter "abc" dans "abcbc" que "abc" dans "ababc".
+N'oubliez pas de vérifier plusieurs cas complexes tels que : rechercher "abc" dans "abababc" ou "abcbcbc".
+
+\bigskip
+
+\bigskip
+
+%Pimentez votre expérience des tableaux en réécrivant ces fonctions et procédures en récursif, voire en récursif terminal pour les moins complexes (certaines sont plus naturelles en récursif terminal).
+
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2022.\\
+La plupart des exercices sont inspirés du cahier d'algo de Nathalie "Junior" BOUQUET et Christophe "Krisboul" BOULLAY.}
+
+\textit{(dernière mise à jour octobre 2023)}
+\end{center}
+
+
+\end{document}

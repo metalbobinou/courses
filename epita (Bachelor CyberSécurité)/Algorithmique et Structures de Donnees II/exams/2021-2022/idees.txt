@@ -1,0 +1,10 @@
+Déjà réalisé :
+
+- N éléments en entrée à empiler/dépiler dans le bon ordre pour obtenir une sortie précise
+" 1 2 3 4 5 6 " en entrée
+" 3 2 1 4 5 6 " en sortie
+
+- N éléments déjà présents dans une pile ou une file dans un certain ordre, et devoir les sortir/stocker et les réinsérer pour obtenir un autre ordre dans la pile/file.
+=> contrainte 1 : avoir seulement N espaces de stockage intermédiaire
+=> contrainte 2 : avoir aucun espace de stockage intermédiaire, mais une autre structure algorithmique vide et son API exclusivement (exemple : une autre pile, ou une autre file, ou ...)
+

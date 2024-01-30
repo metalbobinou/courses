@@ -1,0 +1,252 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{}
+\newcommand{\NumGroupe}{Groupe 1}
+\newcommand{\AnneeUniv}{}
+\newcommand{\DateExam}{2 avril 2019}
+\newcommand{\TypeExam}{Devoir sur Table}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h00}
+\newcommand{\MyWaterMark}{2018-2019} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(2 points) Expliquez le rôle de chacun des composants suivants : navigateur, base de données, serveur web. Décrivez les spécificités de LAMP/MAMP/WAMP par rapport à l'architecture générale théorique.}
+
+\bigskip
+
+\begin{itemize}
+\item Navigateur : logiciel permettant au client d'effectuer des requêtes à un serveur web... c'est à dire, il permet de naviguer sur le web.
+\item Serveur Web : logiciel permettant de répondre aux requêtes d'un navigateur web en lui envoyant les ressources qu'il demande, ou éventuellement un message d'erreur
+\item Base de Données : un conteneur de données organisées (n'est pas un SGBD)
+\end{itemize}
+
+LAMP/MAMP/WAMP : Les 3 suites logicielles permettent d'installer sur un seul système (Linux, Mac, Windows) un serveur web et un SGBD.
+
+\bigskip
+
+\subsection{(2 points) Expliquez la différence de fonctionnement au niveau du serveur web entre les méthodes GET et POST.}
+
+\bigskip
+
+Le navigateur, pour envoyer des données au serveur web, peut utiliser 2 méthodes : GET et POST.
+
+GET : l'URL vers la ressource est étendue d'un \TTBF{?} qui sépare les ressources visées des données transmises.
+Les variables sont séparées par des \TTBF{\&}. (format général : http://domain.com/ressource?var=42\& i=4).
+On ne devrait pas envoyer plus de 256 octets par cette méthode.
+Le serveur web reçoit donc une URL contenant les données supplémentaires.
+Le serveur web enregistre dans les logs/journaux les URL demandées, il ne faut donc jamais envoyer de données sensibles par cette méthode. (les admins du serveur web peuvent lire les données)
+
+POST : Le navigateur envoie les données dans le corps de la réponse, elles ne sont donc pas enregistrées dans les logs/journaux du serveur web.
+Il n'y a pas de limite pour la taille des données envoyées en POST.
+
+\bigskip
+
+\subsection{(2 points) Qu'est-ce qu'un moteur de stockage dans une base de données ? Citer 3 exemples et leurs caractéristiques.}
+
+\bigskip
+
+Le moteur de stockage d'une base de données est le le logiciel/programme/code qui permet d'organiser les données dans la base.
+Chaque moteur a des caractéristiques spécifiques (écriture ou lecture rapide, ...).
+
+\begin{itemize}
+\item MyISAM : lecture rapide, pas de clé étrangère
+\item InnoDB : gère ACID et les clés étrangères
+\item Memory : aucune écriture sur disque, uniquement en mémoire... ultra rapide mais ne sauvegarde rien en cas de crash
+\end{itemize}
+
+\bigskip
+
+\subsection{(2 points) Expliquez la différence entre les fonctions \textit{strip\_tags} et \textit{htmlspecialchars} .}
+
+\bigskip
+
+\begin{itemize}
+\item htmlspecialchars (chaine, flags) : Conversion des caractères spéciaux en entités HTML. Remplace par exemple \& (ET commercial) en \&amp;
+\item strip\_tags (chaine, allowableTags) : Supprime les balises HTML et PHP d'une chaîne. Les commentaires HTML et PHP sont également supprimés
+\end{itemize}
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single]
+$str = "This is some <b> bold </b> text.";
+
+echo htmlspecialchars($str);
+// affichera : This is some &lt;b&gt; bold &lt;/b&gt; text.
+
+
+
+
+$text = '
+<p>Paragraph.</p><!-- Comment --><a href="#fragment">Other text</a>
+';
+
+// Autorise <p> et <a>
+echo strip_tags($text, '<p><a>');
+// affichera :
+// <p>Paragraph.</p> <a href="#fragment">Other text</a>
+\end{lstlisting}
+
+\bigskip
+
+\subsection{(3 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\begin{enumerate}
+\item \TTBF{http://www.monsite.fr/files-storage/data.video/index.php} : protocole : http (web), domaine : www.monsite.fr, ressource : files-storage/data.video/index.php (fichier : index.php)
+\item \TTBF{ftp://server01.datastore.bigcorp.com/contents/fabrice/} : protocole : ftp, domaine : server01.datastore.bigcorp.com, ressource : /contents/fabrice/ (dossier)
+\item \TTBF{rtmp://live.streamcorp.xyz:1337/flux-video/film/4242.01} : protocole : rtmp (streaming), live.streamcorp.xyz, ressource : /flux-video/film/4242.01
+\end{enumerate}
+
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  Paramètre & \TTBF{empty()} \\ \hline
+  \TTBF{null} & true \\ \hline
+  [\TTBF{unset(\$var)}] & true \\ \hline
+  \TTBF{42} & false \\ \hline
+  \TTBF{0} & true \\ \hline
+  \TTBF{""} & true \\ \hline
+  \TTBF{" "} [un espace] & false \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+\subsection{(2,5 points) Remplir le tableau avec les codes HTTP ou leur description.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  Code HTTP & Description \\ \hline
+  200 & OK \\ \hline
+  302 307 & Redirection Temporaire \\ \hline
+  301 308 & Redirection Permanente \\ \hline
+  403 & Le client n'a pas le droit d'accéder à la ressource \\ \hline
+  404 & URL/Ressource demandée n'existe pas \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+%\bigskip
+
+\newpage
+
+% Faire fonctionner code
+\section{Développement}
+
+\subsection{(3,5 points) Ce code devrait afficher le contenu du tableau, mais il ne fonctionne pas. Corrigez les erreurs de syntaxe pour que le tableau soit correctement rempli et affiché.}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+
+my_tab = array();
+my_tab[1] = Fabrice;
+my_tab[2] = Ali;
+my_tab[3] = Floriane;
+
+foreach ( i  in  my_tab )
+{
+   echo('i \n');
+}
+
+?>
+</body>
+</html>
+\end{lstlisting}
+
+
+CORRECTION :
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single]
+<html>
+<body>
+<?php
+
+$my_tab = array();			// <== $   (0,5p)
+$my_tab[1] = "Fabrice";		// <== $ " "    (0,5p)
+$my_tab[2] = "Ali";			// <== $ " "    (0,5p)
+$my_tab[3] = "Floriane";	// <== $ " "    (0,5p)
+
+foreach ( $my_tab as $i )	// <== $my_tab as $i    (1p)
+{
+   echo("$i \n");			// <== " $ "    (0,5p)
+}
+
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\bigskip
+
+\end{document}

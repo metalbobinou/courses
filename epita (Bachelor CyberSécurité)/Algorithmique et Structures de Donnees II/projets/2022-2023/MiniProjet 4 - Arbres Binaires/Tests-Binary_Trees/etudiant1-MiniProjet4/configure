@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+if [ "$1" = "debug" ]; then
+    CFLAGS_DEBUG_FLAGS="-W -Wall -Werror -std=c99 -pedantic -g -ggdb"
+    echo "CFLAGS_DEBUG_FLAGS=$CFLAGS_DEBUG_FLAGS" > Makefile.rules
+elif [ "$1" = "clean" ]; then
+    rm -f Makefile.rules
+else 
+    CFLAGS_DEBUG_FLAGS="-W -Wall -Werror -std=c99 -pedantic"
+    echo "CFLAGS_DEBUG_FLAGS=$CFLAGS_DEBUG_FLAGS" > Makefile.rules
+fi
+

@@ -1,0 +1,231 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{}
+\newcommand{\NumGroupe}{Groupe 2}
+\newcommand{\AnneeUniv}{}
+\newcommand{\DateExam}{4 avril 2019}
+\newcommand{\TypeExam}{Devoir sur Table}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h00}
+\newcommand{\MyWaterMark}{2018-2019} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(2 points) PHP est-il un langage fortement ou faiblement typé ? Expliquez la différence.}
+
+\bigskip
+
+PHP est un langage faiblement typé.
+
+Les langages fortement typés imposent que les types soient rigoureusement les mêmes que ceux utilisés dans les opérations/fonctions.
+Une comparaison entre un nombre et une chaîne de carcatères ne peut pas fonctionner tel quel.
+
+Les langages faiblements types ne vérifient pas les types avant d'effectuer des opérations, ils utilisent le plus simple/commun aux valeurs données en paramètres.
+Par exemple, comparer une chaîne de caractères et un nombre sera effectué en comparant des chaînes de caractères uniquement.
+
+\bigskip
+
+\subsection{(2 points) Expliquez la différence d'utilisation en PHP des méthodes GET et POST. Indiquez les limites de chaque méthode, s'il y en a.}
+
+\bigskip
+
+En PHP, les variables envoyées avec GET et POST se trouvent dans des tableaux associatifs.
+Un formulaire envoie les données selon la méthode indiquée, le serveur web les récupère et les insère dans des tableaux associatifs pour PHP.
+Les variables GET et POST sont des superglobales.
+
+\begin{verbatim}
+$_GET['variable']
+$_POST['variable']
+\end{verbatim}
+
+\bigskip
+
+\subsection{(2 points) Dans quel cas vaut-il mieux utiliser des \textit{sessions} ? Dans quel cas vaut-il mieux utiliser des \textit{cookies} ?}
+
+\bigskip
+
+\begin{itemize}
+\item Sessions : Très utile pour stocker les gros objets sans avoir à les renvoyer au serveur web à chaque requête.
+\item Cookies : Utile pour identifier l'utilisateur. Déconseillé pour stocker les gros objets, car il faut les renvoyer à chaque requête.
+\end{itemize}
+
+\bigskip
+
+\subsection{(2 points) Expliquez ce qu'est un SGBD par rapport à une BDD. Indiquez le nom du standard permettant d'interroger un SGBD.}
+
+\bigskip
+
+\begin{itemize}
+\item BDD/DB : Base De Données/DataBase, l'ensemble des données organisées dans un fichier (ou en mémoire) selon un schéma
+\item SGBD/DBMS : Système de Gestion de Base de Données/DataBase Management System, le logiciel/programme permettant d'interroger et modifier des bases de données
+\end{itemize}
+
+SQL (Standard Query Language) est le langage standard de requête de base de données.
+
+\bigskip
+
+\subsection{(3 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\begin{enumerate}
+\item \TTBF{http://www2.website.jp:3864/homepages/portal/} : protocole : http (web), domaine : www2.website.jp, port : 3864, ressource : /homepages/portal/
+\item \TTBF{https://univ-paris.fr} : protocole : http (web), domaine : univ-paris.fr, ressource : aucune, donc la racine /
+\item \TTBF{http://www.dailynews.co.uk/article/2864} : protocole : http (web), domaine : www.dailynews.co.uk, ressource : /article/2864
+\end{enumerate}
+
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{4}{>{\centering \arraybackslash}X |}}
+  \hline
+  Paramètre & \TTBF{is\_null()} \\ \hline
+  \TTBF{null} & true \\ \hline
+  [\TTBF{unset(\$var)}] & error/true \\ \hline
+  \TTBF{42} & false \\ \hline
+  \TTBF{0} & false \\ \hline
+  \TTBF{""} & false \\ \hline
+  \TTBF{" "} [un espace] & false \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+\subsection{(2,5 points) Remplir le tableau avec les familles de codes HTTP et leur description.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  Code HTTP & Description \\ \hline
+  100 & Informations sur l'état de la connection \\ \hline
+  200 & Réponses positives \\ \hline
+  300 & Redirections \\ \hline
+  400 & Erreurs côté client/dans la requête envoyée \\ \hline
+  500 & Erreurs côté serveur \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+% Faire fonctionner code
+\section{Développement}
+
+\subsection{(3,5 points) Ce code devrait compter le nombre de lignes contenant la valeur "Floriane", mais il ne fonctionne pas. Corrigez les erreurs pour que le compte soit bon.}
+
+%\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+
+// Fait une requete SQL et l'ecrit dans $result
+require(functions.php)
+
+$results = my_fun();
+
+for ( $i = 1; $i <= length($results); $i-- )
+{
+	if ($results[$i] == "Floriane")
+		$count++;
+}
+
+echo "$count";
+?>
+</body>
+</html>
+\end{lstlisting}
+
+
+CORRECTION :
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single]
+<html>
+<body>
+<?php
+
+// Contient la fonction "my_fun" qui fait une requete SQL et
+//  renvoie son resultat
+require("functions.php");	// <== " " (0,5p)   ; (0,5p)   
+
+$results = my_fun();
+$count = 0;					// <== $count = 0;    (0,5p)
+
+  // 0 (0,5p)    < (0,5p)    count/sizeof (0,5p)    $i++ (0,5p)
+for ($i = 0; $i < count($results); $i++) // <== 0 < count/sizeof $i++
+{
+        if ($results[$i] == "Floriane")
+                $count++;
+}
+
+echo "$count";
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\bigskip
+
+\end{document}

@@ -1,0 +1,368 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique - Premiers Pas}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Septembre 2022}
+\newcommand{\TypeExam}{Examen}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Vous devez écrire dans le langage algorithmique classique (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+
+% Questions cours
+\section{Questions (6 points)}
+
+\subsection{(2 points) Sélectionnez les conditions vraies pour A = 5 et B = 8 : }
+
+% Compter pour chaque réponse 0,5 points : si bonne ou pas bonne
+\bigskip
+
+\begin{itemize}
+  \item[\CaseCoche] ((non (A > B)) et (non (B < A))) et ((B != A - 3) et (A == B - 3)) \\ % Vrai
+  \item[\CaseCoche] (non ((A > B) ou (B < A))) et (non ((B == A - 3) et (A != B - 3))) \\ % Faux
+  \item[\CaseCoche] (non ((A > B) ou (B > A))) ou ((B != A - 3) et (A == B - 3)) \\ % Vrai
+  \item[\CaseCoche] (non ((A >= B - 4) et (B >= A + 3))) ou ((B <= A + 3) ou (A <= B - 3)) \\ % Vrai
+\end{itemize}
+
+
+%\bigskip
+
+
+\subsection{(2 points) Quelles sont les caractéristiques de cet algorithme : }
+
+\bigskip
+
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction CalculXYZ : entier
+  parametres locaux
+    entier    x, y, z
+debut
+  si (y == 1)
+    retourner (z)
+  sinon
+    si ((x %*\texttt{\%}*) y) == 0)
+      retourne(CalculXYZ(x, (y - 1), z + y))
+    sinon
+      retourne(CalculXYZ(x, (y - 1), z))
+    fin si
+  fin si
+fin algorithme fonction CalculXYZ \end{lstlisting}
+
+\begin{itemize}
+  \item[\CaseCoche] Il est récursif \\
+  \item[\CaseCoche] Il est même récursif terminal \\
+  \item[\CaseCoche] Il s'agit d'une fonction \\
+  \item[\CaseCoche] Il s'agit d'une procédure \\
+\end{itemize}
+
+
+%\bigskip
+\newpage
+\vfillFirst
+
+
+\subsection{(2 points) Exécutez l'algorithme suivant, et écrivez l'évolution des variables pour \textit{x = 14} et \textit{y = 5} }
+
+%\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction CalculXYZ : entier
+  parametres locaux
+    entier    x, y
+  variables
+    entier    i, j
+debut
+i %*$\leftarrow$*) 0
+j %*$\leftarrow$*) 0
+tant que (x > 1)
+  si ((x %*\texttt{\%}*) 2) == 1)
+    i %*$\leftarrow$*) (2 * x) - i
+    j %*$\leftarrow$*) j + (2 * y)
+    y %*$\leftarrow$*) (2 * y) + (y / 2)
+  sinon
+    i %*$\leftarrow$*) (2 * x) + i
+    j %*$\leftarrow$*) 1 + (2 * y)
+    y %*$\leftarrow$*) y / 2
+  fin si
+  x %*$\leftarrow$*) x / 2
+fin tant que
+retourner (i + j + x + y)
+fin algorithme fonction CalculXYZ \end{lstlisting}
+%    \caption{Algorithme de la somme des N premiers entiers}
+%    \label{algo-somme-n-premiers-entiers}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+    \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |}
+        \hline
+          x  &  y  &  i  &  j    \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+             &     &     &       \\
+             &     &     &       \\
+             &     &     &       \\
+        \hline
+    \end{tabular}
+%    \caption{Tableau d'exécution pas à pas}
+%    \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\vfillLast
+\newpage
+%\vfillFirst
+
+\section{Algorithmes (14 points)}
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{SommeNInt} \fg{} récursive calculant la somme des N premiers entiers. }
+
+%\smallskip
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\smallskip
+%\medskip
+%\bigskip
+
+
+\subsection{(4 points) \'Ecrivez une fonction \og \textit{strlen} \fg{} itérative renvoyant la taille d'une chaîne caractères. }
+
+%\smallskip
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+%\smallskip
+
+%\vfillLast
+\newpage
+
+\vfillFirst
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{MedianeTab} \fg{} calculant la médiane d'un tableau trié d'entiers. }
+
+%\smallskip
+
+Pour rappel, la médiane est le nombre au centre d'une distribution triée. Si le tableau a un nombre paire de cases, vous ferez la moyenne des deux éléments centraux.
+
+%\smallskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+    \begin{tabular}{| c | c | c | c | c |}
+      \hline
+      0 & 3 & 9 & 10 & 11 \\
+      \hline
+    \end{tabular}
+%    \caption{Tableau d'exécution pas à pas}
+%    \label{table-somme-n-premiers-entiers-execution}
+
+  \smallskip
+
+  La médiane de ce tableau est $ 9 $
+  \end{minipage}
+    \hfillx
+    \begin{minipage}{0.4\textwidth}
+    \centering
+    \begin{tabular}{| c | c | c | c |}
+      \hline
+      0 & 9 & 10 & 11 \\
+      \hline
+    \end{tabular}
+%    \caption{Tableau d'exécution pas à pas}
+%    \label{table-somme-n-premiers-entiers-execution}
+
+  \smallskip
+
+  La médiane de ce tableau est $ 9,5 $
+
+  $ (9 + 10) / 2 = 9,5 $
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\begin{center}
+\GrilleReponseN{17}
+\end{center}
+
+
+%\bigskip
+
+\vfillLast
+\newpage
+\vfillFirst
+
+
+\subsection{(2 points) \'Ecrivez une procédure \og \textit{MoyenneTab} \fg{} récursive affichant la moyenne des éléments d'un tableau d'entiers. }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{20}
+\end{center}
+
+
+%\bigskip
+
+\vfillLast
+\newpage
+
+\subsection{(4 points) \'Ecrivez deux algorithmes \og \textit{TabToIntIter} \fg{} itératif, et \og \textit{TabToIntRec} \fg{} en récursif transformant un tableau d'entiers en un unique entier (chaque case contient un nombre positif mais inférieur à 10). }
+
+\medskip
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    4 & 0 & 2 & 3 \\
+    \hline
+  \end{tabular}
+
+  \smallskip
+
+  Ce tableau doit devenir $ 4023 $
+\end{center}
+
+%\bigskip
+\medskip
+
+\begin{center}
+\GrilleReponseN{22}
+\end{center}
+
+
+\end{document}

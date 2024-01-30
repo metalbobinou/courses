@@ -1,0 +1,29 @@
+- 1 - Calculette :
+
+???
+
+
+- 2 - Sapin :
+
+Demander un carré ? Trop simple...
+Ou alors un carré et autre chose ?
+--
+Leur faire dessiner des cookies !
+Un cercle, et on rajoute des tâches dedans
+--
+Un X plus moins grand ?
+
+
+- 3 - CalculTVA
+
+Calculer une réduction
+
+
+- 4 - TicTacToe
+
+Transposer une matrice.
+
+
+- 5 - Normalisation Nom
+
+Créer des logins

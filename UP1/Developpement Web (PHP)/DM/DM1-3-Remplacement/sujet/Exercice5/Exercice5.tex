@@ -1,0 +1,125 @@
+%% Exercice 5
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo5\_fun.php} [my\_NormalisationNom(array)]}{\TTBF{\RenduDir/src/exo5/}}{}{}{Fonctions recommandées}{\TTBF{strlen}, \TTBF{strpos}, \TTBF{substr}, \TTBF{preg\_replace}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l’exercice est de remettre à la norme des noms de fichiers.}
+
+\bigskip
+
+\noindent Les appareils photos numériques et smartphones stockent souvent les images avec des noms de fichiers dans un format proche de : \texttt{IMG\_xxxx.jpg} (où xxxx correspond à un nombre).
+Il arrive que ce nom soit parfois au format \texttt{IMG\_1.jpg} ou au format \texttt{IMG\_0001.jpg}.
+Afin de standardiser ces noms sur un format de taille fixe, vous devrez créer un script qui transforme les noms dans le bon format.
+
+\bigskip
+
+\noindent En entrée, vous recevrez un tableau contenant des noms de fichiers.
+Vous devrez afficher les noms de fichiers après les avoir mis au format : \TTBF{IMG\_xxxx.jpg} (4 chiffres)
+Attention, l'extension \textbf{DOIT} être mise en minuscules (\textit{lower case}).
+Les fichiers que nous testerons pourront avoir des préfixes différents que \TTBF{IMG\_}, tout comme l'extension peut être des \TTBF{png} ou autres.
+
+\bigskip
+
+\noindent Exemple d'entrée :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple de données en entrée}]
+IMG_3.jpg
+IMG_02.JPG
+IMG_0005.jpg
+IMG_8976.JPG
+img_42.png
+picture35.BMP
+\end{lstlisting}
+
+\bigskip
+
+\noindent Sortie attendue pour cette entrée :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Sortie attendue pour l'entrée précédente}]
+IMG_0003.jpg
+IMG_0002.jpg
+IMG_0005.jpg
+IMG_8976.jpg
+img_0042.png
+picture0035.bmp
+\end{lstlisting}
+
+\bigskip
+
+\noindent Le tableau en entrée et l'appel se feront ainsi : \\
+
+\lstset{language=php}
+%\begin{lstlisting}[frame=single,caption={Useless code},label=useless]  % "useless" used to references
+\begin{lstlisting}[frame=single,title={Exemple de tableau en entrée (exo5\_data.php)}]
+$filenames[] = "IMG_3.jpg";
+$filenames[] = "IMG_02.JPG";
+$filenames[] = "IMG_0005.jpg";
+$filenames[] = "IMG_8976.JPG";
+$filenames[] = "img_42.png";
+$filenames[] = "picture35.BMP";
+\end{lstlisting}
+
+\lstset{language=php}
+%\begin{lstlisting}[frame=single,caption={Useless code},label=useless]  % "useless" used to references
+\begin{lstlisting}[frame=single,title={Appel de la fonction}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo5_data.php");
+  require_once("exo5_fun.php");
+  $my_text = my_NormalisationNom($filenames);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+%
+%% OR
+%% \lstinputlisting[language=[ANSI]C]{source.c}
+%% \lstinputlisting[language=Python]{source_filename.py}
+%% \lstinputlisting[language=Python, firstline=37, lastline=45]{source_filename.py}
+%
+
+\bigskip
+
+\noindent La sortie sera de cette forme :\\
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Sortie HTML attendue}]
+<textarea cols="80" rows="25" readonly="readonly">
+IMG_0003.jpg
+IMG_0002.jpg
+IMG_0005.jpg
+IMG_8976.jpg
+img_0042.png
+picture0035.bmp
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent (Les noms de fichiers ne contiendront jamais de point \texttt{.} en dehors de l'extension, et une seule série de chiffre sera présente (celle à remplacer), elle contiendra de 1 à 4 chiffres)
+
+\bigskip
+
+\noindent Vous devez rendre un fichier nommé \TTBF{exo5\_fun.php} qui contiendra au moins la fonction \TTBF{my\_NormalisationNom} qui effectuera le traitement et renverra une chaîne de caractères.
+
+\noindent La fonction prendra en paramètre un tableau qui contient des noms de fichiers.
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}
+
+\bigskip
+
+\begin{YellowBox}
+La fonction \TTBF{preg\_replace} travaille avec des expressions rationnelles (ou expressions régulières, ou regular expression, ou RegExp).
+L'usage classique des RegExp est de reconnaitre et extraire une sous-chaîne selon des critères précis.
+(\TTBF{preg\_replace} ne fonctionne pas exactement comme \TTBF{sed})
+\end{YellowBox}

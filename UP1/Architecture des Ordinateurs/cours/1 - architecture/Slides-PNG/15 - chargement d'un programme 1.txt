@@ -1,0 +1,5 @@
+Lorsque des développeurs écrivent des programmes, les compilent, et les exécutent, c'est au système d'exploitation de charger le code en mémoire.
+
+Le rôle des compilateurs est donc de traduire le code (C, C++, ...) en langage machine dans un fichier, pour que le système d'exploitation puisse le charger en mémoire et démarrer l'exécution.
+
+Pour lancer un programme, le système d'exploitation va rechercher le fichier sur le périphérique de stockage, copier son contenu en mémoire, et "sauter" à  l'adresse de la 1ère ligne du code compilé.

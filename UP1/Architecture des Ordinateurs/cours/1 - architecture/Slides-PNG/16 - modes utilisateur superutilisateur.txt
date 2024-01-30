@@ -1,0 +1,12 @@
+Afin d'empêcher certains programmes d'écraser d'autres programmes (comme l'OS, par exemple), des protections ont été ajoutées avec le temps :
+- interdiction d'écrire dans la mémoire utilisée par un autre programme
+- instructions réservées à l'OS
+- interdiction d'exécuter certaines parties de la mémoire
+- ...
+
+Les processeurs sont souvent dotés de "modes" dans lesquels des protections sont actives.
+Typiquement, le processeur fonctionne en mode "utilisateur" pour l'exécution classique des programmes, puis il passe en mode "superviseur" lorsque des fonctions de l'OS sont nécessaires.
+Le mode "utilisateur" empêche d'accéder à certaines zones mémoire, alors que le mode "superviseur" autorise tout.
+
+Le mode est codé dans un bit du processeur (un "flag"), et toute opération nécessitant des droits va vérifier si le bit est actif ou non.
+Certaines instructions activent ou désactivent ce bit.

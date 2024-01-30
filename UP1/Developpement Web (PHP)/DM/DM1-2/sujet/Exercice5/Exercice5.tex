@@ -1,0 +1,115 @@
+%% Exercice 5
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo5\_fun.php} [my\_Loginisation(array, array)]}{\TTBF{\RenduDir/src/exo5/}}{}{}{Fonctions recommandées}{\TTBF{gettype}, \TTBF{in\_array}, \TTBF{strlen}, \TTBF{substr}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l’exercice est de créer .}
+
+\bigskip
+
+\noindent Il est courant en informatique de devoir créer des logins.
+Dans cet exercice, il faudra créer des logins pour un groupe précis de personnes.
+
+\bigskip
+
+\noindent En entrée, deux paramètres sont donnés : un tableau avec une liste de référence, et un autre tableau avec une liste de personnes dont il faut créer les logins.
+Afin de ne pas créer de login à n'importe qui, seules les personnes apparaissant dans la liste de référence disposeront d'un login.
+
+\noindent La construction du login se fait comme suit : l'initiale du prénom en minuscule, le nom de famille en minuscules, les deux derniers chiffres de l'année de naissance.
+Par exemple, pour \textit{\textbf{E}va \textbf{Bien}} née en \textit{19\textbf{98}}, le login attendu est \textbf{ebien98}.
+
+\noindent Dans certains cas, certaines personnes ne disposent que de l'année de naissance.
+Dans ce cas, on utilise toujours les deux dernières décimales pour le login, mais il faut s'assurer que la base de référence contienne la même information.
+Si deux utilisateurs ont les mêmes nom et prénom, mais pas la même date de naissance, il s'agira de deux personnes distinctes.
+
+\bigskip
+
+\noindent Exemple d'entrées :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple de liste de référence}]
+$ReferenceList[] = array("Marc", "Acin", "05-05-1998");
+$ReferenceList[] = array("Charles", "Attan", "20-06-1997");
+$ReferenceList[] = array("Eva", "Bien", "23-02-1998");
+$ReferenceList[] = array("Jean", "Bombeur", "17-01-1999");
+$ReferenceList[] = array("Jean", "Bonnot", "1997");
+$ReferenceList[] = array("Claire", "Hon", "14-07-1997");
+$ReferenceList[] = array("Lydie", "Le", "02-03-1997");
+$ReferenceList[] = array("Julie", "Tali", "18-12-1998");
+$ReferenceList[] = array("Oreste", "Torrent", "22-04-1998");
+$ReferenceList[] = array("Elena", "Turelle", "08-10-1998");
+\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple de liste de demandes}]
+$RequestList[] = array("Eva", "Bien", "23-02-1998");
+$RequestList[] = array("Jean", "Bombeur", "24-12-2000");
+$RequestList[] = array("Jean", "Bonnot", "1997");
+$RequestList[] = array("Julie", "Tali", "18-12-1998");
+$RequestList[] = array("Clement", "Thine", "13-04-1998");
+\end{lstlisting}
+
+\bigskip
+
+\noindent Les tableaux seront fournis à la fonction ainsi : \\
+
+\lstset{language=html}
+%\begin{lstlisting}[frame=single,caption={Useless code},label=useless]  % "useless" used to references
+\begin{lstlisting}[frame=single,title={Appel de la fonction}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo5_listeref.php");
+  require_once("exo5_data.php");
+  require_once("exo5_fun.php");
+  $my_text = my_Loginisation($ReferenceList, $RequestList);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+%
+%% OR
+%% \lstinputlisting[language=[ANSI]C]{source.c}
+%% \lstinputlisting[language=Python]{source_filename.py}
+%% \lstinputlisting[language=Python, firstline=37, lastline=45]{source_filename.py}
+%
+
+\bigskip
+
+\noindent La sortie sera de cette forme :\\
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Sortie HTML attendue}]
+<textarea cols="80" rows="25" readonly="readonly">
+ebien98
+jbonnot97
+jtali98
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Vous devez rendre un fichier nommé \TTBF{exo5\_fun.php} qui contiendra au moins la fonction \TTBF{my\_Loginisation} qui effectuera le traitement et renverra une chaîne de caractères.
+
+\noindent La fonction prendra en paramètre deux tableaux : le premier contiendra la liste de référence des personnes autorisées, et le deuxième contiendra la liste des personnes demandeuses.
+
+\bigskip
+
+\noindent On considèrera que les listes en entrée sont correctement formattées, et jamais vides.
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}
+
+%\bigskip
+%
+%\begin{YellowBox}
+%La fonction \TTBF{preg\_replace} travaille avec des expressions rationnelles (ou expressions régulières, ou regular expression, ou RegExp).
+%L'usage classique des RegExp est de reconnaitre et extraire une sous-chaîne selon des critères précis.
+%(\TTBF{preg\_replace} ne fonctionne pas exactement comme \TTBF{sed})
+%\end{YellowBox}

@@ -1,0 +1,108 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{Makefile}}{\TTBF{\RenduDir/}}{750}{640}{Fonctions recommandées}{\TTBF{gcc(1)}, \TTBF{ar(1)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de faire fonctionner l'ensemble de votre projet avec un makefile simple, et de produire une bibliothèque statique ainsi qu'une dynamique.}
+
+\bigskip
+
+\noindent Une bibliothèque est un ensemble de fonctions et procédures prêtes à être utilisées (ayant éventuellement des variables statiques, ou encore faisant appel à \texttt{malloc(3)}) par un utilisateur ne connaissant pas leur implémentation.
+L'utilisateur développe et écrit son propre programme (utilisant un \texttt{main} pour s'exécuter) et il peut éventuellement s'appuyer sur des bibliothèques (n'ayant pas de \texttt{main}) pour réutiliser des implémentations existantes.
+
+\bigskip
+
+%\noindent Les exercices précédents vous ont conduit à produire des fonctions manipulant des structures, afin d'offrir un service à des utilisateurs : une file et son interface pour l'exploiter (une \texttt{API}).
+Vous devez écrire le (ou les) \textit{makefile(s)} de votre projet (et éventuellement un fichier \texttt{configure}) afin de produire une bibliothèque statique nommée \TTBF{libmylinkledlist.a} et une bibliothèque dynamique nommée \TTBF{libmylinkledlist.so}.
+
+\bigskip
+
+\noindent Le \textit{makefile} que vous allez écrire rendra votre projet complet et autonome.
+Pour cela, vous devez faire en sorte que plusieurs \textit{cibles} soient présentent dans le makefile (celles-ci sont rappelées dans le paragraphe suivant).
+%Afin de rendre le projet parfaitement complet et autonome, vous devez écrire un \textit{makefile} répondant aux cibles indiquées dans les consignes générales (celles-ci sont rappelées dans le paragraphe suivant).
+
+\bigskip
+
+\noindent Plusieurs stratégies existent pour compiler avec des makefiles, l'une d'entre elle consiste à placer un makefile par dossier afin que le makefile principal appelle les suivants avec la bonne règle (par exemple : le makefile principal va appeler le makefile du dossier \textit{src} pour compiler le projet, mais le makefile principal appellera celui du dossier \textit{check} lorsque l'on demandera d'exécuter la suite de tests).
+
+Pour ce premier contact avec les makefiles, vous pouvez vous contenter d'un seul makefile à la racine exécutant des lignes de compilation toutes prêtes sans aucune réécriture ou extension.
+
+\bigskip
+
+\noindent Afin de générer des bibliothèques statiques et dynamiques, vous devez compiler vos fichiers pour produire des fichiers \textit{objets} (des fichiers \TTBF{.o}), mais vous ne devez pas laisser l'étape d'\textit{édition de liens} classique se faire.
+À la place, la cible \textit{static} de votre makefile devra produire une bibliothèque statique nommée \TTBF{libmylinkledlist.a}, et la cible \textit{shared} devra produire une bibliothèque dynamique nommée \TTBF{libmylinkledlist.so}.
+
+\bigskip
+
+\noindent Pour générer une bibliothèque statique (\textit{static library} en anglais), on utilise la commande \TTBF{ar} qui créée des \textit{archives}.
+Pour produire la bibliothèque statique \textit{libtest.a} à partir des fichiers \textit{test1.c} et \textit{file.c}, on utilisera ces commandes :\\
+
+\begin{tabular}{l}
+\TTBF{cc -c test1.c file.c}\\
+\TTBF{ar cr libtest.a test1.o file.o}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour générer une bibliothèque dynamique (\textit{shared library} en anglais), on utilise l'option \TTBF{-shared} du compilateur.
+Pour produire la bibliothèque dynamique \textit{libtest.so} à partir des fichiers \textit{test1.c} et \textit{file.c}, on utilisera ces commandes :\\
+
+\begin{tabular}{l}
+\TTBF{cc -c test1.c file.c} \\
+\TTBF{cc test1.o file.o -shared -o libtest.so} \\
+\end{tabular}
+
+\bigskip
+
+La première commande génère des fichiers objets, et la deuxième les réunit dans un seul fichier.
+Il arrivera sur certains systèmes qu'il soit nécessaire d'ajouter l'option \TTBF{-fpic} ou \TTBF{-fPIC} (\textit{Position Independent Code}) pour générer des bibliothèques dynamiques.
+Gardez en tête que \textit{toutes} les bibliothèques \textbf{doivent} être préfixées par un \textit{\texttt{lib}} dans le nom des fichiers \TTBF{.a} et \TTBF{.so} générés.
+Mais, lorsque l'on utiliser une bibliothèque dans un projet, on doit ignorer ce préfixe lors de la compilation et l'édition de liens.
+
+\bigskip
+
+Pour utiliser une bibliothèque dynamique sur votre système, plusieurs méthodes existent selon le système où vous vous trouvez.\\
+
+\begin{itemize}
+\item L'une d'entre elle consiste à ajouter le dossier contenant la bibliothèque à la variable d'environnement \TTBF{LD\_LIBRARY\_PATH} (comme pour la variable \TTBF{PATH}).
+Selon votre système, il peut s'agir de la variable d'environnement \TTBF{DYLD\_LIBRARY\_PATH}, \TTBF{LIBPATH}, ou encore \TTBF{SHLIB\_PATH}.
+Pour ajouter le dossier courant comme dossier contenant des bibliothèques dynamiques en plus d'autres dossiers, vous pouvez taper :\\
+\TTBF{export LD\_LIBRARY\_PATH=.:/usr/lib:/usr/local/lib}
+\\
+
+\item Une autre méthode consiste à modifier le fichier \TTBF{/etc/ls.so.conf} et/ou ajouter un fichier contenant le chemin vers votre bibliothèque dans \TTBF{/etc/ld.so.conf.d/} puis à exécuter \TTBF{/sbin/ldconfig} pour recharger les dossiers à utiliser.\\
+
+\item Enfin, vous pouvez demander les droits administrateur et installer votre bibliothèque dans \TTBF{/usr/lib} ou \TTBF{/usr/local/lib}.\\
+\end{itemize}
+
+\bigskip
+
+\noindent \'Evidemment, à long terme, l'objectif est d'avoir une bibliothèque installée dans le répertoire \TTBF{/usr/lib}.
+Mais, lors du développement, il est préférable d'utiliser la variable \TTBF{LD\_LIBRARY\_PATH}.
+Pour vous assurer du fonctionnement de votre exécutable, vous pouvez utiliser \TTBF{ldd(1)} avec le chemin complet vers un exécutable.
+\TTBF{ldd} vous indiquera quelles bibliothèques sont requises, et où celui-ci les trouve.
+Si l'une d'entre elle n'est pas trouvée, \TTBF{ldd} vous en informera :\\
+
+\TTBF{ldd /usr/bin/ls}
+
+\TTBF{ldd my\_main}
+
+
+\bigskip
+
+Pour rappel voici les cibles demandées pour le \TTBF{Makefile} principal à la racine de votre projet :
+
+\bigskip
+
+\begin{tabular}{l p{13cm}}
+\texttt{all} & \textit{[Première règle]} lance la règle \texttt{lib}.\\
+\texttt{clean} & supprime tous les fichiers temporaires et ceux créés par le compilateur.\\
+\texttt{dist} & crée une archive propre, valide, et répondant aux exigences de rendu.\\
+\texttt{distclean} & lance la règle \texttt{clean}, puis supprime les binaires et bibliothèques.\\
+\texttt{check} & lance le(s) script(s) de test.\\
+\texttt{lib} & lance les règles \texttt{shared} et \texttt{static}.\\
+\texttt{shared} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque dynamique.\\
+\texttt{static} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque statique.\\
+\end{tabular}

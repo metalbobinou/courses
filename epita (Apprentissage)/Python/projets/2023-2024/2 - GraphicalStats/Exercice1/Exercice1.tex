@@ -1,0 +1,349 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{PopStats.py}}{\TTBF{\RenduDir/src/}}{750}{640}{Modules recommandés}{\TTBF{sys}, \TTBF{requests}, \TTBF{numpy}}
+%{\TTBF{math.floor}, \TTBF{math.ceil}, \TTBF{random.random}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'écrire un script python calculant des statistiques sur la population française par département et le nombre de pré-plaintes déposées sur la plateforme en ligne de la gendarmerie, le tout en utilisant des API publiques.}
+
+\noindent Vous pouvez utiliser les modules Python de statistiques pour effectuer les calculs.
+De plus, il est recommandé d'utiliser le module \TTBF{requests} pour effectuer les appels aux APIs en ligne, mais vous pouvez tout à fait utiliser \TTBF{urllib} et \TTBF{json}, voire d'autres modules externes.
+
+\bigskip
+
+\noindent La documentation pour les différents modules externes est accessibles via ces liens :
+
+\begin{itemize}
+\item Requests : \url{https://requests.readthedocs.io}
+
+\item Numpy : \url{https://numpy.org/doc/}
+
+\item API Gendarmerie : \\
+\url{https://www.gendarmerie.interieur.gouv.fr/barometre-numerique/api/docs/}
+
+\item API OpenDataSoft : \\
+\url{https://public.opendatasoft.com/api/explore/v2.1/console}
+
+  \begin{itemize}
+  \item[$\circ$] Catalogues des ensembles de données : \\
+  \url{https://public.opendatasoft.com/explore/?sort=modified}
+
+  \item[$\circ$] Populations légales Départements - Millésimé - France : \\
+  \url{https://public.opendatasoft.com/explore/dataset/demographyref-france-pop-legale-departement-millesime}
+  \end{itemize}
+\end{itemize}
+
+% API OpenDataSoft - Population Communes : https://public.opendatasoft.com/explore/dataset/demographyref-france-pop-legale-commune-arrondissement-municipal-millesime
+% API OpenDataSoft - Population Cantons : https://public.opendatasoft.com/explore/dataset/demographyref-france-pop-legale-canton-millesime
+% API OpenDataSoft - Population Departements : https://public.opendatasoft.com/explore/dataset/demographyref-france-pop-legale-departement-millesime
+% API OpenDataSoft - Population Regions : https://public.opendatasoft.com/explore/dataset/demographyref-france-pop-legale-region-millesime
+%%
+% API OpenDataSoft - Hitorique populations : https://public.opendatasoft.com/explore/dataset/historique-des-populations-legales
+
+% API Data.Gouv.Fr : https://www.data.gouv.fr
+% API data.gouv.fr - Données Geographiques : https://www.data.gouv.fr/fr/pages/donnees-geographiques/
+
+\bigskip
+
+\noindent Vous devez implémenter les fonctions décrites plus bas, si nécessaire en déclarant vos propres fonctions.
+%Ce code sera testé en étant lui-même appelé par un autre script, vous devez donc absolument respecter les prototypes décrits ici.
+Ce code sera testé en étant lancé par un script externe : vous pouvez adapter les types et valeurs donnés en paramètre, mais veillez à respecter les prototypes.
+Néanmoins, les messages texte affichés doivent être strictement les mêmes (à l'espace près) que ceux indiqués dans le sujet.
+
+%\bigskip
+\clearpage
+
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=python}
+\begin{lstlisting}[frame=single,title={Liste des fonctions à implémenter}]
+GetPopulationDepartements()
+GetPrePlaintesDepartement(DepartementISOCode)
+
+GetAndFilterPopulationDepartementsPerYear(year)
+GetAndCleanPrePlaintesDepartement(DepartementCode)
+
+SortListColumn(L, column)
+SortListColumnReverse(L, column)
+
+PrintThreeFirstsElt(L)
+PrintStats(year)
+main()
+\end{lstlisting}
+
+
+%\bigskip
+
+
+\subsubsection*{\TTBF{GetPopulationDepartements()}}
+
+\noindent Cette fonction interroge l'API d'OpenDataSoft pour demander des informations dans le catalogue \og Populations légales Départements - Millésimé - France \fg{} et renvoyer les résultats sous forme de dictionnaire.\\
+L'API est accessible à l'adresse suivante, et ne nécessite aucun paramètre.
+%L'API est accessible à l'adresse suivante, et ne nécessite aucun paramètre pour une requête de base.
+%Néanmoins, celle-ci limite le nombre de résultats et propose donc de paramétrer les requêtes.
+
+\noindent URL de base : \url{https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/}
+
+\noindent Complément d'URL : \url{/demographyref-france-pop-legale-departement-millesime/records/}
+
+\medskip
+
+%\noindent Vous devez passer 2 paramètres dans l'en-tête \textbf{HTTP} de la requête :
+%
+%\begin{itemize}
+%\item \TTBF{order_by} qui prendra comme valeur \TTBF{dep_code ASC} pour obtenir les départements dans l'ordre ascendant
+%
+%\item \TTBF{refine} qui prendra comme valeur \TTBF{start_year:2019} pour obtenir les recensements produits en 2019
+%\end{itemize}
+
+\noindent De plus, il faut noter que la réponse renvoyée par l'API doit être désérialisée (\textit{unmarshalled} en anglais) depuis JSON vers un dictionnaire avant d'être retournée.
+
+
+\subsubsection*{\TTBF{GetPrePlaintesDepartement(DepartementISOCode)}}
+
+\noindent Cette fonction interroge l'API de la gendarmerie pour demander la quantité de préplaintes reçues.
+L'API est accessible à l'adresse suivante, et nécessite un paramètre : l'indicatif du département au format \href{https://fr.wikipedia.org/wiki/ISO_3166-2:FR}{ISO 3166-2}.
+De plus, l'API de la gendarmerie ne transmet pas ce paramètre dans l'en-tête de la requête, mais directement dans l'URL avec le \textit{path}.
+Il faut donc ajouter le département voulu en fin d'URL.
+
+\noindent URL de base : \url{https://www.gendarmerie.interieur.gouv.fr/barometre-numerique/}
+
+\noindent Complément d'URL : \url{/api/pre-plainte-en-ligne/map-detail/}
+
+\medskip
+
+\noindent Une autre information importante : les API ne disposent pas toujours de toutes les informations.
+Il est possible que certains départements soient mis à 0.
+
+\medskip
+
+\noindent De plus, il faut noter que la réponse renvoyée par l'API doit être désérialisée (\textit{unmarshalled} en anglais) depuis JSON vers un dictionnaire avant d'être retournée.
+
+\medskip
+
+\noindent Très succinctement, la norme \textbf{ISO 3166-2} implique d'utiliser le numéro du département en le faisant précéder de \og \TTBF{FR-} \fg{}.
+Un seul cas est exceptionnel : l'indicatif de Paris ne doit pas simplement utiliser \textbf{75} précédé de \TTBF{FR-}, mais doit ajouter un \TTBF{C} à la fin (donc \og \TTBF{FR-75C} \fg{}).
+
+
+%%%%%%%%%
+
+
+\subsubsection*{\TTBF{GetAndFilterPopulationDepartementsPerYear(year)}}
+
+\noindent Cette fonction appelle l'API publique pour obtenir la population par département lors de l'année donnée en paramètre.
+La fonction doit utiliser l'année contenue dans le champs \TTBF{start\_year}.
+
+\noindent Deux stratégies sont possibles pour écrire cette fonction :
+
+\begin{itemize}
+\item Soit vous appelez directement \TTBF{GetPopulationDepartements()} afin de filtrer ses résultats (le plus simple)
+
+\item Soit vous réécrivez l'appel à l'API en ajoutant des paramètres dans l'en-tête pour demander à recevoir exclusivement les résultats qui nous intéressent (plus difficile, mais beaucoup plus optimal en bande passante)
+\end{itemize}
+
+
+\subsubsection*{\TTBF{GetAndCleanPrePlaintesDepartement(DepartementCode)}}
+
+\noindent Cette fonction appelle l'API publique pour faire la requête auprès de la gendarmerie avec le code du département, puis filtre les résultats pour ne renvoyer que le nombre de pré-plaintes sous forme d'entier.
+
+
+%%%%%%%%%
+
+
+\subsubsection*{\TTBF{SortListColumn(L, column)}}
+
+\noindent Cette fonction trie en ordre croissant la liste donnée en paramètre selon les valeurs contenues dans une colonne particulière.
+Cette fonction doit trier dans l'ordre croissant : la valeur de la case 0 doit être plus petite ou égale à cette de la case 1, et ainsi de suite.
+
+
+\subsubsection*{\TTBF{SortListColumnReverse(L, column)}}
+
+\noindent Cette fonction trie en ordre décroissant la liste donnée en paramètre selon les valeurs contenues dans une colonne particulière.
+Cette fonction doit trier dans l'ordre décroissant : la valeur de la case 0 doit être plus grande ou égale à cette de la case 1, et ainsi de suite.
+
+
+%%%%%%%%%
+
+
+\subsubsection*{\TTBF{PrintThreeFirstsElt(L)}}
+
+\noindent Cette fonction écrit sur la sortie standard les 3 premiers éléments de la liste donnée en paramètre.
+%Le format attendu est simple : un seul élément et sa position doivent être affichés par ligne.
+Le format attendu est simple : un seul élément doit être affichés par ligne.
+
+\bigskip
+
+%\noindent \TTBF{[\textit{position}] : \textit{valeur}}
+\noindent \TTBF{\textit{valeur}}
+
+\bigskip
+
+\noindent Ce qui donnerait pour la liste $ [ ('a', 'b'), ('c', 'd'), ('e', 'f'), ('g', 'h') ] $ :
+
+%\lstset{language=sh}
+%\begin{lstlisting}[frame=single]
+%$ python3 example.py
+%[0] : ('a', 'b')
+%[1] : ('c', 'd')
+%[2] : ('e', 'f')
+%$
+%\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single]
+$ python3 example.py
+('a', 'b')
+('c', 'd')
+('e', 'f')
+$
+\end{lstlisting}
+
+%\bigskip
+
+\noindent Si la distribution contient moins de 3 éléments, vous n'afficherez que ceux disponibles.
+Si la distribution est vide, vous n'afficherez rien.
+
+
+\subsubsection*{\TTBF{PrintStats(year)}}
+
+\noindent Cette fonction lance les appels aux APIs puis calcule plusieurs statistiques simples sur une année.
+Vous pouvez utiliser \TTBF{numpy} pour calculer ces statistiques (et cela est vivement recommandé).
+
+%\medskip
+
+%\noindent Cette fonction devra calculer plusieurs statistiques utiles concernant les départements en \textbf{2019} et les pré-plaintes en ligne.
+\noindent Cette fonction devra calculer plusieurs statistiques utiles concernant les départements durant l'année donnée en paramètre, et les croiser avec le nombre de pré-plaintes en ligne.
+
+
+%\clearpage
+
+
+\noindent L'affichage attendu est le suivant dans cet ordre précis : \textit{(cf la page suivante également)}
+
+%\bigskip
+\smallskip
+
+\begin{enumerate}
+\itemindent=-13pt
+
+\item Vous devrez tout d'abord afficher la liste des départements avec leur code, leur nom, la population totale du département, et le nombre de pré-plaintes associées.
+Chaque département s'affichera sur une seule ligne
+
+\item Puis, vous devrez sauter une ligne
+
+\item Vous afficherez ensuite une ligne avec marquée :\\
+\og \TTBF{- 3 Tops Most Populations:} \fg{}
+
+\item Vous afficherez la liste des 3 département les plus peuplés dans l'ordre décroissant (dans le même format que la liste complète des départements)
+
+\item Vous afficherez ensuite une ligne avec marquée :\\
+\og \TTBF{- 3 Tops Least Populations:} \fg{}
+
+\item Vous afficherez la liste des 3 département les moins peuplés dans l'ordre croissant (dans le même format que la liste complète des départements)
+
+\item Puis, vous devrez sauter une ligne
+
+\item Vous afficherez ensuite une ligne avec marquée :\\
+\og \TTBF{- 3 Tops Most PrePlaintes:} \fg{}
+
+\item Vous afficherez la liste des 3 département ayant produit le plus de préplaintes dans l'ordre décroissant (dans le même format que la liste complète des départements)
+
+\item Vous afficherez ensuite une ligne avec marquée :\\
+\og \TTBF{- 3 Tops Least PrePlaintes:} \fg{}
+
+\item Vous afficherez la liste des 3 département ayant produit le moins de préplaintes dans l'ordre croissant (dans le même format que la liste complète des départements)
+
+\item Puis, vous devrez sauter une ligne
+
+\item Puis vous afficherez dans cet ordre chaque statistique suivante concernant la population en la précédant d'un message : la moyenne, la médiane, la variance, l'écart type.\\
+La moyenne sera précédée du message : \og \TTBF{- Population average:} \fg{} \\
+La médiane sera précédée du message : \og \TTBF{- Population median:} \fg{} \\
+La variance sera précédée du message : \og \TTBF{- Population variance:} \fg{} \\
+L'écart type sera précédé du message : \og \TTBF{- Population standard deviation:} \fg{} \\
+
+\item Puis, vous devrez sauter une ligne
+
+\item Puis vous afficherez dans cet ordre chaque statistique suivante concernant les pré-plaintes en la précédant d'un message : la moyenne, la médiane, la variance, l'écart type.\\
+La moyenne sera précédée du message : \og \TTBF{- Preplaintes average:} \fg{} \\
+La médiane sera précédée du message : \og \TTBF{- Preplaintes median:} \fg{} \\
+La variance sera précédée du message : \og \TTBF{- Preplaintes variance:} \fg{} \\
+L'écart type sera précédé du message : \og \TTBF{- Preplaintes standard deviation:} \fg{}
+\end{enumerate}
+
+
+%\medskip
+\clearpage
+
+
+\noindent Le format attendu devrait lister les éléments dans ce format pour l'année 2019 :
+
+\bigskip
+
+%\lstset{language=sh}
+\begin{lstlisting}[frame=single]
+$ python3 example.py
+('01', 'Ain', 655171, 9077)
+('02', 'Aisne', 549587, 4962)
+('2A', 'Corse-du-Sud', 156958, 1193)
+('2B', 'Haute-Corse', 179037, 1443)
+%*\textit{[...]}*)
+('974', 'La R%*é*)union', 862814, 3713)
+
+- 3 Tops Most Populations:
+('59', 'Nord', 2639070, 11063)
+('75', 'Paris', 2210875, 8)
+('13', 'Bouches-du-Rh%*ô*)ne', 2047433, 15898)
+- 3 Tops Least Populations:
+('48', 'Loz%*è*)re', 80141, 428)
+('23', 'Creuse', 123500, 753)
+('05', 'Hautes-Alpes', 146148, 1253)
+
+- 3 Tops Most PrePlaintes:
+('33', 'Gironde', 1595903, 29610)
+('44', 'Loire-Atlantique', 1415805, 23312)
+('31', 'Haute-Garonne', 1373626, 21134)
+- 3 Tops Least PrePlaintes:
+('69', 'Rh%*ô*)ne', 1864962, 0)
+('92', 'Hauts-de-Seine', 1622143, 0)
+('93', 'Seine-Saint-Denis', 1616311, 0)
+
+- Population average:
+677518.38
+- Population median:
+548026.5
+- Population variance:
+259634302703.77563
+- Population standard deviation:
+509543.2294749638
+
+- Preplaintes average:
+5593.23
+- Preplaintes median:
+3748.0
+- Preplaintes variance:
+29523226.6771
+- Preplaintes standard deviation:
+5433.528013832265
+\end{lstlisting}
+
+
+\bigskip
+
+
+\subsubsection*{\TTBF{main()}}
+
+\noindent Cette fonction appelle simplement \TTBF{PrintStats()} en lui donnant en paramètre le premier argument donné à la lgine de commande.
+Si le premier argument donné au script n'est pas un entier, vous quitterez le programme en renvoyant \TTBF{-1} et en affichant ce message :
+
+\medskip
+
+\TTBF{First argument must be an integer}
+
+\medskip
+
+\noindent La fonction \TTBF{main()} doit être appelée par votre script pour qu'il affiche toutes les statistiques demandées lorsqu'il est lancé.

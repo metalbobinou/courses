@@ -1,0 +1,222 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{Architecture des Ordinateurs 1}
+\newcommand{\NumeroTD}{Syllabus}
+\newcommand{\DateCours}{Septembre 2023}
+\newcommand{\AnneeScolaire}{2023-2024}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de lister les notions à voir / vues dans le cours.
+
+\bigskip
+
+
+\begin{enumerate}
+% 1
+\item Introduction Générale + Composants d'un ordinateur \textit{[21/09/2023]}\\
+  TD :
+  \begin{itemize}
+%  \item Cours Magistral/Slides :
+  \item Historique informatique et ordinateurs
+  \item Description CPU, RAM, Carte Mère, ...
+  \item Explications PC, north Bridge/South Bridge, ...
+  \item 3 Bus (données, adresses, contrôle)
+  \item Lecture/Ecriture en mémoire
+  \item Utilité des interruptions
+  \end{itemize}
+
+\medskip
+
+% 2
+\item Conversion Binaire/Hexadécimal non-signés \textit{[28/09/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Puissances de 2
+  \item Représentation des entiers en binaire
+  \item Conversions décimaux vers/depuis binaires non-signés
+  \item Symboles et valeurs hexadécimales
+  \item Conversions décimaux vers/depuis hexadécimaux non-signés
+  \item Calculs de tête avec les puissances de 2
+  \item Vérifications rapides (bit de parité, puissances de 2, ...)
+%  \item Conversions signés négatifs
+  \end{itemize}
+
+\medskip
+
+% 3
+\item Conversions Binaire/Hexadécimal signés \textit{[12/10/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Rappel conversions non-signés
+  \item Complément à 2
+  \item Complément à 1
+  \item Conversions négatifs décimaux vers/depuis binaires signés
+  \item Logique pour étendre la représentation des nombres binaires signés
+  \item Conversions négatifs décimaux vers/depuis hexdécimaux signés
+  \end{itemize}
+
+\medskip
+
+% 4
+\item Code Gray et BCD \textit{[19/10/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Rappel conversions non-signés et signés
+  \item Logique générale du Code Gray / Binaire réfléchi
+  \item Conversions Binaire vers Gray (formule mathématique)
+  \item Rappel opérateur XOR
+  \item Conversions Binaire vers Gray (formule bit à bit)
+  \item Conversions Gray vers Binaire (formule bit à bit)
+  \item BCD / Code 8421
+  \item Code 2421
+  \end{itemize}
+
+%\medskip
+\clearpage
+
+% 5
+\item Représentation d'une structure en mémoire \textit{[09/11/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Rappel types algorithmiques
+  \item Code ASCII et binaire/hexadécimal
+  \item Structures et représentation réelle des types en mémoire
+  \item \textit{padding} et \textit{\_\_attribute\_\_((packed))} en C
+  \end{itemize}
+
+\medskip
+
+% 6
+\item Flottants conversions $ 10 \Rightarrow 2 $ \textit{[16/11/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Flottants : difficulté de représentation
+  \item Standard pour flottants : IEEE 754
+  \item Cas spéciaux représentation IEEE 754 (zéros, infinis, NaN, normalisés/dénormalisés)
+  \item Conversions décimaux vers IEEE 754 normalisés
+  \end{itemize}
+
+\medskip
+
+% 7
+\item Flottants conversions conversions $ 2 \Rightarrow 10 $, dénormalisés \textit{[23/11/2023]}\\ % $ 2 \Leftrightarrow 10 $
+  TD :
+  \begin{itemize}
+  \item Rappel conversions décimaux vers IEEE 754 normalisés
+  \item Conversions IEEE 754 normalisés vers décimaux
+  \item Conversions dénormalisés
+  \end{itemize}
+
+\medskip
+
+% 8
+\item Portes Logiques \& Fonctions Logiques \textit{[30/11/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Notations NOT, AND, OR, NAND, NOR, XOR (symboles et portes logiques)
+  \item Conjonction, Disjonction, Implication, \'Equivalence
+  \item Contradiction \& Tautologie
+  \item Tables de vérité
+  \item Formules logiques
+  \item Loi de De Morgan
+  \item Règle d'assemblages des portes
+  \end{itemize}
+
+\medskip
+
+% 9
+\item Simplification des formules, Minterm, Maxterm, et Tableaux de Karnaugh \textit{[14/12/2023]}\\
+  TD :
+  \begin{itemize}
+  \item Difficultés à simplifier des formules logiques
+  \item Minterm
+  \item Maxterm
+  \item Tableaux de Karnaugh (autre méthode de simplification)
+  \end{itemize}
+
+\medskip
+
+% 10
+\item ??? \textit{[21/12/2023]}\\
+  TD :
+  \begin{itemize}
+  \item ???
+  \end{itemize}
+
+\medskip
+
+
+\end{enumerate}
+
+\bigskip
+
+Mode d'évaluation :
+
+\begin{itemize}
+\item 2 examens papiers (80\% note finale)
+\item 2 QCM (20\% note finale)
+\end{itemize}
+
+
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en novembre 2023}
+\end{center}
+
+\end{document}

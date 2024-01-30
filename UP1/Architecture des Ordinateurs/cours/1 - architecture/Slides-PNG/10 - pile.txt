@@ -1,0 +1,5 @@
+A l'usage, un processeur dispose d'une "pile" (stack) où sont stockées des données et divers paramètres du programme en cours d'exécution.
+Cette pile démarre à la première ou à la dernière adresse disponible de la mémoire, et se remplit au fur et à mesure des besoins (bien évidemment, si la pile est pleine, la mémoire l'est aussi, et plus rien ne fonctionne).
+
+Selon l'architecture du processeur, la pile va permettre d'appeler des fonctions et de passer des arguments : on pose l'argument 1 (push), puis l'argument 2 (push), on appelle la fonction (call), celle-ci va récupérer l'argument 2 (pop), puis l'argument 1 (pop), et les utiliser.
+C'est ce que font les x86 (PC 16-32 bits).

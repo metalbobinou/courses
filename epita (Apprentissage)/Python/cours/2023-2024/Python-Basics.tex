@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{beamer}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[french]{babel}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{icomma} % Put a space after a comma in math "only" if explicitly written
+
+% Preparation des infos generales
+\newcommand{\CodeMatiere}{PYTHON}
+\newcommand{\TitreMatiere}{Python}
+\newcommand{\TitreSeance}{Python Basics}
+\newcommand{\DateCours}{12 septembre 2023}
+\newcommand{\AnneeScolaire}{2023-2024}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\Parcours}{Apprentissage}
+\newcommand{\NiveauScolaire}{Ing1}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+%\newcommand{\NomAuteurB}{ }
+%\newcommand{\MailAuteurB}{ }
+\newcommand{\VersionExo}{Version 1}
+\newcommand{\DocKeywords}{Python, Introduction, Functions, Interpreter, Basics}
+\newcommand{\DocLangue}{en} % "en", "fr", ...
+
+
+% Ajout de mes classes & definitions
+\usepackage{MetalCours-beamer} % Appelle un .sty
+
+%\titlegraphic{\includegraphics[width=.4\linewidth]{images/logos/epita}}
+%\titlegraphic{\includegraphics[width=.4\linewidth]{images/logos/epita} \includegraphics[width=.4\linewidth]{images/logos/bachelor_cyber}}
+\titlegraphic{\includegraphics[width=.4\linewidth]{images/logos/apprentissage} \\ {\scriptsize \VersionExo}}
+
+% Deactivate navigation
+\setbeamertemplate{navigation symbols}{}
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}		% RGB model
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash }m{#1}}
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\newcolumntype{G}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}  % another R
+\newcolumntype{D}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % another L
+\newcolumntype{M}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}   % another C
+
+
+\begin{document}
+
+%% Titre
+%\maketitle
+\frame[plain]{\titlepage}
+
+\newpage
+
+%% Copyright
+%\pagenumbering{Roman}
+
+\begin{frame}[fragile,plain]{License}
+
+  \begin{itemize}
+    \item (\latex source code partially reused from Gabriel Laskar)
+    \item Copyright \copyright{} 2022-2024, Fabrice Boissier
+  \end{itemize}
+
+  \begin{verbatim}
+  Permission is granted to copy, distribute
+  and/or modify this document under the terms
+  of the GNU Free Documentation License,
+  Version 1.2 or any later version published
+  by the Free Software Foundation; with the
+  Invariant Sections being just ``Copying
+  this document'', no Front-Cover Texts, and
+  no Back-Cover Texts.
+  \end{verbatim}
+
+\end{frame}
+
+
+%%% Course outline
+\include{1-introduction/10-introduction.tex}
+
+%%% Language, CLI, versions, ...
+\include{2-discovering-python/20-discovering-python.tex}
+
+%%% Hello world, print, str/int, Sys module
+\include{3-small-scripts/30-small-scripts.tex}
+
+%%% Declaring functions, imports, modules
+\include{4-functions-imports-modules/40-functions-imports-modules.tex}
+
+%%% OOP, Classes
+\include{5-OOP-classes/50-OOP-classes.tex}
+
+%%% Files, Directories
+\include{6-files-others/60-files-others.tex}
+
+%%% Types, lists (comprehension, ...)
+\include{7-main-concepts/70-main-concepts.tex}
+
+
+%%% End
+\begin{frame}<beamer>{}
+
+  \begin{center}
+  \textit{Thank you for your attention}
+  \end{center}
+
+\end{frame}
+
+
+\end{document}

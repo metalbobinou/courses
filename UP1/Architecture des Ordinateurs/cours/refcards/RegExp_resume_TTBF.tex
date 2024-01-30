@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{courier}
+
+\usepackage{textcomp}
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} %Cellule P centrée
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} %Cellule M centrée
+\newcolumntype{B}[1]{>{\centering\arraybackslash}b{#1}} %Cellule B centrée
+
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\renewcommand{\thefootnote}{\*} % footnote sans numéro
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}	% TTBF : police teletype, fonte bold
+
+\author{Fabrice BOISSIER}
+
+\begin{document}
+
+\section{Expressions Rationnelles / Regular Expressions}
+
+\bigskip
+
+\subsection{Classes de caractères}
+
+\bigskip
+
+%\renewcommand\arraystretch{2.5}
+
+\begin{center}
+	\begin{tabular}{ c | M{4cm} | M{7cm} }
+  \textbf{Nom de la classe} & \textbf{Signification} & \textbf{ASCII} \\  \hline
+	alpha & Lettres alphabétiques & \TTBF{[A-Za-z]} \\ \hline
+	digit & Chiffres décimaux & \TTBF{[0-9]} \\ \hline
+	xdigit & Chiffres hexadécimaux & \TTBF{[0-9A-Fa-f]} \\ \hline
+	alnum & Chiffres ou lettres alphabétiques & \TTBF{[[:alpha:][:digit:]]} \\ \hline
+	lower & Lettres minuscules & \TTBF{\textquotesingle[a-z]\textquotesingle} \\ \hline
+	upper & Lettres majuscules & \TTBF{[A-Z]} \\ \hline
+	blank & Caractères blancs & \TTBF{[ \textbackslash t]} \\ \hline
+	space & Caractères d'espacement & \TTBF{[ \textbackslash t\textbackslash n\textbackslash f\textbackslash r]} \\ \hline
+	punct & Signes de ponctuation &  \TTBF{[]-!"\#\$\%\&\textquotesingle ()*.,/:+ ;<=>?@\textbackslash \textasciicircum \_\lq \{|\}\textasciitilde } \\ \hline
+	graph & Symboles ayant une représentation graphique & \TTBF{[[:alnum:][:punct:]]} \\ \hline
+	print & Caractères imprimables & \TTBF{[[:graph:]]} \\ \hline
+	cntrl & Caractères de contrôle & Code ASCII inférieur à 31 et caractère de code 127 \\
+	\end{tabular}
+\end{center}
+
+%\renewcommand\arraystretch{1}
+
+\bigskip
+
+\noindent Exemple : \TTBF{grep "H[ea]llo [[:digit:]]" file.c}
+
+\newpage
+
+\subsection{RegExp}
+
+\bigskip
+
+%\renewcommand\arraystretch{2.5}
+
+\begin{center}
+	\begin{tabular}{ M{5cm} | c | c }
+	\textbf{Signification} & \textbf{Symbole RegExp simple} & \textbf{Symbole RegExp étendue} \\  \hline
+	Un seul caractère générique & \TTBF{\textquotesingle .\textquotesingle} & \TTBF{\textquotesingle .\textquotesingle} \\ \hline
+	Début de ligne & \texttt{\textquotesingle \textasciicircum \textquotesingle} & \texttt{\textquotesingle \textasciicircum \textquotesingle} \\ \hline
+	Fin de ligne & \TTBF{\textquotesingle \$\textquotesingle} & \TTBF{\textquotesingle \$\textquotesingle} \\ \hline
+	Alternative (OU) & \TTBF{\textquotesingle \textbackslash |\textquotesingle} & \TTBF{\textquotesingle |\textquotesingle} \\ \hline
+	Liste de caractères & \TTBF{\textquotesingle []\textquotesingle} & \TTBF{\textquotesingle []\textquotesingle} \\ \hline
+	Classe de caractères & \TTBF{\textquotesingle [:classe:]\textquotesingle} & \TTBF{\textquotesingle [:classe:]\textquotesingle} \\ \hline
+	Zéro ou plusieurs occurrences de l'élément précédent & \TTBF{\textquotesingle *\textquotesingle} & \TTBF{\textquotesingle *\textquotesingle} \\ \hline
+	Une ou plusieurs occurrences de l'élément précédent & \TTBF{\textquotesingle \textbackslash +\textquotesingle} & \TTBF{\textquotesingle +\textquotesingle} \\ \hline
+	Zéro ou une occurrence de l'élément précédent & \TTBF{\textquotesingle \textbackslash ?\textquotesingle} & \TTBF{\textquotesingle ?\textquotesingle} \\ \hline
+	Au moins 'n' et au plus 'm' occurrences de l'élément précédent & \TTBF{\textquotesingle \textbackslash \{n,m\textbackslash \}\textquotesingle} & \TTBF{\textquotesingle \{n,m\}\textquotesingle} \\ \hline
+	Au moins 'n' occurrences de l'élément précédent & \TTBF{\textquotesingle \textbackslash \{n,\textbackslash \}\textquotesingle} & \TTBF{\textquotesingle \{n,\}\textquotesingle} \\ \hline
+	Au plus 'm' occurrences de l'élément précédent & \TTBF{\textquotesingle \textbackslash \{0,m\textbackslash \}\textquotesingle} & \TTBF{\textquotesingle \{0,m\}\textquotesingle} \\ \hline
+	Exactement 'n' occurrences de l'élément précédent & \TTBF{\textquotesingle \textbackslash \{n\textbackslash \}\textquotesingle} & \TTBF{\textquotesingle \{n\}\textquotesingle} \\ \hline
+	Groupement de caractères & \TTBF{\textquotesingle \textbackslash ( \textbackslash )\textquotesingle} & \TTBF{\textquotesingle ( )\textquotesingle} \\ \hline
+	Référence arrière au num-ième groupe & \TTBF{\textquotesingle \textbackslash num\textquotesingle} & \TTBF{\textquotesingle \textbackslash num\textquotesingle} \\ \hline
+	\'Echappement de caractères spéciaux & \TTBF{\textquotesingle \textbackslash \textquotesingle} & \TTBF{\textquotesingle \textbackslash \textquotesingle}
+	\end{tabular}
+\end{center}
+
+%\renewcommand\arraystretch{1}
+
+\bigskip
+
+\noindent \textbf{Toujours encadrer ses regexp avec des guillemets !}\\
+
+\noindent \TTBF{echo "Hello 42" | grep "H[ea]llo [[:digit:]]\textbackslash \{2\textbackslash \}"}\\
+\noindent \textrightarrow Hello 42\\
+
+\noindent Attention aux regexp étendues, et à l'échappement de caractères.\\
+\noindent \TTBF{echo "Hello 42" | grep -E "H[ea]llo [[:digit:]]\{2\}"}\\
+\noindent \textrightarrow Hello 42\\
+
+\noindent \TTBF{echo "Hello 42*Bla" | grep -E "H[ea]llo [[:digit:]]\{2\}\textbackslash *Bla"}\\
+\noindent \textrightarrow Hello 42*Bla\\
+
+\footnotetext{Merci les ACU !}
+
+\end{document}

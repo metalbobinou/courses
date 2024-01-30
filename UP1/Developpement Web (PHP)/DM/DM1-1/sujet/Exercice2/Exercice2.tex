@@ -1,0 +1,137 @@
+%% Exercice 2
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo3/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo2\_fun.php} [my\_Sapin(int)]}{\TTBF{\RenduDir/src/exo2/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'afficher un sapin en ASCII art, dont la taille varie selon le paramètre donné.}
+
+\bigskip
+
+\noindent Vous devez écrire la fonction \TTBF{my\_Sapin} qui prendra un entier en paramètre, et affichera selon ce paramètre un sapin.
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas général PHP}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo2_fun.php");
+  $my_text = my_Sapin(2);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas général PHP exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+  /\
+ /  \
+/    \
+______
+  ||
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent De façon précise, voici les spécifications pour les cas 1, 4, et 5 :
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 1}]
+ /\     1 espace / 0 espace  \
+/  \    0 espace / 2 espaces \
+____    4 _
+ ||     1 espace 2 |
+\end{lstlisting}
+
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 4}]
+    /\          4 espaces / 0 espace  \
+   /  \         3 espaces / 2 espaces \
+  /    \        2 espaces / 4 espaces \
+ /      \       1 espace  / 6 espaces \
+/        \      0 espace  / 8 espaces \
+__________      10 _
+    ||          4 espaces 2 |
+\end{lstlisting}
+
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 5}]
+     /\         5 espaces / 0 espace   \
+    /  \        4 espaces / 2 espaces  \
+   /    \       3 espaces / 4 espaces  \
+  /      \      2 espaces / 6 espaces  \
+ /        \     1 espace  / 8 espaces  \
+/          \    0 espace  / 10 espaces \
+____________    12 _
+     ||         5 espaces 2 |
+\end{lstlisting}
+
+
+\bigskip
+
+%\noindent Plusieurs cas spéciaux sont à prendre en compte.\\
+
+\noindent Une exception doit être gérée, dans le cas où le paramètre donné est inférieur ou égal à 0, vous afficherez :
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas 0}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo2_fun.php");
+  $my_text = my_Sapin(0);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas 0 exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+/\
+||
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+%%%%%
+%
+%\noindent Si un paramètre texte est donné, il sera interprété comme 0 :
+%
+%\bigskip
+%
+%\lstset{language=php}
+%\begin{lstlisting}[frame=single,title={Cas texte}]
+%<textarea cols="80" rows="25" readonly="readonly">
+%<?php
+%  require_once("exo2_fun.php");
+%  $my_text = my_Sapin("A");
+%  echo($my_text);
+%?>
+%</textarea>
+%\end{lstlisting}
+%
+%\lstset{language=php}
+%\begin{lstlisting}[frame=single,title={Cas texte exécuté}]
+%<textarea cols="80" rows="25" readonly="readonly">
+%/\
+%||
+%</textarea>
+%\end{lstlisting}
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}

@@ -1,0 +1,661 @@
+% -*- latex -*-
+
+\part{Class, Files, and Directories}  % Class, Files, and Directories
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% How to create a class
+
+\section{Classes}
+
+\begin{frame}<beamer>{OOP}
+
+  Object Oriented Programming (OOP) vocabulary
+
+  \begin{itemize}
+    \item<2-> Class: the type and structure
+    \item<3-> Attribute: a variable that is a member of the class
+    \item<4-> Method: a function/procedure that is a member of the class
+  \end{itemize}
+
+  \begin{itemize}
+    \item<5-> Object: an instance of a class
+    \item<6-> Constructor: the first method called when creating an object
+    \item<7-> Destructor: the method called when deleting an object
+  \end{itemize}
+
+  \begin{itemize}
+    \item<8-> Inheritance: structure of a class reused as a basis for a new one
+    \item<9-> Private: when a member is accessible only by the object itself
+    \item<10-> Public: when a member is accessible by any object
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Classes}
+
+  Specificities of classes in Python:
+
+  \begin{itemize}
+    \item<2-> Only one constructor: \lstinline|__init__|
+    \item<3-> No destructor (python manages the memory by references)
+    \item<4-> Attributes are at least \textit{read-only}, and eventually \textit{writable}
+    \item<5-> Writable attributes can be deleted from the object
+    \item<6-> Member beginning by an underscore (\lstinline|_|) aren't strictly private, but should be considered internal to the class
+    \item<7-> \TTBF{self} keyword is required as the first parameter of each method
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Classes}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+  # Method
+  def getSpeed(self):
+    return (self.__speed)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+  # Methods
+  def getSpeed(self):
+    return (self.__speed)
+  def Accelerate(self, x):
+    self.__speed += x \end{lstlisting}
+      \end{onlyenv}
+
+
+      \begin{onlyenv}<7->
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):       # Constructor
+    self.Passengers = 1
+  # Methods
+  def getSpeed(self):       # Accessor
+    return (self.__speed)
+  def Accelerate(self, x):  # Mutator
+    self.__speed += x \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Classes}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+  # Constructor
+  def __init__(self, CO2, P):
+    self.Passengers = 1
+    self.__CV = (CO2 / 45) + (P / 40)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+  # Constructor
+  def __init__(self, CO2, P):
+    self.Passengers = 1
+    self.__CV = (CO2 / 45) + (P / 40)
+  # Method
+  def getCV(self):
+    return (self.__CV) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Classes}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+Peugeot206Plus.getSpeed()  # 80
+AirbusA340.getSpeed()      # 260
+
+Peugeot206Plus.getCV()
+AirbusA340.getCV() \end{lstlisting}
+      \end{onlyenv}
+
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+Peugeot206Plus.getSpeed()  # 80
+AirbusA340.getSpeed()      # 260
+
+Peugeot206Plus.getCV()
+AirbusA340.getCV()  # Error \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Classes}
+
+  Summary of vocabulary:
+
+  \begin{itemize}
+    \item<2-> \TTBF{Vehicle}: class
+    \item<3-> \TTBF{Car}: class (inherits from \TTBF{Vehicle})
+    \item<4-> \TTBF{Peugeot206Plus}: instance of \TTBF{Car}
+    \item<5-> \TTBF{AirbusA340}: instance of \TTBF{Vehicle}
+  \end{itemize}
+
+  \begin{itemize}
+  \item<6-> \TTBF{Peugeot206Plus} can calculate and give \TTBF{CV}
+  \item<7-> \TTBF{AirbusA340}: doesn't have \TTBF{CV} method nor attribute
+  \end{itemize}
+
+  \begin{center}
+    \onslide<8-> \url{https://docs.python.org/3/tutorial/classes.html}
+  \end{center}
+
+\end{frame}
+
+
+% File management in python
+
+\section{Files and Directories}
+
+% How to open, read, write, close
+\subsection{Open, Read, Write, Close}
+
+
+\begin{frame}[fragile]{Files}
+
+  Files are managed as usual:
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+      \item \TTBF{open}
+      \item \TTBF{read}
+      \item \TTBF{write}
+      \item \TTBF{close}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+    \begin{itemize}
+      \item \TTBF{open(filename, flags}
+      \item \TTBF{read}
+      \item \TTBF{write}
+      \item \TTBF{close}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<4>
+    \begin{itemize}
+      \item \TTBF{open(filename, flags}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write}
+      \item \TTBF{close}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<5>
+    \begin{itemize}
+      \item \TTBF{open(filename, flags}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(String)}
+      \item \TTBF{close}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<6->
+    \begin{itemize}
+      \item \TTBF{open(filename, flags}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(String)}
+      \item \TTBF{close()}
+    \end{itemize}
+  \end{onlyenv}
+
+  \bigskip
+
+  \onslide<7-> Always close files in order to be sure to write changes on the physical support
+
+  \bigskip
+
+  \onslide<8-> Files are managed by an internal python's \textbf{class}
+
+\end{frame}
+
+\begin{frame}<beamer>{Files}
+
+  Open flags:
+
+  \begin{itemize}
+    \item<2-> \TTBF{"r"} - open for reading
+    \item<3-> \TTBF{"w"} - truncate the file for overwriting
+    \item<4-> \TTBF{"a"} - append/begin from the end for writing
+    \item<5-> \TTBF{"x"} - create a new file, fail if it already exists
+    \item<6-> \TTBF{"r+"} - open for reading and writing
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<7-> Read variants:
+
+  \begin{itemize}
+    \item<8-> \TTBF{read()} - get the whole text
+    \item<9-> \TTBF{read(Nb)} - get the next \textit{Nb} characters
+    \item<10-> \TTBF{readline()} - get the next line
+  \end{itemize}
+
+\end{frame}
+
+
+% Reading files
+
+\begin{frame}[fragile]{Files}
+
+  Open existing file for reading
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+line = f.readline()
+print(line)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+line = f.readline()
+print(line)
+f.close() \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Files}
+
+  Read line by line a file with python specificities
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+for x in f:
+  print(x)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+for x in f:
+  print(x)
+f.close() \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+% Writing files
+
+\begin{frame}[fragile]{Files}
+
+  Write at the end of a file (add content)
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+f.close()
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+f.close()
+print(nb)  # 13 chars were added \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Files}
+
+  \begin{center}
+    \onslide<1-> Check documentation for more informations
+
+    \bigskip
+
+    \onslide<1-> \url{https://docs.python.org/3/tutorial/inputoutput.html}
+  \end{center}
+
+\end{frame}
+
+
+% Test file existence and delete
+\subsection{File existence and management}
+
+\begin{frame}<beamer>{Files and Directories}
+
+  Management of files is done through the \TTBF{os} module
+
+  \begin{itemize}
+    \item<2-> \TTBF{os.remove(filename)} - remove the file
+    \item<3-> \TTBF{os.rmdir(dirname)} - remove the directory
+    \item<4-> \TTBF{os.path.exist(path)} - test if \textit{path} is an existing file
+    \item<5-> \TTBF{os.path.isfile(path)} - test if \textit{path} is a file
+    \item<6-> \TTBF{os.path.isdir(path)} - test if \textit{path} is a directory
+    \item<7-> \TTBF{os.path.abspath(path)} - get absolute pathname
+    \item<8-> \TTBF{os.path.dirname(path)} - get dirname of pathname
+    \item<9-> \TTBF{os.path.basename(path)} - get basename of pathname
+  \end{itemize}
+
+  \begin{center}
+    \onslide<10-> \url{https://docs.python.org/3/library/os.path.html}
+  \end{center}
+
+\end{frame}

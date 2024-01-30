@@ -1,0 +1,338 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique II}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2021-2022}
+\newcommand{\DateExam}{16 août 2022}
+\newcommand{\TypeExam}{Rattrapage}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Ne trichez pas
+\end{itemize}
+
+\bigskip
+
+
+% Questions cours files et piles
+\section{Questions (5 points)}
+
+\subsection{(1 points) \'Ecrivez l'état des deux piles après avoir effectué ces opérations dans cet ordre (n'oubliez pas le(s) pointeur(s) de tête (et de queue) ) : }
+
+\bigskip
+
+%%%%%%%%%%%%%%%%% CENTRAGE
+\vfill
+\hspace{0pt}
+
+\begin{center}
+
+\begin{large}
+empiler 42, dépiler, dépiler, empiler 666, empiler 1664, dépiler, empiler 123
+\end{large}
+
+%\vspace{2cm}
+
+\bigskip
+
+\begin{figure}[ht!]
+\centering
+\centerline{  %%% CENTRAGE HORIZONTAL
+%\includegraphics[scale=1]{img/Exercice1.png}
+\includegraphics[scale=1]{img/correction_Exercice1_bis.png}
+%\includegraphics[scale=1,left]{img/2_elts.png}
+}
+%\caption{File A}
+%\label{figure:1-S1-ModeleWI}
+\end{figure}
+
+\end{center}
+
+\bigskip
+
+%\newpage
+
+\subsection{(0,5 point) Quel élément sortira lors du prochain \og pop \fg{} sur chaque pile ? }
+
+\bigskip
+\bigskip
+
+%\begin{center}
+\begin{Large}
+A : 123 \hspace{7.5cm}  B : 123
+\end{Large}
+%\end{center}
+
+\bigskip
+\bigskip
+
+
+\subsection{(0,5 point) Quel élément sortira en dernier de chaque pile ? }
+
+\bigskip
+\bigskip
+
+%\begin{center}
+\begin{Large}
+A : 777 \hspace{7.5cm}  B : 666
+\end{Large}
+%\end{center}
+
+\bigskip
+\bigskip
+
+%\vspace{5cm}
+
+%%%%%%%%%%%%%%%%% FIN CENTRAGE
+
+\hspace{0pt}
+\vfill
+
+\newpage
+
+\subsection{(3 points) En admettant que l'on dispose d'une pile vide et que les éléments \og 1 2 3 4 5 6 \fg{} arrivent en entrée dans cet ordre exclusivement, décrivez les scénarios permettant d'obtenir les sorties suivantes : }
+%%% PREFERER CE TEXTE :
+%\subsection{(3 points) En admettant que l'on dispose d'une pile vide et que les éléments \og 1 2 3 4 5 6 \fg{} arrivent en entrée dans cet ordre exclusivement, décrivez les scénarios permettant d'obtenir les sorties suivantes : }
+%
+% Sujet Nathalie :
+% On ajoute, dans cet ordre, les valeurs A, B, C, D, E et F à une structure linéaire vide. Pour chacun
+% des ordres de sortie donnés sur les feuilles de réponses, indiquer si la structure en question peut être : une
+% pile, une file (ce peut être les deux), ou aucune des deux (ni une pile, ni une file).
+%
+% A B C D E F  -  File, Pile, Aucun
+% B D E F A C  -  File, Pile, Aucun
+% D E C B F A  -  File, Pile, Aucun
+% F E D C B A  -  File, Pile, Aucun
+
+%\bigskip
+
+\begin{center}
+%\noindent \textit{exemple : pour \og A B C \fg{} en entrée, on peut obtenir \og B C A \fg{} en sortie en faisant : \linebreak
+%\og push A \fg, \og push B \fg, \og pop \fg, \og push C \fg, \og pop \fg, \og pop \fg }
+%%%% AJOUTER CE TEXTE :
+%%On a bien inséré A, puis B, puis C, mais l'ordre de sortie est différent suivant les \og pop \fg}
+
+%\begin{figure}[ht!]
+%\centering
+\centerline{
+\includegraphics[scale=0.75]{img/exemple_ordre_pile_longueur_2.png}
+}
+%\end{figure}
+
+\end{center}
+
+%\medskip
+
+
+\begin{center}
+
+\begin{large}
+1, 3, 2, 5, 4, 6
+\end{large}
+%
+\begin{center}
+%\LigneReponseTrois
+push 1, pop, push 2, push 3, pop, pop, push 4, push 5, pop, pop, push 6, pop
+\end{center}
+
+
+\begin{large}
+4, 5, 3, 2, 6, 1
+\end{large}
+%
+\begin{center}
+%\LigneReponseTrois
+push 1, push 2, push 3, push 4, pop, push 5, pop, pop, pop, push 6, pop, pop
+\end{center}
+
+\begin{large}
+1, 2, 3, 6, 5, 4
+\end{large}
+%
+\begin{center}
+%\LigneReponseTrois
+push 1, pop, push 2, pop, push 3, pop, push 4, push 5, push 6, pop, pop, pop
+\end{center}
+
+\end{center}
+
+
+%
+\section{Algorithmes (15 points)}
+
+\subsection{(3 points) \'Ecrivez une structure de données \og \textit{my\_stack} \fg{} pouvant servir de pile \textit{(la structure ne doit pas être statique)} }
+
+\bigskip
+
+\begin{center}
+[La structure minimaliste en liste chaînée est tolérée, tout comme les structures plus complexes sous forme de conteneur avec des attributs]
+\end{center}
+
+\lstset{language=c}
+\begin{lstlisting}[frame=single]
+struct my_stack_1 {   // Structure minimaliste
+	int/void* elt,
+	my_stack_1 *next
+};
+
+struct my_stack_2 {   // Conteneur lise chainee
+	int			nb_elt,
+	[my_stack_1 *head,]
+	my_stack_1 *stack
+};
+
+struct my_stack_3 {   // Conteneur tableau
+	int		nb_elt,
+	int		max_len,
+	[int	head,]
+	int		*array
+};
+\end{lstlisting}
+
+\bigskip
+
+
+\newpage
+
+\subsection{(6 points) \'Ecrivez une fonction \og \textit{push} \fg{} pouvant servir à empiler un élément dans votre précédente structure \og \textit{my\_stack} \fg{} }
+
+\bigskip
+
+\begin{center}
+%%\LigneReponseQuarante
+%\LigneReponseTrente
+%\LigneReponseCinq
+%\LigneReponseTrois
+
+%\GrilleReponseN{24}
+
+\vspace{2cm}
+
+2 cas possibles : tableau OU liste chaînée
+
+\bigskip
+
+Vérifier si :
+\begin{itemize}
+\item \textbf{pointeur NULL} est géré en paramètre,
+\item pile \textbf{pleine} est gérée en paramètre,
+\item et le cas normal (\textbf{malloc}, et suppression en tête avec réorganisation des éléments suivant).
+\end{itemize}
+\end{center}
+
+
+\newpage
+
+\subsection{(6 points) \'Ecrivez une fonction \og \textit{pop} \fg{} pouvant servir à dépiler un élément dans votre précédente structure \og \textit{my\_stack} \fg{} }
+
+\bigskip
+
+\begin{center}
+%\GrilleReponseN{24}
+
+\vspace{2cm}
+
+2 cas possibles : tableau OU liste chaînée
+
+\bigskip
+
+Vérifier si :
+\begin{itemize}
+\item \textbf{pointeur NULL} est géré en paramètre,
+\item pile \textbf{vide} est gérée en paramètre,
+\item et le cas normal (\textbf{free}, et suppression en tête avec réorganisation des éléments suivant).
+\end{itemize}
+
+\end{center}
+
+\bigskip
+
+
+\end{document}

@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{courier}
+
+\usepackage{textcomp}
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} %Cellule P centrée
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} %Cellule M centrée
+\newcolumntype{B}[1]{>{\centering\arraybackslash}b{#1}} %Cellule B centrée
+
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\renewcommand{\thefootnote}{\*} % footnote sans numéro
+
+\author{Fabrice BOISSIER}
+
+\begin{document}
+
+\section{Expressions Rationnelles / Regular Expressions}
+
+\bigskip
+
+\subsection{Classes de caractères}
+
+\bigskip
+
+%\renewcommand\arraystretch{2.5}
+
+\begin{center}
+	\begin{tabular}{ c | M{4cm} | M{7cm} }
+  \textbf{Nom de la classe} & \textbf{Signification} & \textbf{ASCII} \\  \hline
+	alpha & Lettres alphabétiques & \verb![A-Za-z]! \\ \hline
+	digit & Chiffres décimaux & \verb![0-9]! \\ \hline
+	xdigit & Chiffres hexadécimaux & \verb![0-9A-Fa-f]! \\ \hline
+	alnum & Chiffres ou lettres alphabétiques & \verb![[:alpha:][:digit:]]! \\ \hline
+	lower & Lettres minuscules & \verb!'[a-z]'! \\ \hline
+	upper & Lettres majuscules & \verb![A-Z]! \\ \hline
+	blank & Caractères blancs & \verb![ \t]! \\ \hline
+	space & Caractères d'espacement & \verb![ \t\n\f\r]! \\ \hline
+	punct & Signes de ponctuation & \verb|[]-!"#$%&’()*.,/:+| \verb!;<=>?@\^_‘{|}~! \\ \hline
+	graph & Symboles ayant une représentation graphique & \verb![[:alnum:][:punct:]]! \\ \hline
+	print & Caractères imprimables & \verb![[:graph:]]! \\ \hline
+	cntrl & Caractères de contrôle & Code ASCII inférieur à 31 et caractère de code 127 \\
+	\end{tabular}
+\end{center}
+
+%\renewcommand\arraystretch{1}
+
+\bigskip
+
+\noindent Exemple : \verb!grep "H[ea]llo [[:digit:]]" file.c!
+
+\newpage
+
+\subsection{RegExp}
+
+\bigskip
+
+%\renewcommand\arraystretch{2.5}
+
+\begin{center}
+	\begin{tabular}{ M{5cm} | c | c }
+	\textbf{Signification} & \textbf{Symbole RegExp simple} & \textbf{Symbole RegExp étendue} \\  \hline
+	Un seul caractère générique & \verb!'.'! & \verb!'.'! \\ \hline
+	Début de ligne & \texttt{'\^{}'} & \texttt{'\^{}'} \\ \hline
+	Fin de ligne & \verb!'$'! & \verb!'$'! \\ \hline
+	Alternative (OU) & \verb!'\|'! & \verb!'|'! \\ \hline
+	Liste de caractères & \verb!'[]'! & \verb!'[]'! \\ \hline
+	Classe de caractères & \verb!'[:classe:]'! & \verb!'[:classe:]'! \\ \hline
+	Zéro ou plusieurs occurrences de l'élément précédent & \verb!'*'! & \verb!'*'! \\ \hline
+	Une ou plusieurs occurrences de l'élément précédent & \verb!'\+'! & \verb!'+'! \\ \hline
+	Zéro ou une occurrence de l'élément précédent & \verb!'\?'! & \verb!'?'! \\ \hline
+	Au moins 'n' et au plus 'm' occurrences de l'élément précédent & \verb!'\{n,m\}'! & \verb!'{n,m}'! \\ \hline
+	Au moins 'n' occurrences de l'élément précédent & \verb!'\{n,\}'! & \verb!'{n,}'! \\ \hline
+	Au plus 'm' occurrences de l'élément précédent & \verb!'\{0,m\}'! & \verb!'{0,m}'! \\ \hline
+	Exactement 'n' occurrences de l'élément précédent & \verb!'\{n\}'! & \verb!'{n}'! \\ \hline
+	Groupement de caractères & \verb!'\(\)'! & \verb!'()'! \\ \hline
+	Référence arrière au num-ième groupe & \verb!'\num'! & \verb!'\num'! \\ \hline
+	\'Echappement de caractères spéciaux & \verb!'\'! & \verb!'\'!
+	\end{tabular}
+\end{center}
+
+%\renewcommand\arraystretch{1}
+
+\bigskip
+
+\noindent \textbf{Toujours encadrer ses regexp avec des guillemets !}\\
+
+\noindent \verb!echo "Hello 42" | grep "H[ea]llo [[:digit:]]\{2\}"!\\
+\noindent \textrightarrow Hello 42\\
+
+\noindent Attention aux regexp étendues, et à l'échappement de caractères.\\
+\noindent \verb!echo "Hello 42" | grep -E "H[ea]llo [[:digit:]]{2}"!\\
+\noindent \textrightarrow Hello 42\\
+
+\noindent \verb!echo "Hello 42*Bla" | grep -E "H[ea]llo [[:digit:]]{2}\*Bla"!\\
+\noindent \textrightarrow Hello 42*Bla\\
+
+\footnotetext{Merci les ACU !}
+
+\end{document}

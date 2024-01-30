@@ -1,0 +1,133 @@
+# EXPR : Evalue une expression
+#
+# EXPR sur entiers :
+
+# + addition, - soustraction, / division, \* multiplication
+expr 6 \* 7
+# 42
+
+# % est le modulo
+
+expr 42 % 6
+# 0
+
+expr 43 % 6
+# 1
+
+# Bien echapper les caracteres qui pourraient être interpretes par le shell
+expr \( 1 + 2 \) \* \( 3 + 4 \)
+# 21
+
+
+# Booleens
+expr 1 \> 3
+# 0  (faux)
+
+expr 1 \< 3
+# 1 (vrai)
+
+expr 1 != 3
+# 1
+
+expr 1 = 3
+# 0
+
+
+expr 1 \< 3  \&  1 \> 3
+expr \( 1 \< 3 \)  \&  \( 1 \> 3 \)
+# 0
+
+expr 1 \< 3  \|  1 \> 3
+expr \( 1 \< 3 \)  \|  \( 1 \> 3 \)
+# 1
+
+expr 1 \<= 1
+# 1
+
+
+
+
+# EXPR sur chaines de caracteres :
+
+# Longueur chaine
+expr length Metalman
+# 8
+
+expr length Mega\ Man
+# 8
+
+expr length "Mega Man"
+# 8
+
+
+# Extraction sous-chaine/substring (commence a 1)
+expr substr Metalman 1 5
+# Metal
+
+
+# Recherche premiere occurence d'un caractere parmi 1 ou plusieurs
+expr index Metalman m
+# 6
+
+expr index Metalman a
+# 4
+
+expr index Metalman n
+# 8
+
+expr index Metalman man
+# 4
+# 'a' est trouve en premier en position 4, m et n sont plus loin
+
+
+# Pattern Matching / Regexp
+expr match Metalman Metal
+# 5
+# 5 caracteres reconnus
+
+expr match Metalman *man
+# 8
+# 8 caracteres repondent au pattern "*man"
+
+expr match Metalman Metal*
+# 8
+
+expr match Metalman '\(.[a-z]*\)'
+# Metalman
+
+# . = 1 caractere remplace
+# * = 0 a N caracteres remplaces selon l'expression precedente
+# .* = 0 a N caracteres
+
+# [abc] = a ou b ou c (a la place d'un seul caractere)
+# [a-d] = a ou b ou c ou d (a la place d'un seul carcatere)
+# [A-Za-z] = toutes les lettres majuscules ou minuscules (a la place d'un seul caractere)
+# [A-Za-z-0-9] = une lettre ou un chiffre
+# [0-9]* = 0 a N chiffres qui se suivent
+
+# ^ debut d'une ligne OU negation de caracteres
+# $ fin d'une ligne
+# ^[a-z][0-9]$ = un caractere minuscule au debut, et un chiffre. ex : a8 g4
+
+# [^g-m] = tous les caracteres sauf g h i j k l m
+
+# '\(  \)' extrait la sous-chaine contenue dans les parentheses
+
+expr match 'Ceci est une chaine de 36 caracteres' '[^0-9]*\([0-9]*\)[^0-9]*'
+# 36
+# Extrait la premiere suite de chiffres dans la chaine
+
+expr match 'Ceci est une chaine de 46 caracteres. Vive 42.' '[^0-9]*\([0-9]*\)[^0-9]*'
+# 46
+
+expr match 'Ceci est une chaine de 46 caracteres. Vive 42.' '[^0-9]*[0-9]*[^0-9]*'
+# 43
+# Les 43 premiers caracteres repondent a la regexp... la regexp n'a PAS de \( \)
+
+expr match 'Vive 42' '[^0-9]*\([0-9]*$\)'
+# 42
+# On extrait les chiffres en fin de chaine de caracteres
+
+expr match 'Vive 42.' '[^0-9]*\([0-9]*\.$\)'
+# 42.
+# On extrait les chiffres suivi d'un . le tout en fin de chaine de caracteres

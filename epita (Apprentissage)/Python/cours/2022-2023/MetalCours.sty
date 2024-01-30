@@ -1,0 +1,498 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{MetalCours}[2022/06/22 Classe pour generer des cours, V1.00]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% S'appelle par un \usepackage{MetalCours}
+
+%% Necessite comme fichiers :
+% logo1.png (logo de l'etablissement)
+% logo2.png (logo de presentation)
+
+% Necessite dans le .tex :
+%\newcommand{\CodeMatiere}{PYTHON}
+%\newcommand{\TitreMatiere}{Python}
+%\newcommand{\TitreSeance}{Bases Python}
+%\newcommand{\DateCours}{05 septembre 2022}
+%\newcommand{\AnneeScolaire}{2022-2023}
+%\newcommand{\Organisation}{EPITA}
+%\newcommand{\Parcours}{Apprentissage}
+%\newcommand{\NiveauScolaire}{CYBER1}
+%\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+%\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+%\newcommand{\NomAuteurB}{ }
+%\newcommand{\MailAuteurB}{ }
+%\newcommand{\VersionExo}{Version 1}
+%\newcommand{\DocKeywords}{Python, Language, Interpreter}
+%\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Macros creees dans ce package :
+
+% LSTListing (escape chars) : %*   *)
+% Exemple for a prompt : %*\LSTPrompt*)
+
+%%%% COMMANDES GENERALES
+
+% \LoginX
+%% Affiche "login_x" dans le texte
+
+% \Login
+%% Affiche "login" dans le texte
+
+% \TTBF{texte}
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+
+% \rrangle   >>
+% \llangle   <<
+
+% \textquotesingle  '  (simple quote)
+% \textquotedbl     "  (double quote)
+% \textasciigrave   `  (back quote)
+
+% \EUR    €
+
+% Blocks [beamer]
+%
+% \begin{block}{Normal Block}
+%  Block text \texttt{block}
+% \end{block}
+%
+% \begin{alertblock}{Alert Block}
+%  Block text \texttt{alertblock}
+% \end{alertblock}
+%
+% \begin{exampleblock}{Example Block}
+%  Example of block \texttt{exampleblock}
+% \end{exampleblock}
+
+% Two columns / 2 columns [beamer]
+%
+%\begin{frame}
+%\setbeamertemplate{blocks}[rounded][shadow=false]
+%\frametitle{Multi-colonnes}
+%Du texte en plusieurs colonnes, plus visible avec des blocks.
+%
+% \begin{columns}[t]
+%  \begin{column}{5cm}
+%  \begin{block}{Colonne 1}
+%    Texte dans la\\
+%    colonne 1.
+%  \end{block}
+%  \end{column}
+%
+%  \begin{column}{5cm}
+%  \begin{block}{Colonne 2}
+%    Texte dans la\\
+%    colonne 2 qui peut être \\
+%    plus long que dans la \\
+%    colonne 1.
+%  \end{block}
+%  \end{column}
+% \end{columns}
+%
+%\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{tikz}
+
+% extensions
+
+\RequirePackage{lmodern} % Fonte CM/Computer Modern depassee, usage de Latin Modern
+\RequirePackage{courier} % ttfamily en bold
+
+%%%%%%% Geometrie de la page
+%%%\RequirePackage[top=100pt, bottom=80pt, left=80pt, right=80pt]{geometry}
+%%%\RequirePackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+%%\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+%\RequirePackage[margin=2.5cm,headheight=2cm,headsep=30pt]{geometry}
+
+%\RequirePackage{tabularx}
+
+\RequirePackage{xcolor} % Definition de couleurs
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+\definecolor{commentgreen}{RGB}{2,112,10} %  commentstyle=\color{commentgreen},
+\definecolor{eminence}{RGB}{108,48,130}   %  keywordstyle=\color{eminence},
+\definecolor{weborange}{RGB}{255,165,0}   %  keywordstyle=\color{weborange},
+\definecolor{frenchplum}{RGB}{129,20,83}
+
+
+%\RequirePackage[pdftex]{hyperref} % Gestion des liens cliquables + metadata
+
+\hypersetup{
+    pdfauthor={\NomAuteurA, \Organisation},
+    pdftitle={\TitreMatiere},
+    pdfsubject={\TitreSeance},
+    pdfkeywords={\AnneeScolaire, \Organisation , \DocKeywords},
+    pdfproducer={Latex with hyperref},
+    pdfcreator={pdflatex},
+    pdffitwindow=true,%
+	pdflang=\DocLangue,%
+	pdfpagelayout=SinglePage,%
+%    colorlinks = true,
+    linkbordercolor = {white},
+%	linkcolor = {blue},
+%	urlcolor = {blue}
+}
+
+
+\title[\CodeMatiere]{\TitreMatiere}
+\author{\NomAuteurA}
+\date{\DateCours}
+\institute{\Organisation{} - \Parcours}
+%\titlegraphic{\includegraphics[width=.4\linewidth]{images/epita}}
+%\titlegraphic{\includegraphics[width=.4\linewidth]{images/epita} \includegraphics[width=.4\linewidth]{images/bachelor_cyber}}
+
+
+\RequirePackage{listings} % Affichage du code dans le document
+\RequirePackage{upquote} % Ajuste les quotes comme il faut...
+
+\lstset{ %
+  language=Octave,                 % the language of the code
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% Nice example:
+%\lstset {
+%    language=C++,
+%    frame=tb,
+%    tabsize=4,
+%    showstringspaces=false,
+%    numbers=left,
+%    %upquote=true,
+%    commentstyle=\color{commentgreen},
+%    keywordstyle=\color{eminence},
+%    stringstyle=\color{red},
+%    basicstyle=\small\ttfamily, % basic font setting
+%    emph={int,char,double,float,unsigned,void,bool},
+%    emphstyle={\color{blue}},
+%    escapechar=\&,
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={>,<,.,;,-,!,=,~},
+%    morekeywords={>,<,.,;,-,!,=,~},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+%}
+
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{red}]{@}{@},
+}
+
+\lstdefinestyle{sh}{
+  language=sh,                     % the language of the code
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  emph={int,char,double,float,unsigned,void,bool},
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},          % $ if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%  literate={\$}{{\textcolor{weborange}{\$}}}1
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={$},
+%    morekeywords={$},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+}
+
+\lstdefinestyle{python}{
+  language=Python,                     % the language of the code
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  emph={int,char,double,float,unsigned,void,bool},
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},          % $ if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%  literate={\$}{{\textcolor{weborange}{\$}}}1
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={$},
+%    morekeywords={$},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+}
+
+\lstdefinestyle{cplusplus}{
+    language=C++,
+    frame=tb,
+    tabsize=4,
+    showstringspaces=false,
+    numbers=left,
+    %upquote=true,
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{eminence},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily, % basic font setting
+    emph={int,char,double,float,unsigned,void,bool},
+    emphstyle={\color{blue}},
+    escapechar=\&,
+    % keyword highlighting
+    classoffset=1, % starting new class
+    otherkeywords={>,<,.,;,-,!,=,~},
+    morekeywords={>,<,.,;,-,!,=,~},
+    keywordstyle=\color{weborange},
+    classoffset=0,
+}
+
+
+% Print spaces at the beginning of lines
+%\def\lst@outputspace{{\ifx\lst@bkgcolor\empty\color{white}\else\lst@bkgcolor\fi\lst@visiblespace}
+
+
+%\newcommand{\LSTPrompt}{\textbf{\textcolor{weborange}\$}}   % Print a $ in color
+\newcommand{\LSTPrompt}{\textbf{\textcolor{darkgray}\$}}   % Print a $ in color
+
+\RequirePackage{siunitx}
+\RequirePackage{eurosym}
+
+\DeclareSIUnit{\EUR}{\text{\euro}}
+
+\ifx\texteuro\undefined
+\DeclareTextCommandDefault{\texteuro}
+   {\CheckEncodingSubset\UseTextSymbol{TS1}\tc@fake@euro5\texteuro}
+\fi
+
+\RequirePackage{newunicodechar}
+
+%\newunicodechar{£}{\textsterling}
+%\newunicodechar{€}{\texteuro}
+%\newunicodechar{ß}{\ss}
+%\newunicodechar{ä}{\"{a}}
+%\newunicodechar{ü}{\"{u}}
+%\newunicodechar{ö}{\"{o}}
+%\newunicodechar{Ä}{\"{A}}
+%\newunicodechar{Ü}{\"{U}}
+%\newunicodechar{Ö}{\"{O}}
+
+
+
+\RequirePackage{etoolbox} % Faire des If Then Else en LaTeX
+%\RequirePackage{forloop} % Faire des boucles For en LaTeX
+%\RequirePackage{pgffor} % ForEach depuis des tableaux {1, 2, 3} en LaTeX
+
+\RequirePackage{graphicx} % Inserer des images
+
+\RequirePackage{tcolorbox} % Faire des boites colorees
+
+\RequirePackage{xspace} % Pour ajouter quelques espaces
+
+%% strike out text
+%%   - 'normalem' to avoid conflict with \emph
+\RequirePackage[normalem]{ulem}
+
+%% illustrations for data fields
+\RequirePackage{bytefield}
+
+
+% It's either a theme...
+% (Boadilla, Rochester, PaloAlto, Madrid, Frankfurt, Copenhagen, CambridgeUS [Springer-like], Berkeley, Antibes)
+\usetheme{Boadilla}
+
+%... or manual theme
+
+%% Margins
+%\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%% at the beginning of a part, do...
+\AtBeginPart{
+  %% reset section counter to 0
+  \beamer@tocsectionnumber=0\relax
+  \setcounter{section}{0}
+
+  %% automatically insert a slide with the part title
+  \frame{\partpage}
+}
+
+%% at the beginning of sections, do...
+\AtBeginSection[]
+{
+  %% automatically insert a TOC slide
+  \begin{frame}<beamer>{\insertpartnumber: \insertpart}
+%    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=shaded/shaded/hide,subsubsectionstyle=shaded/shaded/hide/hide]
+	\tableofcontents[sectionstyle=show/shaded,subsectionstyle=shaded/shaded/hide,subsubsectionstyle=hide/hide/hide/hide]
+  \end{frame}
+
+  \only<trans>{\addtocounter{page}{1}}
+}
+
+%% at the beginning of subsections, do...
+\AtBeginSubsection[]
+{
+  %%  automatically insert a TOC slide
+  \begin{frame}<beamer>{\insertpartnumber: \insertpart}
+%    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/show/hide/hide]
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=hide/hide/hide/hide]
+  \end{frame}
+
+  \only<trans>{\addtocounter{page}{1}}
+}
+
+%%%%%%%%%%%% Overlay specifications:
+% sectionstyle=(style for current section)/(style for other sections)
+% subsectionstyle=(style for current subsection)/(style for other subsections in current section)/(style for subsections in other sections)
+% subsubsectionstyle=(style for current subsubsection)/(style for other subsubsections in current subsection)/(style for subsubsections in other subsections in current section)/(style for subsubsections in other subsections in other sections)
+
+
+%% use the infolines outer theme and customize the headline to include the part title
+\useoutertheme{infolines}
+
+\setbeamertemplate{headline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.65ex,dp=1.5ex,right]{part in head/foot}%
+    \usebeamerfont{part in head/foot}\insertpart\hspace*{2ex}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.65ex,dp=1.5ex,center]{section in head/foot}%
+    \usebeamerfont{section in head/foot}\insertsectionhead\hspace*{2ex}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.65ex,dp=1.5ex,left]{subsection in head/foot}%
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertsubsectionhead
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{blocks}[rounded]%
+[shadow=true]
+
+
+%\RequirePackage{minted}
+%\renewcommand{\DeleteFile}[2][]{}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% commandes personnelles
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMANDES GENERALES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\latex}{\LaTeX\xspace}
+\newcommand{\tex}{\TeX\xspace}
+
+% \LoginX
+%% Affiche "login_x" dans le texte
+%\newcommand{\LoginX}{\texttt{login\_x}}
+\newcommand{\LoginX}{\texttt{login.x}}
+\newcommand{\Login}{\texttt{login}}
+
+% \TTBF (texte)
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+\newtcolorbox{YellowBox}{colback=yellow!75!white,colframe=yellow!75!black,halign=center,boxsep=3mm}
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+\newtcolorbox{RedBoxTitle}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+
+% \rrangle   >>
+% \llangle   <<
+\newcommand{\rrangle}{>\kern-1.2ex~>\xspace}
+\newcommand{\llangle}{<\kern-1.2ex~<\xspace}

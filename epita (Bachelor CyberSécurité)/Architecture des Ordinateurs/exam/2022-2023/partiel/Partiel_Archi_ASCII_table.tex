@@ -1,0 +1,248 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{janvier 2023}
+\newcommand{\TypeExam}{Partiel (Sujet 1)}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{ } % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+\begin{center}
+\begin{LARGE}
+Table ASCII \og simple... \fg{}
+\end{LARGE}
+\end{center}
+
+
+\vfillFirst
+
+\begin{center}
+
+\begin{tabular}{ | l |c|c|c|c|c| c |c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char & \textbackslash{}0 & \textbackslash{}t & \textbackslash{}n & \textbackslash{}r \\
+\hline
+Dec &          0         &        9          &         10        &        13         \\
+\hline
+Hex &                    &                   &                   &                   \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+% "  ou  ''
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char & \textit{(espace)} &  ! & '' & \# & \$ & \% & \& &  ' &  ( &  ) &  * &  + &  , &  - &  . &  / \\
+\hline
+Dec &        32          & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 \\
+\hline
+Hex &                    &    &    &    &    &    &    &    &    &    &    &    &    &    &    &    \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char & 0 &  1 &  2 &  3 &  4 &  5 &  6 &  7 &  8 &  9 \\
+\hline
+Dec & 48 & 49 & 50 & 51 & 52 & 53 & 54 & 55 & 56 & 57 \\
+\hline
+Hex &    &    &    &    &    &    &    &    &    & \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c| }
+\hline
+Char & : &  ; &  < &  = &  > &  ? &  @ \\
+\hline
+Dec & 58 & 59 & 60 & 61 & 62 & 63 & 64 \\
+\hline
+Hex &    &    &    &    &    &    &    \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+%\begin{center}
+%\centerline{
+%\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+%\hline
+%Dec &  65 & 66 & 67 & 68 & 69 & 70 & 71 & 72 & 73 & 74 & 75 & 76 & 77 & 78 & 79 & 80 & 81 & 82 & 83 & 84 & 85 & 86 & 87 & 88 & 89 & 90 \\
+%\hline
+%Char &  A &  B &  C &  D &  E &  F &  G &  H &  I &  J &  K &  L &  M &  N &  O &  P &  Q &  R &  S &  T &  U &  V &  W &  X &  Y &  Z \\
+%\hline
+%\end{tabular}
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char &  A &  B &  C &  D &  E &  F &  G &  H &  I &  J &  K &  L &  M \\
+\hline
+Dec &  65 & 66 & 67 & 68 & 69 & 70 & 71 & 72 & 73 & 74 & 75 & 76 & 77 \\
+\hline
+Hex &     &    &    &    &    &    &    &    &    &    &    &    & \\
+\hline
+\end{tabular}
+
+%\smallskip
+\bigskip
+%\vspace*{1cm}
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char &  N &  O &  P &  Q &  R &  S &  T &  U &  V &  W &  X &  Y &  Z \\
+\hline
+Dec &  78 & 79 & 80 & 81 & 82 & 83 & 84 & 85 & 86 & 87 & 88 & 89 & 90 \\
+\hline
+Hex &     &    &    &    &    &    &    &    &    &    &    &    & \\
+\hline
+\end{tabular}
+
+%}
+
+%\bigskip
+\vspace*{1cm}
+
+% `   ou   \textasciigrave
+\begin{tabular}{ | l |c|c|c|c|c|c| }
+\hline
+Char & $\lbrack$ &  \textbackslash{} & $\rbrack$ & $\wedge$ & \_ & \textasciigrave \\
+\hline
+Dec &     91     &         92        &     93    &    94    & 95 & 96 \\
+\hline
+Hex &            &                   &           &          &    &    \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char &  a &  b &  c &  d  &  e  &  f  &  g  &  h  &  i  &  j  &  k  &  l  &  m \\
+\hline
+Dec &  97 & 98 & 99 & 100 & 101 & 102 & 103 & 104 & 105 & 106 & 107 & 108 & 109 \\
+\hline
+Hex &     &    &    &    &    &    &    &    &    &    &    &    & \\
+\hline
+\end{tabular}
+
+%\smallskip
+\bigskip
+
+\begin{tabular}{ | l |c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+Char &  n  &  o  &  p  &  q  &  r  &  s  &  t  &  u  &  v  &  w  &  x  &  y  &  z \\
+\hline
+Dec &  110 & 111 & 112 & 113 & 114 & 115 & 116 & 117 & 118 & 119 & 120 & 121 & 122 \\
+\hline
+Hex &     &    &    &    &    &    &    &    &    &    &    &    & \\
+\hline
+\end{tabular}
+
+%\bigskip
+\vspace*{1cm}
+
+% $ \sim $  ou  \textasciitilde   ou   \texttildelow
+\begin{tabular}{ | l |c|c|c|c| }
+\hline
+Char & $\{$ &  |  & $\}$ & \texttildelow \\
+\hline
+Dec &  123  & 124 &  125 &      126  \\
+\hline
+Hex &       &     &      &          \\
+\hline
+\end{tabular}
+
+
+\end{center}
+
+\vfillLast
+
+\end{document}

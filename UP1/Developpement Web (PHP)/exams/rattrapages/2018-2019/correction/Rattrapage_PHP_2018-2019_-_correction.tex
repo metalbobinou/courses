@@ -1,0 +1,389 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{L2}
+\newcommand{\NumGroupe}{L2 MIASHS}
+\newcommand{\AnneeUniv}{2018-2019}
+\newcommand{\DateExam}{27 juin 2019}
+\newcommand{\TypeExam}{Rattrapage}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(1 points) Donnez la définition de l'\textbf{atomicité} et de l'\textbf{isolation}}
+
+\begin{enumerate}
+\item \TTBF{L'Atomicité} : transaction se déroule intégralement ou pas du tout
+\item \TTBF{L'Isolation} : une transaction ne peut pas dépendre d'une autre transaction
+\end{enumerate}
+
+\bigskip
+
+\subsection{(1 point) Citez les 3 versions majeures du protocole HTTP. Expliquez très succinctement la différence entre HTTP et HTTPS.}
+
+\bigskip
+
+HTTP 1.0, HTTP 1.1, HTTP/2
+
+HTTP transmet toutes les informations en clair, tandis que HTTPS chiffre les communications entre le client web et le serveur web.
+On peut vérifier l'authenticiter du serveur web avec les certificats fournis avec HTTPS.
+S pour Secure.
+
+\bigskip
+
+\subsection{(3,5 points) Remplir le tableau avec les codes HTTP ou leur description.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  \textbf{Code HTTP} & \textbf{Description} \\ \hline
+  200 & OK \\ \hline
+  302 307 & Temporary Redirect \\ \hline
+  301 308 & Permanent Redirect \\ \hline
+  403 & Le client n'a pas le droit d'accéder à la ressource \\ \hline
+  404 & URL/Ressource demandée n'existe pas \\ \hline
+  500 & Internal Server Error \\ \hline
+  502 & Bad Gateway \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+\subsection{(1,5 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\begin{enumerate}
+\item \TTBF{http://www2.importexport.jp/category/01/} : protocole : http (web), domaine : \linebreak www2.importexport.jp, ressource : /category/01/ (dossier)
+\item \TTBF{https://www.reservatio.com/timetable/chart.html} : protocole : https (secure web), www.reservatio.com, ressource : /timetable/chart.html (fichier : chart.html)
+\item \TTBF{ssh://publi.service.univ.org:2367/articles/20190331.php} : protocole : ssh, port : 2367, domaine : publi.service.univ.org, ressource : /articles/20190331.php
+\end{enumerate}
+
+\bigskip
+
+\newpage
+
+% Code à écrire ou corriger
+\section{Développement}
+
+\subsection{(3,5 points) \'Ecrire une fonction "\textit{Calculatrice}" qui effectuera les 4 opérations de base : addition ("\TTBF{+}"), soustraction ("\TTBF{-}"), multiplication ("\TTBF{*}"), et division ("\TTBF{/}"). La fonction prendra 2 paramètres : un tableau simple contenant 2 nombres, puis l'opérateur. Le résultat doit être renvoyé par un \TTBF{return}. La division par 0 devra être protégée en écrivant le message "\TTBF{Erreur}" puis il faudra renvoyer 0. Il faudra s'assurer que les paramètres sont du bon type et que l'opérateur existe, sinon il faut le message "\TTBF{Erreur}" et renvoyer 0}
+
+%\medskip
+
+%\textit{L'exercice étant à l'écrit, on supposera qu'il n'y a aucun problème de virgule.}
+
+%\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<?php
+function Calculatrice($tab, $op)
+{
+  $nb1 = $tab[0];         // 0,25
+  $nb2 = $tab[1];
+  if (!((gettype($nb1) == gettype(0)) &&     // 0,5
+        (gettype($nb2) == gettype(0)) &&
+        (gettype($op) == gettype("lol"))))
+  {
+    echo("Erreur");       // 0,25
+    return (0);
+  }
+
+  if ($op == "+")         // 0,5
+  {
+    return($nb1 + $nb2);
+  }
+  elseif ($op == "-")      // 0,5
+  {
+    return($nb1 - $nb2);
+  }
+  elseif ($op == "*")    // 0,5
+  {
+    return($nb1 * $nb2);
+  }
+  elseif ($op == "/")    // 0,5
+  {
+    if ($nb2 == 0)     // 0,25
+    {
+      echo("Erreur");
+      return (0);
+    }
+    return($nb1 / $nb2);
+  }
+  else
+  {
+    echo("Erreur");      // 0,25
+    return (0);
+  }
+}
+?>
+\end{lstlisting}
+
+\medskip
+
+\subsection{(5 points) Vous devez implémenter l'inscription sur une mailing list. \'Ecrire le code pour ajouter une adresse mail dans une base de données. Si l'adresse a été ajoutée, on écrit "OK", sinon, si l'adresse existe déjà, on écrira "NOP". L'adresse mail sera transférée par une variable POST nommée \TTBF{mail}.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "monshop", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "ml", et dispose du mot de passe "passbdd".
+\end{WhiteBox}
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{1}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{mail} \\ \hline %\TTBF{ID} & \TTBF{login} & \TTBF{password} & \TTBF{nom} & \TTBF{prenom} & \TTBF{ville}\\ \hline
+  fabrice.boissier@univ-paris1.fr \\ \hline % 0 & fafa & ML0.Qje4sc & Boissier & Fabrice & Paris \\ \hline
+  ali.jaffal@univ-paris1.fr \\ \hline % 1 & ali & v/87jVKZhK & Jaffal & Ali & Paris \\ \hline
+  floriane.owczarek@univ-paris1.fr \\ \hline % 2 & flo & PFjgksmt.G & Owczarek & Floriane & Paris \\ \hline
+  \end{tabularx}
+\caption{Base de données : monshop     Table : mailinglist}\label{tab:bdd-1-1}
+\end{table}
+\end{center}
+%
+\renewcommand\arraystretch{1}
+%
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $mail = $_POST['mail'];  // Assignation variables "hors" SQL
+
+  $mysqli = new mysqli("localhost", "ml", "passbdd", "monshop");
+  if ($mysqli->connect_errno)
+  {
+    die ("Echec lors de la connexion " . $mysqli->connect_error);
+  }
+  $sql = "SELECT * FROM mailinglist WHERE mail='$mail'" ;
+  $resultat = $mysqli->query($sql);
+  if ($resultat->num_rows > 0)
+  {
+    echo "NOP";
+  }
+  else
+  {
+    $sql = "INSERT INTO mailinglist (mail) VALUES ('$mail')";
+    $resultat = $mysqli->query($sql);
+    echo "OK";
+  }
+  $mysqli->close();  // Pas obligatoire
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\medskip
+
+\newpage
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $mail = $_POST['mail'];
+
+  try {  // fab / passbdd
+    $pdo = new PDO("mysql:host=localhost;dbname=monshop", "ml", "passbdd");
+  } catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+  }
+
+  $sql = $pdo->query("SELECT * FROM mailinglist WHERE mail='$mail'");
+  $infos = $sql->fetch();
+  if ($infos)
+  {
+    echo "NOP";
+    $sql->closeCursor();  // Pas obligatoire
+  }
+  else
+  {
+    $sql = $pdo->exec("INSERT INTO mailinglist (mail) VALUES ('$mail')");
+    echo "OK";
+  }
+?>
+</body>
+</html>
+\end{lstlisting}
+
+
+
+\newpage
+
+\subsection{(5 points) Vous devez implémenter une recherche de facture selon sa date. L'utilisateur entre une date minimale et une date maximale, puis les factures concernées doivent être présentées. Le formulaire est envoyé en POST avec deux variables \TTBF{datemin} et \TTBF{datemax}. \'Ecrire la fonction "\textit{RechercheFactures}" qui prend en paramètre une date minimale et une date maximal, puis récupère les numéros de factures correspondant. Si aucune facture n'est trouvée, il faut écrire "NOP". N'oubliez pas d'appeler la fonction pour l'exécuter.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "monshop", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "shop", et dispose du mot de passe "shopass".
+\end{WhiteBox}
+
+\medskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{6}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{ID} & \TTBF{client} & \TTBF{commande} & \TTBF{date} & \TTBF{montant} \\ \hline
+  4235 & 2358748 & 4001 & 2013-03-21 & 43.35 \\ \hline
+  4236 & 98634 & 4005 & 2013-03-22 & 231.00 \\ \hline
+  4237 & 642409 & 4007 & 2013-03-23 & 145.02 \\ \hline
+  \end{tabularx}
+\caption{Base de données : monshop     Table : factures}\label{tab:bdd-2-1}
+\end{table}
+\end{center}
+
+\medskip
+
+\newpage
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $DateMin = $_POST['datemin'];
+  $DateMax = $_POST['datemax'];
+
+  RechercheArticle($DateMin, $DateMax);
+
+function RechercheFactures($datemin, $datemax)
+{
+  try {
+    $pdo = new PDO("mysql:host=localhost;dbname=monshop", "shop", "shopass");
+  } catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+  }
+
+  $sql = $pdo->query("SELECT * FROM factures WHERE date>='$datemin' AND date<='$datemax'");
+  $i = 0;
+  while ($infos = $sql->fetch(PDO::FETCH_ASSOC))
+  {
+    $id = $infos['ID'];
+    $client = $infos['client'];
+    $commande = $infos['commande'];
+    $date = $infos['date'];
+    $montant = $infos['montant'];
+    echo "$id $client $commande $date $montant <br />\n";
+    $i++;
+  }
+  if ($i == 0)
+  {
+    echo "NOP";
+  }
+  $sql->closeCursor();  // Pas obligatoire
+}
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\medskip
+
+\newpage
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $DateMin = $_POST['datemin'];
+  $DateMax = $_POST['datemax'];
+
+  RechercheArticle($DateMin, $DateMax);
+
+function RechercheFactures($datemin, $datemax)
+{
+  $mysqli = new mysqli("localhost", "shop", "shopass", "monshop"); // fab / passbdd
+
+  if ($mysqli->connect_errno)
+  {
+    die ("Echec lors de la connexion " . $mysqli->connect_error);
+  }
+
+  $sql = "SELECT * FROM factures WHERE date>='$datemin' AND date<='$datemax'";
+  $resultat = $mysqli->query($sql);
+  if ($resultat->num_rows > 0)
+  {
+    while ($infos = $resultat->fetch_array())
+    {
+      $id = $infos['ID'];
+      $client = $infos['client'];
+      $commande = $infos['commande'];
+      $date = $infos['date'];
+      $montant = $infos['montant'];
+      echo "$id $client $commande $date $montant <br />\n";
+    }
+  }
+  else
+  {
+    echo "NOP";
+  }
+  $mysqli->close();  // Pas obligatoire
+}
+
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\end{document}

@@ -1,0 +1,53 @@
+Dans certains langages, les booléens sont représentés par des entiers
+A) Vrai
+B) Faux
+ANSWER: A
+Le code suivant est-il simplement récursif ou récursif terminal ?int fun1(int a, int b)  if (a >= 42)    return (b);  return (fun1(a + 2, b + 2) + 1)
+A) Récursif
+B) Récursif terminal
+ANSWER: A
+Le code suivant est-il simplement récursif ou récursif terminal ?int fun1(int a, int b)  if (a >= 42)    return (b);  return (fun1(a + 2, b + 2))
+A) Récursif terminal
+B) Récursif
+ANSWER: A
+Qu'affichera le code suivant ?int fun2(int c)a = 3b = 5while (a != b)  a = a + 1  b = b - 1return (a)
+A) Rien
+B) 3
+C) 5
+D) 4
+ANSWER: A
+Que retournera le code suivant ?int fun1(int c)a = 5b = 6while (a != b)  a += 2  b = b + 1return (b + a)
+A) 14
+B) 12
+C) 7
+D) 11
+ANSWER: A
+Qu'affichera le code suivant ?int fun1(int c)a = 5b = 5while (a == b)  print(c)  a += 1return (b)
+A) La valeur contenue dans le paramètre c
+B) 'c'
+C) 6
+D) 5
+ANSWER: A
+Pour accéder à l'élément 66 avec les langages classiques de programmation, il faut utiliser l'instruction :
+A) tab[2]
+B) tab(2)
+C) tab[3]
+D) tab(3)
+ANSWER: A
+Le tableau tab...
+A) Est de taille 5
+B) Est de taille 4
+C) Est de taille 6
+ANSWER: A
+Dans le code suivant, à quelle itération accèdera-t-on à l'élément 55 ?for (int i = 1; i < 5; i++)  var = tab[i]
+A) 2
+B) 1
+C) 3
+D) 4
+ANSWER: A
+En exécutant le code suivant, quelle valeur s'affichera à l'écran ?i = 1while (tab[i] != 5)  i += 1print(i)
+A) 3
+B) 4
+C) 5
+D) 6
+ANSWER: A

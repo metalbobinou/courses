@@ -1,0 +1,110 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo4\_fun.php} [my\_Transposee(array)]}{\TTBF{\RenduDir/src/exo4/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{gettype}, \TTBF{sizeof}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de transposer une matrice.}
+
+\bigskip
+
+\noindent Une matrice est donnée en paramètre, il faut simplement la transposer.
+
+\noindent Vous devez écrire une fonction nommée \TTBF{my\_Transposee} qui prendra en paramètre un tableau de tableaux.
+La fonction renverra la matrice transposée.
+
+\bigskip
+
+\noindent Exemple d'entrée :
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Exemple de matrice (exo4\_data.php)}]
+$line1 = array(0, 42, 1);
+$line2 = array(8, 9, 13);
+
+$matrix[] = $line1;
+$matrix[] = $line2;
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Appel de la fonction}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo4_data.php");
+  require_once("exo4_fun.php");
+  $my_text = my_Transposee($matrix);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas général}]
+<textarea cols="80" rows="25" readonly="readonly">
+0;8
+42;9
+1;13
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Deux cas d'erreur doivent être gérés avant tout affichage : si la matrice est vide (ou n'existe pas), et si la matrice contient autre chose que des nombres.
+
+\noindent Si la matrice est vide ou que la variable n'existe pas, il faut indiquer le message suivant :
+
+\bigskip
+
+\noindent \TTBF{Empty\textvisiblespace matrix}
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Exemple de matrice vide (exo4\_data.php)}]
+$line1 = array();
+$line2 = array();
+
+$game[] = $line1;
+$game[] = $line2;
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 : matrice vide}]
+<textarea cols="80" rows="25" readonly="readonly">
+Empty matrix
+</textarea>
+\end{lstlisting}
+
+\noindent Si la matrice contient des caractères autres que des nombres, il faut indiquer le message suivant :
+
+\bigskip
+
+\noindent \TTBF{Incorrect\textvisiblespace matrix}
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Exemple de matrice incorrecte (exo4\_data.php)}]
+$line1 = array(0, "42", "A");
+$line2 = array("-", "U", 13);
+
+$game[] = $line1;
+$game[] = $line2;
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 : matrice incorrecte}]
+<textarea cols="80" rows="25" readonly="readonly">
+Incorrect matrix
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}

@@ -1,0 +1,669 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Python}
+\newcommand{\TitreSeance}{Bases Python et Statistiques}
+\newcommand{\NumeroTD}{TD 1}
+\newcommand{\DateCours}{05 septembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Python, Langage, Interpreteur, Statistiques}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce TD a pour objectif de vous faire développer un petit module de statistiques \textit{from scratch}.
+Vous démarrerez depuis l'écriture de quelques lignes de code directement dans l'interpréteur, pour atteindre plusieurs fichiers dont un importable et une classe.
+Durant tout l'exercice, vous utiliserez au fur et à mesure chaque notion clé du langage Python.
+Ces notions vous permettront d'utiliser plus tard les extensions et modules Python dédiés ou optimisés pour l'apprentissage automatique, le calcul parallèle, ou bien même pour d'autres usages dans la sécurité ou le scripting générique.
+
+\bigskip
+
+\section{Prise en main de Python}
+
+\bigskip
+
+Ouvrez un terminal disposant d'un shell, puis lancez python en tapant simplement la commande :
+
+\begin{center}
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+python \end{lstlisting}
+\end{center}
+
+Assurez-vous d'avoir au minimum une version 3.8.
+
+\medskip
+
+Afin de prendre en main l'interpréteur et le langage, nous allons démarrer en faisant des statistiques simples.
+
+
+Commencez par importer le module \TTBF{random} afin de disposer d'un générateur de nombres aléatoires, ainsi que le module \TTBF{math}.
+
+\begin{center}
+\begin{lstlisting}[style=python,morekeywords={floor,ceil}]
+import math
+import random \end{lstlisting}
+\end{center}
+
+Le module \TTBF{random} contient une fonction \TTBF{random()} affichant un nombre entre 0 et 1 (exclu).
+
+
+Commencez par afficher un nombre aléatoire en tapant :
+
+\begin{center}
+\begin{lstlisting}[style=python,morekeywords={floor,ceil}]
+random.random() \end{lstlisting}
+\end{center}
+
+
+\question{Vérifiez le type de la valeur retournée.}
+
+% type(random.random())
+
+\question{Multipliez le nombre par $ 100 $, puis transformez-le en entier, afin d'obtenir un pourcentage.}
+
+% int(random.random() * 100)
+
+\question{Générez maintenant $ 10 $ nombres aléatoires avec une boucle \TTBF{for}. Ceci correspondra à une distribution de $ 10 $ nombres.}
+
+% for (x in range(0, 10)):
+%   int(random.random() * 100)
+
+\bigskip
+
+Afin de vous faire gagner du temps dans la correction syntaxique, et surtout pour travailler correctement, vous devrez continuer l'exercice en tapant votre code dans des fichiers \TTBF{.py}.
+Vous pourrez ainsi sauvegarder vos travaux et nous les rendre.
+
+Néanmoins, vous pouvez utilisez le shell python pour tester certaines opérations rapidement.
+
+%\bigskip
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Premier script}
+
+\bigskip
+
+Avant de continuer, créez un fichier \TTBF{simple\_stats.py} dans lequel vous écrirez votre code.
+
+N'oubliez pas de mettre sur la première ligne du fichier :
+
+\begin{center}
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+#! /usr/bin/python \end{lstlisting}
+\end{center}
+
+Recopiez ensuite la boucle \TTBF{for} de la question précédente afin de générer $ 10 $ nombres aléatoires.
+
+\question{Testez votre script avec la commande suivante :}
+
+\begin{center}
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+python simple_stats.py \end{lstlisting}
+\end{center}
+
+\'Etant donné que vous n'avez pas demandé à écrire sur la sortie standard les résultats, le script ne produit rien.
+
+\question{Utilisez la fonction \TTBF{print} pour écrire les nombres générés, puis la quantité de nombres générés.}
+
+\begin{center}
+\begin{equation*}
+\text{Nombre de Valeurs} = \text{cardinal de la distribution} = \text{\textit{card}}(L) = |L|
+\end{equation*}
+\end{center}
+
+
+\bigskip
+
+Continuons le code précédent afin de calculer manuellement quelques statistiques sur notre distribution aléatoire.
+
+\bigskip
+
+\question{Assignez le plus petit nombre de la distribution à une variable nommée \TTBF{DistrMin}, et faites de même pour le plus grand nombre dans la variable \TTBF{DistrMax}. Affichez ensuite les deux variables sur la sortie standard.}
+
+% DistrMin = 100
+% DistrMax = -1
+% if (valeur > DistrMax):
+%   DistrMax = valeur
+% if (valeur < DistrMin):
+%   DistrMin = valeur
+
+\question{Calculez et affichez l'\textit{étendue} de la distribution en faisant la différence entre la valeur la plus élevée de la distribution à la valeur la plus petite.}
+
+\begin{center} % \text{étendue} = \text{Valeur}_{\text{\textit{max}}} - \text{Valeur}_{\text{\textit{min}}}
+\begin{equation*}
+\text{étendue} = E = \text{\textit{max}}(L) - \text{\textit{min}}(L)
+\end{equation*}
+\end{center}
+
+\bigskip
+
+% etendue = DistrMax - DistrMin
+
+\question{Calculez et affichez la \textit{moyenne} de la distribution en faisant la somme de toutes les valeurs, puis en divisant par le nombre de valeurs.}
+
+\begin{center} % \text{moyenne} = \frac{\sum_{n=1}^{\text{Nb Valeurs}} \text{Valeur}_{i}}{\text{Nb Valeurs}}
+\[
+\text{moyenne} = \mu = \bar{L} = \frac{\displaystyle \sum L_{i}}{|L|}
+\]
+\end{center}
+
+% DistrNbValues = 10
+% moyenne = 0
+% for (x in range(0, DistrNbValues)):
+%   valeur = int(random.random() * 100)
+%   moyenne += valeur
+% moyenne = moyenne / DistrNbValues
+
+
+%\bigskip
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Listes}
+
+\bigskip
+
+Afin de permettre à l'utilisateur de choisir le nombre de valeurs dans la distribution, utilisez le module \TTBF{sys} pour pouvoir lire les arguments donnés par le shell.
+Pour rappel, il suffit de lire la séquence \TTBF{argv} fournie par le module \TTBF{sys}, sans oublier de vérifier sa taille.
+
+\bigskip
+
+\question{Votre script doit maintenant vérifier si un paramètre est fourni : si oui, le premier paramètre correspondra au nombre de valeurs que la distribution doit comporter, si non, la distribution sera composée de $ 10 $ valeurs. Si le nombre donné en paramètre est inférieur ou égal à 0, la distribution sera composée de $ 1 $ nombre. Le nombre de valeurs de la distribution sera conservé dans la variable nommée \TTBF{DistrNbValues}.}
+
+% import sys as Sys
+% if (len(sys.argv) < 0):
+%   DistrNbValues = 10
+% else:
+%   if (sys.argv[1] > 0):
+%     DistrNbValues = int(sys.argv[1])
+%   else:
+%     DistrNbValues = 1
+
+\bigskip
+
+Pour mieux manipuler votre distribution, nous allons créer une liste dans une variable nommée \TTBF{MyDistribution}.
+
+\bigskip
+
+\question{Créez une liste vide \TTBF{MyDistribution}, puis remplissez-la au fur-et-à-mesure avec la méthode \TTBF{append()}.}
+
+% MyDistribution = []
+% moyenne = 0
+% for (x in range(0, DistrNbValues)):
+%   valeur = int(random.random() * 100)
+%   MyDistribution.append(valeur)
+%   moyenne += valeur
+% moyenne = moyenne / DistrNbValues
+
+\bigskip
+
+\question{Calculez et affichez la \textit{médiane} de la distribution en choisissant la valeur au centre de la distribution \textbf{triée}. Utilisez la valeur par défaut (\TTBF{floor} du module \TTBF{math}) en cas de quantité impaire de valeurs dans la distribution (les tableaux démarrant à $ 0 $, on y applique donc déjà le $ +1 $).}
+
+\begin{center} % \text{médiane} = \text{Valeur}_{\frac{i}{\text{Nb Valeurs}}}
+\begin{equation*}
+\text{médiane} = L_{\frac{|L|}{2}}
+\end{equation*}
+\end{center}
+
+% import math
+% median_pos = int(math.floor(DistrNbValues / 2))
+% sorted_distr = MyDistribution.copy()
+% sorted_distr.sort()
+% median = sorted_distr[median_pos]
+
+%\bigskip
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fonctions}
+
+\bigskip
+
+Votre code devenant de plus en plus complexe, mais de plus en plus structuré, vous allez maintenant écrire des fonctions.
+\'Etant donné que votre code contient déjà ces fonctions de façon très/trop intégrée, cette étape correspond au processus de \textit{refactoring} dans l'industrie : le code est démêlé et réécrit afin de pouvoir être mieux maintenu par de nouvelles équipes n'ayant pas toujours participé à l'écriture initiale (donc n'ayant pas vécues les mêmes contextes, contraintes, et exigences que la première équipe).
+
+\medskip
+
+\question{Implémentez une fonction \TTBF{GetDistrNbValues} qui ne prend aucun paramètre, mais renvoie le nombre de valeurs demandé en argument dans la ligne de commande par l'utilisateur.}
+
+\question{Implémentez une fonction \TTBF{Mean} calculant la moyenne à partir de la liste contenant votre distribution.}
+
+\question{Implémentez une fonction \TTBF{Median} calculant la médiane à partir de la liste contenant votre distribution.}
+
+
+\bigskip
+
+Pour profiter des retours multiples de fonctions de Python, vous allez également écrire une fonction renvoyant simultanément le minimum, le maximum, et la distribution.
+
+\bigskip
+
+\question{Implémentez une fonction \TTBF{GenerateDistribution} prenant en paramètre le nombre souhaité de valeurs dans la distribution, et renvoyant dans cet ordre précis : la valeur minimum, la valeur maximum, et la liste contenant la distribution.}
+
+% for (x in range(0, DistrNbValues)):
+%   valeur = int(random.random() * 100)
+%   return min, max, distribution
+% DistrMin, DistrMax, MyDistribution = GenerateDistribution(DistrNbValues)
+
+\question{Implémentez une fonction \TTBF{main} récupérant dans la variable \TTBF{DistrNbValues} le nombre souhaité de valeurs dans la distribution, puis créant la distribution \TTBF{MyDistribution} et stockant le minimum et le maximum dans les variables \TTBF{DistrMin} et \TTBF{DistrMax}.
+Cette fonction sera la seule appelée dans le script : aucune autre instruction ne sera présente hors des fonctions.}
+
+\bigskip
+
+Parmi les mesures statistiques utiles se trouve l'\textit{écart interquartile} basé sur la différence entre des \textit{quartiles}.
+L'idée des quartiles est de diviser la distribution en $ 4 $ parties, chaque quartile étant un séparateur, et d'observer l'écart entre certains séparateurs pour mesurer la dispersion des valeurs.
+
+\begin{itemize}
+\item le quartile 0 ($Q_{0}$) est la valeur la plus petite de la distribution
+\item le $ 1^{er} $ quartile ($Q_{1}$) sépare les $ 25\% $ premières valeurs de la distribution des autres
+\item le $ 2^{\grave{e}me} $ quartile ($Q_{2}$) sépare les $ 50\% $ premières valeurs de la distribution des autres
+\item le $ 3^{\grave{e}me} $ quartile ($Q_{3}$) sépare les $ 75\% $ premières valeurs de la distribution des autres
+\item le quartile 4 ($Q_{4}$) est la valeur la plus élevée de la distribution
+\end{itemize}
+
+Plus visuellement, la distribution triée est séparée ainsi :
+
+\begin{center}
+$ Q_{0} $ ... (partie 1) ... $ Q_{1} $ ... (partie 2) ... $ Q_{2} $ ... (partie 3) ... $ Q_{3} $ ... (partie 4) ... $ Q_{4} $
+\end{center}
+
+Dans le cas dit \textit{discret} (c'est-à-dire non continu : on peut dénombrer les valeurs que l'on étudie), il suffit de calculer le \textit{rang} des valeurs, c'est-à-dire leur position dans la distribution triée par ordre croissant.
+Un quartile dans le cas discret est donc simplement une valeur à une position précise dans la distribution triée.
+
+\bigskip
+
+Pour une distribution contenant $ n $ valeurs, on calcule les rangs ainsi :
+
+\begin{itemize}
+\item le quartile 0 ($Q_{0}$) est donc au rang $ 1 $
+\item le $ 1^{er} $ quartile ($Q_{1}$) est au rang $ (n + 3) / 4 $
+\item le $ 2^{\grave{e}me} $ quartile ($Q_{2}$) est au rang $ (n + 1) / 2 $ (il s'agit de la médiane)
+\item le $ 3^{\grave{e}me} $ quartile ($Q_{3}$) est au rang $ (3n + 1) / 4 $
+\item le quartile 4 ($Q_{4}$) est donc au rang $ n $
+\end{itemize}
+
+\bigskip
+
+Testons sur la distribution : $ 1 \; 2 \; 3 \; 4 \; 5 \; 6 \; 7 \; 8 \; 9 $
+
+\begin{itemize}
+\item $ Q_{0} = 1 $
+\item $ Q_{1} = 3 $
+\item $ Q_{2} = 5 $
+\item $ Q_{3} = 7 $
+\item $ Q_{4} = 9 $
+\end{itemize}
+
+\bigskip
+
+La première partie contient donc les valeurs de $ 1 \; 2 \; 3 $, la deuxième partie les valeurs de $ 3 \; 4 \; 5 $, la troisième partie les valeurs $ 5 \; 6 \; 7 $, et la quatrième partie les valeurs $ 7 \; 8 \; 9 $.
+
+\smallskip
+
+Si on ne tombe pas sur un rang précis, il est normalement nécessaire de calculer un poids entre la valeur au dessus et la valeur au dessous.
+Mais pour simplifier notre cas, utilisons le rang inférieur (avec \TTBF{math.floor}).
+
+\bigskip
+
+\question{Créez cinq fonctions nommées \TTBF{QuartileZero}, \TTBF{QuartileOne}, \TTBF{QuartileTwo}, \TTBF{QuartileThree}, \TTBF{QuartileFour} calculant la valeur de chaque quartile pour une distribution donnée.}
+
+% Q0 = 1
+% Q1 = (DistrNbValues + 3) / 4
+% Q2 = DistrNbValues / 2
+% Q3 = ((3 * DistrNbValues) + 1) / 4
+% Q4 = DistrNbValues
+
+\bigskip
+
+Revenons à la métrique qui nous intéressait : l'écart interquartile.
+Celui-ci se calcule simplement ainsi :
+
+\begin{center} % \text{étendue} = \text{Valeur}_{\text{\textit{max}}} - \text{Valeur}_{\text{\textit{min}}}
+\begin{equation*}
+\text{écart interquartile} = EI = Q_{3} - Q_{1}
+\end{equation*}
+\end{center}
+
+\bigskip
+
+\question{Implémentez le calcul de l'\textit{écart interquartile} dans une fonction nommée \TTBF{InterQuartileRange} qui prendra une distribution en paramètre.}
+
+% EI = Q3 - Q1
+
+\bigskip
+
+\question{Implémentez maintenant le calcul de la \textit{variance} de la distribution dans une fonction nommée \TTBF{Variance}. Cette fonction prendra en paramètre la distribution, et retournera la variance.}
+
+\bigskip
+
+La variance permet de mesurer la dispersion des valeurs de la distribution par rapport à la moyenne.
+L'interprétation est simple : une variance élevée indique que les nombres de la distribution sont éloignés de la moyenne ($ 1 $ et $ 99 $ par rapport à $ 50 $), une variance faible indique que les nombres de la distribution sont proches de la moyenne ($ 42 $ et $ 58 $ par rapport à $ 50 $).
+
+% \frac{\displaystyle (\sum E_{i}^{2}) - \frac{\displaystyle (\sum E_{i})^{2}}
+%                                             {\displaystyle \text{Nb Valeurs}}}
+%      {\displaystyle \text{Nb Valeurs}}
+
+\begin{center}
+\begin{equation*}
+\text{variance} = \sigma^{2} = Var(L) = \frac{1}{|L|} \sum (L_{i} - \bar{L})^{2}
+\end{equation*}
+\end{center}
+
+\bigskip
+
+Ce calcul peut paraître rebutant, mais il est très simple lorsque l'on regarde de plus près chaque partie de l'expression :
+
+\medskip
+
+\begin{itemize}
+\item[$\bullet$] $ (L_{i} - \bar{L}) $ correspond à la différence entre chaque élément de la distribution et la moyenne de la distribution.
+
+\item[$\bullet$] $ (L_{i} - \bar{L})^{2} $ correspond au carré de la différence entre chaque élément de la distribution et la moyenne de la distribution.
+
+\item[$\bullet$] $ \sum (L_{i} - \bar{L})^{2} $ correspond à la somme des carrés précédemment décrits. Il s'agit donc de faire une boucle effectuant les traitements précédemment décrits, pour ajouter le résultat à une variable initialisée à $ 0 $ juste avant la boucle.
+
+\item[$\bullet$] $ \frac{1}{|L|} \sum (L_{i} - \bar{L})^{2} $ correspond à la division par le nombre d'éléments de la distribution du total de la somme précédente.
+\end{itemize}
+
+%def Variance1(MyDistribution):
+%  DistrNbValues = length(MyDistribution)
+%  Moyenne = 0
+%  for x in MyDistribution:
+%    Moyenne = Moyenne + x
+%  Moyenne = Moyenne / DistrNbValues
+%  tmp = 0
+%  for x in MyDistribution:
+%    tmp = tmp + ((x - Moyenne) ** 2)
+%  variance = tmp / DistrNbValues
+%  return (variance)
+
+\bigskip
+
+En développant le calcul, on peut arriver à une formule beaucoup plus adaptée au développement, surtout avec des distributions extrêmement grandes (c'est-à-dire des distributions sur lesquelles il coûterait très/trop cher de passer plusieurs fois pour calculer tout d'abord la \textit{moyenne}, et seulement ensuite la différence de chaque élément avec la moyenne), ou lorsque les valeurs arrivent au fur et à mesure sans savoir précisément quand la distribution s'arrêtera (et que l'on souhaite un aperçu des statistiques en temps réel) :
+
+\begin{center}
+\begin{equation*}
+\text{variance} = \sigma^{2} = Var(L) = \frac{1}{|L|} \sum (L_{i} - \bar{L})^{2} = \left( \frac{1}{|L|} \sum L_{i}^{2} \right) - \bar{L}^{2}
+\end{equation*}
+\end{center}
+
+\bigskip
+
+Analysons cette deuxième formule pour comprendre son intérêt en tant que développeur :
+
+\medskip
+
+\begin{itemize}
+\item[$\bullet$] $ L_{i}^{2} $ correspond à la mise au carré de chaque élément de la distribution.
+
+\item[$\bullet$] $ \sum L_{i}^{2} $ correspond à la somme de tous les éléments de la distribution mis au carré individuellement, c'est-à-dire d'itérer sur chaque élément, en faire son propre carré, puis d'ajouter ce résultat à une variable mise à $ 0 $ juste avant la boucle.
+
+\item[$\bullet$] $ \frac{1}{|L|} \sum L_{i}^{2} $ correspond à la division de la somme précédente par le nombre d'éléments de la distribution.
+
+\item[$\bullet$] $ ( \frac{1}{|L|} \sum L_{i}^{2} ) - \bar{L}^{2} $ correspond à la différence entre la division précédente, et la moyenne de la distribution mise au carré.
+\end{itemize}
+
+Cette deuxième formule est en réalité bien plus efficace dans un contexte séquentiel (c'est-à-dire lorsque chaque opération est effectuée l'une après l'autre), car nous pouvons faire une somme de tous les éléments qui arrivent et une somme de chacun de leur carré, et seulement lorsque tous les nombres ont été analysés, nous pouvons en déduire la moyenne et la soustraire.
+Chaque élément n'aura été lu qu'une seule et unique fois lorsqu'il a été généré, et nous avons fait évolué deux variables distinctes à côté : une somme simple (pour produire la moyenne), et une somme des carrés.
+
+%sumelt = 0
+%sumsqelt = 0
+%DistrNbValues = N
+%
+%def Generation(N):
+%  for x in range(0, N):
+%    elt = random.randint()
+%    sumelt = sumelt + elt
+%    sumsqelt = sumsqelt + (elt ** 2)
+%  ...
+%
+%def Variance2(MyDistribution):
+%  variance = (sumsqelt - ((sumelt ** 2) / DistrNbValues) / DistrNbValues)
+%  return (variance)
+
+
+\bigskip
+
+\question{Implémentez maintenant le calcul de l'\textit{écart type} de la distribution dans une fonction nommée \TTBF{StandardDeviation}. Cette fonction prendra en paramètre la distribution, et retournera l'écart type.}
+
+\bigskip
+
+L'écart type permet de mesurer la dispersion d'une distribution.
+Plus la mesure est élevée, plus la distribution contient des valeurs éloignées ($ 3 $ et $ 90 $), et plus la mesure est faible, plus la distribution contient des valeurs proches ($ 42 $ et $ 46 $).
+On peut comparer les écarts types de distributions issues de mêmes choses (par exemple, les écarts types de plusieurs classes composées d'étudiants).
+
+\begin{center}
+\begin{equation*}
+\text{écart type} = \sigma = \sqrt{Var(L)}
+\end{equation*}
+\end{center}
+
+% import math
+% stddev = math.sqrt(Variance1(MyDistribution))
+
+\bigskip
+
+\question{Implémentez maintenant le calcul du \textit{coefficient de variation} (ou \textit{écart type relatif}) de la distribution dans une fonction nommée \TTBF{RelativeStandardDeviation}. Cette fonction prendra en paramètre la distribution, et retournera le coefficient de variation.}
+
+\bigskip
+
+L'écart type relatif permet de mesurer la dispersion d'une distribution autour de la moyenne en générant un pourcentage indépendant des objets étudiés par la distribution.
+Plus le pourcentage est faible, plus la distribution est concentrée autour de sa moyenne, plus le pourcentage est élevé, plus la distribution est étalée loin de sa moyenne.
+Cependant, l'écart type relatif ne fonctionne pas lorsque la moyenne est proche de $ 0 $ : celui-ci va tendre vers l'infini (donc dépasser les $ 100\% $) et sera très sensible aux variations.
+
+\begin{center}
+\begin{equation*}
+\text{coefficient de variation} = c_{v} = \frac{\sigma}{\mu} = \frac{\sqrt{Var(L)}}{\bar{L}}
+\end{equation*}
+\end{center}
+
+% import math
+% stddev = math.sqrt(Variance1(MyDistribution))
+% RSD = stddev / mean(MyDistribution)
+
+\newpage
+
+Un autre indice intéressant issu particulièrement du monde économique et social se nomme le \textit{coefficient de Gini}.
+Ce coefficient a été constitué pour mesurer les inégalités de revenus au sein d'une population, mais il permet plus généralement de mesurer l'inégalité de répartition d'une variable (donc son interprétation s'approche des mesures de dispersion).
+Le coefficient de Gini calcule une valeur entre $ 0 $ (égalité parfaite entre toutes les valeurs de la distribution) et $ 1 $ (inégalité totale/une seule valeur est positive, et toutes les autres sont nulles).
+
+Le calcul théorique de ce coefficient peut paraitre très rebutant à cause des termes employés, et pourtant, il est très facile à comprendre.
+De plus, le calcul pratique dans le cas discret (pour rappel : non continu/on peut dénombrer les valeurs de la distribution), n'est pas complexe.
+
+\bigskip
+
+Le coefficient de Gini est défini comme le double de l'aire entre la courbe de Lorenz d'une distribution parfaitement égalitaire, et la courbe de Lorenz de la distribution étudiée.
+
+Qu'est-ce qu'une courbe de Lorenz ?
+Tout simplement la courbe formée par la somme des éléments triés par ordre croissant d'une distribution.
+Plus visuellement, le tracé bleu correspond à la courbe de Lorenz de la distribution $ 5 \; 10 \; 40 \; 5 \; 40 $, et le tracé rouge correspond à la courbe de Lorenz d'une distribution parfaitement égalitaire.
+
+\bigskip
+
+\begin{center}
+\includegraphics[scale=0.60]{images/exemple_courbe_lorenz_simple.png}
+\end{center}
+
+\bigskip
+
+Encore plus visuellement, une fois la distribution ordonnée, on obtient donc $ 5 \; 5 \; 10 \; 40 \; 40 $.
+L'histogramme suivant montre visuellement chaque valeur ajoutée entre les points de la courbe bleue.
+Donc, en effectuant la somme des valeurs au fur et à mesure, chaque point de la courbe bleue correspond à $ 5 \; 10 \; 20 \; 60 \; 100 $.
+
+\bigskip
+
+\begin{center}
+\includegraphics[scale=0.60]{images/exemple_courbe_lorenz-5-5-10-40-40.png}
+\end{center}
+
+\bigskip
+
+Pour rappel, le coefficient de Gini correspond au double de l'aire entre la courbe bleue et la courbe rouge.
+Pour bien apprécier visuellement l'écart de cette aire, prenons maintenant deux autres distributions, et comparons l'ensemble des cas :
+
+\begin{itemize}
+\item[$\bullet$] $ 0 \; 0 \; 0 \; 10 \; 90 $ (une distribution très inégale) : $ \text{Coeff Gini} = 0,760 $
+\item[$\bullet$] $ 5 \; 5 \; 10 \; 40 \; 40 $ (une distribution plutôt inégale) : $ \text{Coeff Gini} = 0,424 $
+\item[$\bullet$] $ 10 \; 15 \; 20 \; 25 \; 30 $ (une distribution peu inégale) : $ \text{Coeff Gini} = 0,200 $
+\end{itemize}
+
+Pour bien visualiser ces cas, la moyenne des distributions ($ 20 $) a été tracée en pointillés verts.
+
+\begin{center}
+\includegraphics[scale=0.55]{images/exemple_courbes_lorenz.png}
+\end{center}
+
+Comme vous pouvez le constater, le cas peu inégal montre une courbe bleue proche de la courbe rouge, et inversement, le cas très inégal montre une courbe bleue très éloignée de la courbe rouge.
+Pour rappel, la moyenne n'est pas un indicateur de dispersion, mais bien un indicateur de tendance centrale ou de position.
+Les nombreux indicateurs que vous venez d'implémenter vous permettront donc de mieux interpréter les données dont vous disposerez dans votre carrière, et éventuellement de voir des phénomènes jusque-là peu visibles.
+
+\bigskip
+
+Reprenons l'implémentation du coefficient de Gini : vous venez de comprendre comment celui-ci est théoriquement construit et interprété.
+Mais comment l'implémenter facilement ?
+
+Deux formules nous intéressent particulièrement, la première est l'équation de Kendal et Stuart.
+Dans celle-ci, $ n $ correspond au nombre d'éléments dans la distribution, et $ L_{1} , L_{2} , ... , L_{n} $ correspondent à chaque élément de la distribution.
+
+\begin{center}
+\begin{equation*}
+G = \frac{ (1 / 2 n^{2}) \, \overset{n}{\underset{i = 1}{\sum}} \overset{n}{\underset{j = 1}{\sum}} \, | L_{i} - L_{j} | }{ (1 / n) \, \overset{n}{\underset{i = 1}{\sum}} \, L_{i}}
+\end{equation*}
+\end{center}
+
+En observant cette formule, vous devriez remarquer que la double somme teste littéralement tous les éléments de la distribution deux à deux, ce qui est particulièrement long.
+Et qu'il est par la suite nécessaire de diviser le tout par la somme des éléments.
+
+\bigskip
+
+Si vous implémentez chacune des parties indépendamment, le temps de calcul sera particulièrement long.
+Et si vous implémenter toute la formule dans une fonction, vous aurez beaucoup de variables à conserver, et le code risque d'être difficile à comprendre.
+
+\bigskip
+
+Heureusement, vous devriez remarquer que le diviseur est constitué du nombre d'éléments de la distribution, et de leur somme... ce qui ressemble à la moyenne.
+Et effectivement, Mookherjee et Shorrocks ont simplifié cette équation en introduisant la moyenne ($ \mu $) :
+
+% G = \frac{ Moyenne des valeurs absolues des diff\acute{e}rences entre chaque Partie }{ Moyenne de toutes les Parties \times 2}
+\begin{center}
+\begin{equation*}
+G = \frac{1}{2 \mu n^{2}} \, \overset{n}{\underset{i = 1}{\sum}} \overset{n}{\underset{j = 1}{\sum}} \, | L_{i} - L_{j} |
+\end{equation*}
+\end{center}
+% Formule des trapèzes ou Formule des triangles ?
+% = AE2 / (W2 * 2)
+% AE2 = MOYENNE(ABS(L2-L2); ABS(L2-M2); ..... ; ABS(M2-L2); ABS(M2-M2); ....)
+% W2 = MOYENNE(distribution)
+
+Bien que cette formule semble encore complexe, décomposons-là :
+
+\begin{itemize}
+\item[$\bullet$] $ L_{i} - L_{j} $ correspond à la différence entre chaque élément de la distribution.
+
+\item[$\bullet$] $ | L_{i} - L_{j} | $ correspond à la valeur absolue de la différence entre chaque élément de la distribution.
+
+\item[$\bullet$] $ \overset{n}{\underset{i = 1}{\sum}} \overset{n}{\underset{j = 1}{\sum}} \, | L_{i} - L_{j} | $ correspond à la somme des différences absolues des éléments de la distribution. Il s'agit donc de faire une double boucle effectuant la différence entre chaque élément de la distribution, pour ajouter le résultat à une variable initialisée à $ 0 $ juste avant la boucle. La double boucle implique simplement d'itérer comme sur un tableau à deux dimensions ($ | L_{1} - L_{1} | + | L_{1} - L_{2} | + ... + | L_{2} - L_{1} | + | L_{2} - L_{2} | + ... + | L_{n} - L_{n} | $).
+
+\item[$\bullet$] $  2 \mu n^{2} $ correspond simplement à $ 2 $ multiplié par la moyenne de la distribution, multiplié par la quantité d'éléments (le cardinal) au carré.
+\end{itemize}
+
+
+%def CoeffGini(MyDistribution):
+%  DiffGini = 0
+%  for i in MyDistribution:
+%    for j in MyDistribution:
+%      DiffGini = DiffGini + abs(i - j)
+%  DiffGini = DiffGini / (DistrNbValues ** 2)
+%  CoeffGini = DiffGini / (mean(MyDistribution) ** 2)
+%  return (CoeffGini)
+
+Pour conclure, pensez tout de même que le deux formules peuvent être optimisées lors de leur implémentation (on peut calculer la moyenne au fur et à mesure des boucles, ou dans d'autres cas, voire, on peut accumuler la somme des éléments dans une variable).
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modules}
+
+\bigskip
+
+Une fois toutes les fonctions écrites, nous allons créer un second fichier \TTBF{MyOwnStats.py} qui servira de module.
+
+\bigskip
+
+Ce module va contenir toutes les fonctions que vous avez précédemment écrites, exceptée la fonction \TTBF{main()}.
+
+\bigskip
+
+\question{Copiez les fonctions, sauf \TTBF{main()}, dans le nouveau fichier.}
+
+\bigskip
+
+Une fois les fonctions copiées dans le nouveau fichier, enregistrez votre travail, et supprimez les fonctions du fichier \TTBF{simple\_stats.py}.
+Faites maintenant un ajout de module dans votre ancien script, afin d'importer les fonctions, et mettez à jour le contenu de votre fonction \TTBF{main()}.
+
+\bigskip
+
+\question{Supprimez les fonctions du précédent script, importez le module que vous venez de créer, et mettez à jour la fonction \TTBF{main()} pour appeler correctement votre module et vos fonctions.}
+
+
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classes et Objets}
+
+\bigskip
+
+Une fois le module écrit, vous allez copier le fichier \TTBF{MyOwnStats.py} vers un troisième fichier nommé \TTBF{MyStats.py}  dans lequel vous allez créer une classe \TTBF{MyStats}.
+Cette classe va contenir toutes les fonctions que vous avez écrit précédemment (sans \TTBF{main()}), ainsi que la distribution étudiée comme attribut.
+
+\bigskip
+
+Le constructeur de cette classe prendra un paramètre optionnel nommé \TTBF{NbValues} qui représentera le nombre de valeurs à générer.
+Si aucune valeur n'est indiquée, on assignera $ 10 $ à \TTBF{NbValues}.
+Vous l'aurez compris, cette classe permettra d'étudier les statistiques d'une distribution générée aléatoirement.
+
+\bigskip
+
+\question{\'Ecrivez une classe \TTBF{MyStats} (dans le fichier \TTBF{MyStats.py}) qui contiendra une liste de nombres en attribut, et les différentes fonctions de génération de distribution et calculs de mesures statistiques. Le constructeur prendra un paramètre optionnel \TTBF{NbValues} qui sera mis à $ 10 $ s'il n'est pas précisé par l'utilisateur.}
+
+\bigskip
+
+Un deuxième paramètre optionnel sera ajouté au constructeur et prendra une liste de nombres en paramètre.
+Le constructeur copiera chacun des nombres de cette liste vers celle en attribut de la classe.
+
+\bigskip
+
+Si vous souhaitez optimiser les calculs des différentes mesures précédemment décrites, vous pouvez tout à fait effectuer l'ensemble des calculs de moyenne, variance, et autres lors de la création de chaque objet.
+Ainsi, l'appel aux méthodes censées calculer et renvoyer les valeurs ne feront que renvoyer les résultats stockés dans l'objet.
+
+\bigskip
+
+\question{Créez un nouveau script nommé \TTBF{simple\_stats\_obj.py} qui instanciera deux fois la classe \TTBF{MyStats} avec le même nombre de valeurs, et comparez chacune des mesures précédemment codées.}
+
+\end{document}

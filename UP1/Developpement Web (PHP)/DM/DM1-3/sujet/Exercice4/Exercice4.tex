@@ -1,0 +1,123 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo4\_fun.php} [my\_TicTacToe(array)]}{\TTBF{\RenduDir/src/exo4/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de déterminer quel est le gagnant d'une partie de morpion (ou \textit{Tic Tac Toe} en angais).}
+
+\bigskip
+
+\noindent Les règles sont relativement simples : chaque joueur place un \TTBF{X} ou un \TTBF{O} à chaque tour dans un tableau de 3 cases sur 3 cases, le premier joueur alignant trois fois son symbole a gagné (une ligne verticale, horizontale, ou en diagonale).
+Il est relativement simple de faire un match nul (aucun joueur n'arrive à aligner trois fois son symbole).
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple de jeu où le joueur X a gagné par la diagonale}]
+X O X
+O X O
+X O O
+\end{lstlisting}
+
+\noindent Vous devez écrire une fonction nommée \TTBF{my\_TicTacToe} qui prendra en paramètre un tableau de tableaux.
+La fonction renverra tout d'abord le tableau de jeu, puis elle renverra le gagnant.
+
+\bigskip
+
+\noindent Exemple d'entrée :
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Exemple de tableau de jeu (exo4\_data.php)}]
+$line1 = array("X", "O", "X");
+$line2 = array("O", "X", "O");
+$line3 = array("X", "O", "O");
+
+$game[] = $line1;
+$game[] = $line2;
+$game[] = $line3;
+\end{lstlisting}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Appel de la fonction}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo4_data.php");
+  require_once("exo4_fun.php");
+  $my_text = my_TicTacToe($game);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si un joueur est gagnant, vous devez l'indiquer avec les chaînes de caractères :
+
+\bigskip
+
+\noindent \TTBF{Player\textvisiblespace X\textvisiblespace won}
+
+\noindent \TTBF{Player\textvisiblespace O\textvisiblespace won}
+
+\bigskip
+
+\noindent Si aucun joueur n'est gagnant, vous devez l'indiquer ainsi :
+
+\bigskip
+
+\noindent \TTBF{It's\textvisiblespace a\textvisiblespace draw}
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas général gagnant}]
+<textarea cols="80" rows="25" readonly="readonly">
+XOX
+OXO
+XOO
+Player X won</textarea>
+\end{lstlisting}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas général en match nul}]
+<textarea cols="80" rows="25" readonly="readonly">
+OXX
+XXO
+OOX
+It's a draw</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Un cas d'erreur doit être géré avant tout affichage.
+Si le tableau contient des caractères autres que \TTBF{X} ou \TTBF{O}, il faut indiquer le message suivant :
+
+\bigskip
+
+\noindent \TTBF{Incorrect\textvisiblespace game}
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Exemple de tableau de jeu incorrect (exo4\_data.php)}]
+$line1 = array("X", "O", "A");
+$line2 = array("O", "X", "O");
+$line3 = array("O", "O", "O");
+
+$game[] = $line1;
+$game[] = $line2;
+$game[] = $line3;
+\end{lstlisting}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Cas d'erreur}]
+<textarea cols="80" rows="25" readonly="readonly">
+Incorrect game</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}

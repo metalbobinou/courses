@@ -1,0 +1,3262 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique et Structures de Données 2}
+\newcommand{\TitreSeance}{Arbres Binaires de Recherche}
+\newcommand{\NumeroTD}{H-équilibrage et AVL}
+\newcommand{\DateCours}{Avril 2023}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec une nouvelle structure de données algorithmique abstraite : les \textit{arbres} (en anglais : \textit{trees}).
+%En particulier, nous y aborderons les \textit{arbres binaires} (en anglais : \textit{binary trees}), précisément, les \textit{arbres binaires de recherche} ou \textit{ABR} (en anglais : \textit{binary search tree} ou \textit{BST}).
+En particulier, nous y aborderons les \textit{arbres binaires de recherche} ou \textit{ABR} (en anglais : \textit{binary search tree} ou \textit{BST}) qui sont des cas spécifiques d'arbres binaires, ainsi que les arbres \textit{AVL} (\textit{Adelson-Velsky \& Landis}) utilisant des rotations pour maintenir leur équilibre.
+
+\bigskip
+
+Pour rappel, un arbre binaire est un arbre d'arité/de degré 2, c'est-à-dire que chaque nœud dispose au maximum de 2 fils : un fils gauche et un fils droit.
+Il n'existe aucune boucle dans un arbre : chaque nœud n'a qu'un seul père (excepté la racine).
+La profondeur d'un nœud est la différence de niveau entre le nœud étudié et la racine de l'arbre.
+La hauteur d'un arbre est la profondeur du nœud le plus éloigné de la racine.
+La taille d'un arbre est le nombre de nœuds contenus dans l'arbre.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Arbres Binaires de Recherche équilibrés}
+\section{\'Equilibre et déséquilibre}
+% Desequilibre ?
+
+L'insertion en feuille dans un ABR mène parfois à des arbres filiformes où la recherche devient une itération sur une liste chaînée, ce qui perd tout l'intérêt des ABR.
+Par exemple, si l'on insère en feuille dans cet ordre précis les éléments suivants : $ 15 - 5 - 10 - 8 $, on obtient l'arbre suivant :
+
+\bigskip
+
+\vfillFirst
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c}
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n15) {15}
+  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none]
+          child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none]
+                  child { node [draw=none] (nE) {\phantom{E}} edge from parent [draw=none] }
+                }
+        }
+  child { node [draw=none] (nF) {\phantom{F}} edge from parent [draw=none]
+          child { node [draw=none] (nH) {\phantom{H}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n15) {15}
+  child { node (n5) {5}
+          child { node [draw=none] (nB) {\phantom{B}} edge from parent [draw=none]
+                  child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+                }
+        }
+  child { node [draw=none] (nF) {\phantom{F}} edge from parent [draw=none]
+          child { node [draw=none] (nG) {\phantom{G}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n15) {15}
+  child { node (n5) {5}
+          child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none] }
+          child { node (n10) {10}
+                  child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+                }
+        }
+  child { node [draw=none] (nF) {\phantom{F}} edge from parent [draw=none]
+          child { node [draw=none] (nH) {\phantom{H}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.25\textwidth}
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n15) {15}
+  child { node (n5) {5}
+          child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none] }
+          child { node (n10) {10}
+                  child { node (n8) {8} }
+                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                }
+        }
+  child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none]
+          child { node [draw=none] (nE) {\phantom{E}} edge from parent [draw=none] }
+          child { node [draw=none] (nF) {\phantom{F}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+
+\bigskip
+
+\stepcounter{figure}
+\caption{Fig.\thefigure : ABR filiforme}
+\label{fig:example1-BST-degenareted}
+\end{table}
+
+\vfillLast
+
+Ce problème où une branche est beaucoup plus profonde que l'autre s'appelle le \textit{déséquilibre} (en anglais \textit{unbalancing}).
+
+Un arbre dont les feuilles sont toutes au même niveau (donc un arbre parfait), est donc dit \textit{équilibré} (en anglais \textit{balanced}).
+Afin de pouvoir effectuer des recherches rapides, on peut vouloir faire en sorte que l'arbre s'\textit{auto-équilibre} à chaque insertion ou suppression (en anglais \textit{self-balance}).
+
+Néanmoins, plusieurs critères d'équilibrage existent : les arbres \textit{h-équilibrés} (en anglais \textit{height-balanced trees} ou \textit{h-balanced trees}) pour l'équilibrage en \textit{hauteur} de chacun des sous-arbres gauche et droit, et les arbres équilibrés en \textit{poids} (en anglais \textit{weight-balance trees} ou {w-balanced trees} ou encore \textit{WBT}) pour l'équilibrage basé sur le nombre de feuilles de chacun des sous-arbres gauche et droit.
+
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Arbres AVL}
+
+Les premiers ABR automatiquement équilibrés ont été conçus par \textit{G. Adelson-Velsky} et \textit{E. Landis} (d'où le nom \textit{AVL}).
+Ces arbres s'équilibrent automatiquement grâce aux rotations lors de l'insertion et de la suppression afin de garantir une recherche efficace.
+Les AVL sont équilibrés en hauteur, ils sont donc \textit{h-équilibrés}.
+
+%\bigskip
+
+\subsection{Facteur d'équilibrage}
+
+La structure des AVL est la même que pour les ABR, excepté que chaque nœud dispose d'un champs supplémentaire : le \textit{facteur d'équilibrage} (ou \textit{balance factor} en anglais), c'est-à-dire un entier représentant la différence entre la hauteur du sous-arbre droit et la hauteur du sous-arbre gauche.
+
+\bigskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={structure d'arbre binaire}]
+\begin{lstlisting}[frame=single]
+struct node
+{
+  int         key;
+  struct node *left_child;
+  struct node *right_child;
+  int         balanced_factor;
+};
+\end{lstlisting}
+
+\vspace*{-0.5cm}
+
+\begin{equation*}
+\text{\textit{BF}}(N) = \text{hauteur}(\text{Sous-Arbre Droit}(N)) - \text{hauteur}(\text{Sous-Arbre Gauche}(N))
+\end{equation*}
+
+\begin{equation*}
+\text{\textit{BF}}(N) = \text{hauteur}(N\rightarrow\text{fd}) - \text{hauteur}(N\rightarrow\text{fg})
+\end{equation*}
+
+\bigskip
+
+On considère qu'un nœud est équilibré lorsque son facteur d'équilibrage a comme valeurs $ -1 $, $ 0 $, ou $ 1 $ (c'est-à-dire que les sous-arbres gauche et droit du nœud ont une différence de hauteur de 1 au maximum).
+
+À l'inverse, un nœud est déséquilibré lorsque son facteur d'équilibrage est inférieur à $ -1 $ ou supérieur à $ 1 $ (c'est-à-dire que les sous-arbres gauche et droit du nœudone une différence supérieure à 1).
+
+\bigskip
+
+Lorsque le facteur d'équilibrage est de $ +1 $, alors le nœud est plus lourd à droite (il manque un ou des nœuds à gauche), à l'inverse, si le facteur d'équilibrage de $ -1 $, alors le nœud est plus lourd à gauche (il manque un ou des nœuds à droite).
+
+\bigskip
+
+Voici plusieurs exemples d'arbres équilibrés avec les facteurs d'équilibres de chaque nœud :
+
+\medskip
+
+\vfillFirst
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c}
+  \begin{minipage}{0.23\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{0}}] (n16) {16} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n24) {24} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (n48) {48} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.21\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+          child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+          child { node [draw=none] (nB) {\phantom{B}} edge from parent [draw=none] }
+        }
+  child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none]
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.23\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{0}}] (n16) {16} }
+          child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [draw=none] (nG) {\phantom{G}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.23\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{+1}}] (n21) {21}
+          child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (n24) {24} }
+        }
+  child { node [label=below:{\footnotesize \textit{+1}}] (n64) {64}
+          child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Exemples d'arbres binaires avec facteur d'équilibre}
+%\label{fig:example2-BT-balance-factor}
+\end{table}
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c}
+  \begin{minipage}{0.23\textwidth}
+    \centering
+1
+  \end{minipage}
+&
+  \begin{minipage}{0.23\textwidth}
+    \centering
+2
+  \end{minipage}
+&
+  \begin{minipage}{0.21\textwidth}
+    \centering
+3
+  \end{minipage}
+&
+  \begin{minipage}{0.23\textwidth}
+    \centering
+4
+  \end{minipage}
+\end{tabular}
+\end{table}
+
+\vfillLast
+
+\clearpage
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.90\textwidth}
+  \centering
+
+% Exemple Wikipedia adapte a mes exemples
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n24) {24}
+                  child { node [draw=none] (nB) {\phantom{B}} edge from parent [draw=none] }
+                  child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none] }
+                }
+         }
+  child { node [label=below:{\footnotesize \textit{+1}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{+1}}] (n48) {48}
+                  child { node [draw=none] (nD) {\phantom{D}} edge from parent [draw=none] }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n56) {56} }
+                }
+          child { node [label=below:{\footnotesize \textit{-1}}] (n72) {72}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n68) {68}
+                          child { node [label=below:{\footnotesize \textit{0}}] (n66) {66} }
+                          child { node [label=below:{\footnotesize \textit{0}}] (n70) {70} }
+                        }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n96) {96} }
+                }
+        };
+\end{tikzpicture}
+
+5
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+
+%\bigskip
+\smallskip
+
+\stepcounter{figure}
+\caption{Fig.\thefigure : Exemples d'arbres binaires équilibrés avec les facteurs d'équilibre}
+\label{fig:example2-BT-balance-factor}
+\end{table}
+
+
+Parmi ces exemples, on constate que seule la hauteur des sous-arbres compte : on ne remonte pas les différences hauteurs telles quelles en les ajoutant !
+Le but de ce facteur est de mesurer l'écart de hauteur entre les sous-arbres à partir de chaque nœud.
+
+\medskip
+%\smallskip
+
+On remarque également que dans l'exemple 5, les nœuds 24, 56, et 66 sont sur 3 niveaux distincts, mais que la racine ne constate une différence de hauteur de $ 1 $.
+Ce phénomène est normal.
+Lors de l'insertion en feuille d'un prochain nœud, soit l'arbre rapprochera de $ 0 $ certains facteurs, soit il créera des déséquilibres de $ -2 $ ou $ +2 $ (par exemple en insérant en fils de 8, 56, 66, ou 70).
+De même, si l'on supprime certains nœuds, soit les facteurs se rapprocheront de $ 0 $, soit des déséquilibres seront créés (par exemple en supprimant 24, le nœud 21 aura un facteur d'équilibrage de $ -2 $.
+
+%\bigskip
+\medskip
+
+La gestion de ce facteur se fait lors de l'insertion et de la suppression : on insère/supprime récursivement un nœud en feuille, puis à la remontée, on met à jour les valeurs.
+Les traitements pour rééquilibrer l'arbre se font lorsque la mise à jour génère un $ -2 $ ou un $ +2 $.
+
+%\bigskip
+
+%\vfillFirst
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Rotations}
+
+Afin de réduire le déséquilibre engendré lors des insertions et suppressions, on utilise les \textit{rotations}.
+Vous avez précédemment vu les rotations \textit{gauche} et \textit{droite} permettant de remonter d'un niveau un nœud, mais il peut arriver que l'on utilise une combinaison de ces rotations dans certains cas, en particulier les rotations \textit{gauche droite} et \textit{droite gauche}.
+Lorsque le facteur d'équilibrage atteint $ 2 $ ou $ -2 $, on va regarder les facteurs de ses fils, et éventuellement de leurs fils, pour choisir la rotation adaptée qui rééquilibrera l'arbre.
+
+%\medskip
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c}
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (nA) {A}
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+  child { node [label=below:{\footnotesize \textit{+1}}] (nB) {B}
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+        };
+\end{tikzpicture}
+% Rotation gauche
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (nA) {A}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nB) {B}
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+        }
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+        };
+\end{tikzpicture}
+% Rotation droite
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (nA) {A}
+  child { node [label=below:{\footnotesize \textit{+1}}] (nB) {B}
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+        }
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+        };
+\end{tikzpicture}
+% Rotation gauche droite
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (nA) {A}
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+  child { node [label=below:{\footnotesize \textit{-1}}] (nB) {B}
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+% Rotation droite gauche
+
+  \end{minipage}
+\end{tabular}
+\end{table}
+
+\vspace*{-0.5cm}
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c}
+  \begin{minipage}{0.22\textwidth}
+    \centering
+rotation gauche
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+rotation droite
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+rotation gauche droite
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+rotation droite gauche
+  \end{minipage}
+\end{tabular}
+\end{table}
+
+%\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Rotation Gauche}
+
+La rotation gauche vise à remonter le fils droit d'un nœud (il passe donc à gauche vers la place de son père).
+
+%\vfillFirst
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.1cm] (s1) {S1} }
+        }
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s2) {S2} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s3) {S3} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black, -{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.1cm] (s1) {S1} }
+        }
+  child [dashed] { node [circle, solid, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+          child [dashed] { node[circle, draw=none] {}
+                { node[triangle, solid, xshift=0.1cm] (s2) {S2} }
+                }
+          child [solid] { node[circle, draw=none] {}
+                { node[triangle, solid, xshift=-0.1cm] (s3) {S3} }
+                }
+        };
+\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=5] (nA.east);
+\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.west) to[bend right=5] (-1.5,-1);
+\draw [blue] (s2.north) to[bend right=5] (nA.south);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+  child { node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s1) {S1} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.1cm] (s3) {S3} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (sous-arbres)}
+%\label{fig:example4-BST-rotation-left-subtrees}
+\end{table}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{0.25cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node (n21) {21}
+          child { node [draw=none] (n8)  {\phantom{8}}  edge from parent [draw=none] }
+          child { node [draw=none] (n24) {\phantom{24}} edge from parent [draw=none] }
+        }
+  child { node [red] (n64) {64}
+          child { node (n48) {48} }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+(1)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node (n21) {21}
+          child { node [draw=none] (n8)  {\phantom{8}}  edge from parent [draw=none] }
+          child { node [draw=none] (n24) {\phantom{24}} edge from parent [draw=none] }
+        }
+  child { node [red] (n64) {64} edge from parent [dashed]
+          child [solid] { node (n48) {48} }
+          child [solid] { node (n72) {72} }
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.south) to (n48.north);
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (n42.east) to[bend right=5] (n48.north);
+
+(2)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node (n21) {21}
+          child { node [draw=none] (n8)  {\phantom{8}}  edge from parent [draw=none] }
+          child { node [draw=none] (n24) {\phantom{24}} edge from parent [draw=none] }
+        }
+  child { node [red] (n64) {64} edge from parent [draw=none]
+          child { node (n48) {48} edge from parent [dashed] }
+          child { node (n72) {72} }
+        };
+
+\draw [black] (n42.south) to (n48.north);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n64.north) to[bend right=5] (n42.east);
+\end{tikzpicture}
+
+(3)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [red] (n64) {64}
+  child { node [green(htmlcssgreen)] (n42) {42}
+          child { node (n21) {21} }
+          child { node (n48) {48} }
+        }
+  child { node (n72) {72}
+          child { node [draw=none] (nXX) {\phantom{48}} edge from parent [draw=none] }
+          child { node [draw=none] (nYY) {\phantom{72}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+(4)
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (nœuds)}
+%\label{fig:example4-BST-rotation-left-nodes}
+\end{table}
+
+%\vfillLast
+
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Rotation Droite}
+
+La rotation droite vise à remonter le fils gauche d'un nœud (il passe donc à droite vers la place de son père).
+
+%\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s1) {S1} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.1cm] (s3) {S3} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child [dashed] { node [circle, solid, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+          child [solid] { node[circle, draw=none] {}
+                { node[triangle, solid, xshift=0.1cm] (s1) {S1} }
+                }
+          child [dashed] { node[circle, draw=none] {}
+                { node[triangle, solid, xshift=-0.1cm] (s2) {S2} }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.1cm] (s3) {S3} }
+        };
+\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=-5] (nA.west);
+\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.east) to[bend right=-5] (1.5,-1);
+\draw [blue] (s2.north) to[bend right=5] (nA.south);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 2/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nB) {B}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.1cm] (s1) {S1} }
+        }
+  child { node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s2) {S2} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s3) {S3} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation droite (sous-arbres)}
+%\label{fig:example4-BST-rotation-right-subtrees}
+\end{table}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{0.25cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node [red] (n21) {21}
+          child { node (n8)  {8}  }
+          child { node (n24) {24} }
+        }
+  child { node (n64) {64}
+          child { node [draw=none] (n48) {\phantom{48}} edge from parent [draw=none] }
+          child { node [draw=none] (n72) {\phantom{72}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+(1)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node [red] (n21) {21} edge from parent [dashed]
+          child [solid] { node (n8)  {8}  }
+          child [solid] { node (n24) {24} }
+        }
+  child { node (n64) {64}
+          child { node [draw=none] (n48) {\phantom{48}} edge from parent [draw=none] }
+          child { node [draw=none] (n72) {\phantom{72}} edge from parent [draw=none] }
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.south) to (n24.north);
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (n42.east) to[bend right=5] (n24.north);
+
+(2)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n42) {42}
+  child { node [red] (n21) {21} edge from parent [draw=none]
+          child { node (n8)  {8}  }
+          child { node (n24) {24} edge from parent [dashed] }
+        }
+  child { node (n64) {64}
+          child { node [draw=none] (n48) {\phantom{48}} edge from parent [draw=none] }
+          child { node [draw=none] (n72) {\phantom{72}} edge from parent [draw=none] }
+        };
+
+\draw [black] (n42.south) to (n24.north);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n21.north) to[bend right=-5] (n42.west);
+\end{tikzpicture}
+
+(3)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [red] (n21) {21}
+  child { node (n8) {8}
+          child { node [draw=none] (nXX) {\phantom{XX}} edge from parent [draw=none] }
+          child { node [draw=none] (nYY) {\phantom{YY}} edge from parent [draw=none] }
+        }
+  child { node [green(htmlcssgreen)] (n42) {42}
+          child { node (n24) {24} }
+          child { node (n64) {64} }
+        };
+\end{tikzpicture}
+
+(4)
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation droite (nœuds)}
+%\label{fig:example4-BST-rotation-right-nodes}
+\end{table}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Rotation Gauche Droite}
+
+La rotation gauche droite vise à effectuer deux rotations successives : une rotation gauche, puis une rotation droite.
+À l'issue des deux rotations, on remarque que les sous-arbres ont été répartis entre les deux nouveaux fils de la nouvelle racine.
+
+%\vfillFirst
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.15cm] (s1) {S1} }
+                }
+          child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s2) {S2} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s3) {S3} }
+                        }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.15cm] (s4) {S4} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+rotation gauche
+
+\begin{tikzpicture}
+  \draw [black, -{Stealth[length=2mm, width=2mm]}](0.5,0) -- (2,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+          child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s1) {S1} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                        }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.15cm] (s3) {S3} }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.15cm] (s4) {S4} }
+        };
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=5] (nA.east);
+%\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.west) to[bend right=5] (-1.5,-1);
+%\draw [blue] (s2.north) to[bend right=5] (nA.south);
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (sous-arbres)}
+%\label{fig:example4-BST-rotation-left-subtrees}
+\end{table}
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+          child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s1) {S1} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                        }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.15cm] (s3) {S3} }
+                }
+        }
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=-0.15cm] (s4) {S4} }
+        };
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=5] (nA.east);
+%\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.west) to[bend right=5] (-1.5,-1);
+%\draw [blue] (s2.north) to[bend right=5] (nA.south);
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+rotation droite
+
+\begin{tikzpicture}
+  \draw [black, -{Stealth[length=2mm, width=2mm]}](0.5,0) -- (2,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 1/.style={sibling distance=3.5cm},
+  level 2/.style={sibling distance=1.7cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+  child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s1) {S1} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                }
+        }
+  child { node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s3) {S3} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s4) {S4} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (sous-arbres)}
+%\label{fig:example4-BST-rotation-left-subtrees}
+\end{table}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{0.25cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bigskip
+\medskip
+
+%Pour une implémentation plus concise, on remarque que les sous-arbres peuvent directement être rattachés aux nouveaux fils de la nouvelle racine.
+L'implémentation classique effectue l'appel successif à chacune des rotations dans le bon ordre, mais il est possible de directement réorganiser tous les nœuds (attention à ne pas oublier de mettre à jour l'éventuel parent de la racine lors de l'implémentation concrète : les rotations doubles ne se font pas toujours à la racine de l'arbre).
+
+%\bigskip
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n64) {64}
+  child { node [orange] (n21) {21}
+          child { node (n16) {16} }
+          child { node [red] (n42) {42}
+                  child { node (n32) {32} }
+                  child { node (n56) {56} }
+                }
+        }
+  child { node (n72) {72}
+        };
+\end{tikzpicture}
+
+(1)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n64) {64}
+  child { node [orange] (n21) {21} edge from parent [dashed]
+          child [solid] { node (n16) {16} }
+          child { node [red, solid] (n42) {42} edge from parent [dashed]
+                  child [solid] { node (n32) {32} }
+                  child [solid] { node (n56) {56} }
+                }
+        }
+  child { node (n72) {72}
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n21.south) to (n32.north);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n64.south) to (n56.north);
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (n42.east) to[bend right=5] (n48.north);
+
+(2)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n64) {64}
+  child { node [orange] (n21) {21} edge from parent [draw=none]
+          child [solid] { node (n16) {16} }
+          child { node [red, solid] (n42) {42} edge from parent [draw=none]
+                  child [solid] { node (n32) {32} edge from parent [dashed] }
+                  child [solid] { node (n56) {56} edge from parent [dashed] }
+                }
+        }
+  child { node (n72) {72}
+        };
+
+\draw [black] (n21.south) to (n32.north);
+\draw [black] (n64.south) to (n56.north);
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.north) to[bend right=5] (n21.east);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.north) to[bend right=-5] (n64.west);
+\end{tikzpicture}
+
+(3)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [red] (n42) {42}
+  child { node [orange] (n21) {21}
+          child { node (n16) {16} }
+          child { node (n32) {32} }
+        }
+  child { node [green(htmlcssgreen)] (n64) {64}
+          child { node (n56) {56}
+                  child { node [draw=none] (nXX) {\phantom{0}} edge from parent [draw=none] }
+                  child { node [draw=none] (nYY) {\phantom{0}} edge from parent [draw=none] }
+                }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+(4)
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (nœuds)}
+%\label{fig:example4-BST-rotation-left-nodes}
+\end{table}
+
+%\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Rotation Droite Gauche}
+
+La rotation droite gauche vise à effectuer deux rotations successives : une rotation droite, puis une rotation gauche.
+À l'issue des deux rotations, on remarque que les sous-arbres ont été répartis entre les deux nouveaux fils de la nouvelle racine.
+
+%\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.15cm] (s1) {S1} }
+        }
+  child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s2) {S2} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s3) {S3} }
+                        }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.15cm] (s4) {S4} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+rotation droite
+
+\begin{tikzpicture}
+  \draw [black, -{Stealth[length=2mm, width=2mm]}](0.5,0) -- (2,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.15cm] (s1) {S1} }
+        }
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.15cm] (s2) {S2} }
+                }
+          child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s3) {S3} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s4) {S4} }
+                        }
+                }
+        };
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=5] (nA.east);
+%\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.west) to[bend right=5] (-1.5,-1);
+%\draw [blue] (s2.north) to[bend right=5] (nA.south);
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (sous-arbres)}
+%\label{fig:example4-BST-rotation-left-subtrees}
+\end{table}
+
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=3cm,
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+  child { node[circle, draw=none] {}
+        { node[triangle, xshift=0.15cm] (s1) {S1} }
+        }
+  child { node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.15cm] (s2) {S2} }
+                }
+          child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=0.1cm] (s3) {S3} }
+                        }
+                  child { node[circle, draw=none] {}
+                        { node[triangle, xshift=-0.1cm] (s4) {S4} }
+                        }
+                }
+        };
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=5] (nA.east);
+%\draw [green(htmlcssgreen), dashed, -{Latex[length=2mm, width=2mm]}] (nA.west) to[bend right=5] (-1.5,-1);
+%\draw [blue] (s2.north) to[bend right=5] (nA.south);
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.20\textwidth}
+    \centering
+
+rotation gauche
+
+\begin{tikzpicture}
+  \draw [black, -{Stealth[length=2mm, width=2mm]}](0.5,0) -- (2,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+%  itria/.style={draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+%  every node/.style = {minimum width = 2em, draw, circle},
+\begin{tikzpicture}[sibling distance=2cm,
+  level 1/.style={sibling distance=3.5cm},
+  level 2/.style={sibling distance=1.7cm},
+  triangle/.style={draw, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.05cm},
+  ]
+  \node [circle, harvardcrimson, draw=red, very thick, minimum width = 2em, draw] (nC) {C}
+  child { node [circle, green(htmlcssgreen), draw=green(htmlcssgreen), very thick, minimum width = 2em, draw] (nA) {A}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s1) {S1} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s2) {S2} }
+                }
+        }
+  child { node [circle, orange, draw=orange, very thick, minimum width = 2em, draw] (nB) {B}
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=0.1cm] (s3) {S3} }
+                }
+          child { node[circle, draw=none] {}
+                { node[triangle, xshift=-0.1cm] (s4) {S4} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (sous-arbres)}
+%\label{fig:example4-BST-rotation-left-subtrees}
+\end{table}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{0.25cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bigskip
+\medskip
+
+%Pour une implémentation plus concise, on remarque que les sous-arbres peuvent directement être rattachés aux nouveaux fils de la nouvelle racine.
+L'implémentation classique effectue l'appel successif à chacune des rotations dans le bon ordre, mais il est possible de directement réorganiser tous les nœuds (attention à ne pas oublier de mettre à jour l'éventuel parent de la racine lors de l'implémentation concrète : les rotations doubles ne se font pas toujours à la racine de l'arbre).
+
+%\bigskip
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n21) {21}
+  child { node (n16) {16} }
+  child { node [orange] (n64) {64}
+          child { node [red] (n42) {42}
+                  child { node (n32) {32} }
+                  child { node (n56) {56} }
+                }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+(1)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n21) {21}
+  child { node (n16) {16} }
+  child { node [orange] (n64) {64} edge from parent [dashed]
+          child { node [red, solid] (n42) {42} edge from parent [dashed]
+                  child [solid] { node (n32) {32} }
+                  child [solid] { node (n56) {56} }
+                }
+          child [solid] { node (n72) {72} }
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n21.south) to (n32.north);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n64.south) to (n56.north);
+\end{tikzpicture}
+%\draw [red, -{Latex[length=2mm, width=2mm]}] (n42.east) to[bend right=5] (n48.north);
+
+(2)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 25mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [green(htmlcssgreen)] (n21) {21}
+  child { node (n16) {16} }
+  child { node [orange] (n64) {64} edge from parent [draw=none]
+          child { node [red, solid] (n42) {42} edge from parent [draw=none]
+                  child [solid] { node (n32) {32} edge from parent [dashed] }
+                  child [solid] { node (n56) {56} edge from parent [dashed] }
+                }
+          child [solid] { node (n72) {72} }
+        };
+
+\draw [black] (n21.south) to (n32.north);
+\draw [black] (n64.south) to (n56.north);
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.north) to[bend right=5] (n21.east);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (n42.north) to[bend right=-5] (n64.west);
+\end{tikzpicture}
+
+(3)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+%  level/.style = {sibling distance = 30mm/#1},
+%  level 1/.style={sibling distance = 25mm},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 20mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [red] (n42) {42}
+  child { node [green(htmlcssgreen)] (n21) {21}
+          child { node (n16) {16} }
+          child { node (n32) {32} }
+        }
+  child { node [orange] (n64) {64}
+          child { node (n56) {56}
+                  child { node [draw=none] (nXX) {\phantom{0}} edge from parent [draw=none] }
+                  child { node [draw=none] (nYY) {\phantom{0}} edge from parent [draw=none] }
+                }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+(4)
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Rotation gauche (nœuds)}
+%\label{fig:example4-BST-rotation-left-nodes}
+\end{table}
+
+
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Insertion dans un AVL}
+
+L'insertion d'un nœud dans un AVL est littéralement l'insertion récursive en feuille, suivie d'une mise à jour des facteurs d'équilibrage à la remontée, avec éventuellement des rotations adaptées lorsqu'un facteur atteint $ 2 $ ou $ -2 $.
+Le choix de la rotation à effectuer dépend donc du cas rencontré.
+%Voici un rappel des cas, des rotations, et des arbres résultants :
+
+\begin{center}
+Rotation gauche
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c c}
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (nA) {A}
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+  child { node [label=below:{\footnotesize \textit{+1}}] (nB) {B}
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+  child { node [thick, blue] (nB) {B}
+          child { node [draw=none, label=below:{\footnotesize \textit{\phantom{0}}}] (nY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node (nC) {C} }
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=45] (nA.east);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nB) {B}
+  child { node [label=below:{\footnotesize \textit{0}}] (nA) {A} }
+  child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+        ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+\end{table}
+
+
+%\bigskip
+
+
+Rotation droite
+
+\begin{table}[ht!]
+  \centering
+\begin{tabular}{c c c c c}
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (nA) {A}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nB) {B}
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+        }
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node [thick, blue] (nB) {B}
+          child { node (nC) {C} }
+          child { node [draw=none, label=below:{\footnotesize \textit{\phantom{0}}}] (nY) {\phantom{Y}} edge from parent [draw=none] }
+        }
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nB.north) to[bend right=-45] (nA.west);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (1,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.22\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nB) {B}
+  child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+  child { node [label=below:{\footnotesize \textit{0}}] (nA) {A} }
+        ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+\end{table}
+
+
+%\bigskip
+
+
+Rotation gauche droite
+
+\begin{table}[ht!]
+  \centering
+  \centerline{
+\begin{tabular}{c c c c c c c c c}
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (nA) {A}
+  child { node [label=below:{\footnotesize \textit{+1}}] (nB) {B}
+          child [missing] {}
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+        }
+  child [missing] {}
+  ;
+\end{tikzpicture}
+%  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+%        };
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node [thick, blue] (nB) {B}
+          child { node [draw=none, label=below:{\footnotesize \textit{\phantom{0}}}] (nY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node [thick, blue] (nC) {C} }
+        }
+  child [missing] {}
+  ;
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nC.north) to[bend right=45] (nB.east);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nB.west) to[bend right=15] (nY.north);
+\end{tikzpicture}
+%  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none]
+%        };
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (nA) {A}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nC) {C}
+          child { node [label=below:{\footnotesize \textit{0}}] (nB) {B} }
+          child [missing] {}
+        }
+  child [missing] {}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node [thick, blue] (nC) {C}
+          child { node [label=below:{\footnotesize \textit{\phantom{0}}}] (nB) {B} }
+          child [missing] {}
+        }
+  child [missing] {}
+  ;
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nC.north) to[bend right=-45] (nA.west);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nC) {C}
+  child { node [label=below:{\footnotesize \textit{0}}] (nB) {B} }
+  child { node [label=below:{\footnotesize \textit{0}}] (nA) {A} }
+        ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+}
+\end{table}
+
+
+%\bigskip
+
+
+Rotation droite gauche
+
+\begin{table}[ht!]
+  \centering
+  \centerline{
+\begin{tabular}{c c c c c c c c c}
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (nA) {A}
+  child [missing] {}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nB) {B}
+          child { node [label=below:{\footnotesize \textit{0}}] (nC) {C} }
+          child [missing] {}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+  child { node [thick, blue] (nB) {B}
+          child { node [thick, blue] (nC) {C} }
+          child { node [draw=none, label=below:{\footnotesize \textit{\phantom{0}}}] (nY) {\phantom{Y}} edge from parent [draw=none] }
+        };
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nC.north) to[bend right=-45] (nB.west);
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nB.east) to[bend right=-15] (nY.north);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (nA) {A}
+  child [missing] {}
+  child { node [label=below:{\footnotesize \textit{+1}}] (nC) {C}
+          child [missing] {}
+          child { node [label=below:{\footnotesize \textit{0}}] (nB) {B} }
+        }
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child [missing] {}
+  child { node [thick, blue] (nC) {C}
+          child [missing] {}
+          child { node [label=below:{\footnotesize \textit{\phantom{0}}}] (nB) {B} }
+        }
+  ;
+
+\draw [blue, -{Latex[length=2mm, width=2mm]}] (nC.north) to[bend right=45] (nA.east);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+&
+  \begin{minipage}{0.13\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nC) {C}
+  child { node [label=below:{\footnotesize \textit{0}}] (nA) {A} }
+  child { node [label=below:{\footnotesize \textit{0}}] (nB) {B} }
+        ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{tabular}
+}
+\end{table}
+
+\end{center}
+
+%\bigskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection*{Exemple complet d'insertion dans un AVL}
+
+L'exemple suivant effectue dans cet ordre précis les insertions successives dans un AVL des éléments 36, 42, 56, 32, 28, 72, 64, 16, 21, 8.
+
+\vfillFirst
+
+\begin{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(1) Insertion de 36
+%Insert 36 (M)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] (none) {Ø}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n36) {36}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(2) Insertion de 42
+%Insert 42 (N)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n36) {36}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+1}}] (n36) {36}
+  child [missing] {}
+  child { node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(3) Insertion de 56
+%Insert 56 (O) (rotation gauche)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n36) {36}
+  child [missing] {}
+  child { node (n42) {42}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+2}}] (n36) {36}
+  child [missing] {}
+  child { node [label=below:{\footnotesize \textit{+1}}] (n42) {42}
+          child { node [draw=none] (nYY) {\phantom{Y}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (n56) {56}
+                }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n42.north) to[bend right=45] (n36.east);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+gauche
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+  child { node [label=below:{\footnotesize \textit{0}}] (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(4) Insertion de 32
+%Insert 32 (L)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n36) {36} }
+  child { node (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n36) {36}
+          child { node [label=below:{\footnotesize \textit{0}}] (n32) {32} }
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\vfillLast
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(5) Insertion de 28
+%Insert 28 (K)  (rotation droite)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n36) {36}
+          child { node (n32) {32} }
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+        }
+  child { node (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{ }}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-2}}] (n36) {36}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n32) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                  child { node [draw=none] (nYY) {\phantom{Y}} edge from parent [draw=none] }
+                }
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+        }
+  child { node [label=below:{\footnotesize \textit{ }}] (n56) {56}
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n32.north) to[bend right=-45] (n36.west);
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\vspace*{-0.5cm}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] (nZZ) {\phantom{Z}}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black](0,0) -- (0.75,1);
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+droite
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+%\bigskip
+\smallskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(6) Insertion de 72
+%Insert 72 (Q)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28} }
+          child { node (n36) {36} }
+        }
+  child { node (n56) {56}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{+1}}] (n56) {56}
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+%\bigskip
+\smallskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(7) Insertion de 64
+%Insert 64 (P) (rotation droite gauche)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28} }
+          child { node (n36) {36} }
+        }
+  child { node (n56) {56}
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28} }
+          child { node (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{+2}}] (n56) {56}
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{-1}}] (n72) {72}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64} }
+                  child [missing] {}
+                }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n64.north) to[bend right=-45] (n72.west);
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n72.north) to[bend right=45] (n56.east);
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black](0,0) -- (0.75,1);
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+droite gauche
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28} }
+          child { node (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{+2}}] (n56) {56}
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{+1}}] (n64) {64}
+                  child [missing] {}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+                }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n64.north) to[bend right=45] (n56.east);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.35\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (n56) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+\vfillFirst
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(8) Insertion de 16
+%Insert 16 (H)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28} }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n28) {28}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n16) {16} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (n56) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\vfillLast
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(9) Insertion de 21
+%Insert 21 (I)  (rotation gauche droite)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node (n28) {28}
+                  child { node (n16) {16} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node [label=below:{\footnotesize \textit{-2}}] (n28) {28}
+                  child { node [label=below:{\footnotesize \textit{+1}}] (n16) {16}
+                          child [missing] {}
+                          child { node [label=below:{\footnotesize \textit{0}}] (n21) {21} }
+                        }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n21.north) to[bend right=45] (n16.east);
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n16.north) to[bend right=-45] (n28.west);
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\clearpage
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black](0,0) -- (0.75,1);
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+gauche droite
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n32) {32}
+          child { node [label=below:{\footnotesize \textit{-2}}] (n28) {28}
+                  child { node [label=below:{\footnotesize \textit{-1}}] (n21) {21}
+                          child { node [label=below:{\footnotesize \textit{0}}] (n16) {16} }
+                          child [missing] {}
+                        }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n21.north) to[bend right=-45] (n28.west);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n16) {16} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (n56) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\vfillFirst
+\vfillLast
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(10) Insertion de 8
+%Insert 8 (A) (rotation droite)
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node(n32) {32}
+          child { node (n21) {21}
+                  child { node (n16) {16} }
+                  child { node (n28) {28} }
+                }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node [label=below:{\footnotesize \textit{-2}}] (n32) {32}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n21) {21}
+                  child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+                          child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+                          child [missing] {}
+                        }
+                  child { node (n28) {28} }
+                }
+          child { node (n36) {36} }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n21.north) to[bend right=-45] (n32.west);
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\vspace*{-0.5cm}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] (nZZ) {\phantom{Z}}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black](0,0) -- (0.75,1);
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+droite
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+                }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (n56) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\end{center}
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Suppression dans un AVL}
+
+La suppression dans un AVL suit globalement la même démarche : on effectue d'abord une suppression classique dans un ABR (donc en vérifiant les 3 cas où le nœud est une feuille, un point simple, ou possédant deux fils), puis on met à jour les facteurs d'équilibrage afin de déterminer si une rotation est nécessaire (et si oui, laquelle).% : un facteur négatif implique une droite, un facteur positif une rotation gauche).
+
+%\textit{La suppression n'est pas détaillée plus que cela pour cette première itération du cours.}
+
+\begin{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(1) Suppression de 56
+%Remove 56 (O)
+
+%\vspace*{-0.5cm}
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n21) {21}
+          child { node (n16) {16}
+                  child { node (n8) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (n32) {32}
+                  child { node (n28) {28} }
+                  child { node (n36) {36} }
+                }
+        }
+  child { node (n64) {64}
+          child { node (n56) {56} }
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+                }
+        }
+  child { node [label=below:{\footnotesize \textit{+1}}] (n64) {64}
+          child { node [dashed] (n56) {56} edge from parent [dashed] }
+          child { node [label=below:{\footnotesize \textit{0}}] (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(2) Suppression de 72
+%Remove 72 (Q)  (rotation gauche droite)
+
+%\vspace*{-0.5cm}
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node (n21) {21}
+          child { node (n16) {16}
+                  child { node (n8) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (n32) {32}
+                  child { node (n28) {28} }
+                  child { node (n36) {36} }
+                }
+        }
+  child { node (n64) {64}
+          child [missing] {}
+          child { node (n72) {72} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-2}}] (n42) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (n21) {21}
+          child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+                }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (n64) {64}
+          child [missing] {}
+          child { node [dashed] (n72) {72} edge from parent [dashed] }
+        };
+
+\draw [blue, dashed, -{Latex[length=2mm, width=2mm]}] (n21.north) to[bend right=-45] (n42.west);
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\vspace*{-0.5cm}
+
+\begin{table}[ht!]
+  \centering
+
+%\colorbox{blanccustom}
+%\framebox[2pt]{black}
+\colorbox{blanccustom}
+{
+  \begin{minipage}{0.45\textwidth}
+    \raggedright
+
+%\begin{tikzpicture}[
+%  level/.style = {sibling distance = 33mm/#1},
+%  every node/.style = {minimum width = 2em, draw, circle},
+%  ]
+%  \node [draw=none] (nZZ) {\phantom{Z}}
+%  ;
+%\end{tikzpicture}
+
+De manière générale, l'équilibrage s'effectue selon le facteur d'équilibrage d'un premier nœud, puis, du facteur d'un de ses fils.
+Si un nœud a un facteur de $ -2 $ (respectivement $ 2 $), on s'intéresse à son fils gauche (respectivement droit) pour tester si son facteur est inférieur à $ 1 $ (respectivement supérieur à $ -1 $), si c'est le cas on effectue une rotation droite (respectivement gauche), sinon, on effectue une rotation gauche droite (respectivement droite gauche).
+
+  \end{minipage}
+}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}
+  \draw [black](0,0) -- (0.75,1);
+  \draw [black,-{Stealth[length=2mm, width=2mm]}](0,0) -- (0.75,0);
+\end{tikzpicture}
+
+\centerline{
+rotation
+}
+
+\centerline{
+droite
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{+1}}] (n21) {21}
+  child { node [label=below:{\footnotesize \textit{-1}}] (n16) {16}
+          child { node [label=below:{\footnotesize \textit{0}}] (n8) {8} }
+          child [missing] {}
+        }
+  child { node [label=below:{\footnotesize \textit{-1}}] (n42) {42}
+          child { node [label=below:{\footnotesize \textit{0}}] (n32) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (n28) {28} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (n36) {36} }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (n64) {64} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+\end{center}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace*{-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\bigskip
+
+%\vfillFirst
+
+%\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2023.
+Certaines illustrations sont inspirées des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

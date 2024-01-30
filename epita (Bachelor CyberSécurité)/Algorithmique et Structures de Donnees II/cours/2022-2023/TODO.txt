@@ -1,0 +1,53 @@
+- hauteur arbre vide = -1
+- parcours profondeur : faire plusieurs schémas supplémentaires !
+ 1) un arbre simple (1 noeud et 2 fils) et montrer dessus à quel moment on
+    fait le passage en préfixe, infixe, et suffixe (ajouter une boule rouge
+    à gauche, une boule verte en bas, et une boule bleue à droite)
+ 2) ajouter une flèche qui circule autour des noeuds (ou voir le dossier "img" et
+    copier le schéma avec les petits points multi colors
+
+- suppression d'un noeud : ajouter un schéma avec des sous-arbres triangulaires (avec un noeud tout à droite ou tout à gauche que l'on remonte)
+
+- La longueur de cheminement externe d'un arbre B correspond à la somme des hauteurs de chacune des feuilles
+- La longueur de cheminement interne d'un arbre B correspond à la somme des hauteurs des nœuds internes de B
+-
+
+- vérifier dans cours 2 sur ABR au début "relation d'ordre" ou "relation d'équivalence" ? (vérifier que la bonne expression est choisie)
+
+
+P3 : non la recherche n'est pas exclusivement récursive...
+(mais on la conseille très fortement)
+
+AJOUTER LES NUMEROS DE PAGES EN BAS.
+
+P5 : Suppression : si 2 fils, alors "le plus petit"/"le plus grand" à "échanger" est lui aussi supprimé... il peut être une feuille ou un point simple => ré-appeler l'algo ? ou recopier/coller le code ?...
+[éventuellement pour l'an prochain : illustrer le cas où le plus petit/plus grand est un point simple]
+
+
+
+AVL : préciser les cas des rotations, surtout pour la suppression
+
+Exemple algo d'équilibrage (s = noeud/sommet manipulé, p = père du sommet)
+
+fonction equilibreUnSommet(ref p,s:sommet):vide;
+  début
+    si s==filsGauche(p) alors
+      si getEquilibre(p)==-2 alors
+        si getEquilibre(s)<1 alors
+          rotationDroite(p);
+        sinon
+          rotationGauche(s);
+          rotationDroite(p);
+        finsi
+      finsi
+    sinon
+      si getEquilibre(p)==2 alors
+        si getEquilibre(s)>-1 alors
+	    rotationGauche(p)
+        sinon
+          rotationDroite(s);
+          rotationGauche(p);
+	finsi
+      finsi
+    finsi
+fin

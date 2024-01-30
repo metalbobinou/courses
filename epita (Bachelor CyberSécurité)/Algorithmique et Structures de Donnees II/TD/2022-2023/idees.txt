@@ -1,0 +1,201 @@
+
+################################
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/*
+** La creation peut
+** eventuellement prendre une
+** taille max
+*/
+my_stack *create_stack();
+
+void *head_stack(my_stack *s);
+my_stack *push(void *elt);
+my_stack *pop(void);
+
+void delete_stack(my_stack *s); \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/*
+** La creation peut
+** eventuellement prendre une
+** taille max
+*/
+my_queue *create_queue();
+
+void *head_queue(my_queue *q);
+my_queue *enqueue(void *elt);
+my_queue *dequeue(void);
+
+void delete_queue(my_queue *q); \end{lstlisting}
+
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+
+######################################################################
+
+
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24}
+                  child { node {22} }
+                }
+         }
+  child { node {64}
+          child { node {48} }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+Arbre5
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24}
+                  child { node {22} }
+                  child { node {32} }
+                }
+         }
+  child { node {64}
+          child { node {48}
+                  child { node {46} }
+                  child { node {56} }
+                }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+Arbre6
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres binaires presque complets}
+%\label{fig:example3-almost-complete-binary-trees}
+\end{table}
+
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ù
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child {node {8}
+                child {node {2}}
+                child {node {16}}
+               }
+         child {node {24}}
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+Arbre7
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child [missing] {}
+         child {node {24}
+                child {node {22}}
+                child {node {32}}
+               }
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+Arbre8
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}

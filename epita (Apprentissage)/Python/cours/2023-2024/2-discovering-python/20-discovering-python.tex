@@ -1,0 +1,223 @@
+% -*- latex -*-
+
+\part{Python Basics}  % Language, CLI, versions, ...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Python Language}
+
+\begin{frame}<beamer>{Discovering Python}
+
+  \begin{itemize}
+    \item<1-> Interpreter~\\
+      \only<2->{\TTBF{/usr/bin/python3}}
+    \item<3-> Imperative programming language
+    \item<4-> Object Oriented Programming language
+    \item<5-> Multiple versions (currently major version 3)~\\
+      \only<6->{Beware, version \alert{2.7} is still running on some machines}
+  \end{itemize}
+
+\end{frame}
+
+
+%%% Terminal example
+
+\begin{frame}[fragile]{Calling Python}
+
+  \onslide<1-> Simply like any program
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*)
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3
+Python 3.10.4 (main, Apr  2 2022, 09:04:19) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%% Quit terminal example
+
+\begin{frame}[fragile]{Calling Python}
+
+  \onslide<1-> Quit by typing "\TTBF{exit()}" or by pressing \TTBF{Ctrl + D}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3
+Python 3.10.4 (main, Apr  2 2022, 09:04:19) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit() \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%% Script call example
+
+\begin{frame}[fragile]{Calling Python}
+
+  \onslide<1-> You can call a script by calling python with an argument
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3 my_script.py
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3 my_script.py
+Hello World! \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%% Version
+
+%\begin{frame}[fragile]{Versions}
+%
+%  \onslide<1> Beware of versions !
+%
+%  \onslide<1> \phantom{We currently use the major version 3 (3.8, 3.10, ...)}
+%
+%  \begin{columns}[onlytextwidth]
+%    \begin{column}{\textwidth}
+%      \begin{onlyenv}<1>
+%        \begin{lstlisting}[style=sh,morekeywords={3.10.4, python, python3, python3.10}]]
+%
+%
+%
+%
+%        \end{lstlisting}
+%      \end{onlyenv}
+%
+%    \onslide<1> \phantom{Avoid at all cost the obsolete 2.7 (\TTBF{python27})}
+%
+%    \end{column}
+%  \end{columns}
+%\end{frame}
+
+\begin{frame}[fragile]{Versions}
+
+  \onslide<1-> Beware of versions !
+
+  \onslide<1-> We currently use the major version 3 (3.8, 3.10, ...)
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2->
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python3
+Python 3.10.4 (main, Apr  2 2022, 09:04:19) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit() \end{lstlisting}
+      \end{onlyenv}
+
+    \onslide<3-> Do not use the obsolete 2.7 (\TTBF{python2}, \TTBF{python27}, \TTBF{python2.7})
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Versions}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>  %,morekeywords={3.10.4, python3.10, python3, python}]
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+%*\LSTPrompt*) python3
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+%*\LSTPrompt*) python3.10
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>  %,morekeywords={3.10.4, python3.10, python3, python}]
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+%*\LSTPrompt*) python3
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+%*\LSTPrompt*) python3.10
+Python 3.10.4 (main, Apr  2 2022, 09:04:19)
+
+%*\LSTPrompt*) python2
+Python 2.7.18 (default, Jan  2 2021, 09:22:32) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Versions}
+
+  \begin{center}
+
+  \centering{
+    Please, check right now which default version of Python you have when you type \TTBF{python}
+  }
+
+  \vspace*{2cm}
+
+  \centering{
+    Eventually, install package \TTBF{python-is-python3} in order to avoid any problem
+  }
+
+  \end{center}
+
+\end{frame}

@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 1}									%Droite Haut
+\chead{09 novembre 2017}							%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs ; Déplacement dans le Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{166}, \texttt{-47}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1011 1001}, \texttt{\%1101 1101}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Citer les 3 bus d'un processeur, puis les 3 classes générales d'ordinateurs}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Citer les 5 étages classiques du pipeline d'un processeur}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Expliquer les relations entre les différents langages : "langage machine", "assembleur", "C"}
+
+\end{document}

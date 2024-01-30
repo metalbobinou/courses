@@ -1,0 +1,9 @@
+Utiliser le projet:
+
+./configure
+option:
+    -debug: met les flags de debug pour les binaires de test uniquement dans un fichier Makefile.rules
+    -clean: supprime le fichier Makefile.rules
+    <aucune option>: met les flags pour les binaires de test mais sans flag de debug dans un fichier Makefile.rules
+
+make check

@@ -1,0 +1,159 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\usepackage{tabularx}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{01 décembre 2016}							%Centre Haut
+\lhead{Interrogation 2}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 2} \\
+          \normalsize\textbf{Système d'Exploitation et Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Citer 4 appels systèmes}
+
+\bigskip
+\bigskip
+
+\section{Quels sont les 2 modes d'accès aux données sur les supports physiques ? Donner un exemple de support pour chacun}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Remplir le tableau avec les commandes ou leur description}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabular}{| c | c |}
+  \hline
+  \textbf{Commande/Programme} & \textbf{Description} \\ \hline
+  & Lister les fichiers \\ \hline
+  pwd &  \\ \hline
+  & Renommer un fichier \\ \hline
+  & Supprimer un fichier \\ \hline
+  & Supprimer un dossier \\ \hline
+  & Créer un dossier \\ \hline
+  cd & \\ \hline
+  & Modifier la date de modification d'un fichier \\ \hline
+  grep & \\ \hline
+  ps & \\ \hline
+  & Déplacer un dossier \\
+  \hline
+  \end{tabular}
+\end{center}
+\bigskip
+
+\renewcommand\arraystretch{1}
+
+\section{Remettre dans l'ordre les phases de compilation, indiquer la commande du principal compilateur/linkeur et ses options si nécessaire}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabularx}{15.5cm}{| c | c | c | X |}
+  \hline
+  \No \'Etape & Nom de l'\'Etape & Programme/Commande & Paramètre(s) \\ \hline
+  & \textbf{Assemblage} & & \\
+  \hline
+  & \textbf{Compilation} & & \\
+  \hline
+  & \textbf{Link Edit/\'Edition de Liens} & & \\
+  \hline
+  & \textbf{Pré-Compilation} & & \\ 
+  \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\section{Indiquer les commandes pour donner les bons droits aux fichiers suivants :}
+
+\medskip
+
+\noindent fichier1 (tous les droits pour le propriétaire, lecture et exécution pour le groupe et les autres)
+
+\bigskip
+\bigskip
+
+\noindent fichier2 (lecture et exécution pour le propriétaire, exécution pour le groupe, aucun droit pour les autres)
+
+\bigskip
+\bigskip
+
+\noindent \#monfichier\# (lecture et écriture pour le propriétaire, aucun droit pour tous les autres)
+
+\bigskip
+\bigskip
+
+\section{Citer les sections de l'espace d'adressage où peuvent se situer les variables d'un programme}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{\textit{\texttt{SUPPL\'EMENT :}} Que font >, >{}>, |, et < dans le shell ?}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{\textit{\texttt{SUPPL\'EMENT :}} Que font les registres "PC" (Program Counter) et "SP" (Stack Pointer) dans un processeur ?}
+
+\bigskip
+
+\end{document}

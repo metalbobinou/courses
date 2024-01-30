@@ -1,0 +1,8 @@
+- afficher les algorithmes et demander lequel fait quoi
+- algorithme pour différencier feuille, point simple, noeud avec 2 fils
+- demanderà construire un arbre
+- demander comment on arrive à un tel arbre
+
+
+- exemples à utiliser :
+parcours largeur qui produit IWASBORNINTHEUSA

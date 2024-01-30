@@ -1,0 +1,193 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\usepackage{tabularx}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{18 décembre 2017}							%Centre Haut
+\lhead{Interrogation 2}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 2} \\
+          \normalsize\textbf{Système d'Exploitation et Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Citer les 6 appels systèmes UNIX permettant des manipulations sur le système de fichier : }
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Indiquer les commandes pour donner les bons droits aux fichiers suivants :}
+
+\medskip
+
+\noindent fichier1 (lecture et exécution pour le propriétaire, tous les droits pour le groupe, et aucun droit pour les autres)
+
+\medskip
+
+\noindent fichier2 (écriture pour le propriétaire, lecture pour le groupe, exécution pour les autres)
+
+\medskip
+
+\noindent \#monfichier\# (tous les droits pour le propriétaire, lecture et écriture pour tous les autres)
+
+\medskip
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{\'Ecrire la ligne de commande permettant de créer une archive \newline \texttt{archive.tar.bz2} contenant le répertoire \texttt{UnDossier} : }
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Remplir les phrases suivantes avec les bons mots : }
+
+\bigskip
+
+\noindent Un système d'exploitation ................................... permet de stopper des processus/tâches en cours d'exécution pour pouvoir donner du temps processeur à d'autres. On dit aussi que le système est à ................................... ................................... .\\
+
+\noindent La méthode d'accès ................................... permet d'accéder directement à la donnée souhaitée, tandis que la méthode d'accès ................................... nécessite de lire toutes les données précédentes depuis le début du support.\\
+
+\bigskip
+
+\section{Remettre dans l'ordre les phases de compilation, indiquer la commande du principal compilateur/linkeur et ses options si nécessaire}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabularx}{15.5cm}{| c | c | c | X |}
+  \hline
+  \No \'Etape & Nom de l'\'Etape & Programme/Commande & Paramètre(s) \\ \hline
+  & \textbf{Assemblage} & & \\
+  \hline
+  & \textbf{Compilation} & & \\
+  \hline
+  & \textbf{Link Edit/\'Edition de Liens} & & \\
+  \hline
+  & \textbf{Pré-Compilation} & & \\ 
+  \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\section{Remplir le tableau avec les commandes ou leur description}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabular}{| c | c |}
+  \hline
+  \textbf{Commande/Programme} & \textbf{Description} \\ \hline
+  kill & \\ \hline
+  ps & \\ \hline
+  & Renommer un fichier \\ \hline
+  & Supprimer un fichier \\ \hline
+  & Supprimer un dossier \\ \hline
+  ln & \\ \hline
+  bg & \\ \hline
+  touch & \\ \hline
+  & Programme de traitement de texte par colonne \\ \hline
+  cp & \\ \hline
+  & Déplacer un dossier \\
+  \hline
+  \end{tabular}
+\end{center}
+\bigskip
+
+\renewcommand\arraystretch{1}
+
+\newpage
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{222}, \texttt{-14}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1000 1101}, \texttt{\%1011 1101}}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{\'Ecrire un script sh qui affichera \texttt{"Coucou !"} si on lui donne en unique paramètre \texttt{"Bonjour ?"}, mais qui affichera \texttt{"Non."} si on lui donne d'autres paramètres (multiples ou non), et n'affichera rien si aucun paramètre n'est donné.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+
+
+\end{document}

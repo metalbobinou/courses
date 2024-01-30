@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\usepackage{tabularx}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{01 décembre 2016}							%Centre Haut
+\lhead{Interrogation 2}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 2} \\
+          \normalsize\textbf{Système d'Exploitation et Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Citer 4 appels systèmes}
+
+\bigskip
+\begin{itemize}
+\item Open : ouvre un fichier selon des règles (création, ajout, remise à zéro) et crée un file descriptor
+\item Read : lit depuis un file descriptor des données, et les copie au bout d'un pointeur
+\item Write : écrit dans un file descriptor des données issues d'un pointeur
+\item Close : ferme un file descriptor, et libère le fichier
+\item Fork : duplique le processus en cours (création d'un processus "fils")
+\item Pipe : créer un pipe entre le processus et lui-même
+\item Dup : duplique un file descriptor
+\item Wait/WaitPID : attend la fin d'un processus fils
+\item GetPID/GetPPID : récupère son PID ou celui de son "père"
+\end{itemize}
+\bigskip
+
+\section{Quels sont les 2 modes d'accès aux données sur les supports physiques ? Donner un exemple de support pour chacun}
+
+\bigskip
+\begin{itemize}
+\item Accès Séquentiel : le support physique contient des données, dont l'organisation oblige à lire (ou au moins faire passer) tout ce qui précède la donnée recherchée. On ne peut accéder à une case que si on a lu/est passé sur ses prédécesseurs. Par exemple : les bandes magnétiques doivent être déroulées pour accéder à la donnée qui se trouve au milieu de la bande.\\
+\item Accès Aléatoire : le support physique permet un accès à n'importe quelle donnée de façon aisée/peu contraignante/rapide. On peut accéder à n'importe quelle case à la demande. Par exemple : les disques permettent d'accéder à n'importe quelle case en faisant simplement tourner le disque et en déplaçant la tête de lecture (accès plutôt rapide). Les mémoires flashs activent les cases à lire/écrire grâce au câblage électronique gravé dans le silicium (accès très rapide).\\
+\end{itemize}
+\bigskip
+
+\section{Remplir le tableau avec les commandes ou leur description}
+
+%\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabular}{| c | c |}
+  \hline
+  \textbf{Commande/Programme} & \textbf{Description} \\ \hline
+  \texttt{ls} & Lister les fichiers \\ \hline
+  \texttt{pwd} & Afficher le répertoire courant \\ \hline
+  \texttt{mv} / \texttt{rename} & Renommer un fichier \\ \hline
+  \texttt{rm} & Supprimer un fichier \\ \hline
+  \texttt{rmdir} / \texttt{rm -r} & Supprimer un dossier \\ \hline
+  \texttt{mkdir} & Créer un dossier \\ \hline
+  \texttt{cd} & Changer de répertoire courant \\ \hline
+  \texttt{touch} & Modifier la date de modification d'un fichier \\ \hline
+  \texttt{grep} & Afficher les chaînes de caractères correspondantes à un motif \\ \hline
+  \texttt{ps} & Afficher la liste des processus \\ \hline
+  \texttt{mv} & Déplacer un dossier \\
+  \hline
+  \end{tabular}
+\end{center}
+\bigskip
+
+%\renewcommand\arraystretch{1}
+
+\section{Remettre dans l'ordre les phases de compilation, indiquer la commande du principal compilateur/linkeur et ses options si nécessaire}
+
+%\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabularx}{15.5cm}{| c | c | c | X |}
+  \hline
+  \No \'Etape & Nom de l'\'Etape & Programme/Commande & Paramètre(s) \\ \hline
+  1 & \textbf{Pré-Compilation} & gcc (OU cpp) & -E\\ 
+  \hline
+  2 & \textbf{Compilation} & gcc (OU cc1) & -S \\
+  \hline
+  3 & \textbf{Assemblage} & gcc (OU as) & -c \\
+  \hline
+  4 & \textbf{Link Edit/\'Edition de Liens} & gcc (OU ld) & \\
+  \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+%\renewcommand\arraystretch{1}
+
+\section{Indiquer les commandes pour donner les bons droits aux fichiers suivants :}
+
+\medskip
+
+\noindent fichier1 (tous les droits pour le propriétaire, lecture et exécution pour le groupe et les autres)
+
+\noindent \textbf{chmod 755 fichier1} \hfill OU \hfill \textbf{chmod u=rwx,go=rx fichier1}
+
+\bigskip
+
+\noindent fichier2 (lecture et exécution pour le propriétaire, exécution pour le groupe, aucun droit pour les autres)
+
+\noindent \textbf{chmod 510 fichier2} \hfill OU \hfill \textbf{chmod u=rx,g=x,o= fichier2}
+
+\bigskip
+
+\noindent \#monfichier\# (lecture et écriture pour le propriétaire, aucun droit pour tous les autres)
+
+\noindent \textbf{chmod 600 \textbackslash\#monfichier\textbackslash\#} \hfill OU \hfill \textbf{chmod u=rw,go= \textbackslash\#monfichier\textbackslash\#}
+
+\bigskip
+
+\section{Citer les sections de l'espace d'adressage où peuvent se situer les variables d'un programme}
+
+\bigskip
+\begin{itemize}
+\item Data : données initialisées (exemple : \textit{\texttt{int a = 42;}})
+\item BSS : variables initialisées à 0, ou non initialisées (exemple : \textit{\texttt{int a, b = 0;}})
+\item (acceptée) ROData : données initialisées et chaînes de caractères pré-déclarées \\ (exemple : \textit{\texttt{char *str = "LOL";}})
+\item (acceptée si les précédentes sont citées) Pile/Stack : certaines variables peuvent se situer dans la pile lors de l'exécution du programme
+\end{itemize}
+\bigskip
+
+\section{\textit{\texttt{SUPPL\'EMENT :}} Que font >, >{}>, |, et < dans le shell ?}
+
+\bigskip
+\begin{itemize}
+\item \textbf{>} : la sortie standard de la commande à gauche est envoyée dans un fichier (le fichier est écrasé)
+\item \textbf{>{}>} : la sortie standard de la commande à gauche est envoyée dans un fichier (ajout en fin de fichier)
+\item \textbf{<} : l'entrée standard de la commande à gauche est remplie avec le contenu d'un fichier
+\item \textbf{|} : la sortie standard de la commande à gauche est connectée à l'entrée standard de la commande à droite
+
+\end{itemize}
+\bigskip
+
+\section{\textit{\texttt{SUPPL\'EMENT :}} Que font les registres "PC" (Program Counter) et "SP" (Stack Pointer) dans un processeur ?}
+
+\bigskip
+\begin{itemize}
+\item PC (Program Counter) : donne l'adresse de l'instruction en cours d'exécution
+\item SP (Stack Pointer) : donne l'adresse de la pile, et plus particulièrement du sommet de la pile
+\end{itemize}
+
+\end{document}

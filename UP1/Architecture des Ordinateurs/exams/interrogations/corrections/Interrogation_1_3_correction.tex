@@ -1,0 +1,104 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 1}									%Droite Haut
+\chead{09 novembre 2017}							%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs ; Déplacement dans le Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{166}, \texttt{-47}}
+
+\bigskip
+166 : \% 1010 0110 (\$ A6)	\qquad	-47 : \% 1101 0001 (\$ D1)
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1011 1001}, \texttt{\%1101 1101}}
+
+\bigskip
+\% 1011 1001 : 185 ou -71	\qquad	\% 1101 1101 : 221 ou -35
+\bigskip
+
+\section{Citer les 3 bus d'un processeur, puis les 3 classes générales d'ordinateurs}
+
+\bigskip
+Bus de Données, Bus d'Adresses, Bus de Contrôle \qquad Mainframes, Minis, Micros
+\bigskip
+
+\section{Citer les 5 étages classiques du pipeline d'un processeur}
+
+\bigskip
+Fetch, Decode, Execute, Memory, Write Back
+\bigskip
+
+\section{Expliquer les relations entre les différents langages : "langage machine", "assembleur", "C"}
+
+\bigskip
+
+\noindent Le langage machine est le langage compris par les processeurs.
+Il est souvent représenté par du binaire (0 et 1), et correspond aux instructions exécutées par le processeur.
+Chaque famille de processeurs comprend un langage machine précis.
+Le code machine n'est donc pas portable d'une architecture à une autre.
+
+\bigskip
+
+\noindent L'assembleur est la version "lisible (par un humain)" du langage machine.
+Chaque instruction du langage machine correspond à une instruction assembleur (et inversement).
+Il n'y a aucune différence de "logique" dans le code des instructions assembleur et machine.
+Chaque famille de processeurs comprend un assembleur précis.
+Le code assembleur n'est donc pas portable d'une architecture à une autre.
+
+\bigskip
+
+\noindent Le langage C est un langage haut niveau plutôt indépendant du processeur sous-jacent.
+On peut écrire du code dans une logique plus humaine : on peut créer des boucles et conditions complexes en une seule ligne, là où l'assembleur nécessiterait plusieurs instructions.
+Le C permet de s'abtraire légèrement du fonctionnement exact d'un processeur.
+Pour un même processeur, un seul code C peut générer plusieurs versions différentes de code assembleur.
+Un code C est portable sur plusieurs architectures différentes de processeurs sans changement majeur.
+
+\end{document}

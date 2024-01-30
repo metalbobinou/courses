@@ -1,0 +1,27 @@
+Mon code :
+
+void	strtolower(char *str_in, /* string to convert */
+		     char *str_out /* string converted */)
+{
+  /* this exemple assumes str_out is already allocated */
+  int	i = 0;
+  char	c; /* one_character */
+
+  c = str_in[i];		/* first character get */
+  while (c != NULL)	/* while string is not finished */
+  {
+    if (c < 'A')		/* if the char is not a letter */
+      str_out[i] = c;	/* let's copy it */
+    else
+      if (c > 'Z')		/* if the char is already low */
+        str_out[i] = c;	/* let's copy it */
+      else
+        str_out[i] = 'a' - 'A' + c; /* let's make the char lower */
+    i++;			/* next character */
+  }
+}
+
+
+
+Mon texte :
+Le C offre une logique plus abstraite que l'assembleur, mais il garde quelques notions liées à la mémoire.

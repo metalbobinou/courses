@@ -1,0 +1,105 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[margin=2.5cm,headheight=2cm,headsep=30pt]{geometry}
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}		% RGB model
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash }m{#1}}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+
+\newcolumntype{G}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % another L
+\newcolumntype{M}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}   % another C
+\newcolumntype{D}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}  % another R
+
+
+\newcommand{\VersionExo}{Version 1.2}
+
+\begin{document}
+
+\title{Barême Python App1\\
+       \large 2023-2024 (\VersionExo)}
+
+\author{Fabrice BOISSIER}
+
+\maketitle
+
+\thispagestyle{empty} % Remove page number
+
+
+\begin{equation*}
+\text{Note finale} = \text{moyenne}(\text{Projet 1}, \text{Projet 2})
+\end{equation*}
+
+
+\medskip
+
+\noindent En cas d'échec majeur par toute la promo d'un projet, le projet le mieux réalisé verra son coefficient augmenté, et celui le moins bien réalisé verra son coefficient réduit.
+
+\noindent Par exemple (mais pas nécesairement) :
+
+\begin{equation*}
+\text{Note finale} = \frac{3 \times \text{Projet 1} \; + \; 1 \times \text{Projet 2}}{4}
+\end{equation*}
+
+\medskip
+
+\noindent Si certains tests d'exercices sont ratés par trop de personnes dans la promo, les tests en question verront leurs poids réduits.
+Voire, dans certains cas, des points seront proportionnellement attribués pour permettre un rééquilibrage entre les meilleurs et les moins avancés (ceci est laissé selon l'appréciation générale de l'enseignant).
+
+\bigskip
+
+
+\noindent Barême Projet 1 (Statistiques) :
+
+\begin{itemize}
+\item Format de rendu : 2 points
+\item Exercice 1 : 15 points sur les fonctions + 4 points sur les exceptions
+\item Exercice 2 : 15 points sur les fonctions + 4 points sur les exceptions
+\item $ \text{Total Projet 1} = \frac{\text{Format} \, + \, \text{Exercice 1} \, + \, \text{Exercice 2}}{2} $
+\end{itemize}
+
+
+\bigskip
+
+
+\noindent Barême Projet 2 (Statistiques Graphiques) :
+
+\begin{itemize}
+\item Format de rendu : 2 points
+\item Exercice 1 : 1 point format d'affichage + 2 points sur les données + 0,5 point \textit{main()}
+\item Exercice 2 : 1 point sur les données + 1 point graphe barres + 1 point graphe circulaire + 1,5 point \textit{main()}
+\item $ \text{Total Projet 2} = \text{Format} \; + \; \text{Exercice 1} \; + \; \text{Exercice 2} $
+\end{itemize}
+
+\bigskip
+
+\noindent En cas de rendus multiples sur Teams, celui-ci ajoute automatiquement un numéro à la fin du nom de fichier : cela ne sera pas pris en compte lors de la notation.
+Néanmoins, le nom de l'archive doit correspondre à ce qui est demandé concernant le login et le nom du projet.
+
+\bigskip
+
+\noindent Attention, dans tous les cas, si un rattrapage de cette matière doit être produit, il s'agira d'un des deux projets tel quel ou modifié.
+Vous devez donc absolument les réaliser.
+
+\bigskip
+
+\noindent \textit{Exceptionnellement, celles et ceux qui auraient été sous Windows pendant les 3 séances de cours peuvent rendre un \textbf{.zip} au lieu d'un \textbf{.tar.bz2}}
+
+\end{document}

@@ -1,0 +1,53 @@
+Cibles définies : all, preproc, preassemble, assemble, linkedit, help, clean, distclean
+(attention : tabulation nécessaire au début des lignes de commandes)
+(distclean appelle d'abord la cible clean avant de s'exécuter)
+
+Appel des cibles (dans shell) :
+make help
+make distclean
+make preproc
+make
+
+Possibilité de définir des variables, ne pas recompiler ce qui a déjà été compilé, etc...
+
+
+
+
+tabulation
+
+cible(s) à exécuter avant de lancer les commandes
+
+
+
+
+all:
+	make preproc
+	make preassemble
+	make assemble
+	make linkedit
+
+preproc:
+	gcc -E -P file.c -o file_out.c
+
+preassemble:
+	gcc -S file_out.c -o file_asm.s
+
+assemble:
+	gcc -c file_asm.s -o file.o
+
+linkedit:
+	gcc -c main.c -o main.o
+	gcc -o programme.exe file.o main.o
+
+help:
+	echo "TARGET: preproc preassemble assemble linkedit"
+
+clean:
+	rm -f *~
+
+distclean: clean
+	rm -f file_out.c
+	rm -f file_asm.s
+	rm -f file.o
+	rm -f main.o
+	rm -f programme.exe

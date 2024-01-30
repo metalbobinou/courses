@@ -1,0 +1,217 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{}
+\newcommand{\NumGroupe}{Groupe 2}
+\newcommand{\AnneeUniv}{}
+\newcommand{\DateExam}{4 avril 2019}
+\newcommand{\TypeExam}{Devoir sur Table}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h00}
+\newcommand{\MyWaterMark}{2018-2019} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(2 points) PHP est-il un langage fortement ou faiblement typé ? Expliquez la différence.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Expliquez la différence d'utilisation en PHP des méthodes GET et POST. Indiquez les limites de chaque méthode, s'il y en a.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Dans quel cas vaut-il mieux utiliser des \textit{sessions} ? Dans quel cas vaut-il mieux utiliser des \textit{cookies} ?}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Expliquez ce qu'est un SGBD par rapport à une BDD. Indiquez le nom du standard permettant d'interroger un SGBD.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\newpage
+
+\subsection{(3 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\TTBF{http://www2.website.jp:3864/homepages/portal/}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{https://univ-paris.fr}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{http://www.dailynews.co.uk/article/2864}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{4}{>{\centering \arraybackslash}X |}}
+  \hline
+  Paramètre & \TTBF{is\_null()} \\ \hline
+  \TTBF{null} &  \\ \hline
+  [\TTBF{unset(\$var)}] & \\ \hline
+  \TTBF{42} & \\ \hline
+  \TTBF{0} & \\ \hline
+  \TTBF{""} & \\ \hline
+  \TTBF{" "} [un espace] & \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\newpage
+
+% On affiche le petit cartouche Nom/Prenom
+\MakeStudentName
+
+\subsection{(2,5 points) Remplir le tableau avec les familles de codes HTTP et leur description.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  Code HTTP & Description \\ \hline
+  100 &  \\ \hline
+  200 &  \\ \hline
+  300 &  \\ \hline
+  400 &  \\ \hline
+  500 &  \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+% Faire fonctionner code
+\section{Développement}
+
+\subsection{(3,5 points) Ce code devrait compter le nombre de lignes contenant la valeur "Floriane", mais il ne fonctionne pas. Corrigez les erreurs pour que le compte soit bon.}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+
+// Fait une requete SQL et l'ecrit dans $result
+require(functions.php)
+
+$results = my_fun();
+
+for ( $i = 1; $i <= length($results); $i-- )
+{
+	if ($results[$i] == "Floriane")
+		$count++;
+}
+
+echo "$count";
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\end{document}

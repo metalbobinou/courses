@@ -1,0 +1,68 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{check.sh}}{\TTBF{\RenduDir/check/}}{750}{750}{Fonctions recommandées}{\TTBF{diff(1)}, \TTBF{find(1)}, \TTBF{printf(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de construire une suite de tests pour valider le fonctionnement de la file.}
+
+\bigskip
+
+\noindent Vous devez écrire plusieurs tests démontrant que vos implémentations des files fonctionnent.
+Pour cela, vous devrez faire plusieurs programmes en C qui utilisent vos files, et un script shell qui compare les résultats.
+
+\noindent Dans les exercices précédents, vous n'avez pas écrit de fonction \textit{main} pour la bonne raison qu'il s'agissait d'implémenter une structure (une file) de différentes façons.
+Il est maintenant temps de réutiliser tous les tests que vous avez écrits lors du développement de vos files !
+Vous devez néanmoins penser aux cas un peu plus complexes que le cas général.
+
+\bigskip
+
+\noindent Un exemple avec 3 programmes C de test serait :
+\begin{itemize}
+\item Un programme qui utilise la file implémentée avec des listes chaînées, imprime l'état de la file à différents moments, et imprime certains retours de fonctions.
+\item Un programme qui utilise la file avec tableau, imprime l'état de la file à différents moments, et imprime certains retours de fonctions.
+\item Un programme témoin qui servira de vérité absolue sur le comportement attendu.
+\item Les trois programmes enfilent et défilent les mêmes valeurs dans le même ordre, afin que le même comportement soit visible d'un point de vue utilisateur.
+Seule l'implémentation sous-jacente varie.
+\end{itemize}
+
+\bigskip
+
+\noindent Votre fichier \TTBF{main.c} pourra contenir un scénario précis à suivre qui imprimera différentes valeurs dans le terminal, et vous pouvez éventuellement comparer cela à une sortie texte que vous avez manuellement préparée dans un fichier.
+Ainsi, le fichier préparé manuellement sera stocké en dur dans le dossier \textit{check} et sera comparé avec un \TTBF{diff} pour confirmer que tout se passe bien, ou au contraire que des problèmes existent lors de certains tests.
+
+\bigskip
+
+Pour utiliser une bibliothèque statique, lors du développement, vous devez disposer de la bibliothèque (le \TTBF{.a} ou \TTBF{.so}) et du fichier \TTBF{.h} associé à l'interface (l'API) de votre bibliothèque, c'est-à-dire aux fonctions exportées.
+
+\medskip
+
+Lors de la phase de \textit{compilation}, vous devrez parfois ajouter un paramètre \textit{INCLUDE} indiquant le dossier où trouver les \textit{headers} de la bibliothèque (par exemple pour la \textit{libxml2}, on ajoutera ce flag : \TTBF{-I/usr/include/libxml2}).
+Ce flag \TTBF{-I} permet d'ajouter un dossier dans lequel chercher les fichiers d'en-têtes propres aux bibliothèques (donc les \TTBF{.h} entourés de \TTBF{<  >} dans vos \textit{includes}).
+Vous pouvez cumuler plusieurs flags \TTBF{-I} à la suite.
+
+\medskip
+
+Lors de la phase d'\textit{édition de liens}, vous devrez parfois ajouter un paramètre \textit{LIBRARY} indiquant le nom de la bibliothèque à utiliser (par exemple pour la \textit{libxml2}, on ajoutera ce flag : \TTBF{-lxml2}).
+Ce flag \TTBF{-l} (littéralement : \textit{tiret L minuscule}) permet d'indiquer à l'éditeur de lien qu'il doit utiliser une bibliothèque dynamique dont le nom est donné en paramètre (attention : le préfixe \textit{lib} est supprimé des noms de bibliothèques).
+%Attention, le placement de la bibliothèque dans la ligne de commande a une importance : vous devez indiquer les bibliothèques \textit{avant} les \TTBF{.o} les utilisant.
+Attention, le placement de la bibliothèque par rapport aux fichiers objets (les fichiers \TTBF{.o}) dans la ligne de commande a une importance.
+
+\medskip
+
+Vous devrez également indiquer dans quel dossier trouver les bibliothèques grâce au flag \TTBF{-L} (par exemple, pour chercher une bibliothèque dans le dossier courant, on ajoutera le flag : \TTBF{-L.}).
+Vous pouvez cumuler plusieurs flags \TTBF{-L} et \TTBF{-l} à la suite.
+
+\medskip
+
+Si vous disposez de la même bibliothèque avec une version statique et une dynamique, l'\textit{éditeur de liens} choisira la version dynamique par défaut, mais vous pouvez forcer la statique grâce au flag \TTBF{-static}.
+
+\bigskip
+
+\noindent La méthode idéale consiste à produire plusieurs scénarios numérotés et décrits, puis d'afficher quels tests ont réussi, et lesquels ont échoué.
+Pour cet exercice, vous n'êtes pas obligés de descendre à ce niveau de précision.
+Une simple petite suite de tests est suffisante, mais n'oubliez pas de vérifier autre chose que le cas général.
+
+N'hésitez pas à vous appuyer sur le fait que votre projet produit des bibliothèques !
+Vous pouvez développer un programme entier qui affiche une suite de tests avec un script shell très simple appelant ce programme, ou, vous pouvez utiliser un script shell plus complet qui fait de nombreux tests en s'appuyant sur un ou des programmes C très simples.

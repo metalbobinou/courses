@@ -1,0 +1,321 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algo et Structure de Données 1}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Novembre 2022}
+\newcommand{\TypeExam}{QCM 2}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{20 min}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+
+% \setcounter{section}{1}  % Ne pas faire une liste de 0.1, 0.2, ... mais 1.1, 1.2, ...
+
+\renewcommand{\thesubsection}{\arabic{subsection}} % Subsection sans 0.x, mais juste x
+
+% \newcommand{\thesubsection}{\thesection.\arabic{subsection}} % Subsection avec numero section (0.x)
+
+
+\vfillFirst
+
+\subsection{(4 points) Cochez la (ou les) affirmation(s) vraie(s) : }
+
+\begin{itemize}
+  \item[\CaseCoche] Les piles sont des structures LOFI \\
+  \item[\CaseCoche] Les piles sont des structures LIFO \\
+  \item[\CaseCoche] Les files sont des structures FOFI \\
+  \item[\CaseCoche] Les files sont des structures FIFO \\
+  \item[\CaseCoche] Les listes sont des structures POPI \\
+  \item[\CaseCoche] Les listes sont des structures PIPO \\
+\end{itemize}
+
+
+\bigskip
+\vspace*{1cm}
+
+\subsection{(4 points) Cocher la (ou les) structure(s) pouvant implémenter une file : }
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.28\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+struct A
+  struct A next
+  entier nb_elt
+  entier head
+  entier tail
+fin struct \end{lstlisting}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers}
+  \CaseCoche
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.28\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+struct B
+  struct B *next
+  entier head
+fin struct \end{lstlisting}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers}
+  \CaseCoche
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.28\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+struct C
+  entier[] tab
+  entier head
+  entier tail
+fin struct \end{lstlisting}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers}
+  \CaseCoche
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+\vspace*{1cm}
+
+
+\subsection{(4 points) On peut empiler dans l'ordre 1, 2, 3, 4, 5, 6 et les dépiler dans cet (ou ces) ordre(s) : }
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 1, 2, 3, 4, 5, 6
+  \item[\CaseCoche] 6, 5, 4, 3, 2, 1
+  \item[\CaseCoche] 6, 5, 3, 1, 2, 4
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 3, 2, 4, 1, 5, 6
+  \item[\CaseCoche] 2, 3, 1, 5, 4, 6
+  \item[\CaseCoche] 4, 3, 1, 2, 5, 6
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\vfillLast
+
+%\bigskip
+\newpage
+
+\vfillFirst
+
+
+\subsection{(4 points) On peut accéder à un entier en utilisant cette (ou ces) expression(s) : }
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+struct MyStruct1
+  entier elt
+  struct MyStruct1 *next
+fin struct 
+
+struct MyStruct1 var1
+struct MyStruct1 *var2 \end{lstlisting}
+\end{center}
+
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] var1.elt    \phantom{()} \\
+  \item[\CaseCoche] (*var1).elt \\
+  \item[\CaseCoche] (*var1.elt) \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] var2.elt    \phantom{()} \\
+  \item[\CaseCoche] (*var2).elt \\
+  \item[\CaseCoche] (*var2.elt) \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+% DIFFERENCE ENTRE (*ptr).next, (*(*ptr).next), (*ptr.next), ptr.next
+
+\bigskip
+%\vspace*{1cm}
+
+\subsection{(4 points) Qu'affichera le programme suivant ? }
+
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction CalculPointeurs2 : entier
+  parametres locaux
+    entier    i, j
+  variables
+    entier    *ptr1, **ptr2
+debut
+  i = 42
+  j = 1337
+  ptr1 = &j
+  ptr2 = &ptr1
+  (*ptr1) = 3615
+  ecrire((**ptr2) + i)
+fin algorithme fonction CalculPointeurs2
+\end{lstlisting}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 42 \\  
+  \item[\CaseCoche] 1337 \\
+  \item[\CaseCoche] 1379 \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 3615 \\
+  \item[\CaseCoche] 3657 \\  
+  \item[\CaseCoche] Rien, le programme va crasher \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+%\vspace*{1cm}
+
+\subsection{[BONUS] (0 point) Le fossile nautile dans Pokémon, est connu pour : }
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] obtenir Amonita \phantom{()} \\
+  \item[\CaseCoche] obtenir Kabuto  \phantom{()}\\
+  \item[\CaseCoche] obtenir Ptéra \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] avoir généré des memes \phantom{()} \\
+  \item[\CaseCoche] être l'objet d'un culte quasi-religieux \phantom{()} \\
+  \item[\CaseCoche] être le sous-marin du livre de Jules Vernes \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\vfillLast
+
+\end{document}

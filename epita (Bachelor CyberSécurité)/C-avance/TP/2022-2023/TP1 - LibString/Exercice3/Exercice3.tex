@@ -1,0 +1,62 @@
+%% Exercice 3
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{StrPart2.c} \TTBF{StrPart2.h}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de recoder les fonctions essentielles permettant de manipuler des chaînes de caractères : \TTBF{my\_strcat}, \TTBF{my\_strtok\_simple}, et \TTBF{my\_strstr} }
+
+\bigskip
+
+%\noindent Vous devez implémenter ces fonctions en respectant strictement les spécifications suivantes.
+%Vous ne devez ni rendre de fonction \TTBF{main} ni vos tests : vous ne devez rendre \textit{que} les fonctions demandées (et éventuellement celles vous permettant de les faire fonctionner) dans le fichier \texttt{StrPart2.c}, ainsi que leurs prototypes dans le fichier \texttt{StrPart2.h}.
+
+\bigskip
+
+%\noindent Vous devez implémenter les X fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{char *my\_strcat(char *dest, char *src)}
+%\item \TTBF{char **my\_strtok\_simple(char *str, char delim)}
+%\item \TTBF{char *my\_strstr(char *haystack, char *needle)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={Liste des fonctions pour l'exercice 1}]
+\begin{lstlisting}[frame=single]
+char *my_strcat(char *dest, char *src);
+char **my_strtok_simple(char *str, char delim);
+char *my_strstr(char *haystack, char *needle);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{char *my\_strcat(char *dest, char *src)}}
+
+\noindent Cette fonction ajoute une chaîne de caractère à la fin d'une autre chaîne de caractères (elles sont concaténées).
+La fonction lit les caractères de la chaîne \TTBF{src} pour les copier à la fin de la chaîne \TTBF{dest} (en écrasant son '\TTBF{\textbackslash{}0}').
+L'espace mémoire au bout de \TTBF{dest} doit avoir été préalablement réservé par l'utilisateur appelant, afin de pouvoir y ajouter tous les caractères de la chaîne contenue dans \TTBF{src} ainsi que le '\TTBF{\textbackslash{}0}' final.
+La fonction doit renvoyer un pointeur vers la chaîne \TTBF{dest}.
+\textit{Si l'espace mémoire dans \TTBF{dest} n'est pas assez grand, vous ne pouvez pas le savoir à l'avance, donc, vous devez essayer de copier normalement les caractères dedans. Si l'utilisateur ne respecte l'exigence de taille, ce n'est pas votre faute en tant que développeur : votre fonction peut échouer dans ce cas.}
+
+
+\subsubsection*{\TTBF{char **my\_strtok\_simple(char *str, char delim)}}
+
+\noindent Cette fonction découpe une chaîne de caractère selon un carcatère séparateur.
+La fonction doit renvoyer un tableau contenant des pointeurs vers des chaînes de caractères (comme \TTBF{argv}), sachant que le dernier élément de ce tableau sera \TTBF{NULL} (qui agira comme un '\TTBF{\textbackslash{}0}' dans une chaîne de caractères).
+Si la chaîne de caractère en entrée est vide (elle ne contient qu'un seul caractère : '\TTBF{\textbackslash{}0}'), alors la fonction doit renvoyer un tableau contenant une seule case qui elle-même contiendra la valeur \TTBF{NULL}.
+Si le paramètre donné en paramètre est \TTBF{NULL}, alors la fonction renverra \TTBF{NULL}.
+
+\noindent \textit{Cette implémentation diffère de la fonction \TTBF{strtok} implémentée dans la bibliothèque standard.}
+
+
+\subsubsection*{\TTBF{char *my\_strstr(char *haystack, char *needle)}}
+
+\noindent Cette fonction recherche une sous-chaîne dans une chaîne de caractère.
+La fonction doit renvoyer l'adresse du premier caractère de la première sous-chaîne (\TTBF{needle}) trouvée dans la chaîne principale (\TTBF{haystack}).
+Si la sous-chaîne n'est pas trouvée, alors la fonction doit renvoyer \TTBF{NULL}.
+
+\noindent \textit{Cette implémentation diffère de la fonction \TTBF{strtok} implémentée dans la bibliothèque standard.}

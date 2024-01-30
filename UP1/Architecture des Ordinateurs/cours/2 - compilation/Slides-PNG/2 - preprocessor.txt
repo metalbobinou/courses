@@ -1,0 +1,63 @@
+Pre-Processing / Pré-Processeur
+cpp (gcc -E)
+
+
+Exécution des directives de pré-processing :
+- Retrait des commentaires
+- Inclusion des fichiers inclus
+- Transformation des constantes
+- Exécution de tout ordre indiqué
+  dans le langage de macros...
+
+Résultat :
+Un fichier contenant uniquement du code (moins de logique visible)
+
+gcc -E -P file.c -o file_out.c
+
+
+file.h :
+
+#ifndef FILE_H_
+# define FILE_H_
+
+#define MON_NOMBRE 42
+
+int	my_fun(void);
+
+#endif /* !FILE_H_ */
+
+
+
+file.c :
+
+#include "file.h"
+
+/*
+** Ma fonction
+*/
+
+int	my_fun(void)
+{
+  int a = 3;
+
+  if (a == 3)
+    return (0); // Return 0
+  else
+    return (MON_NOMBRE); // Return 42
+}
+
+
+
+file_out.c :
+
+int	my_fun(void);
+
+int	my_fun(void)
+{
+  int a = 3;
+
+  if (a == 3)
+    return (0);
+  else
+    return (42);
+}

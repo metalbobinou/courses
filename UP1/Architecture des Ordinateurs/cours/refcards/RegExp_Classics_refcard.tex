@@ -1,0 +1,467 @@
+\documentclass[10pt,landscape]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{textcomp}
+
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{Mémo \texttt{expr}, \texttt{grep}, \texttt{sed}, \texttt{awk}}} \\
+\end{center}
+
+\section{Expr}
+\section{RegExp simples}
+\begin{tabular}{@{}ll@{}}
+\verb!.!  & 1 caractère quelconque \\
+\verb!*!  & 0 à N apparition(s) du caractère précédent \\
+\verb!\?! & 0 ou 1 apparition du caractère précédent \\
+\verb!\+! & 1 ou N apparition(s) du caractère précédent \\
+\verb!.*! & 0 à N caractères quelconques (représente tout) \\
+\verb![abc]!  & a ou b ou c (1 seul caractère) \\
+\verb![a-d]!  & a ou b ou c ou d (1 seul caractère) \\
+\verb![A-Za-z]!  & N'importe quelle majuscule ou minuscule \\
+\verb![A-Za-z-0-9]!  & Une lettre ou un chiffre \\
+\verb![0-9]*!  & 0 à N chiffres qui se suivent \\
+%\verb!^!  & Début de ligne, OU négation d'un ensemble \\
+\textbf{\^{}}  & Début de ligne, OU négation d'un ensemble \\
+\verb!$!  & Fin de ligne \\
+\verb!^[a-z][0-9]$!  & 1 caractère minuscule puis 1 chiffre (ex : a8) \\
+\verb![^g-m]!  & N'importe quel caractère sauf g h i j k l m \\
+\verb!'\(  \)'!  & Extrait la sous-chaîne entre les parenthèses
+\end{tabular}
+
+\subsection{expr : mathématiques}
+\# + addition, - soustraction, / division, \textbackslash * multiplication\\
+\verb!expr 6 \* 7!\\
+\textrightarrow 42\\
+\# \% est le modulo\\
+\verb!expr 42 % 6!\\
+\textrightarrow 0\\
+\verb!expr 43 % 6!\\
+\textrightarrow 1\\
+\# \'Echapper les caractères qui pourraient être interprétés par le shell\\
+\verb!expr \( 1 + 2 \) \* \( 3 + 4 \)!\\
+\textrightarrow 21\\
+
+\subsection{expr : booléens}
+\verb!expr 1 \> 3!\\
+\textrightarrow 0  (faux)\\
+\verb!expr 1 \< 3!\\
+\textrightarrow 1 (vrai)\\
+\verb!expr 1 \!= 3!\\
+\textrightarrow 1\\
+\verb!expr 1 = 3!\\
+\textrightarrow 0\\
+\verb!expr 1 \<= 1!\\
+\textrightarrow 1\\
+
+\verb!expr 1 \< 3  \&  1 \> 3!\\
+\verb!expr \( 1 \< 3 \)  \&  \( 1 \> 3 \)!\\
+\textrightarrow 0\\
+
+\verb!expr 1 \< 3  \|  1 \> 3!\\
+\verb!expr \( 1 \< 3 \)  \|  \( 1 \> 3 \)!\\
+\textrightarrow 1\\
+
+\subsection{expr : string}
+Longueur d'une chaîne de caractères\\
+\verb!expr length Metalman!\\
+\textrightarrow 8\\
+\verb!expr length Mega\ Man!\\
+\textrightarrow 8\\
+\verb!expr length "Mega Man"!
+\textrightarrow 8\\
+
+Extraction sous-chaîne\\
+\verb!expr substr Metalman 1 5!\\
+\textrightarrow Metal\\
+
+Première occurrence d'un mot (sinon 0)\\
+\verb!expr index Metalman z!\\
+\textrightarrow 0\\
+\verb!expr index Metalman m!\\
+\textrightarrow 6\\
+\verb!expr index Metalman a!\\
+\textrightarrow 4\\
+\verb!expr index Metalman n!\\
+\textrightarrow 8\\
+\verb!expr index Metalman man!\\
+\textrightarrow 4\\
+\# 'a' est trouvé en premier, en position 4\\
+\# m et n sont plus loin\\
+
+Pattern Matching\\
+\verb!expr match 'Chaine 46' '[^0-9]*\([0-9]*\)[^0-9]*'! \\
+\textrightarrow 46\\
+\# Extrait la première suite de chiffres dans la chaîne\\
+\verb!expr match 'Chaine 46. 88' '[^0-9]*\([0-9]*\)[^0-9]*'! \\
+\textrightarrow 46\\
+\verb!expr match 'Chaine 46. 88.' '[^0-9]*[0-9]*[^0-9]*'! \\
+\textrightarrow 11\\
+\# Les 11 premiers caractères répondant à la regexp. La regexp n'a PAS de \textbackslash( \textbackslash)\\
+\verb!expr match 'Vive 42' '[^0-9]*\([0-9]*$\)'! \\
+\textrightarrow 42\\
+\# On extrait les chiffres en fin de chaîne de caractères\\
+\verb!expr match 'Vive 42.' '[^0-9]*\([0-9]*\.$\)'! \\
+\textrightarrow 42.\\
+\# On extrait les chiffres suivi d'un . le tout en fin de chaîne de caractères\\
+\verb!expr match 'Vive 42.' '[^0-9]*\([0-9]\?\)[^0-9]*'! \\
+\textrightarrow 4\\
+\# On extrait le premier chiffre disponible\\
+\verb!expr match 'Vive 42.' '[^0-9]*\([0-9]\+\)[^0-9]*'! \\
+\textrightarrow 42\\
+\# On extrait tous les chiffres qui se suivent, si au moins un existe\\
+
+
+\medskip
+
+\section{Grep}
+\subsection{grep : options}
+\begin{tabular}{@{}ll@{}}
+\texttt{-E}  & Expressions régulières étendues\\
+\texttt{-v}  & Affiche lignes différentes du motif\\
+\texttt{-i}  & Indifférent aux majuscules/minuscules\\
+\texttt{-c}  & Compte les lignes avec le motif\\
+\texttt{-x}  & Affiche lignes strictement égales au motif\\
+\texttt{-l}  & Nom des fichiers contenant le motif
+\end{tabular}
+
+\subsection{grep : exemples}
+\verb!echo "Test." | grep  "Test"!\\
+\textrightarrow Test.\\
+\verb!echo "Test." | grep -x "Test"!\\
+\textrightarrow \\
+\verb!echo "Test." | grep -v "Test"!\\
+\textrightarrow \\
+\verb!echo "Test." | grep -v "Testa"!\\
+\textrightarrow Test.\\
+
+\medskip
+
+\section{Sed}
+\subsection{sed : options}
+\begin{tabular}{@{}ll@{}}
+\verb!-r! OU \verb!-E!  & Activation des RegExp étendues \\
+\verb!-i!  & Remplace dans le(s) fichier(s) le motif \\
+\verb!-n!  & N'affiche rien (sauf si /p ajouté) \\
+\verb!y/!  & \'Echange des caractères (comme \texttt{tr}) \\
+\verb!s/!  & Substitution du motif dans le document \\
+\verb!/1!  & Modifie la 1\up{ère} occurrence \\
+\verb!/2!  & Modifie la 2\up{nde} occurrence \\
+\verb!/g!  & Modifications multiples/dans tous le document \\
+\verb!/p!  & Affiche les lignes contenant le motif \\
+\verb!a\!  & Ajoute une ligne après chaque changement \\
+\verb!i\!  & Ajoute une ligne avant chaque changement \\
+\verb!c\!  & Remplace la ligne contenant le motif \\
+\verb!d!   & Supprime les lignes contenant le motif \\
+\verb!\( \)! & Sauvegarde le motif \\
+\verb!\1!  & Réutilise le 1\up{er} motif sauvegardé \\
+\end{tabular}
+
+\subsection{sed : exemples}
+\verb!sed 's/test/TEST/g' < Filename! \\
+\# Affiche le fichier avec les modifications selon le motif\\
+\verb!sed -n 's/test/TEST/p' < Filename! \\
+\# N'affiche que les lignes où le motif a été appliqué\\
+
+\medskip
+
+\# Créer un fichier exemple\\
+\verb!echo -e "Ceci est un test pour\n"\!\\
+\verb!"aider a comprendre le\n"\!\\
+\verb!"fonctionnement de sed.\n"\!\\
+\verb!"Il y aura au moins 3 lignes de\n"\!\\
+\verb!"test." > FILE!\\
+
+\smallskip
+
+\# Vérification contenu du fichier\\
+\verb!cat FILE!\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow test.\\
+
+\smallskip
+
+\# Affiche le texte + ce qui matche\\
+\verb!sed 's/test/&/p' FILE!\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow test.\\
+\textrightarrow test.\\
+
+\smallskip
+
+\# Affiche seulement les matchs\\
+\verb!sed -n 's/test/&/p' FILE!\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow test.\\
+
+\smallskip
+
+\# "test" ou "Il" sont matchés (usage du pipe "|")\\
+\verb!sed -n 's/test\|Il/&/p' FILE!\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow test.\\
+
+\smallskip
+
+\# Remplacement des occurrences\\
+\verb!sed -n 's/test\|Il/MDR/p' FILE!\\
+\textrightarrow Ceci est un MDR pour\\
+\textrightarrow MDR y aura au moins 3 lignes de\\
+\textrightarrow MDR.\\
+
+\smallskip
+
+\# Affiche seulement ce qui est changé\\
+\verb!sed -n 's/test/PTDR/p' FILE!\\
+\textrightarrow Ceci est un PTDR pour\\
+\textrightarrow PTDR.\\
+
+\smallskip
+
+\# Affiche tout le texte changé\\
+\verb!sed 's/test/PTDR/g' FILE!\\
+\textrightarrow Ceci est un PTDR pour\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow PTDR.\\
+
+\smallskip
+
+\# Changer les / en \# est possible\\
+\verb!sed -n 's#Ceci#&#p' FILE!\\
+\textrightarrow Ceci est un test pour\\
+
+\smallskip
+
+\# Travaille sur la ligne 5 seulement\\
+\verb!sed -n '5 s/test/&/p' FILE!\\
+\textrightarrow test.\\
+
+\smallskip
+
+\# Travaille sur lignes 1 à 4 seulement\\
+\verb!sed -n '1,4 s/test/&/p' FILE!\\
+\textrightarrow Ceci est un test pour\\
+
+\smallskip
+
+\# Supprime les lignes contenant "test"\\
+\verb!sed '/test/ d' FILE!\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+
+\smallskip
+
+\# !p affiche ce qui ne contient pas "test"\\
+\verb|sed -n '/test/!p' FILE|\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+
+\smallskip
+
+\# Remplacer des caractères par d'autres (comme tr)\\
+\verb!sed 'y/abcdefghijk/ABCDEFGHIJK/' FILE!\\
+\textrightarrow CECI Est un tEst pour\\
+\textrightarrow AIDEr A ComprEnDrE lE\\
+\textrightarrow FonCtIonnEmEnt DE sED.\\
+\textrightarrow Il y AurA Au moIns 3 lIGnEs DE\\
+\textrightarrow tEst.\\
+
+\smallskip
+
+\# Insertion dans le fichier\\
+\verb!sed -i 'y/t/T/' FILE!\\
+\verb!cat FILE!\\
+\textrightarrow Ceci esT un TesT pour\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow foncTionnemenT de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow TesT.\\
+
+\smallskip
+
+\# Ajoute une ligne après chaque occurrence\\
+\# (\textit{a} ajoute après, \textit{i} ajoute avant)\\
+\verb!sed '/test/ a LOL' FILE!\\
+\textrightarrow Ceci est un test pour\\
+\textrightarrow LOL\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow test.\\
+\textrightarrow LOL\\
+
+\smallskip
+
+\# Remplacer une ligne si motif trouvé\\
+\verb!sed '/test/c\!\\
+\verb!NOP' FILE!\\
+\textrightarrow NOP\\
+\textrightarrow aider a comprendre le\\
+\textrightarrow fonctionnement de sed.\\
+\textrightarrow Il y aura au moins 3 lignes de\\
+\textrightarrow NOP\\
+
+\smallskip
+
+\# Tester en ligne de commande\\
+\verb!echo "Texte2Texte" | sed -nE '/[^0-9]+[0-9]{1}[^0-9]+/p'! \\
+\textrightarrow Texte2Texte\\
+
+\smallskip
+
+\# Exemples utiles, supprimer lignes vides\\
+\verb!sed '/^$/d'!\\
+\verb|sed '/./!d'|\\
+
+\smallskip
+
+\# Réutilisation de motifs \texttt{\textbackslash( \textbackslash)} et \texttt{\textbackslash1}\\
+\verb!sed -n 's/.*\(test\).*\(pour\).*/\2 \1/p' FILE!\\
+\textrightarrow pour test\\
+
+\medskip
+
+\section{Awk}
+\subsection{awk : variables}
+\begin{tabular}{@{}lll@{}}
+\verb!FS!  & Field Separator & Séparateur de champs/colonnes \\
+\verb!NF!  & Number of Fields & Nombre de champs/colonnes\\
+\verb!RS!  & Record Separator & Séparateur d'enregistrements/lignes\\
+\verb!NR!  & Number of Records & Nombre d'enregistrements/lignes\\
+\verb!OFS! & Output FS & Séparateur de colonnes en sortie\\
+\verb!ORS! & Output RS & Séparateur de lignes en sortie\\
+\end{tabular}
+\begin{tabular}{@{}ll@{}}
+\verb!FILENAME! & Nom du fichier en cours de traitement\\
+\verb!$0! & Ensemble de la ligne sélectionnée\\
+\verb!$1! & Première colonne\\
+\verb!$2! & Deuxième colonne\\
+... & \\
+\verb!$NF! & Dernière colonne\\
+\end{tabular}
+
+\subsection{awk : exemples}
+\# Afficher le nombre de colonnes d'un fichier\\
+\# champs/colonnes séparées par des ':'\\
+\verb!awk -F":" '{print NF}' /etc/passwd!\\
+\textrightarrow 7\\
+\textrightarrow 7\\
+\textrightarrow 7\\
+
+\# Afficher champs/colonnes 1 et 6\\
+\verb!awk -F":" '{print $1,$6}' /etc/passwd!\\
+\textrightarrow root /root\\
+\textrightarrow metalman /home/metalman\\
+
+\# Traitements avant/après\\
+\verb!awk -F":" 'BEGIN { print "Lecture fichier"}!\\
+\verb!{print $1,$6,FILENAME }!\\
+\verb!END {print "Fin lecture"}' /etc/passwd!\\
+\textrightarrow Lecture fichier\\
+\textrightarrow root /root /etc/passwd\\
+\textrightarrow metalman /home/metalman /etc/passwd\\
+\textrightarrow Fin lecture\\
+
+\# Vérifier le contenu de certains champs
+\verb!awk 'BEGIN { print "Verification des logins et UID"; FS=":"}!\\
+\verb|$1 !~ /^[[:alnum:]]+$/ { print "Bad login line "NR" : \n"$0}|\\
+\verb|$3 !~ /^[0-9]+$/ { print "Bad UID line "NR" : \n"$0}|\\
+\verb|END { print "Fin verification"}' /etc/passwd|\\
+\textrightarrow Lecture fichier\\
+\textrightarrow Fin lecture\\
+
+\# (Test du précédent filtre dans un fichier construit)\\
+\# (ligne 1 ok, mais ligne 2 a un problème dans UID)\\
+\verb!echo -e "metal:*:1234\ntest42:*:1b3" > FILE2!
+\verb!awk 'BEGIN { print "Verification des logins et UID"; FS=":"}!\\
+\verb|$1 !~ /^[[:alnum:]]+$/ { print "Bad login line "NR" : \n"$0}|\\
+\verb|$3 !~ /^[0-9]+$/ { print "Bad UID line "NR" : \n"$0}|\\
+\verb!END { print "Fin verification"}' FILE2!\\
+\textrightarrow Verification des logins et UID\\
+\textrightarrow UID incorrect ligne 2 :\\
+\textrightarrow test42:*:1b3\\
+\textrightarrow Fin verification\\
+
+
+
+\end{multicols}
+\end{document}

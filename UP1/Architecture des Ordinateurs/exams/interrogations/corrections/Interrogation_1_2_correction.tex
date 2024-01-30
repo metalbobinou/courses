@@ -1,0 +1,121 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{06 novembre 2017}							%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs ; Déplacement dans le Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{144}, \texttt{-120}}
+
+\bigskip
+144 : \% 1001 0000 (\$ 90)	\qquad	-120 : \% 1000 1000 (\$ 88)
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1110 0110}, \texttt{\%1001 0111}}
+
+\bigskip
+\% 1110 0110 : 230 ou -26	\qquad	\% 1001 0111 : 151 ou -105
+\bigskip
+
+\section{Nommer le langage que comprennent les processeurs, puis son équivalent lisible par un.e humain.e}
+
+\bigskip
+Le langage machine (suite de 0 et 1/binaire) est compris par les processeurs, l'assembleur est son équivalent lisible par un humain.
+\bigskip
+
+\section{Citer les 3 bus d'un processeur, puis les 3 classes générales d'ordinateurs}
+
+\bigskip
+Bus de Données, Bus d'Adresses, Bus de Contrôle \qquad Mainframes, Minis, Micros
+\bigskip
+
+\section{Expliquer le fonctionnement de la pile, puis faites un petit schéma représentant l'appel de la fonction suivante : \texttt{toupper("Aie", str)} où \textit{str} aura pour adresse \texttt{@1440}}
+
+\bigskip
+
+\noindent Une pile ou LIFO (Last In First Out) est une forme de liste d'éléments, où les éléments sont accédés par ordre inverse d'ajout.
+En d'autres termes, le dernier élément ajouté à la pile est le premier que l'on récupèrera.
+La pile s'oppose à la file.
+
+\medskip
+
+\noindent Dans la plupart des processeurs, il existe une pile permettant le passage d'arguments aux fonctions.
+
+\bigskip
+
+\noindent Pour appeler la fonction \textbf{toupper} avec en premier paramètre "Aie" (chaîne de caractères) et str (adresse 1440), deux possibilités existent :
+\begin{itemize}
+\item cas d'un processeur 32 bits : on place la chaîne "aie" dans un mot de 32 bits, et 1440 dans un autre mot, et on les empile \\
+
+\begin{tabular}{| c |}
+\hline
+ \\ \hline
+"a", "i", "e", \textbackslash 0 \\ \hline
+1440 \\ \hline
+... \\ \hline
+... \\ \hline
+\end{tabular}
+
+\item cas général : on alloue "aie" en mémoire, puis on empile son adresse, puis celle de str \\
+
+\begin{tabular}{| c |}
+\hline
+ \\ \hline
+adresse du pointeur vers la chaîne "aie" \\ \hline
+1440 \\ \hline
+... \\ \hline
+... \\ \hline
+\end{tabular}
+
+\end{itemize}
+
+
+
+\end{document}

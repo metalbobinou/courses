@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{13 octobre 2016}								%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Citer 3 classes d'ordinateurs et leurs caractéristiques}
+
+\bigskip
+\noindent 4 classes d'ordinateurs :
+\begin{itemize}
+\item \textbf{Micro-Ordinateurs} (Micros) : Nos ordinateurs classiques à la maison, généralement des PC (Personal Computer), dont l'usage est plutôt orienté graphisme et expérience utilisateur (GUI, IHM/HCI, ...) pour nos besoins quotidiens.
+\item \textbf{Mini-Ordinateurs} (Minis) : Machines souvent mises en réseau ensemble, légèrement plus puissantes que des Micros, et orientées dans le traitement des requêtes émises par des Micros.
+\item \textbf{Mainframes} : Machines les plus puissantes en terme de traitement IO, dédiées pour traiter des quantités énormes de requêtes (typiquement : les transactions bancaires, les réservations de billets, etc.)
+\item \textbf{Super-Ordinateurs} / \textbf{Super-Calculateurs} : Ensemble de Minis reliés pour du calcul scientifique intensif.
+\item [ANNEXE] \textit{"Nano-Ordinateurs" : SmartPhones (Micros dans l'usage), sondes, webcams autonomes, FPGA, RFID, etc. Tout pour l'Internet of Things (IOT).}\\
+\end{itemize}
+
+\section{Quels sont les 3 principaux bus d'un processeur ? Expliquer leurs fonctions}
+
+\bigskip
+\begin{itemize}
+\item \textbf{Bus d'Adresse} : sélectionne une adresse en mémoire, pour y écrire ou lire des données.
+\item \textbf{Bus de Données} : envoie ou récupère des données en dehors du processeur.
+\item \textbf{Bus de Contrôle} : contrôle le processeur lui-même, la synchronisation électronique avec la mémoire, et les périphériques externes avec les \textbf{interruptions}.
+\end{itemize}
+
+\section{Un périphérique peut-il écrire en mémoire ? Quel mécanisme lui permet de communiquer avec le processeur ?}
+
+\bigskip
+\noindent Oui un périphérique peut écrire directement en mémoire sans passer par le processeur (avec des DMA/Direct Memory Access).
+Les interruptions permettent de communiquer avec le processeur.
+
+\section{Comment est chargé un programme en mémoire pour être exécuté ?}
+
+\bigskip
+\noindent Le programme est stocké sur le disque dur sous forme de fichier.
+Grâce au nom logique du programme (par exemple : \textit{/bin/ls}), le système d'exploitation va rechercher la position physique du fichier sur le disque dur.
+Le système d'exploitation va copier ce programme depuis le disque dur vers la mémoire (le processeur va exécuter du code dédié à l'OS qui fera de multiples interruptions entre le disque et le processeur).
+Une fois que le programme est copié en mémoire, le système d'exploitation va sauter à l'adresse de la première instruction du programme (JUMP, CALL, etc.).
+Lorsque le code du système d'exploitation est exécuté, le processeur est en mode superviseur.
+Lorsque le code du programme est exécuté, le processeur est en mode normal/utilisateur.
+
+\section{Dans le contexte d'un processeur, par quels moyens des paramètres peuvent être donnés à une fonction ?}
+
+\bigskip
+\noindent Dans la plupart des processeurs, la pile/stack permet de passer des paramètres à une fonction.
+Chaque argument est empilé l'un après l'autre, la fonction est appelée (CALL), puis le code de la fonction dépile chaque argument nécessaire.
+
+\end{document}

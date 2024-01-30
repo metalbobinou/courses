@@ -1,0 +1,355 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{MetalExam}[2019/03/01 Classe pour generer des exemens, V1.0]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% S'appelle par un \usepackage{MetalExam}
+
+%% Necessite comme fichiers :
+
+% Necessite dans le .tex :
+%\newcommand{\NomAuteur}{Fabrice BOISSIER}
+%\newcommand{\TitreMatiere}{Développement Web - PHP}
+%\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+%\newcommand{\NiveauUniv}{L2}
+%\newcommand{\NumGroupe}{Groupe 1}
+%\newcommand{\AnneeUniv}{2018-2019}
+%\newcommand{\DateExam}{2 avril 2019}
+%\newcommand{\TypeExam}{Devoir sur Table}
+%\newcommand{\TitreExam}{\TitreMatiere}
+%\newcommand{\DureeExam}{3h00}
+%\newcommand{\LoginEtudiant}{2018-2019} % Watermark de protection
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Macros creees dans ce package :
+
+%%%% COMMANDES GENERALES
+
+% \TTBF{texte}
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+
+% \begin{WhiteBox}
+%    texte
+% \end{WhiteBox}
+%% Creer une boite blanche dans laquelle on ecrit des choses
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+
+
+%%%% TITRE
+
+% \MakeExamTitle
+%% La boite titre + le nom et prenom de l'etudiant(e)
+
+% \MakeExamTitleDuree
+%% La boite titre + la duree de l'examen + le nom et prenom de l'etudiant(e)
+
+% \MakeExamTitleSimple
+%% Creer une boite en haut avec les infos utiles
+
+% \MakeStudentName
+%% L'espace pour que l'étudiant(e) mette son nom et prenom
+
+
+%%%% EXERCICES
+
+% \CaseCoche
+%% Definition de \CaseCoche qui produira une case à cocher
+%% usage : \begin{itemize}   \item[\CaseCoche] Le Processeur\\   \item[\CaseCoche] L'Ordonnanceur\\  \end{itemize}
+
+%% DECONSEILLE
+% \CaseCocheTexte{Texte}
+%% Definition de \CaseCocheTexte{*} qui produira une ligne avec une case et un texte
+
+% \mbox{}
+% Page blanche pour écrire (déjà existant)
+% usage :     \newpage    \mbox{}    \newpage
+
+% \LigneReponse
+%% 1 Ligne pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponse    \end{center}
+
+% \LigneReponseCinq
+%% 5 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseCinq    \end{center}
+
+% \LigneReponseDix
+%% 10 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseDix   \medskip   \LigneReponseCinq    \end{center}
+
+% \LigneReponseVingt
+%% 20 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseVingt   \medskip   \LigneReponseCinq    \end{center}
+
+% \LigneReponseQuarante
+%% 40 Lignes pour écrire en suivant un joli format (une page complète)
+%% usage : \begin{center}    \LigneReponseQuarante    \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% extensions
+
+\RequirePackage{lmodern}  % Fonte CM/Computer Modern depassee, usage de Latin Modern
+\RequirePackage{courier}  % ttfamily en bold
+\RequirePackage{lastpage} % Page max connue dans variable \pageref*{LastPage}      ex : \thepage{} / \pageref{LastPage}
+
+%%%%%%% Geometrie de la page
+%%\RequirePackage[top=100pt, bottom=80pt, left=80pt, right=80pt]{geometry}
+%%\RequirePackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+%\RequirePackage[margin=2.5cm,headheight=2cm,headsep=30pt]{geometry}
+\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\RequirePackage{fancyhdr} % En-tetes jolies
+
+\pagestyle{fancy}								% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}			% Ligne au dessus du footer
+\fancyhf{}										% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+\lhead{}		%Gauche Haut
+\chead{}		%Centre Haut
+\rhead{}		%Droite Haut
+\lfoot{}		%Gauche Bas
+\cfoot{}		%Centre Bas
+\rfoot{}		%Droite Bas
+
+%\lhead{\TypeExam}							%Gauche Haut
+%\chead{\NomUniv}							%Centre Haut
+%\rhead{\NumGroupe}							%Droite Haut
+%\lfoot{\DateExam}							%Gauche Bas
+%\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+%\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+\RequirePackage{xcolor} % Definition de couleurs
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+
+\RequirePackage[pdftex,
+            pdfauthor={\NomAuteur},
+            pdftitle={\TitreMatiere},
+            pdfsubject={\TitreExam},
+            pdfkeywords={},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={pdflatex}]{hyperref} % Gestion des liens cliquables + metadata
+
+\hypersetup{
+    colorlinks = true,
+    linkbordercolor = {white},
+	linkcolor = {blue},
+	urlcolor = {blue}
+}
+
+
+\RequirePackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+	% My parameters
+  xleftmargin=2em,
+  framexleftmargin=1.5em,
+	% Regular parameters
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{green},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%\RequirePackage{draftwatermark} % Ajoute une watermark sur toutes les pages
+\RequirePackage[firstpage]{draftwatermark} % Ajoute une watermark, variantes : *none*, [firstpage], [nostamp]
+
+\SetWatermarkText{\MyWaterMark}
+\SetWatermarkScale{1}
+\SetWatermarkColor[gray]{0.97}
+\SetWatermarkAngle{30}
+%
+% AUTRE VERSION DE LA WATERMARK
+%
+%\RequirePackage[printwatermark]{xwatermark}
+%\newwatermark[allpages,color=gray!15,angle=30,scale=4,xpos=0,ypos=0]{\LoginEtudiant}
+
+
+\RequirePackage{etoolbox} % Faire des If Then Else en LaTeX
+%\RequirePackage{forloop} % Faire des boucles For en LaTeX
+%\RequirePackage{pgffor} % ForEach depuis des tableaux {1, 2, 3} en LaTeX
+
+\RequirePackage{graphicx} % Inserer des images
+
+\RequirePackage{tcolorbox} % Faire des boites colorees
+
+\RequirePackage[export]{adjustbox} % Image sur la gauche ou la droite
+
+\author{\NomAuteur}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% commandes personnelles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMANDES GENERALES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \TTBF (texte)
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+% \begin{WhiteBox}
+%    texte
+% \end{WhiteBox}
+%% Creer une boite blanche dans laquelle on ecrit des choses
+\newtcolorbox{WhiteBox}{colback=white!75!white,colframe=white!75!black,halign=center,boxsep=3mm}
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+\newtcolorbox{YellowBox}{colback=yellow!75!white,colframe=yellow!75!black,halign=center,boxsep=3mm}
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+\newtcolorbox{RedBoxTitle}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+
+
+%%%%%%%%%%%
+%% TITRE %%
+%%%%%%%%%%%
+
+%% Creer une boite en haut avec les infos utiles
+\newcommand{\MakeExamTitleSimple}[1]{
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{\TypeExam #1 \AnneeUniv{} - \NiveauUniv{} (\DureeExam) } \\
+          \normalsize\textbf{\TitreExam}
+     \end{center}
+\end{minipage}
+}
+}
+
+%% L'espace pour que l'étudiant(e) mette son nom et prenom
+\newcommand{\MakeStudentName}{
+NOM : \hspace{6.5cm} PR\'ENOM :
+}
+
+%% La boite titre + le nom et prenom de l'etudiant(e)
+\newcommand{\MakeExamTitle}{
+\MakeExamTitleSimple{}
+
+\bigskip
+
+\MakeStudentName
+
+\smallskip
+}
+
+%% La boite titre + la duree de l'examen + le nom et prenom de l'etudiant(e)
+\newcommand{\MakeExamTitleDuree}{
+\MakeExamTitleSimple{ - \DureeExam}
+
+\bigskip
+
+\MakeStudentName
+
+\smallskip
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% EXERCICES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Definition de \CaseCoche qui produira une case à cocher
+\newcommand{\CaseCoche}{\fontsize{20}{20}\selectfont $ \square $}
+
+%% USAGE DECONSEILLE
+% Definition de \CaseCocheTexte{*} qui produira une ligne avec une case et un texte
+\newcommand{\CaseCocheTexte}[1]{{\fontsize{20}{20}\selectfont $ \square $} {\large #1}}
+
+
+% 1 Ligne pour écrire en suivant un joli format
+\newcommand{\LigneReponse}{\line(1,0){450}}
+
+% 5 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseCinq}{\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+}
+
+% 10 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseDix}{\LigneReponseCinq
+
+\medskip
+
+\LigneReponseCinq}
+
+% 20 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseVingt}{\LigneReponseDix
+
+\medskip
+
+\LigneReponseDix}
+
+% 40 Lignes pour écrire en suivant un joli format (une page)
+\newcommand{\LigneReponseQuarante}{\LigneReponseVingt
+
+\medskip
+
+\LigneReponseVingt}

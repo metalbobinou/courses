@@ -1,0 +1,2352 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique et Structures de Données 2}
+\newcommand{\TitreSeance}{Arbres Binaires}
+\newcommand{\NumeroTD}{Structure, Métriques, et Manipulation}
+\newcommand{\DateCours}{Mars 2023}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec une nouvelle structure de données algorithmique abstraite : les \textit{arbres} (en anglais : \textit{trees}).
+En particulier, nous y aborderons les \textit{arbres binaires} (en anglais : \textit{binary trees}), précisément, les \textit{arbres binaires de recherche} ou \textit{ABR} (en anglais : \textit{binary search tree} ou \textit{BST}).
+
+\bigskip
+
+Définition informelle d'une structure de données~\footnote{Wikipedia : \href{https://fr.wikipedia.org/wiki/Structure_de_donn\%C3\%A9es}{Structure de données}} : \og \textit{En informatique, une structure de données est une manière d'organiser les données pour les traiter plus facilement. Une structure de données est une mise en œuvre concrète d'un type abstrait} \fg .
+
+\bigskip
+
+Les arbres, aussi appelés \textit{arborescences}, sont des structures de données dites hiérarchiques : les données sont organisées sur plusieurs niveaux par des relations \textit{parent-enfant}.
+La seule contrainte importante : il n'existe aucun lien pouvant créer de boucle (d'un fils à un autre du même niveau, ou vers un niveau au dessus).
+
+Voici un exemple d'\textit{arbre général} de hauteur 2 :
+
+%\bigskip
+\medskip
+
+\begin{center}
+
+%        child {node {J}}
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {A}
+  child { node {B}
+          child { node {C} }
+          child { node {D} }
+          child { node {E} }
+        }
+  child [missing]
+  child [missing]
+  child [missing]
+  child { node {H}
+          child { node {I} }
+          child { node {K} }
+        }
+  child [missing]
+  child [missing]
+  child [missing]
+  child { node {V}
+          child { node {W} }
+          child { node {X} }
+          child { node {Y} }
+          child { node {Z} }
+        };
+\end{tikzpicture}
+
+\end{center}
+
+%\bigskip
+\smallskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Terminologie}
+
+\subsection{Arbres}
+
+Les arbres sont composés de \textit{nœuds} (les cercles dans le schéma, en anglais \textit{nodes}) et de \textit{liens} (les traits entre les cercles, en anglais \textit{edges}).
+Avant d'aborder la terminologie précise, nous utiliserons une vision simplifiée des termes \textit{racine} et \textit{feuilles} pour mieux comprendre les arbres.
+%Le nœud en haut est appelé \textit{racine} (le nœud en rouge sur le schéma, c'est-à-dire A), et les nœuds tout en bas sont appelés \textit{feuilles} (les nœuds verts, c'est-à-dire C, D, E, I, K, W, X, Y, Z).
+La \textit{racine} est le nœud tout en haut (le nœud en rouge sur le schéma, c'est-à-dire A) duquel descendent tous les autres, et les \textit{feuilles} sont les nœuds tout en bas (les nœuds verts, c'est-à-dire C, D, E, I, K, W, X, Y, Z).
+
+\bigskip
+
+\begin{center}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {A}
+  child { node {B}
+          child { node [leaf] {C} }
+          child { node [leaf] {D} }
+          child { node [leaf] {E} }
+        }
+  child [missing]
+  child [missing]
+  child [missing]
+  child { node {H}
+          child { node [leaf] {I} }
+          child { node [leaf] {K} }
+        }
+  child [missing]
+  child [missing]
+  child [missing]
+  child { node {V}
+          child { node [leaf] {W} }
+          child { node [leaf] {X} }
+          child { node [leaf] {Y} }
+          child { node [leaf] {Z} }
+        };
+\end{tikzpicture}
+
+\end{center}
+
+\bigskip
+
+Vous avez très probablement déjà manipulé l'arborescence UNIX où les fichiers sont donc les feuilles d'un arbre dont la racine se nomme \og / \fg{} .
+Dans l'arborescence Windows, chaque disque dur est présenté comme un arbre dictinct avec sa propre racine, et où les fichiers sont également des feuilles.
+
+\bigskip
+
+%On remarque que la structure se répète à chaque \textit{niveau} : chaque \textit{nœud} dispose de liens vers d'autres nœuds.
+Les arbres sont également considérés comme des structures de données \textit{récursives} dans le sens où la structure se répète plusieurs fois en se contenant elle-même.
+En effet, on peut observer une répétition de la structure d'arbre : l'arbre que l'on manipule est simplement un nœud servant de racine auquel d'éventuels liens renvoient vers des \textit{sous-arbres}, eux-mêmes composés d'une racine chacun et d'éventuels sous-arbres.
+
+%\bigskip
+
+\begin{center}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+% itria/.style = {draw, dashed, shape border uses incircle, isosceles triangle, shape border rotate=90, yshift=-1.45cm},
+% triangle/.style={isosceles triangle, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0, yshift=-1.34cm},
+\begin{tikzpicture}[sibling distance=5cm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {A}
+  child { child [missing] {}
+          { node [triangle] {B} }
+        }
+  child { child [missing] {}
+          { node [triangle] {H} }
+        }
+  child { child [missing] {}
+          { node [triangle] {V} }
+        };
+\end{tikzpicture}
+
+
+%\bigskip
+\medskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.33\textwidth}
+
+\begin{tikzpicture}[sibling distance=1.85cm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {B}
+  child { child [missing] {}
+          { node [triangle] {C} }
+        }
+  child { child [missing] {}
+          { node [triangle] {D} }
+        }
+  child { child [missing] {}
+          { node [triangle] {E} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.22\textwidth}
+
+\begin{tikzpicture}[sibling distance=1.85cm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {H}
+  child { child [missing] {}
+          { node [triangle] {I} }
+        }
+  child { child [missing] {}
+          { node [triangle] {K} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.43\textwidth}
+
+\begin{tikzpicture}[sibling distance=1.85cm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {V}
+  child { child [missing] {}
+          { node [triangle] {W} }
+        }
+  child { child [missing] {}
+          { node [triangle] {X} }
+        }
+  child { child [missing] {}
+          { node [triangle] {Y} }
+        }
+  child { child [missing] {}
+          { node [triangle] {Z} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\end{center}
+
+Cette vision récursive des arbres permet de voir les caractéristiques essentielles pour former la structure : il faut un nœud racine, et des liens vers des sous-arbres appelés \textit{fils} (en anglais : \textit{children)}.
+La racine d'un nœud est également appelée \textit{père} (en anglais : \textit{parent}).
+Chaque nœud a au plus un père (pour éviter de créer des boucles).
+
+La quantité de fils que chaque nœud peut porter au maximum s'appelle \textit{l'arité} (ou le \textit{degré}) : un arbre \textit{N-aire} (de \textit{degré N}) a des nœuds pouvant contenir jusqu'à $ N $ fils.
+Vous pouvez trouver dans la littérature des mentions d'octrees dans le cas d'un arbre 8-aire/de degré 8 où un nœud peut avoir jusqu'à 8 fils, ou d'autres types d'arbres (quadtrees, arbres ternaires, ...).
+%
+%Dans le cadre de ce cours, nous nous concentrerons sur les \textit{arbres binaires} (en anglais : \textit{binary trees}), c'est-à-dire les arbres disposant au maximum de 2 fils.
+%Vous pourrez néanmoins trouver dans la littérature des mentions d'octrees dans le cas où un nœud peut avoir jusqu'à 8 fils, ou d'autres types d'arbres.
+
+%\medskip
+
+\subsection{Arbres Binaires}
+
+Dans le cadre de ce cours, nous nous concentrerons sur les \textit{arbres binaires} (en anglais : \textit{binary trees}), c'est-à-dire les arbres d'arité 2 (ou de degré 2), donc disposant au maximum de 2 fils par nœud.
+%
+Ainsi, nous nous intéresserons en particulier aux arbres de cette forme :
+
+\begin{center}
+\begin{tikzpicture}[sibling distance=1.85cm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=10mm, minimum width=15mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {r}
+  child { child [missing] {}
+          { node [triangle] {G} }
+        }
+  child { child [missing] {}
+          { node [triangle] {D} }
+        };
+\end{tikzpicture}
+\end{center}
+
+%\medskip
+
+Les arbres binaires sont donc formés d'une racine, et de nœuds comportant 2, 1, ou 0 fils.
+On utilise couramment les dénominations \textit{fils gauche} et \textit{fils droit} pour parler de chacun des fils d'un nœud.
+
+\medskip
+
+Pour préciser la terminologie précédente, un arbre est composé de :
+\begin{itemize}
+\item \textit{feuilles}, c'est-à-dire des nœuds sans aucun fils
+\item \textit{nœuds internes}, c'est-à-dire des nœuds avec un ou plusieurs fils
+\end{itemize}
+
+La racine devenant ainsi un cas spécial de nœud interne n'ayant aucun parent.
+
+
+\pagebreak
+
+
+\begin{figure}[ht!]
+\centering{
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [root] {42}
+  child { node [internal] {21}
+          child { node [internal] {8}
+                  child { node [leaf] {2} }
+                  child { node [leaf] {16} }
+                }
+          child { node [leaf] {24} }
+        }
+  child { node [internal] {64}
+          child { node [internal] {48}
+                  child [missing] {}
+                  child { node [leaf] {56} }
+                }
+          child { node [leaf] {96} }
+        };
+\end{tikzpicture}
+}
+\caption{Fig.\thefigure : Arbre binaire}
+\label{fig:example1-binary-tree-1}
+\end{figure}
+
+%\medskip
+\vspace*{-0.35cm} %%%% ESTHETIQUE
+
+Dans l'exemple Fig.\ref{fig:example1-binary-tree-1}, on trouvera donc en nœuds internes : 8, 21, 42, 48, 64, sachant que 42 est également la racine, et on trouvera en feuilles : 2, 16, 24, 56, 96.
+
+Toujours dans cet exemple, vous constaterez que tous les nœuds ne sont pas au même \textit{niveau}.
+Cela ne retire pas à l'arbre sa qualité d'\textit{arbre binaire} : chacun de ses nœuds a \textit{au plus} 2 fils.
+
+%\medskip
+
+\subsubsection{Profondeur}
+
+La \textit{profondeur} (en anglais : \textit{depth}) d'un nœud est le niveau auquel il se trouve (profondeur = niveau).
+Plus précisément, il s'agit de la différence entre le niveau du nœud et celui de la racine.
+%Par convention, la racine se trouve au niveau $ 0 $.
+La racine se trouve généralement au niveau $ 0 $ (mais certaines conventions peuvent indiquer $ 1 $).
+%La racine se trouve généralement au niveau $ 0 $ \footnote{\label{note1-hauteur-arbre-vide} Certaines conventions mettent la racine en profondeur 1, et donc donnent à un arbre vide une hauteur de 1.}.
+
+%Ainsi, la profondeur de 42 est $ 0 $, la profondeur de 21 et 64 est $ 1 $, la profondeur de 8, 24, 48, 96 est $ 2 $, la profondeur de 2, 16, 56, est $ 3 $.
+Ainsi, la profondeur de 42 est $ 0 $, la profondeur de 64 est $ 1 $, la profondeur de 96 est $ 2 $, etc.
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none] }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24} }
+        }
+  child { node {64}
+          child { node {48}
+                  child [missing] {}
+                  child { node {56} }
+                }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  myhide/.style = {circle, gray, draw=gray},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child { node [dashed, gray] {21} edge from parent[dashed, gray]
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24} }
+        }
+  child { node {64}
+          child { node [dashed, gray] {48} edge from parent[dashed, gray]
+                  child [missing] {}
+                  child { node {56} }
+                }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none] }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+%\medskip
+\vspace*{-0.35cm} %%% ESTHETIQUE
+
+
+\subsubsection{Hauteur}
+
+La \textit{hauteur} (en anglais : \textit{height}) d'un arbre est le niveau du plus profond de ses nœuds.
+%Toujours par convention, si un arbre ne contient qu'un seul nœud (la racine), alors il aura une hauteur de $ 0 $.
+%Si un arbre ne contient qu'un seul nœud (la racine), alors il aura une hauteur de $ 0 $ (certaines conventions peuvent indiquer $ 1 $).
+%Si un arbre ne contient qu'un seul nœud (la racine), alors il aura une hauteur de $ 0 $ \footnotemark[\ref{note1-hauteur-arbre-vide}].
+Un arbre ne contenant qu'un seul nœud (la racine) a une hauteur de $ 0 $ (ou $ 1 $ dans certaines conventions).
+
+
+Ainsi, la hauteur de l'arbre exemple est de $ 3 $.
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none] }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child {node {2} }
+                  child {node {16} }
+                }
+          child { node {24} }
+        }
+  child { node {64}
+          child { node {48}
+                  child [missing] {}
+                  child { node {56} }
+                }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  myhide/.style = {circle, gray, draw=gray},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node [dashed, gray] {16} edge from parent[dashed, gray] }
+                }
+          child { node [dashed, gray] {24} edge from parent[dashed, gray] }
+        }
+  child { node [dashed, gray] {64} edge from parent[dashed, gray]
+          child { node {48}
+                  child [missing] {}
+                  child { node {56} }
+               }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+%\medskip
+
+
+\subsubsection{Taille}
+
+La \textit{taille} (en anglais : \textit{size}) d'un arbre est le nombre de nœuds qu'il possède.
+
+Ainsi, la taille de l'arbre est de $ 10 $.
+
+\medskip
+
+\begin{figure}[ht!]
+\centering{
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node [label=below:{\footnotesize \textit{1}}] {42}
+  child { node [label=below:{\footnotesize \textit{2}}] {21}
+          child { node [label=below:{\footnotesize \textit{4}}] {8}
+                  child { node [label=below:{\footnotesize \textit{8}}] {2} }
+                  child { node [label=below:{\footnotesize \textit{9}}] {16} }
+                }
+          child {node [label=below:{\footnotesize \textit{5}}] {24}}
+        }
+  child { node [label=below:{\footnotesize \textit{3}}] {64}
+          child { node [label=below:{\footnotesize \textit{6}}] {48}
+                  child [missing] {}
+                  child {node [label=below:{\footnotesize \textit{10}}] {56} }
+                }
+          child { node [label=below:{\footnotesize \textit{7}}] {96} }
+        };
+\end{tikzpicture}
+}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%
+
+%\pagebreak
+
+\subsection{Résumé}
+
+\bigskip
+
+\begin{itemize}
+\item Arbre/Arborescence (tree) : structure de données récursive organisée comme une hiérarchie, parfois aussi appelée \textit{arbre enraciné}
+\item Nœud (node) : élément stocké dans la structure
+\item Lien (edge) : lien de parenté entre deux nœuds
+
+\bigskip
+
+%\item Père/Parent (parent) : nœud précédent (au dessus)
+%\item Fils/Enfant(s) (children) : nœud(s) suivant(s) (en dessous)
+%\item Arité/Degré (arity/degree) : nombre maximum de fils que les nœuds peuvent avoir dans l'arbre
+\item Père/Parent (parent) : nœud hiérarchiquement au dessus
+\item Fils/Enfant(s) (children) : nœud(s) hiérarchiquement en dessous
+\item Arité/Degré (arity/degree) : nombre maximum de fils que chaque nœud peut avoir dans l'arbre
+
+\bigskip
+
+\item Feuille (leaf) : nœud sans aucun fils
+\item Nœud interne (internal node) : nœud avec au moins un fils
+\item Racine (root) : nœud sans parent \textit{(peut être une feuille si l'arbre n'a qu'un seul élément)}
+
+\bigskip
+
+%\item Profondeur/Niveau (depth/level) d'un nœud : nombre de liens depuis la racine \textit{(la racine étant généralement au niveau 0)}
+\item Profondeur/Niveau (depth/level) d'un nœud : différence entre le niveau d'un nœud et le niveau de la racine \textit{(la racine étant généralement au niveau 0)}, ou plus simplement, le nombre de liens depuis la racine
+\item Hauteur (height) de l'arbre : niveau du nœud le plus profond de l'arbre
+\item Taille (size) de l'arbre : nombre de nœuds dans l'arbre
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Typologie d'Arbres Binaires}
+
+\bigskip
+
+Les arbres binaires sont donc des arbres de degré 2, c'est-à-dire où chaque nœud a au plus 2 fils.
+
+Il existe plusieurs cas spécifiques d'arbres binaires que nous allons voir avec des illustrations.
+
+
+\medskip
+
+
+\subsection{Arbre binaire strict - Arbre binaire localement complet}
+
+Un \textit{arbre binaire strict} ou \textit{arbre binaire localement complet} (en anglais : \textit{full binary tree}, \textit{proper binary tree}, \textit{plane binary tree}, ou encore \textit{strict binary tree}) désignent un arbre dont tous les nœuds ont exactement 0 ou 2 fils.
+
+Chaque nœud de l'arbre est effectivement complet dans le sens où il dispose de 2 fils au maximum, ou aucun, mais toutes les feuilles ne sont pas nécessairement au même niveau.
+Aucun nœud ne dispose que d'un seul fils.
+
+Avec un point de vue récursif, on se rend compte qu'un arbre binaire localement complet dispose donc de sous-arbres ayant exclusivement 2 ou aucun fils.
+
+\begin{figure}[ht!]
+\centering{
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                 child { node {2} }
+                 child { node {16} }
+                }
+          child { node {24}}
+         }
+  child { node {64}
+          child { node {48}
+                  child { node {46} }
+                  child { node {56}
+                          child { node {50} }
+                          child { node {60} }
+                        }
+                }
+          child { node {96} }
+        };
+\end{tikzpicture}
+}
+\caption{Fig.\thefigure : Arbre binaire strict / Arbre binaire localement complet}
+\label{fig:example2-full-binary-tree}
+\end{figure}
+
+
+\medskip
+
+\subsection{Arbre binaire parfait}
+
+Un \textit{arbre binaire parfait} (en anglais : \textit{perfect binary tree}) désigne un arbre dont tous les nœuds ont exactement 0 ou 2 fils, et où toutes les feuilles sont au même niveau.
+
+Il s'agit donc d'un arbre binaire localement complet, mais, avec toutes les feuilles au même niveau.
+Une autre façon d'exprimer ce cas serait que tous les niveaux de l'arbre sont remplis.
+
+\begin{figure}[ht!]
+\centering{
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8} }
+          child { node {24} }
+         }
+  child { node {64}
+          child { node {48} }
+          child { node {96} }
+        };
+\end{tikzpicture}
+}
+\caption{Fig.\thefigure : Arbre binaire parfait}
+\label{fig:example3-perfect-binary-tree}
+\end{figure}
+
+
+On notera que chaque niveau de l'arbre dispose au maximum de $ 2^{niveau} $ nœuds.
+Ainsi, au niveau 0 seule la racine peut exister, au niveau 1 il y aura les 2 fils de la racine, et ainsi de suite.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24}
+                  child { node {22} }
+                  child { node {32} }
+                }
+         }
+  child { node {64}
+          child { node {48}
+                  child { node {46} }
+                  child { node {56} }
+                }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {$ 2^{0} = 1 $}
+  child { node [draw=none] {$ 2^{1} = 2 $} edge from parent[draw=none]
+          child { node [draw=none] {$ 2^{2} = 4 $} edge from parent[draw=none]
+                  child { node [draw=none] {$ 2^{3} = 8 $} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+\stepcounter{figure}
+\caption{Fig.\thefigure : Nombre de nœuds par niveau = $ 2^{niveau} $}
+\label{fig:example3-nodes-per-level}
+\end{table}
+
+
+\medskip
+
+\subsection{Arbre binaire (presque) complet}
+
+Un \textit{arbre binaire complet} ou \textit{arbre binaire presque complet} (en anglais : \textit{complete binary tree} ou \textit{almost complete binary tree}) désigne un arbre parfait dont le dernier niveau est éventuellement partiellement rempli, mais, dont les feuilles sont alignées à gauche.
+
+
+Par définition, un arbre binaire parfait est donc un arbre binaire presque complet.
+
+Il est important de noter la différence avec les abres binaires stricts/localement complets : ici, tous les niveaux sont remplis sauf \textit{éventuellement} le dernier, et on peut n'avoir qu'un seul fils à un nœud de l'avant dernier niveau.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24}
+                  child { node {22} }
+                }
+         }
+  child { node {64}
+          child { node {48} }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child { node {16} }
+                }
+          child { node {24}
+                  child { node {22} }
+                  child { node {32} }
+                }
+         }
+  child { node {64}
+          child { node {48}
+                  child { node {46} }
+                  child { node {56} }
+                }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\stepcounter{figure}
+\caption{Fig.\thefigure : Arbres binaires presque complets}
+\label{fig:example3-almost-complete-binary-trees}
+\end{table}
+
+
+\medskip
+
+\subsection{Arbre filiforme}
+
+Un \textit{arbre filiforme} ou \textit{arbre dégénéré} (en anglais : \textit{degenerated tree} ou \textit{pathological tree}) désigne un arbre dont tous les nœuds sont des \textit{points simples} (c'est-à-dire que chaque nœud a au plus 1 seul fils).
+De ce fait, la taille d'un arbre filiforme est exactement sa hauteur + 1.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child [missing] {}
+          child { node {24}
+                  child { node {22} }
+                  child [missing] {}
+                }
+         }
+  child [missing] {};
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child [missing] {}
+  child { node {64}
+          child [missing] {}
+          child { node {96}
+                  child [missing] {}
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\stepcounter{figure}
+\caption{Fig.\thefigure : Arbres filiformes}
+\label{fig:example4-degenerated-trees}
+\end{table}
+
+
+
+\medskip
+
+\subsection{Peignes}
+
+Les \textit{peignes} (en anglais : \textit{skewed trees}) désignent deux cas proches des arbres filiformes où l'arbre n'est développé que d'un seul côté jusqu'aux feuilles, mais tous les nœuds disposent de 2 fils.
+
+L'arbre est donc localement complet, mais n'est développé en profondeur que sur sa gauche ou sa droite.
+
+Le \textit{peigne droit} (en anglais : \textit{right skewed tree}) atteint sa profondeur maximale sur les fils droits uniquement, tout en ayant un fils gauche à chaque niveau.
+Le \textit{peigne gauche} (en anglais : \textit{left skewed tree}) est l'équivalent symétrique à gauche.
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+
+\begin{center}
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+		  child { node {8}
+                  child { node {2}
+                          child { node {1} }
+                          child { node {3} }
+                        }
+                  child { node {16} }
+                }
+          child { node {24} }
+        }
+  child { node {64} }
+  ;
+\end{tikzpicture}
+%\stepcounter{figure}
+\captionof{figure}{Fig.\thefigure : Peigne gauche}
+%\caption{Fig.\thefigure : Peigne gauche}
+%\label{fig:example5-left-skewed-tree}
+%\end{figure}
+\end{center}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+
+\begin{center}
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21} }
+  child { node {64}
+          child { node {48} }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98}
+                          child { node {97} }
+                          child { node {99} }
+                        }
+                }
+        };
+\end{tikzpicture}
+%\stepcounter{figure}
+\captionof{figure}{Fig.\thefigure : Peigne droit}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+\end{center}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+
+%\begin{tikzpicture}[
+%  every node/.style = {minimum width = 2em, draw, circle},
+%  ]
+%  \node {42}
+%  child { edge from parent[draw = none] }
+%  child { node {64}
+%          child { edge from parent[draw = none] }
+%          child { node {96}
+%                  child { edge from parent[draw = none] }
+%                  child { node {98}
+%                          child { edge from parent[draw = none] }
+%                          child  {node {20} }
+%                        }
+%                }
+%        };
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}[
+%  every node/.style = {minimum width = 2em, draw, circle},
+%  ]
+%  \node {20}
+%  child { node {10}
+%		   child { node {7}
+%                  child { node {3}
+%                          child { node {2} }
+%                          child { edge from parent[draw = none] }
+%                        }
+%                  child { edge from parent[draw = none] }
+%                }
+%          child { edge from parent[draw = none] }
+%        }
+%  child { edge from parent[draw = none] }
+%  ;
+%\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Implémentations des Arbres Binaires}
+
+\bigskip
+
+\subsection{Tableaux}
+
+La représentation sous forme de tableaux s'appuie sur la numérotation hiérarchique des nœuds, et donc des puissances de 2 pour représenter les niveaux.
+Ainsi la position de chaque nœud va permettre de déduire sa profondeur, et donc le numéro de la case où il se trouve dans le tableau.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{1}}] {A}
+  child { node [label=below:{\footnotesize \textit{2}}] {B}
+          child { node [label=below:{\footnotesize \textit{4}}] {D}
+                  child { node [label=below:{\footnotesize \textit{8}}] {H} }
+                  child { node [label=below:{\footnotesize \textit{9}}] {I} }
+                }
+          child { node [label=below:{\footnotesize \textit{5}}] {E}
+                  child { node [label=below:{\footnotesize \textit{10}}] {J} }
+                  child { node [label=below:{\footnotesize \textit{11}}] {K} }
+                }
+         }
+  child { node [label=below:{\footnotesize \textit{3}}] {C}
+          child { node [label=below:{\footnotesize \textit{6}}] {F}
+                  child { node [label=below:{\footnotesize \textit{12}}] {L} }
+                  child { node [label=below:{\footnotesize \textit{13}}] {M} }
+                }
+          child { node [label=below:{\footnotesize \textit{7}}] {G}
+                  child { node [label=below:{\footnotesize \textit{14}}] {N} }
+                  child { node [label=below:{\footnotesize \textit{15}}] {O} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {$ 2^{0} = 1 $}
+  child { node [draw=none] {$ 2^{1} = 2 $} edge from parent[draw=none]
+          child { node [draw=none] {$ 2^{2} = 4 $} edge from parent[draw=none]
+                  child { node [draw=none] {$ 2^{3} = 8 $} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+\end{table}
+
+\begin{center}
+\begin{tabular}{ r c cc cccc cccccccc }
+position   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+\cline{2-16}
+valeur     & \multicolumn{1}{|c|}{A} &
+\multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} &
+\multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} &
+  \multicolumn{1}{c|}{F} & \multicolumn{1}{c|}{G} &
+\multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{I} & \multicolumn{1}{c|}{J} & \multicolumn{1}{c|}{K} &
+  \multicolumn{1}{c|}{L} & \multicolumn{1}{c|}{M} & \multicolumn{1}{c|}{N} & \multicolumn{1}{c|}{O} \\
+\cline{2-16}
+profondeur & \textit{0} &
+\textit{1} & \textit{1} &
+\textit{2} & \textit{2} &
+  \textit{2} & \textit{2} &
+\textit{3} & \textit{3} & \textit{3} & \textit{3} &
+  \textit{3} & \textit{3} & \textit{3} & \textit{3} \\
+\end{tabular}
+\end{center}
+
+%\medskip
+\smallskip
+
+Une façon plus intuitive est de lire ce problème dans l'autre sens : lorsqu'un arbre est représenté sous la forme d'un tableau, on retrouve la position du nœud dans l'arbre à partir du numéro de sa case et des puissances de 2 (et donc du logarithme base 2).
+
+\begin{itemize}
+\item Le niveau 0 contient 1 nœud (la position 1, donc case 0)
+\item Le niveau 1 contient 2 nœuds (positions 2 3, cases 1 2)
+\item Le niveau 2 contient 4 nœuds (positions 4 5 6 7, cases 3 4 5 6)
+\item Le niveau 3 contient 8 nœuds (positions 8 à 15, cases 7 à 14)
+%\item ...
+\end{itemize}
+
+La profondeur se retrouve avec un logarithme base 2 : $ \text{niveau}(N) = \lfloor log_{2}(\text{position-hiérarchique}(N)) \rfloor $
+
+%Le nœud en position 11 se trouve donc au niveau 3 (car $8 \leq 11 < 16 \Leftrightarrow 2^{3} \leq 11 < 2^{4} $).
+Le nœud en position 11 se trouve niveau 3 : $ \; log_{2}(11) = 3,45943 \; \Rightarrow \; \lfloor log_{2}(11) \rfloor = 3 \; \Rightarrow \; 2^{3} \leq 11 < 2^{4} $
+
+Il est le $4^{e}$ nœud du niveau (car on le décale de $11 - 2^{3} = 3$ depuis le premier élément du niveau).
+
+\medskip
+
+%Encore plus intuitivement :
+%\begin{enumerate}
+%\item on ajoute 1 au numéro de case pour obtenir la position hiérarchique
+%\item on cherche la puissance de 2 inférieure ou égale à la position hiérarchique pour trouver le niveau
+%\item on soustrait la position hiérarchique à la puissance de 2 choisie pour trouver le décalage
+%\end{enumerate}
+%
+%L'élément \textit{F} est dans la case 5 du tableau :
+%\begin{enumerate}
+%\item $ 5 + 1 = 6 $ position hiérarchique : 6
+%\item 4 est la puissance de 2 la plus proche de 6, $ 2^{2} = 4 $ niveau : 2
+%\item $ 6 - 2^{2} = 6 - 4 = 2 $ décalage : 2
+%\item \textit{F} est donc au niveau 2, et il se trouve 2 places après le premier nœud, donc en $3^{e}$ position
+%\end{enumerate}
+
+Encore plus intuitivement, il suffit de diviser par 2 le numéro de la position hiérarchique pour obtenir la position du nœud père.
+%Une position paire implique qu'il s'agit du fils gauche, et une position impaire qu'il s'agit du fils droit.
+%
+Pour un nœud en position hiérarchique \textit{i} :
+\begin{itemize}
+\item son fils gauche est en position $ 2i $
+\item son fils droit est en position $ 2i + 1 $
+\item son père est en position $ \lfloor i \div 2 \rfloor $ \footnotesize{\textit{(partie entière par défaut de la division par 2)}}
+\end{itemize}
+
+\textit{Attention : les numéros des cases du tableau démarrent à 0 et non pas 1, pensez au décalage de 1 entre le numéro de la case et la position hiérarchique}
+
+\bigskip
+
+Par exemple pour \textit{F} :
+\begin{enumerate}[label=\alph*)]
+\item \textit{F} est dans la case 5 du tableau, donc en position 6 (fils gauche)
+\item $ \lfloor 6 \div 2 \rfloor = 3 $ le père de \textit{F} est en position 3 (case 2)
+\item $ \lfloor 3 \div 2 \rfloor = 1 $ le grand-père de \textit{F} est en position 1 : la racine (case 0)
+\item le fils gauche de F est en position $ 12 $ (case 11), et son fils droit en position $ 13 $ (case 12)
+\end{enumerate}
+
+\bigskip
+
+Comme vous le constatez, il s'agit d'une représentation idéale pour les arbres parfaits : comme ceux-ci ont tous leurs nœuds utilisés, le tableau est plein.
+Cependant, dans le cas où un arbre est incomplet, il est nécessaire de choisir une valeur spéciale qui n'est pas utilisée par les éléments stockés (par exemple, si on travaille avec des entiers naturels, on peut utiliser des valeurs négatives pour indiquer que le nœud n'existe pas).
+
+\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{1}}] {A}
+  child { node [label=below:{\footnotesize \textit{2}}] {B}
+          child { node [label=below:{\footnotesize \textit{4}}] {D}
+                  child [missing] {}
+                  child { node [label=below:{\footnotesize \textit{9}}] {I} }
+                }
+          child { node [label=below:{\footnotesize \textit{5}}] {E} }
+         }
+  child { node [label=below:{\footnotesize \textit{3}}] {C}
+          child [missing] {}
+          child { node [label=below:{\footnotesize \textit{7}}] {G}
+                  child [missing] {}
+                  child { node [label=below:{\footnotesize \textit{15}}] {O} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {$ 2^{0} = 1 $}
+  child { node [draw=none] {$ 2^{1} = 2 $} edge from parent[draw=none]
+          child { node [draw=none] {$ 2^{2} = 4 $} edge from parent[draw=none]
+                  child { node [draw=none] {$ 2^{3} = 8 $} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+\end{table}
+
+\begin{center}
+\begin{tabular}{ r c cc cccc cccccccc }
+position   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+\cline{2-16}
+valeur     & \multicolumn{1}{|c|}{A} &
+\multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} &
+\multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} &
+  \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{G} &
+\multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{I} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} &
+  \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{O} \\
+\cline{2-16}
+profondeur & \textit{0} &
+\textit{1} & \textit{1} &
+\textit{2} & \textit{2} &
+  \textit{2} & \textit{2} &
+\textit{3} & \textit{3} & \textit{3} & \textit{3} &
+  \textit{3} & \textit{3} & \textit{3} & \textit{3} \\
+\end{tabular}
+\end{center}
+
+\medskip
+
+Dans ce cas, on se rend compte que la perte d'espace n'est pas négligeable, et peut devenir pire si l'arbre est relativement profond : l'arbre est de taille 8, mais il consomme tout de même 15 cases en mémoire.
+
+\medskip
+
+Dans le cas d'un arbre filiforme, étant donné qu'un seul fils est utilisé à chaque fois, la perte est extrême : une seule case par niveau n'est utilisée en pratique (pour un arbre de hauteur 3, on aura donc seulement 4 cases utilisées sur 15).
+
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.05\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {0}
+  child { node [draw=none] {1} edge from parent[draw=none]
+          child { node [draw=none] {2} edge from parent[draw=none]
+                  child { node [draw=none] {3} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{1}}] {A}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [label=below:{\footnotesize \textit{3}}] {C}
+          child [missing] {}
+          child { node [label=below:{\footnotesize \textit{7}}] {G}
+                  child [missing] {}
+                  child { node [label=below:{\footnotesize \textit{15}}] {O} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.10\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  every node/.style = {draw=none, anchor=north},
+  ]
+  \node [draw=none] {$ 2^{0} = 1 $}
+  child { node [draw=none] {$ 2^{1} = 2 $} edge from parent[draw=none]
+          child { node [draw=none] {$ 2^{2} = 4 $} edge from parent[draw=none]
+                  child { node [draw=none] {$ 2^{3} = 8 $} edge from parent[draw=none]
+                        }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.0\textwidth}
+  \end{minipage}
+\end{table}
+
+\begin{center}
+\begin{tabular}{ r c cc cccc cccccccc }
+position   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+\cline{2-16}
+valeur     & \multicolumn{1}{|c|}{A} &
+\multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{C} &
+\multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} &
+  \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{G} &
+\multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} &
+  \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{\footnotesize \textit{-1}} & \multicolumn{1}{c|}{O} \\
+\cline{2-16}
+profondeur & \textit{0} &
+\textit{1} & \textit{1} &
+\textit{2} & \textit{2} &
+  \textit{2} & \textit{2} &
+\textit{3} & \textit{3} & \textit{3} & \textit{3} &
+  \textit{3} & \textit{3} & \textit{3} & \textit{3} \\
+\end{tabular}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bigskip
+\pagebreak
+
+\subsection{Pointeurs}
+
+La représentation la plus commune des arbres binaires s'appuie sur les pointeurs en utilisant une structure copiant le modèle récursif :
+
+\medskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={structure d'arbre binaire}]
+\begin{lstlisting}[frame=single]
+struct node
+{
+  int         key;
+  struct node *left_child;
+  struct node *right_child;
+};
+\end{lstlisting}
+
+%\vspace*{-0.5cm}
+
+On définit un arbre comme étant un nœud contenant une \textit{clé} (l'élément à stocker), et des pointeurs vers le sous-arbre gauche et le sous-arbre droit (eux-mêmes des nœuds).
+
+\bigskip
+
+Vous pouvez également tout à fait définir un type \textit{node} comme conteneur concret, et un type plus abstrait \textit{bin\_tree} pointant vers un nœud qui servira de racine et pouvant éventuellement contenir des informations utiles.
+
+\medskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={structure d'arbre binaire}]
+\begin{lstlisting}[frame=single]
+struct node
+{
+  int         key;
+  struct node *left_child;
+  struct node *right_child;
+};
+
+struct bin_tree
+{
+  struct node *root;
+};
+\end{lstlisting}
+
+%\vspace*{-0.5cm}
+
+
+%Dans ce modèle, directement issu de la vision récursive, il existe donc 4 cas (+ 1 pour l'arbre vide) :
+Il existe généralement deux façons de traiter les arbres binaires avec le point de vue récursif : une vision où l'on traite 2 cas (un arbre vide, ou un arbre disposant de deux sous-arbres), et une vision avec plusieurs cas plus explicites (racine vide, nœud sans fils, nœud avec fils gauche, nœud avec fils droit, nœud avec deux fils).
+Lorsque vous écrirez des algorithmes sur les arbres, vous devrez vous appuyer sur un de ces points de vue.
+
+\medskip
+
+Dans la première vision, il s'agit donc de traiter deux cas typiques des traitements récursifs :
+
+\begin{enumerate}
+\item l'arbre courant est \textit{NULL}
+\item l'arbre courant existe et dispose donc de liens vers des sous-arbres (pouvant être \textit{NULL} ou pas)
+\end{enumerate}
+
+%%%%%%%%% 2 cas : arbre vide, arbre avec 2 fils
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] {Ø}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+
+
+\end{tikzpicture}
+}
+
+\bigskip
+\bigskip
+
+\centering{Arbre vide}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Arbre non-vide}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+%Dans la deuxième vision, il s'agit de traiter plusieurs cas, dont certains sont récursifs.
+%
+%Plus particulièrement, on va traiter l'arbre avec un peu plus de recul en observant le nœud courant, et l'état de ses éventuels fils :
+
+Dans la deuxième vision, il s'agit de traiter plusieurs cas avec un certain recul.
+On teste d'abord si l'arbre est vide, et ensuite seulement, on observe l'état du nœud courant et de ses éventuels fils pour y descendre par la suite :
+
+\begin{enumerate}
+\item \textbf{Racine vide} : comme dans les traitements avec une fonction chapeau, si l'arbre est totalement vide, on a probablement rien à faire (donc on traite ce cas avant tous les autres)
+\item \textbf{Nœud sans fils} : le nœud courant est une feuille, il y a donc peut être un traitement particulier pour les nœuds externes
+\item \textbf{Nœud avec un fils gauche} : le nœud courant dispose d'un fils gauche (nœud interne)
+\item \textbf{Nœud avec un fils droit} : le nœud courant dispose d'un fils droit (nœud interne)
+\item \textbf{Nœud avec fils gauche et droit} : le nœud courant dispose de ses deux fils (parfois ce cas est induit par les deux précédents, parfois il s'agit d'un cas à traiter en priorité)
+\end{enumerate}
+
+\textit{Attention : tous ces cas n'ont pas à être énumérés dans tous les algorithmes s'appuyant sur cette vision !
+Il s'agit seulement de tous les cas possibles, mais on peut par exemple avoir des traitements exclusifs aux nœuds ne disposant que d'un seul fils, ou au contraire à ceux disposant de deux fils.}
+
+\bigskip
+
+%%%%%%%%%%%%%%%% 5 cas : racine vide, noeud sans fils, noeud avec fils gauche, noeud avec fils droit, noeud avec fils gauche et droit
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] {Ø}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+\bigskip
+
+\centering{Racine vide (arbre vide)}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+\bigskip
+
+\centering{Nœud sans fils (feuille)}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Nœud avec fils gauche (nœud interne)}
+%\caption{Fig.\thefigure : Peigne gauche}
+%\label{fig:example5-left-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Nœud avec fils droit (nœud interne)}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+\centering{Nœud avec fils gauche et droit (nœud interne)}
+%\caption{Fig.\thefigure : Peigne droit}
+%\label{fig:example5-right-skewed-tree}
+%\end{figure}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{NULL}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [draw=none] {NULL} edge from parent[dashed] }
+  child { node [draw=none] {NULL} edge from parent[dashed] }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [draw=none] {NULL} edge from parent[dashed] }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [draw=none] {NULL} edge from parent[dashed] }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+Une dernière variante dans les algorithmes est de traiter chaque fils indépendament de l'existence de l'autre.
+Si le fils gauche existe, on le traite, puis, si le fils droit existe, on le traite.
+Cette variante n'exclue pas les précédents cas : faire ces deux traitements n'induisent pas l'existence des deux fils en même temps.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{\phantom{NULL}}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{\phantom{NULL}}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [triangle] {G} }
+  child { node [draw=none] {?} edge from parent[dashed] }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {R}
+  child { node [draw=none] {?} edge from parent[dashed] }
+  child { node [triangle] {D} }
+  ;
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{\phantom{NULL}}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\textit{Ces différentes visions et ces différents cas ne sont présentés que pour vous aider à comprendre les algorithmes liés aux arbres, vous ne devez pas les apprendre par cœur.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Parcours}
+
+\bigskip
+
+Les parcours d'arbres impliquent de passer dans chacun des nœuds pour accéder à leurs valeurs.
+Néanmoins, on peut visiter de plusieurs façons le même arbre : en descendant le plus profondément en priorité, ou au contraire, en passant prioritairement sur chaque nœud de chaque niveau.
+
+
+\subsection{Parcours Profondeur}
+
+Le \textit{parcours profondeur} (en anglais : \textit{depth-first search} ou \textit{DFS}) consiste à descendre le plus profondément possible en priorité.
+Néanmoins, plusieurs parcours profondeurs sont également possibles : démarre-t-on par le fils gauche ou droit ?
+
+Usuellement, on démarre par le fils gauche, ce qui en fait un \textit{parcours profondeur main gauche} : tant que l'on peut descendre dans un fils gauche, on le fait, si un nœud n'a de fils qu'à droite, on y descend, si un nœud n'a pas de fils, alors on remonte d'un niveau, et on essaye le fils droit.
+
+\medskip
+
+
+\begin{center}
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node (nD) {D}
+                  child { node (nH) {H} }
+                  child { node (nI) {I} }
+                }
+          child { node (nE) {E}
+                  child { node (nJ) {J} }
+                  child { node (nK) {K} }
+                }
+         }
+  child { node (nC) {C}
+          child { node (nF) {F}
+                  child { node (nL) {L} }
+                  child { node (nM) {M} }
+                }
+          child { node (nG) {G}
+                  child { node (nN) {N} }
+                  child { node (nO) {O} }
+                }
+        };
+\end{tikzpicture}
+\end{center}
+
+Lors d'un parcours profondeur, on passe sur chaque nœud 3 fois :
+
+\begin{enumerate}
+\item \textit{Ordre préfixe} (\textit{pre-order}) : avant de descendre vers le sous-arbre gauche
+\item \textit{Ordre infixe} ou \textit{symétrique} (\textit{in-order}) : à la remontée du sous-arbre gauche et avant de descendre vers le sous-arbre droit
+\item \textit{Ordre suffixe} ou \textit{postfixe} (\textit{post-order}) :  à la remontée du sous-arbre droit
+\end{enumerate}
+
+Le choix de l'ordre peut avoir une importance selon le problème étudié : doit-on traiter un nouvel élément dès sa première rencontre (parcours préfixe) ? ou au contraire la dernière fois que l'on passera dessus (parcours suffixe) ?
+
+\medskip
+
+Le parcours profondeur main gauche pour chaque ordre donnera ces résultats :
+
+\medskip
+
+\begin{tabular}{l l}
+\textcolor{red}{ordre préfixe} : & \textcolor{red}{A-B-D-H-I-E-J-K-C-F-L-M-G-N-O} \\
+\textcolor{green(htmlcssgreen)}{ordre infixe} :  & \textcolor{green(htmlcssgreen)}{H-D-I-B-J-E-K-A-L-F-M-C-N-G-O} \\
+\textcolor{blue}{ordre suffixe} : & \textcolor{blue}{H-I-D-J-K-E-B-L-M-F-N-O-G-C-A} \\
+\end{tabular}
+
+\medskip
+
+Il est très important de noter que l'ordre préfixe n'est pas l'inverse de l'ordre suffixe.
+
+\medskip
+
+Le parcours profondeur dans lequel on applique les 3 ordres donnerait :
+
+\begin{center}
+\textcolor{red}{A}-
+\textcolor{red}{B}-
+\textcolor{red}{D}-
+\textcolor{red}{H}-
+\textcolor{green(htmlcssgreen)}{H}-
+\textcolor{blue}{H}-
+\textcolor{green(htmlcssgreen)}{D}-
+\textcolor{red}{I}-
+\textcolor{green(htmlcssgreen)}{I}-
+\textcolor{blue}{I}-
+\textcolor{blue}{D}-
+\textcolor{green(htmlcssgreen)}{B}-
+\textcolor{red}{E}-
+\textcolor{red}{J}-
+\textcolor{green(htmlcssgreen)}{J}-
+\textcolor{blue}{J}-
+\textcolor{green(htmlcssgreen)}{E}-
+\textcolor{red}{K}-
+\textcolor{green(htmlcssgreen)}{K}-
+\textcolor{blue}{K}-
+\textcolor{blue}{E}-
+\textcolor{blue}{B}-
+\textcolor{green(htmlcssgreen)}{A}-%%%%%%%%%%
+\textcolor{red}{C}-
+\textcolor{red}{F}-
+\textcolor{red}{L}-
+\textcolor{green(htmlcssgreen)}{L}-
+\textcolor{blue}{L}-
+\textcolor{green(htmlcssgreen)}{F}-
+\textcolor{red}{M}-
+\textcolor{green(htmlcssgreen)}{M}-
+\textcolor{blue}{M}-
+\textcolor{blue}{F}-
+\textcolor{green(htmlcssgreen)}{C}-
+\textcolor{red}{G}-
+\textcolor{red}{N}-
+\textcolor{green(htmlcssgreen)}{N}-
+\textcolor{blue}{N}-
+\textcolor{green(htmlcssgreen)}{G}-
+\textcolor{red}{O}-
+\textcolor{green(htmlcssgreen)}{O}-
+\textcolor{blue}{O}-
+\textcolor{blue}{G}-
+\textcolor{blue}{C}-
+\textcolor{blue}{A}
+\end{center}
+
+\medskip
+
+On remarque que les feuilles sont visitées 3 fois successivement : étant donné qu'il n'y a aucun fils, on arrive la première fois sur le nœud, on remonte du sous-arbre gauche vide, on remonte du sous-arbre droit vide, puis on repart immédiatement vers le père.
+Il faut néanmoins faire attention au cas des points simples : étant donné qu'un point simple a un seul fils, il faut vérifier s'il s'agit du fils gauche ou droit.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, level distance=20pt, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node (nD) {D} }
+          child { node [draw=none] {} edge from parent[draw=none] }
+        }
+  child { node (nC) {C}
+        };
+\end{tikzpicture}
+
+\bigskip
+
+\begin{tabular}{l l}
+\textcolor{red}{ordre préfixe} : & \textcolor{red}{A-B-D-C} \\
+\textcolor{green(htmlcssgreen)}{ordre infixe} :  & \textcolor{green(htmlcssgreen)}{D-B-A-C} \\
+\textcolor{blue}{ordre suffixe} : & \textcolor{blue}{D-B-C-A} \\
+\end{tabular}
+
+\medskip
+
+\textcolor{red}{A}-
+\textcolor{red}{B}-
+\textcolor{red}{D}-
+\textcolor{green(htmlcssgreen)}{D}-
+\textcolor{blue}{D}-
+\textcolor{green(htmlcssgreen)}{B}-
+\textcolor{blue}{B}-
+\textcolor{green(htmlcssgreen)}{A}-
+\textcolor{red}{C}-
+\textcolor{green(htmlcssgreen)}{C}-
+\textcolor{blue}{C}-
+\textcolor{blue}{A}
+
+\bigskip
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, level distance=20pt, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node (nD) {D}
+                  child { node [draw=none] {} edge from parent[dashed, gray] }
+                  child { node [draw=none] {} edge from parent[dashed, gray] }
+                }
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+        }
+  child { node (nC) {C}
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+        };
+\end{tikzpicture}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+%\begin{figure}
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, level distance=20pt, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node [draw=none] {} edge from parent[draw=none] }
+          child { node (nD) {D} }
+        }
+  child { node (nC) {C}
+        };
+\end{tikzpicture}
+
+\bigskip
+
+\begin{tabular}{l l}
+\textcolor{red}{ordre préfixe} : & \textcolor{red}{A-B-D-C} \\
+\textcolor{green(htmlcssgreen)}{ordre infixe} :  & \textcolor{green(htmlcssgreen)}{B-D-A-C} \\
+\textcolor{blue}{ordre suffixe} : & \textcolor{blue}{D-B-C-A} \\
+\end{tabular}
+
+\medskip
+
+\textcolor{red}{A}-
+\textcolor{red}{B}-
+\textcolor{green(htmlcssgreen)}{B}-
+\textcolor{red}{D}-
+\textcolor{green(htmlcssgreen)}{D}-
+\textcolor{blue}{D}-
+\textcolor{blue}{B}-
+\textcolor{green(htmlcssgreen)}{A}-
+\textcolor{red}{C}-
+\textcolor{green(htmlcssgreen)}{C}-
+\textcolor{blue}{C}-
+\textcolor{blue}{A}
+
+\bigskip
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, level distance=20pt, draw, circle},
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+          child { node (nD) {D}
+                  child { node [draw=none] {} edge from parent[dashed, gray] }
+                  child { node [draw=none] {} edge from parent[dashed, gray] }
+                }
+        }
+  child { node (nC) {C}
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+          child { node [draw=none] {} edge from parent[dashed, gray] }
+        };
+\end{tikzpicture}
+}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+
+\vspace{-1cm}
+
+\end{table}
+
+On remarque dans cet exemple que la variation sera l'ordre de lecture de B et D dans l'ordre infixe.
+
+\bigskip
+
+L'implémentation la plus directe du parcours profondeur main gauche est récursive : on teste si le nœud est vide, puis on descend dans le sous-arbre gauche, puis on descend dans le sous-arbre droit.
+
+\medskip
+
+%  /* %*\textcolor{red}{\texttt{Traitement prefixe / avant fils gauche}}*) */
+%  printf("%*\textcolor{red}{\texttt{Prefixe : \%d\textbackslash{}n}}*)", N->key);
+%
+%  /* %*\textcolor{green(htmlcssgreen)}{\texttt{Traitement infixe / apres fils gauche \& avant fils droit}}*) */
+%  printf("%*\textcolor{green(htmlcssgreen)}{\texttt{Infixe : \%d\textbackslash{}n}}*)", N->key);
+%
+%  /* %*\textcolor{blue}{\texttt{Traitement suffixe / apres fils droit}}*) */
+%  printf("%*\textcolor{blue}{\texttt{Suffixe : \%d\textbackslash{}n}}*)", N->key);
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void Parc_Prof_Gauche(node *N)
+{
+  if (N == NULL)
+  {
+    printf("Le noeud est vide\n");
+    return ();
+  }
+
+  printf("%d\n", N->key); /* %*\textcolor{red}{\texttt{Prefixe / avant fils gauche}}*) */
+
+  Parc_Prof_Gauche(N->left_child);
+
+  printf("%d\n", N->key); /* %*\textcolor{green(htmlcssgreen)}{\texttt{Infixe / ap. fils gauche \& av. fils droit}}*) */
+
+  Parc_Prof_Gauche(N->right_child);
+
+  printf("%d\n", N->key); /* %*\textcolor{blue}{\texttt{Suffixe / apres fils droit}}*) */
+} \end{lstlisting}
+
+
+%\medskip
+\vspace{-0.5cm}
+
+L'implémentation itérative implique l'usage d'une pile : on empile d'abord la racine, puis, tant que la pile n'est pas vide et selon l'ordre choisi, on traite l'élément en tête de la pile ou on empile les fils.
+
+L'ordre d'empilement entre les deux fils est important !
+Pour respecter le principe du parcours profondeur main gauche, on empile d'abord le fils droit, puis ensuite seulement le fils gauche, afin d'accéder au fils gauche en premier lors du dépilement.
+
+\bigskip
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parcours Largeur}
+
+Le \textit{parcours largeur} ou \textit{parcours par niveaux} (en anglais : \textit{breadth-first search} ou \textit{BFS}) consiste à parcourir les nœuds niveau par niveau.
+Tout comme pour le parcours profondeur : on peut démarrer à gauche ou à droite.
+
+Usuellement, on démarre à gauche pour respecter \textit{l'ordre hiérarchique}.
+
+\medskip
+
+Comme vous l'aurez reconnu, l'ordre hiérarchique est celui employé par l'implémentation des arbres sous forme de tableaux.
+Ainsi, parcourir le tableau du premier au dernier élément revient à effectuer un parcours largeur.
+
+
+\begin{center}
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 55mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textcolor{gray}{\textit{1}}}] {A}
+  child { node [label=below:{\footnotesize \textcolor{red}{\textit{2}}}] {B}
+          child { node [label=below:{\footnotesize \textcolor{blue}{\textit{4}}}] {D}
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{8}}}] {H} }
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{9}}}] {I} }
+                }
+          child { node [label=below:{\footnotesize \textcolor{blue}{\textit{5}}}] {E}
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{10}}}] {J} }
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{11}}}] {K} }
+                }
+         }
+  child { node [label=below:{\footnotesize \textcolor{red}{\textit{3}}}] {C}
+          child { node [label=below:{\footnotesize \textcolor{blue}{\textit{6}}}] {F}
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{12}}}] {L} }
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{13}}}] {M} }
+                }
+          child { node [label=below:{\footnotesize \textcolor{blue}{\textit{7}}}] {G}
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{14}}}] {N} }
+                  child { node [label=below:{\footnotesize \textcolor{green(htmlcssgreen)}{\textit{15}}}] {O} }
+                }
+        };
+\end{tikzpicture}
+\end{center}
+
+\medskip
+
+L'implémentation du parcours largeur s'appuie sur une file : on enfile la racine, puis, tant que la file n'est pas vide, on défile la tête de file pour enfiler les fils dans l'ordre choisi (gauche puis droit, en général).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2023.
+Certains exemples et illustrations sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY, ainsi que de Wikipédia.}
+\end{center}
+
+\end{document}

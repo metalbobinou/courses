@@ -1,0 +1,274 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{MyOwnStats.py}}{\TTBF{\RenduDir/src/module/}}{750}{640}{Fonctions externes autorisées}{\TTBF{math.sqrt}, \TTBF{random.random}, \TTBF{random.randint}}
+%{\TTBF{math.floor}, \TTBF{math.ceil}, \TTBF{random.random}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'écrire un module python contenant plusieurs fonctions permettant de calculer des statistiques sur une distribution.}
+
+\bigskip
+
+\noindent Vous devez implémenter les fonctions décrites plus bas, si nécessaire en déclarant vos propres fonctions.
+Ce code sera testé en étant lui-même appelé par un autre script, vous devez donc absolument respecter les prototypes décrits ici.
+
+\bigskip
+
+\noindent Vous ne devez pas implémenter de classe dans cet exercice, mais bel et bien un module.
+Vous ne devez pas non plus importer la classe de l'exercice 2.
+
+\bigskip
+
+\noindent Pour construire ce module, vous avez le droit d'importer exclusivement 3 fonctions de modules externes :
+
+\begin{itemize}
+%\item \TTBF{math.floor} du module \texttt{math}
+%\item \TTBF{math.ceil} du module \texttt{math}
+\item \TTBF{math.sqrt} du module \texttt{math}
+\item \TTBF{random.random} du module \texttt{random}
+\item \TTBF{random.randint} du module \texttt{random}
+\end{itemize}
+
+\bigskip
+
+\noindent Cependant, vous pouvez parfaitement utiliser les fonctions, types, et classes internes à Python (tels que \TTBF{print()}, \TTBF{int()}, \TTBF{str()}, \TTBF{range()}, \TTBF{list()}, et autres).
+
+\bigskip
+
+\begin{RedBoxTitle}{Titre}
+Notez bien qu'aucune fonction de ce module ne doit modifier la distribution donnée en paramètre !
+Pas même les fonctions de tri, d'ajout, de suppression, ou de fusion, ni les autres fonctions ayant besoin que la distribution soit triée.
+\end{RedBoxTitle}
+
+
+%\bigskip
+\newpage
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=python}
+\begin{lstlisting}[frame=single,title={Liste des fonctions pour le module de statistiques}]
+GenerateDistribution(DistrNbValues)
+SortDistribution(Distribution, [asc=True])
+PrintDistribution(Distribution)
+
+AddValueDistribution(Distribution, Value)
+AddValuePositionDistribution(Distribution, Value, Position)
+DeleteValueDistribution(Distribution, Value)
+DeletePositionDistribution(Distribution, Position)
+MergeDistribution(Distribution, NewDistribution)
+
+Min(Distribution)
+Max(Distribution)
+Cardinality(Distribution)
+Range(Distribution)
+
+Mean(Distribution)
+Median(Distribution)
+GetQuartile(Distribution, Quartile)
+
+InterQuartileRange(Distribution)
+Variance(Distribution)
+StandardDeviation(Distribution)
+RelativeStandardDeviation(Distribution)
+GiniCoefficient(Distribution)
+\end{lstlisting}
+
+
+\bigskip
+
+
+\subsubsection*{\TTBF{GenerateDistribution(DistrNbValues)}}
+
+\noindent Cette fonction crée et renvoie une liste d'entiers aléatoires représentants une distribution, ainsi que les valeurs minimale et maximale.
+Les valeurs doivent être renvoyées exactement dans cet ordre : la valeur minimum, la valeur maximum, et la liste contenant la distribution.
+La distribution créée peut contenir plusieurs fois la même valeur.
+Le paramètre \textit{DistrNbValues} est un entier indiquant le nombre d'entiers que la distribution doit contenir.
+Si \textit{DistrNbValues} est nul, alors vous renverrez une liste vide, avec le minimum et le maximum à $ 0 $.
+Si \textit{DistrNbValues} est négatif, alors vous renverrez une distribution contenant $ 10 $ entiers.
+
+
+\subsubsection*{\TTBF{SortDistribution(Distribution, [asc=True])}}
+
+\noindent Cette fonction renvoie la version triée de la distribution donnée en paramètre.
+Le paramètre \textit{Distribution} est la distribution à trier (il doit s'agir d'une liste d'entiers).
+Le paramètre \textit{asc} est un booléen indiquant si la liste doit être triée par ordre ascendant ou descendant.
+Par défaut, le tri doit être ascendant (à la position $ 0 $ doit se trouver l'entier le plus petit de la distribution, et à la dernière position on doit trouver l'entier le plus grand).
+
+\medskip
+
+\noindent Attention : cette fonction ne doit pas modifier le paramètre donné, mais bien renvoyer une copie triée !
+
+
+\subsubsection*{\TTBF{PrintDistribution(Distribution)}}
+
+\noindent Cette fonction écrit le contenu de la distribution sur la sortie standard.
+Le format attendu est simple : un seul élément et sa position doivent être affichés par ligne.
+
+\bigskip
+
+\noindent \TTBF{[\textit{position}] : \textit{valeur}}
+
+\bigskip
+
+\noindent Ce qui donnerait pour la distribution $ [ 10, 5, 42 ] $ :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single]
+$ python3.10 example.py
+[0] : 10
+[1] : 5
+[2] : 42
+$
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si la distribution est vide, vous n'afficherez rien.
+
+
+%%%%%%%%%
+
+\subsubsection*{\TTBF{AddValueDistribution(Distribution, Value)}}
+
+\noindent Cette fonction renvoie une distribution contenant la valeur ajoutée à la distribution donnée en paramètre.
+Le paramètre \textit{Value} est la valeur à ajouter.
+La valeur supplémentaire s'ajoute en fin de liste.
+On peut ajouter une valeur déjà existante.
+Si la valeur n'est pas un entier, vous déclencherez une exception \TTBF{ValueNotInteger} sans afficher de message.
+
+\medskip
+
+\noindent Ainsi, pour la distribution $ [ 10, 5, 42 ] $, lorsque l'on ajoute la valeur $ 6 $, on doit obtenir la distribution suivante : $ [ 10, 5, 42, 6 ] $.
+
+
+\subsubsection*{\TTBF{AddValuePositionDistribution(Distribution, Value, Position)}}
+
+\noindent Cette fonction renvoie une distribution contenant la valeur ajoutée à la position précise dans la distribution donnée en paramètre.
+Le paramètre \textit{Value} est la valeur à ajouter.
+On peut ajouter une valeur déjà existante.
+Si la valeur n'est pas un entier, vous déclencherez une exception \TTBF{ValueNotInteger} sans afficher de message.
+Le paramètre \textit{Position} indique la position dans la liste où ajouter l'élément (l'ancien élément présent à cette position sera décalé à la position suivante : si on ajoute en position $ 0 $, l'élément qui y était sera poussé en position $ 1 $).
+Si la position est négative, on ajoute l'élément en position $ 0 $.
+Si la position est supérieure à la dernière position de la liste, on ajoute l'élément en fin de liste/après la dernière position.
+
+
+\subsubsection*{\TTBF{DeleteValueDistribution(Distribution, Value)}}
+
+\noindent Cette fonction renvoie une copie de la distribution donnée en paramètre dont on a supprimé une occurrence de la valeur indiquée (la première occurrence trouvée depuis la position $ 0 $).
+Le paramètre \textit{Value} est la valeur à supprimer.
+Si la valeur n'est pas un entier, vous déclencherez une exception \TTBF{ValueNotInteger} sans afficher de message.
+Si la valeur n'est pas trouvée dans la liste, vous déclencherez une exception \TTBF{ValueNotFoundInDistribution} sans afficher de message.
+Si la distribution ne contient plus aucune valeur au moment de l'appel à cette méthode, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+L'exception \TTBF{ValueNotInteger} prime sur l'exception \TTBF{DistributionEmpty} qui elle-même prime sur l'exception \TTBF{ValueNotFoundInDistribution}.
+
+
+\subsubsection*{\TTBF{DeletePositionDistribution(Distribution, Position)}}
+
+\noindent Cette fonction renvoie une copie de la distribution donnée en paramètre dont on a supprimé la valeur située à la position donnée en paramètre.
+Le paramètre \textit{Position} est la position de la valeur à supprimer.
+Si la position est négative, vous supprimerez l'élément en position $ 0 $.
+Si la position est supérieure à la dernière position de la liste, vous supprimerez le dernier élément de la liste.
+Si la distribution ne contient plus aucune valeur au moment de l'appel à cette méthode, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{MergeDistribution(Distribution, NewDistribution)}}
+
+\noindent Cette fonction renvoie une liste issue de la fusion des deux distributions données en paramètre.
+Le paramètre \textit{NewDistribution} est la distribution à ajouter après la liste en premier paramètre.
+
+
+%%%%%%%%%
+
+\subsubsection*{\TTBF{Min(Distribution)}}
+
+\noindent Cette fonction renvoie la valeur minimale de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{Max(Distribution)}}
+
+\noindent Cette fonction renvoie la valeur maximale de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{Cardinality(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie le \textit{cardinal} de la distribution.
+
+
+\subsubsection*{\TTBF{Range(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie l'\textit{étendue} de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+%%%%%%%%%
+
+\subsubsection*{\TTBF{Mean(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie la \textit{moyenne} de la distribution (il doit s'agir d'un flottant).
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{Median(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie la \textit{médiane} de la distribution.
+Si la distribution a un nombre impair d'éléments, vous renverrez l'élément à la position par défaut/obtenue par la partie entière inférieure (par exemple, pour une distribution composée de $ 3 $ éléments, vous renverrez l'élément en position $ 1 $ et non pas en $ 2 $).
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+\medskip
+
+\noindent Rappel : cette fonction ne doit pas modifier la distribution donnée en paramètre !
+
+
+\subsubsection*{\TTBF{GetQuartile(Distribution, Quartile)}}
+
+\noindent Cette fonction calcule et renvoie le \textit{quartile} demandé de la distribution.
+Le paramètre \TTBF{Quartile} correspond à un entier entre $ 0 $ et $ 4 $ (inclus).
+Les quartiles $ 1 $, $ 2 $, et $ 3 $ correspondent aux quartiles séparant les différentes parties de la distribution.
+Le quartile $ 0 $ correspond à la plus petite valeur de la distribution, et le quartile $ 4 $ correspond à la plus grande valeur de la distribution.
+Si le paramètre \TTBF{Quartile} est inférieur à $ 0 $ ou supérieur à $ 4 $, vous déclencherez une exception \TTBF{IncorrectQuartileParameter} sans afficher de message.
+En cas de position non entière, vous prendrez la valeur par défaut en retirant juste la virgule.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+L'exception \TTBF{IncorrectQuartileParameter} prime sur l'exception \TTBF{DistributionEmpty}.
+
+\medskip
+
+\noindent Rappel : cette fonction ne doit pas modifier la distribution donnée en paramètre !
+
+
+%%%%%%%%%
+
+\subsubsection*{\TTBF{InterQuartileRange(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie l'\textit{écart interquartile} de la distribution.
+C'est-à-dire la différence entre le quartile $ 3 $ et le quartile $ 1 $.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{Variance(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie la \textit{variance} de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{StandardDeviation(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie l'\textit{écart type} de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{RelativeStandardDeviation(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie le \textit{coefficient de variation} de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.
+
+
+\subsubsection*{\TTBF{GiniCoefficient(Distribution)}}
+
+\noindent Cette fonction calcule et renvoie le \textit{coefficient de Gini} de la distribution.
+Si la liste est vide, vous déclencherez une exception \TTBF{DistributionEmpty} sans afficher de message.

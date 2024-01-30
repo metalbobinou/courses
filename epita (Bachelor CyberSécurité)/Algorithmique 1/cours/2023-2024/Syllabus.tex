@@ -1,0 +1,327 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Algorithmique 1}
+\newcommand{\NumeroTD}{Syllabus}
+\newcommand{\DateCours}{Septembre 2023}
+\newcommand{\AnneeScolaire}{2023-2024}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de lister les notions à voir / vues dans le cours.
+
+\bigskip
+
+
+\begin{enumerate}
+\item Introduction à l'algorithmique \textit{[22/09/2023]}\\
+  CM :
+  \begin{itemize}
+  \item \textit{(arrivée au campus cyber)}
+  \item Qu'est-ce qu'un algorithme, paramètres et valeur retournée
+  \item Types de données (entiers, flottants, carcatère, chaîne de caractères, booléens, ...)
+  \item While, For, Foreach
+  \item Fonctions et Procédures
+  \item Paramètres locaux/globaux (Portée des variables)
+  \item Effets de bord
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item Exécution d'algorithmes simples
+  \item Traces des variables
+  \item Différence $ > $ et $ >= $
+  \end{itemize}
+
+\medskip
+
+\item Récursivité \textit{[29/09/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Modulo
+  \item Logique (conditions ET OU)
+  \item (exemple : test de parité)
+  \item Récursivité (cas d'arrêt \& cas récursif)
+  \item Pile d'appels
+  \item Récursivité Terminale (accumulateur \& fonction chapeau)
+  \item (exemple : somme des N premiers entiers)
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item min/max entre 3 paramètres, somme des carrés des 2 plus grands paramètres
+  \item \'Ecriture d'algorithmes récursifs \& récursifs terminaux
+  \item factorielle, suite géométrique, Fibonacci, Ackermann, nombre miroir (print \& return)
+  \item (Procédure récursive == récursive terminale ?)
+  \item Comparaison versions itératives et récursives
+  \end{itemize}
+
+\medskip
+
+\clearpage
+
+\item Tableaux \textit{[06/10/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Rappels : While, For, Foreach
+  \item Continue \& Break
+  \item Tableaux
+  \item Chaînes de caractères
+  \item Taille max d'un tableau et d'une chaîne
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Recherche dans un tableau (iter \& rec)
+  \item Min/Max tableau (iter \& rec), Somme des éléments d'un tableau (iter \& rec), strlen (iter \& rec)
+  \item Comparaison de tableaux (iter \& rec), strcmp (iter \& rec)
+  \item Inversion d'un tableau
+  \item Test tableau croissant/décroissant (iter \& rec)
+  \item Préfixe/Suffixe chaîne (iter \& rec)
+  \item {} [BONUS] Substr
+  \end{itemize}
+
+\medskip
+
+\item Tris \textit{[13/10/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Tri à bulles
+  \item Tri par sélection
+  \item (Preprocessing du Tri par sélection)
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Swap(p1, p2, tab)
+  \item Tri à bulles
+  \item Tri par sélection
+  \item (Preprocessing du Tri par sélection)
+  \end{itemize}
+
+\medskip
+
+\item Structures de Données et Listes \textit{[20/10/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Structures de données (champs, types, ...)
+  \item Listes (tableaux)
+  \item API
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Acces, Creer, Vider, Supprimer
+  \item Statique vs Dynamique
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Ajout Elt en fin, Suppression Elt en fin
+  \item Acces, Creer, Vider, Supprimer
+  \item Print, Taille, Taille Max, EstVide, EstPleine
+  \item Ajout Elt en tête/milieu, Suppression Elt en tête/milieu
+  \end{itemize}
+
+\medskip
+
+\clearpage
+
+\item Pile \textit{[27/10/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Piles (tableaux)
+  \item Usages LIFO (parcours, tâches à gérer, paramètres, ...)
+  \item Pile par dessus l'API Listes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Sommet, Creer, Vider, Supprimer
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item Exercice d'utilisation
+  \item Empiler "1 2 3 4 5 6" dans cet ordre avec des pushs, et écrire le scénario pour sortir avec pop dans ces ordres si cela est possible :\\
+  \item 6 5 4 3 2 1
+  \item 1 2 3 4 5 6
+  \item 2 3 1 6 5 4
+  \item 1 4 3 2 6 5
+  \item 4 6 5 1 2 3  % (impossible)
+  \item 2 4 3 1 6 5
+  \item 3 2 5 4 6 1
+  \item 1 3 5 4 2 6
+  \item 5 6 1 2 4 3  % (impossible)
+  \item \'Ecriture d'algorithmes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Sommet, Creer, Vider, Supprimer
+  \end{itemize}
+
+\medskip
+
+\item File \textit{[10/11/2023]}\\
+  CM :
+  \begin{itemize}
+  \item File (tableaux)
+  \item Usages FIFO (parcours, traitement clients, ...)
+  \item File par dessus l'API Listes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Tete, Creer, Vider, Supprimer
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Tete, Creer, Vider, Supprimer
+  \end{itemize}
+
+\medskip
+
+\clearpage
+
+\item Pointeurs \textit{[17/11/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Mémoire, tableaux, accès
+  \item Pointeurs
+  \item Chaînes de caractères en C
+  \item Variables "globales" (avec pointeur/référence)
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item Exercices de prise en main
+  \item Accès à des entiers, pointeurs d'entiers, char, char*, ...
+  \item \'Ecriture d'algorithmes :
+  \item Adresse du premier caractère trouvé
+  \item Recherche (avec reprise) jusqu'à la dernière occurrence trouvée dans un texte
+  \item MyStrTok (à la sauce Fabrice : transformer une chaîne en un tableau de chaînes NULL-terminated)
+  \end{itemize}
+
+\medskip
+
+\item Listes Chaînées \textit{[24/11/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Listes chaînées \& Maillons
+  \item Déclaration structures
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes :
+  \item Ajout Elt en fin, Suppression Elt en fin
+  \item Acces, Creer, Vider, Supprimer
+  \item Print, Taille, Taille Max, EstVide, EstPleine
+  \item Ajout Elt en tête/milieu, Suppression Elt en tête/milieu
+  \end{itemize}
+
+\medskip
+
+\item Piles (pointeurs) \textit{[01/12/2023]}\\
+  CM :
+  \begin{itemize}
+  \item Pile \& Maillons
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Sommet, Creer, Vider, Supprimer
+  \end{itemize}
+
+\medskip
+
+\item Files (pointeurs) \textit{[08/12/2023]}\\
+  CM :
+  \begin{itemize}
+  \item File \& Maillons
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item \'Ecriture d'algorithmes
+  \item Ajout Elt, Suppression Elt, EstVide, EstPleine, Tete, Creer, Vider, Supprimer
+  \end{itemize}
+
+\medskip
+
+\item ??? \textit{[15/12/2023]}\\
+  CM :
+  \begin{itemize}
+  \item ???
+  \item (liste doublement chaînée ?)
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item ???
+  \end{itemize}
+
+\medskip
+
+\item ??? \textit{[22/12/2023]}\\
+  CM :
+  \begin{itemize}
+  \item ???
+  \end{itemize}
+  TD :
+  \begin{itemize}
+  \item ???
+  \end{itemize}
+
+\end{enumerate}
+
+\bigskip
+
+Mode d'évaluation :
+
+\begin{itemize}
+\item 2 examens papiers (80\% note finale)
+\item 2 QCM (20\% note finale)
+\end{itemize}
+
+
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en septembre 2023}
+\end{center}
+
+\end{document}

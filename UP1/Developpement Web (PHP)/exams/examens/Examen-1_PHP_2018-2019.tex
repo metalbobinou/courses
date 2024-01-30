@@ -1,0 +1,217 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{}
+\newcommand{\NumGroupe}{Groupe 1}
+\newcommand{\AnneeUniv}{}
+\newcommand{\DateExam}{2 avril 2019}
+\newcommand{\TypeExam}{Devoir sur Table}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h00}
+\newcommand{\MyWaterMark}{2018-2019} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(2 points) Expliquez le rôle de chacun des composants suivants : navigateur, base de données, serveur web. Décrivez les spécificités de LAMP/MAMP/WAMP par rapport à l'architecture générale théorique.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Expliquez la différence de fonctionnement au niveau du serveur web entre les méthodes GET et POST.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Qu'est-ce qu'un moteur de stockage dans une base de données ? Citer 3 exemples et leurs caractéristiques.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(2 points) Expliquez la différence entre les fonctions \textit{strip\_tags} et \textit{htmlspecialchars} .}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\newpage
+
+\subsection{(3 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\TTBF{http://www.monsite.fr/files-storage/data.video/index.php}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{ftp://server01.datastore.bigcorp.com/contents/fabrice/}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{rtmp://live.streamcorp.xyz:1337/flux-video/film/4242.01}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+  \hline
+  Paramètre & \TTBF{empty()} \\ \hline
+  \TTBF{null}  &  \\ \hline
+  [\TTBF{unset(\$var)}] &  \\ \hline
+  \TTBF{42} &  \\ \hline
+  \TTBF{0} &  \\ \hline
+  \TTBF{""} &  \\ \hline
+  \TTBF{" "} [un espace] &  \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+%\bigskip
+\newpage
+
+% On affiche le petit cartouche Nom/Prenom
+\MakeStudentName
+
+\subsection{(2,5 points) Remplir le tableau avec les codes HTTP ou leur description.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+%  \begin{tabularx}{\linewidth}{| *{2}{>{\centering \arraybackslash}X |}}
+\begin{tabularx}{\linewidth}{| c | *{1}{>{\centering \arraybackslash}X |}}
+  \hline
+  Code HTTP & Description \\ \hline
+  200 &  \\ \hline
+  302 307 &  \\ \hline
+  301 308 &  \\ \hline
+  403 &  \\ \hline
+  404 &  \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+% Faire fonctionner code
+\section{Développement}
+
+\subsection{(3,5 points) Ce code devrait afficher le contenu du tableau, mais il ne fonctionne pas. Corrigez les erreurs de syntaxe pour que le tableau soit correctement rempli et affiché.}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+
+my_tab = array();
+my_tab[1] = Fabrice;
+my_tab[2] = Ali;
+my_tab[3] = Floriane;
+
+foreach ( i  in  my_tab )
+{
+   echo('i \n');
+}
+
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\end{document}

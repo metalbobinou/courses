@@ -1,0 +1,28 @@
+Lecture/Ecriture d'une donnée en mémoire :
+
+Lecture :
+
+1 - Le processeur met sur le bus d'@, l'adresse qu'il souhaite atteindre
+
+1 - Le processeur indique, via le bus de contrôle, qu'il souhaite lire (READ)
+
+2 - La mémoire charge l'adresse et récupère la donnée
+
+3 - Le processeur indique sur le bus de contrôle qu'il est prêt à recevoir la donnée
+
+4 - La mémoire prend la donnée, et l'envoie sur le bus de données
+
+
+Ecriture :
+
+1 - Le processeur met sur le bus d'@, l'adresse qu'il souhaite atteindre
+
+1 - Le processeur indique sur le bus contrôle qu'il souhaite écrire (WRITE)
+
+2 - La mémoire charge l'adresse
+
+3 - Le processeur indique, via le bus de contrôle, qu'il est prêt à émettre la donnée
+
+3 - Le processeur charge la donnée sur le bus de données
+
+4 - La mémoire prend la donnée, et l'écrit à l'adresse indiquée

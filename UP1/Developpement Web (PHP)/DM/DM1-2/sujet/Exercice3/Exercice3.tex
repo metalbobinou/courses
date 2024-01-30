@@ -1,0 +1,145 @@
+%% Exercice 3
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo3\_fun.php} [my\_Reduction(array, int)]}{\TTBF{\RenduDir/src/exo3/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{date\_format}, \TTBF{(int)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de calculer des réductions sur des listes de factures.}
+
+\bigskip
+
+\noindent A partir d'un fichier de factures émises stockées dans des tableaux, vous allez afficher ces factures en ajoutant 3 colonnes supplémentaires (le montant avec réduction appliquée, le taux de réduction, et le montant de la réduction).
+Tous les montants sont stockés sous forme de centimes (300 signifie 300 centimes, soit 3 euros).
+
+\bigskip
+
+\noindent Pour rappel, voici comment se calculent les réductions :\\
+
+\begin{tabular}{l c l}
+Prix final après réduction : & $ Prix Final = $ & $ Prix Initial - Reduction $ \\
+Réduction (20\%) depuis un prix : & $ Reduction = $ & $ Prix Initial \times 20 \div 100 $ \\
+ & & \\
+Prix initial si réduction (20\%) : & $ Prix Initial = $ & $ Prix Final \div 0,80 (Coef) $ \\
+Coefficient de réduction de 20\% : & $ Coefficient (0,80) = $ & $ 1 - (20 \div 100) $ \\
+\end{tabular}
+
+\bigskip
+
+\bigskip
+
+\noindent Le tableau en entrée est de cette forme : \\
+
+%\hspace*{-\parindent} %% BIDOUILLE
+%\begin{minipage}{17cm} %% BIDOUILLE
+\lstset{language=sh}
+%\begin{lstlisting}[frame=single,caption={Useless code},label=useless]  % "useless" used to references
+\begin{lstlisting}[frame=single,title={Tableau en entrée}]
+[[ID_client (int), Date (DateTime), ID_Facture (int), Montant (int)] , [ID_client (int), Date (DateTime), ID_Facture (int), Montant (int)] , ...]
+\end{lstlisting}
+%\end{minipage} %% FIN BIDOUILLE
+
+%
+%% OR
+%% \lstinputlisting[language=[ANSI]C]{source.c}
+%% \lstinputlisting[language=Python]{source_filename.py}
+%% \lstinputlisting[language=Python, firstline=37, lastline=45]{source_filename.py}
+%
+
+\bigskip
+
+\noindent Le fichier de sortie sera de cette forme : \\
+
+%\hspace*{-\parindent} %% BIDOUILLE
+%\begin{minipage}{17cm} %% BIDOUILLE
+\lstset{language=sh,basicstyle=\ttfamily \footnotesize}
+\begin{lstlisting}[frame=single,title={Sortie attendue}]
+ID client ; Date ; Num Facture ; Montant Final ; Montant Initial ; Taux Reduction ; Reduction
+\end{lstlisting}
+%\end{minipage} %% FIN BIDOUILLE
+
+\bigskip
+
+\noindent Exemple de structure d'entrée :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple de données en entrée}]
+42421337;2006/06/06;456789;200
+36153615;2018/05/30;123456;123
+\end{lstlisting}
+
+\bigskip
+%\newpage
+
+\noindent Sortie attendue pour cette entrée si on effectue une réduction de 33\% :
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Sortie attendue pour l'entrée précédente avec 33\% de réduction}]
+42421337;06/06/06;456789;134;200;33;66
+36153615;18/05/30;123456;83;123;33;40
+\end{lstlisting}
+
+\bigskip
+
+\noindent (Les fichiers que nous testerons ne seront pas de mauvaise qualité : les données seront toujours correctement formatées)
+
+\bigskip
+
+\begin{YellowBox}
+\textbf{Attention :} Certains nombres risquent de subir des virgules.
+Pour éviter cela, utilisez \TTBF{((int) (x / y))} pour ne conserver que la partie entière (\texttt{123} en valeur initiale donnera donc par division \texttt{40} en réduction et \texttt{83} en valeur finale).
+Attention, cette fonction tronque selon la virgule : si vous tronquez avant ou après certaines opérations, les résultats ne seront pas les mêmes !
+Lors du calcul des valeurs, choisissez avec attention la ligne exacte où vous tronquerez les nombres, afin de ne pas ajouter ou retirer 1 centime.
+\end{YellowBox}
+
+\bigskip
+
+\noindent Vous devez rendre un fichier nommé \TTBF{exo3\_fun.php} qui contiendra au moins la fonction \TTBF{my\_Reduction} qui effectuera le calcul et renverra une chaîne contenant le résultat.
+
+\noindent La fonction prendra en paramètre un tableau qui contient lui-même des tableaux associatifs (chaque case du tableau général correspond à une facture).
+
+\bigskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,title={Tableau en entrée (exo3\_data.php)}]
+$tab1["ID_Client"] = 42421337;
+$tab1["Date"] = new DateTime('2006-06-06');
+$tab1["ID_Facture"] = 456789;
+$tab1["Montant"] = 200;
+$data[] = $tab1;
+
+$tab1["ID_Client"] = 36153615;
+$tab1["Date"] = new DateTime('2018-05-30');
+$tab1["ID_Facture"] = 123456;
+$tab1["Montant"] = 123;
+$data[] = $tab1;
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Appel de la fonction}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo3_data.php");
+  require_once("exo3_fun.php");
+  $my_text = my_Reduction($data, 33);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Sortie HTML attendue}]
+<textarea cols="80" rows="25" readonly="readonly">
+42421337;06/06/06;456789;134;200;33;66
+36153615;18/05/30;123456;83;123;33;40
+</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+\end{RedBoxTitle}

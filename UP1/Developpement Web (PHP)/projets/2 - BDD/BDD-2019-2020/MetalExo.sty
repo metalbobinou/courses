@@ -1,0 +1,411 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{MetalExo}[2017/08/23 Classe pour generer des exercices, V1.0]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% S'appelle par un \usepackage{MetalExo}
+
+%% Necessite comme fichiers :
+% logo1.png (logo de l'etablissement)
+% logo2.png (grand logo de presentation)
+
+% Necessite dans le .tex :
+%\newcommand{\TitreMatiere}{Architecture}
+%\newcommand{\DateExo}{13 octobre 2016}
+%\newcommand{\TypeExo}{DM 1}
+%\newcommand{\TitreExercice}{Scripts Shells}
+%\newcommand{\NomAuteur1}{Fabrice BOISSIER}
+%\newcommand{\MailAuteur1}{fabrice.boissier@univ-paris1.fr}
+%\newcommand{\NomAuteur2}{Ali JAFFAL}
+%\newcommand{\MailAuteur2}{ali.jaffal@univ-paris1.fr}
+%\newcommand{\VersionExo}{Version 1}
+%\newcommand{\LoginEtudiant}{login\_x}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Macros creees dans ce package :
+
+%%%% COMMANDES GENERALES
+
+% \LoginX
+%% Affiche "login_x" dans le texte
+
+% \TTBF{texte}
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+
+%%%% TITRE
+
+% \maketitle
+%% Affiche le titre avec deux logos (logo1.png et logo2.png)
+
+%%%% CONSIGNES GENERALES
+
+% Consigne Generale - \ConsigneGenerale{compteur}{Contenu}
+%% Creer une consigne generale numerotee, affiche son contenu, et incremente le compteur
+%% (Astuce : creez un compteur avec \newcounter{MonCompteur} juste avant)
+
+%%%% SPECIFICATIONS RENDU
+
+% Responsables du Projet - \ResponsablesProjet{Respo1/respo1@mail.org, Respo2/respo2@mail.org}
+%% Creer un tableau de responsables avec leurs mails.
+%% La liste est separee par des virgules, chaque responsable est un couple Nom/Mail
+%% ex : \ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org}
+
+% Responsables du Projet (Tabular) - \ResponsablesProjetRow{Respo1/respo1@mail.org, Respo2/respo2@mail.org}
+%% Creer des lignes de tableau de responsables avec leurs mails (SANS DECLARER LE TABLEAU)
+%% La liste est separee par des virgules, chaque responsable est un couple Nom/Mail
+%% ex : \ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org}
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+
+% Specifications generales - \RenduSpecsGenerales{Balise}{NbEtudiant}{ProcRendu}{DirName}{TarName}{DateRendu}{DureeProj}
+%% Creer les lignes de tableau avec toutes les specifications liees au rendu.  (SANS DECLARER DE TABLEAU)
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+
+% Specifications machines - \RenduSpecsTechniques{Arch}{Lang}{Compilo}{OptionsCompilo}
+%% Creer le tableau avec toutes les specifications liees au rendu.  (SANS DECLARER DE TABLEAU)
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+
+%%%% SPECIFICATIONS EXERCICES
+
+% Exercice Specifications - \ExoSpecs{Fichiers}{Dossier}{Droits Repertoire}{Droits Fichiers}{Fonctions Autorisees}
+%% Creer le tableau avec toutes les specifications a respecter
+%% Fichiers obligatoires, repertoire de rendu, droits sur le repertoire, droits sur les fichiers, fonctions autorisees
+
+% Exercice Specifications (custom) - \ExoSpecsCustom{Fichiers}{Dossier}{Droits Repertoire}{Droits Fichiers}{NomDerniereLigne}{ValeurDerniereLigne}
+%% Creer le tableau avec toutes les specifications a respecter, dont la derniere ligne est libre
+%% Fichiers obligatoires, repertoire de rendu, droits sur le repertoire, droits sur les fichiers,
+%% Le Nom de la derniere ligne (ex : fonctions conseillees)
+%% La Valeur de la derniere ligne (ex : write, fwrite)
+
+% Objectif de l'exercice - \ExoObjectif{texte}
+%% Creer le petit paragraphe d'objectif du debut
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% extensions
+
+\RequirePackage{lmodern} % Fonte CM/Computer Modern depassee, usage de Latin Modern
+\RequirePackage{courier} % ttfamily en bold
+
+%%%%%%% Geometrie de la page
+%%\RequirePackage[top=100pt, bottom=80pt, left=80pt, right=80pt]{geometry}
+%%\RequirePackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+%\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\RequirePackage[margin=2.5cm,headheight=2cm,headsep=30pt]{geometry}
+
+\RequirePackage{fancyhdr} % En-tetes jolies
+
+\pagestyle{fancy}								% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}			% Ligne au dessus du footer
+\fancyhf{}										% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+\lhead{}		%Gauche Haut
+\chead{}		%Centre Haut
+\rhead{}		%Droite Haut
+\lfoot{}		%Gauche Bas
+\cfoot{}		%Centre Bas
+\rfoot{}		%Droite Bas
+
+\RequirePackage{xcolor} % Definition de couleurs
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+
+\RequirePackage[pdftex,
+            pdfauthor={\NomAuteurA},
+            pdftitle={\TitreMatiere},
+            pdfsubject={\TitreExercice},
+            pdfkeywords={\LoginEtudiant},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={pdflatex}]{hyperref} % Gestion des liens cliquables + metadata
+
+\hypersetup{
+    colorlinks = true,
+    linkbordercolor = {white},
+	linkcolor = {blue},
+	urlcolor = {blue}
+}
+
+
+\RequirePackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{green},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%\RequirePackage{draftwatermark} % Ajoute une watermark sur toutes les pages
+\RequirePackage[firstpage]{draftwatermark} % Ajoute une watermark, variantes : *none*, [firstpage], [nostamp]
+
+\SetWatermarkText{\LoginEtudiant}
+\SetWatermarkScale{1}
+\SetWatermarkColor[gray]{0.97}
+\SetWatermarkAngle{30}
+%
+% AUTRE VERSION DE LA WATERMARK
+%
+%\RequirePackage[printwatermark]{xwatermark}
+%\newwatermark[allpages,color=gray!15,angle=30,scale=4,xpos=0,ypos=0]{\LoginEtudiant}
+
+
+\RequirePackage{etoolbox} % Faire des If Then Else en LaTeX
+%\RequirePackage{forloop} % Faire des boucles For en LaTeX
+%\RequirePackage{pgffor} % ForEach depuis des tableaux {1, 2, 3} en LaTeX
+
+\RequirePackage{graphicx} % Inserer des images
+
+\RequirePackage{tcolorbox} % Faire des boites colorees
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% commandes personnelles
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMANDES GENERALES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \LoginX
+%% Affiche "login_x" dans le texte
+\newcommand{\LoginX}{\texttt{login\_x}}
+
+% \TTBF (texte)
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+\newtcolorbox{YellowBox}{colback=yellow!75!white,colframe=yellow!75!black,halign=center,boxsep=3mm}
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+\newtcolorbox{RedBoxTitle}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+
+
+%%%%%%%%%%%
+%% TITRE %%
+%%%%%%%%%%%
+
+% Page titre / maketitle
+%% Pas besoin du makeatletter et makeatother
+%% un renewcommand suffit dans les class customs
+%% et ajout d'un thispagestyle empty
+
+%\makeatletter %%
+%    \def\@maketitle{ %%
+\renewcommand\maketitle{ %%%%
+  \newpage
+  \null
+  \vskip 1em
+  \vglue 1cm
+  \begin{center}
+  	\includegraphics[height=4cm]{logo1.png}
+  	\vskip 2em%
+  \let \footnote \thanks
+    {\LARGE \textbf{\TitreMatiere} \par}
+    \vskip 1.5em
+	{\Large \textbf{\textit{\TitreExercice}} }
+	\vskip 1em
+    {\large \DateExo}
+  \end{center}
+  \vskip 2em%
+  \begin{center}
+	\hrule height 3pt
+	\vskip 1em
+	\textbf{\VersionExo} %\hfill généré pour \textbf{\LoginEtudiant}
+%	\flushright \textbf{\VersionExo}
+	\vskip 2em
+	\centering \includegraphics[height=10cm]{logo2.png}
+	\vskip 2em
+	\flushleft \textbf{\NomAuteurA} \space \textless\href{mailto:\MailAuteurA}{\nolinkurl{\MailAuteurA}}\textgreater
+	\vskip 1em
+	\hrule height 3pt
+  \end{center}
+  \par
+  \vskip 1.5em
+  \thispagestyle{empty}} %%%%
+%\makeatother %%
+
+%	\flushleft \textbf{\NomAuteurB} \space \textless\href{mailto:\MailAuteurB}{\nolinkurl{\MailAuteurB}}\textgreater
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONSIGNES GENERALES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ConsigneGenerale (compteur) (Contenu)
+%% Creer une consigne generale numerotee, affiche son contenu, et incremente le compteur
+%% (Astuce : creez un compteur avec \newcounter{MonCompteur} juste avant)
+\newcommand{\ConsigneGenerale}[2]{
+\noindent \textbf{Consigne Générale \arabic{#1} :} #2 \\
+\stepcounter{#1}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SPECIFICATIONS RENDU %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{tabular}{p{7cm} p{10cm}}
+%Responsable(s) du projet : & #1 \\
+% & #2 \\
+%  & \\
+%Balise du projet : & #2 \\
+% & \\
+%Nombre d'étudiant(s) par rendu : & #4 \\
+% & \\
+%Procédure de rendu : & #5 \\
+%Nom du répertoire : & #6 \\
+%Nom de l'archive : & #7 \\
+%Date maximale de rendu : & #8 \\
+%Durée du projet : & #9 \\
+% & \\
+%Architecture(s)/OS : & #10 \\
+%Langage(s) : & #11 \\
+%Compilateur/Interpréteur : & #12 \\
+%Option(s) du compilateur/interpréteur : & #13 \\
+%\end{tabular}
+
+
+% ResponsablesProjetRow (Liste de Responsables)
+%% Creer une liste de responsables avec leurs mails (SANS DECLARER DE TABLEAU)
+%% La liste est separee par des virgules, chaque responsable est un couple Nom/Mail
+%% ex : \ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org}
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+\def\MetalExoAddTableRow#1/#2!{
+ & \textbf{#1} \\
+ & <\texttt{#2}> \\ }
+\newcommand{\ResponsablesProjetRow}[1]{
+%	\renewcommand*{\do}[1]{\MetalExoAddTableRow##1!}	%% Creer une definition "temporaire" de "do" : s'arrete a begin(table) ou &
+	\gdef\do##1{\MetalExoAddTableRow##1!}				%% Utilise la definition globale de "do"
+		Responsable(s) du projet :
+		\docsvlist{#1}
+}
+
+% ResponsablesProjet (Liste de Responsables)
+%% Creer une liste de responsables avec leurs mails.
+%% La liste est separee par des virgules, chaque responsable est un couple Nom/Mail
+%% ex : \ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org}
+\newcommand{\ResponsablesProjet}[1]{
+	\let\origdo\do				%% Sauvegarde l'ancien "do"
+	\begin{tabular}{p{7cm} p{10cm}}
+		\ResponsablesProjetRow{#1}
+	\end{tabular}
+	\let\do\origdo				%% Restaure l'ancien "do"
+}
+
+
+% RenduSpecsGenerales (Balise) (NbEtudiant) (ProcRendu) (DirName) (TarName) (DateRendu) (DureeProj)
+%% Creer les lignes de tableau avec toutes les specifications liees au rendu.  (SANS DECLARER DE TABLEAU)
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+\newcommand{\RenduSpecsGenerales}[7]{
+Balise(s) du projet : & \TTBF{#1} \\
+ & \\
+Nombre d'étudiant(s) par rendu : & #2 \\
+ & \\
+Procédure de rendu : & #3 \\
+Nom du répertoire : & \texttt{#4} \\
+Nom de l'archive : & \texttt{#5} \\
+Date maximale de rendu : & #6 \\
+Durée du projet : & #7 \\
+}
+
+% RenduSpecsTechniques (Type) (Arch) (Lang) (Compilo) (OptionsCompilo)
+%% Creer le tableau avec toutes les specifications liees au rendu.  (SANS DECLARER DE TABLEAU)
+%% VOUS DEVEZ DEFINIR VOTRE PROPRE TABLEAU (\begin{tabular}{c c} ... \end{tabular})
+\newcommand{\RenduSpecsTechniques}[5]{
+Format(s) attendu(s) : & #1 \\
+Architecture(s)/OS : & #2 \\
+Langage(s) : & #3 \\
+Compilateur/Interpréteur : & \TTBF{#4} \\
+Options du compilateur/interpréteur : & \TTBF{#5} \\
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SPECIFICATIONS EXERCICES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ExoSpecsCustom (Fichiers) (Dossier) (Droits Repertoire) (Droits Fichiers) (NomDerniereLigne) (ValeurDerniereLigne)
+%% Creer le tableau avec toutes les specifications a respecter, dont la derniere ligne est libre
+%% Le/Les fichiers obligatoires,
+%% Le repertoire de rendu,
+%% Les droits sur le repertoire,
+%% Les droits sur les fichiers,
+%% Le Nom de la derniere ligne (ex : fonctions conseillees)
+%% La Valeur de la derniere ligne (ex : write, fwrite)
+\newcommand{\ExoSpecsCustom}[6]{
+\begin{tabular}{p{6cm} p{12cm}}
+Nom du(es) fichier(s) : & #1 \\
+Répertoire : & #2 \\
+Droits sur le répertoire : & #3 \\
+Droits sur le(s) fichier(s) : & #4 \\
+#5 : & #6 \\
+\end{tabular}
+}
+
+% ExoSpecs (Fichiers) (Dossier) (Droits Repertoire) (Droits Fichiers) (Fonctions Autorisees)
+%% Creer le tableau avec toutes les specifications a respecter
+%% Le/Les fichiers obligatoires,
+%% Le repertoire de rendu,
+%% Les droits sur le repertoire,
+%% Les droits sur les fichiers,
+%% Les fonctions autorisees
+\newcommand{\ExoSpecs}[5]{
+\ExoSpecsCustom{#1}{#2}{#3}{#4}{Fonctions autorisées}{#5}
+}
+
+% ExoObjectif (texte)
+%% Creer le petit paragraphe d'objectif du debut
+\newcommand{\ExoObjectif}[1]{
+\textbf{Objectif : } \space #1 \\
+}

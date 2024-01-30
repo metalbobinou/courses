@@ -1,0 +1,11 @@
+A => X = (A ET (A OU B)) OU ((A ET B) OU (B ET C))
+
+B => X = (A OU (A NON-OU B)) ET ((A NON-OU B) ET (B XOR C))
+     X = (A OU (-(A OU B))) ET ((-(A OU B)) ET (B XOR C))
+
+C => X = (A OU (A NON-OU C)) ET ((B NON-OU C) ET (B XOR C))
+     X = (A OU (-(A OU C))) ET ((-(B OU C)) ET (B XOR C))
+
+D => X = (A NON-ET (A ET C)) XOR ((B OU C) NON-ET (B OU C))
+     X = (-(A ET (A ET C))) XOR (-((B OU C) ET (B OU C)))
+

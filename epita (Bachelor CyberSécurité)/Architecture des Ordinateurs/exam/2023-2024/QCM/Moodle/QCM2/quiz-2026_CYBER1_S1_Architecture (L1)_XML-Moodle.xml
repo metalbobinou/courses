@@ -1,0 +1,3049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[Questions d'Architecture des Ordinateurs (L1)<br>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Conversions</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions de nombres<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions de nombre entiers (non signés)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 2]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 10 (décimale) vers base 2 (binaire)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135610  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[115 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 115 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 0011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0110 1111<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 0110<br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1000 1101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135611  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[133 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 133 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1000 0101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 1101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1000 1001<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1000 1101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135612  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[142 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 142 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1000 1110<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 0010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 1000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 1100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135613  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[172 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 172 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 1100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1100 0010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1011 0100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 1110<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135614  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[234 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 234 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1110 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1110 1011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 0101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135615  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[42 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 42 en base 2<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0010 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0000 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 1000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 2 -> 10]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 2 (binaire) vers base 10 (décimale)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135616  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%00101010 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 0010 1010 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">42<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">38<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">30<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">210<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135617  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%01101101 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 0110 1101 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">109<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">613<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">119<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">103<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135618  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%01111100 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 0111 1100 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">124<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">248<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">126<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">250<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135619  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%10111011 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 1011 1011 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">187<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">251<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">123<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">191<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135620  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%11001011 -> base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 1100 1011 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">203<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">184<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">183<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">1211<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135621  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[%11010111 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 1101 0111 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">215<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">231<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">183<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">240<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 16]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 10 (décimale) vers base 16 (hexadécimale)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135622  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[238 -> base 16]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 238 en base 16<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ EE<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 1414<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ E4<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 4E<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ DD<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ CC<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135623  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[42 -> base 16]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 42 en base 16<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 2A<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ A2<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 42<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 24<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 28<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 82<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135624  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[56 -> base 16]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 56 en base 16<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 38<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 83<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 3A<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ A3<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 42<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 24<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 16 -> 10]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 16 (hexadécimale) vers base 10 (décimale)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135625  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$34 -> base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez $34 en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">52<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">484<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">34<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">48<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135626  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$5E -> base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez $5E en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">94<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">64<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">90<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">74<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135627  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$AB -> base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez $AB en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">171<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">1011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">170<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">172<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions BCD -> 10]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions code BCD vers base 10 (décimale)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135628  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[BCD %01011001 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 0101 1001 du BCD vers la base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">59<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">89<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">105<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Ce n'est pas un nombre correct en BCD<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135629  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[BCD %01100111 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 0110 0111 du BCD vers la base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">67<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">103<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">107<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">83<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135630  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[BCD %11001001 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez % 1100 1001 du BCD vers la base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Ce n'est pas un nombre correct en BCD<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">129<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">21<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">1209<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> BCD]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr">Conversions base 10 (décimale) vers code BCD<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135631  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[42 -> BCD]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 42 en BCD<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0100 0010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0010 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0101 0101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135632  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[72 -> BCD]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 72 en BCD<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0111 0010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0100 1000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0101 0010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0100 0110<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135633  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[96 -> BCD]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez 96 en BCD<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 0110<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0110 0000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0101 1110<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 0110 0100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversion d'Entiers (signés)<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 10 -> 16 (s)]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 10 (décimale) vers base 16 (hexadécimale) de nombres signés<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135634  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[-108 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez -108 en binaire signé sur 8 bits<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 0100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1001 0011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1110 1100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1110 1011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135635  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[-37 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez -37 en binaire signé sur 8 bits<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1101 1011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1101 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 0101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1010 0100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135636  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[-53 -> Base 2]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">Convertissez -53 en binaire signé sur 8 bits<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1100 1011<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1100 1010<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1011 0101<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">% 1011 0100<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 16 -> 10 (s)]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions base 16 (hexadécimale) vers base 10 (décimale) de nombres signés<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 135637  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$B4 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez $B4 comme un nombre signé en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-76<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-54<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-75<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-53<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135638  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$C4 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Convertissez $C4 comme un nombre signé en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-60<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-59<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-68<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-67<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 135639  -->
+  <question type="multichoice">
+    <name>
+      <text><![CDATA[$D8 -> Base 10]]></text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">Convertissez $D8 comme un nombre signé en base 10<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-40<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-39<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-88<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-87<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Flottants IEEE 754</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Questions sur les flottants au format IEEE 754<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Flottants IEEE 754/Valeurs Réservées</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Questions sur les valeurs réservées<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141420  -->
+  <question type="multichoice">
+    <name>
+      <text>Infini (1)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">L'infini peut être codé par :<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="50" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ FF80 0000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 7FF8 0000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">L'exposant et la mantisse binaires ne contenant que des 1<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="50" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">L'exposant binaire ne contenant que des 1, et la mantisse binaire ne contenant que des 0<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141419  -->
+  <question type="multichoice">
+    <name>
+      <text>NaN (1)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Les NaN (Not a Number) peuvent être codés par :<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="50" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ FF80 0001<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 0F80 0001<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="50" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">L'exposant et à la mantisse binaires ne contenant que des 1<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"></p><p dir="ltr">L'exposant binaire ne contenant que des 1, et la mantisse binaires ne contenant que des 0<br></p><p></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141421  -->
+  <question type="multichoice">
+    <name>
+      <text>Zéro (1)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Zéro peut être codé par :<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="25" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 0000 0000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="25" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">$ 8000 0000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="25" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">L'exposant et la mantisse binaires ne contenant que des 0<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="25" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">&nbsp;L'exposant, le signe, et la mantisse ne contenant que des 0<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Flottants IEEE 754/Conversions IEEE754 -> Base 10]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions de flottants IEEE 754 vers la base 10<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141913  -->
+  <question type="multichoice">
+    <name>
+      <text>1337 (base 16)</text>
+    </name>
+    <questiontext format="html">
+      <text>A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x44a72000</text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">1337<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-1998,974<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">2^(-142)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">NaN<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141912  -->
+  <question type="multichoice">
+    <name>
+      <text>32 (16)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x42000000<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">32<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-2048<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">2^(-142)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">+ l'infini<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141424  -->
+  <question type="multichoice">
+    <name>
+      <text>42 (base 16)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x42280000<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">42<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">2^(-135)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-138,5<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141426  -->
+  <question type="multichoice">
+    <name>
+      <text>NaN 1 (base 16)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">A quelle valeur base 10 correspond ce flottant IEEE 754 : 0x7F86AE00<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">NaN<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[4242133700000<br>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">-18,59<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">2(-138)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text><![CDATA[$course$/top/Architecture (L1)/Flottants IEEE 754/Conversions Base 10 -> IEEE754]]></text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Conversions de flottants de la base 10 vers IEEE754<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141511  -->
+  <question type="multichoice">
+    <name>
+      <text>0,5 (base 10)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 0.5 ?<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x3F000000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0xBF000000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x3F11A2F3<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0xBF11A2F3<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141507  -->
+  <question type="multichoice">
+    <name>
+      <text>123 (base 10)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 123 ?<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x42F60000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0xC2F60000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x042F6000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141509  -->
+  <question type="multichoice">
+    <name>
+      <text>12.5475692749 (base 10)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 12.5475692749 ?<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x4148c2d8<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0xC148c2d8<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x41800000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0xC148c2d8<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141427  -->
+  <question type="multichoice">
+    <name>
+      <text>42 (base 10)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">A quelle valeur IEEE 754 correspond le nombre décimal 42 ?<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x42280000<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x7F80002A<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x42752A01<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">0x05A12892<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Portes Logiques</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Questions sur les portes logiques<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Portes Logiques/Schémas Portes Logiques</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[Questions sur les schémas européens/américains pour représenter les portes logiques<br>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141514  -->
+  <question type="matching">
+    <name>
+      <text>Schémas (1)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Sélectionnez le nom de chaque porte logique selon son équivalent en schéma<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <subquestion format="html">
+      <text><![CDATA[<img src="@@PLUGINFILE@@/A_eur.png" alt="Porte A" width="106" height="46" class="img-fluid atto_image_button_text-bottom"><br>]]></text>
+<file name="A_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAuCAIAAABPihu6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAE2SURBVGhD7dixDcIwEIVhyozgMiO4jKgYIVNkhmwRtsgGtBkjBUVGSOkynOMTEh3J0x0Sel+DLITs++UIxGUjAPNBmA/CfBDmg3jka9v24i7GmFLSE5gxz7csiw7kbpomPYQZv3y6dlHXNfOdx3wQ5ssenXyue+jqAObb02XMt9P1d3K86/2ZX5jveD7FfMwHYT4I80GYD8J8kHP5crcP8itG3/oGbx+E+SDMB2E+iGu+YRhuZpqm+VW+GKMewkDf97JRnuo9oal9Licln6kQgmykU8k9NzKOY9mvbOSj5JOnSg9hYF1X2ch8Kn51QJgPwnwQ5oMwH4T5IMwHYT4I80GYD8J8EOaDMB+E+SDMB2E+yDuf/sntoqqqP8mXUgohlILO5nnWQ5jxeKbkAspFcObQbtu2F/EnjXC1sPW6AAAAAElFTkSuQmCC</file>
+<file name="LogicGate-NOT_eur1.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAuCAIAAABPihu6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAHWSURBVGhD7ZmhjgIxEIaRSCRBECSKrCSnTiJ5BBQh4QVwPAL3BgSFxJGgkDwC4gQSiVy595eZIxwKmHYuaf5PwLZbaOdjOmx2axUxQH0mqM8E9ZmgPhMe+obDYc2doijKstQVJCO5vtPppAG5s9/vdRHJ8NOnbRc6nQ71vQ/1maC+wHaMz4232noB6ruqC1DfFW0/R5D38fUd3qjvdX0K9VGfCeozQX0mqM8E9Zl4T1/w9gdcxeipZ2D2mbjpw+zL5XI+ny8Wi+PxqKfjkbO+6XRar9dldmE2m+mISOSsTxgMBsi+yWQiTRzroBhkru8+3TabDXqQj5fLRbvMhKhQFz6T0e/3JRKZz4d2u40ZG43Gw/16rAf9vV5P1mZBfpgQ1S3CpFzX70Sr1cKMyEFt/xLxqUuz2cQXalT4k0rEer2W+WQiH26b93A4aFdVnc9nxIzO1WqlizMgFSB5VP9b++ALJQ898CibDK8yJgo565MKeA+qYdyrv5z17XY7FPiiKHDc7XZHoxH2r46IRM76UKG0nQzqM0F9JqjPBPWZoD4T1GeC+kxQnwnqM0F9JqjPBPWZ8NOnN7ldkAdsOegry1Lu8fqT4sHuAx57CgmIRHDGwV1VVT/UG0LKOOeezQAAAABJRU5ErkJggg==</file>
+      <answer>
+        <text>YES</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<img src="@@PLUGINFILE@@/B_eur.png" alt="Porte B" width="106" height="46" class="img-fluid atto_image_button_text-bottom"><br>]]></text>
+<file name="B_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAuCAIAAABPihu6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAHCSURBVGhD7dmtbgJBFIZh5EoUWbkahSQVpBLJJaAIl8AdIOldoMg6EhRyJRJRwSUgVy7fcE4amlQAZ+aULN8j2jKbdmbe7Hb602nIgPlMmM+E+UyYz8Qj32Qy6bgbDAZ1XesKkkme73Q66Ybc7fd7XUQyfvn0tYuiKJjvecxnwnzBdobPm2311QOY75ouYL4rfX2fEO/j6zu8Y77H8ynmYz6Tf8yHXzwwuw6l0eZ8kOf54XDQ0QRafvfhbZZlZVnqhdjanG+3202nU5l9tVrptaheNF/o9gt+itFL97g9OpbLpXyJ+XwuVyN67bvvWbf5YL1e4xHGyHg8Pp/PMhjFW+SDqqq63S4G4x7H75IPsBIZj3gcv1E+wJM7HA5xKdZxHHaFU+kzGVkuyHw+JB+eU13EjdFo1Ov1ZEn9fl9HH7dYLDBR2NXPDpO67suJ5EsK3wEwke4K93kiOPVkPpnIh+TDU6WL+Mtms9GPniInePJdvdT3vuiYz4T5TJjPhPlMmM+E+UyYz4T5TJjPhPlMmM+E+UyYz4T5TJjPxC+f/pHbhfxbsg356rrO81wKOjsej7qIZDyeKdyAuBGcObRrmuYC+GRDcs4czHAAAAAASUVORK5CYII=</file>
+<file name="LogicGate-YES_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAuCAIAAABPihu6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAE2SURBVGhD7dixDcIwEIVhyozgMiO4jKgYIVNkhmwRtsgGtBkjBUVGSOkynOMTEh3J0x0Sel+DLITs++UIxGUjAPNBmA/CfBDmg3jka9v24i7GmFLSE5gxz7csiw7kbpomPYQZv3y6dlHXNfOdx3wQ5ssenXyue+jqAObb02XMt9P1d3K86/2ZX5jveD7FfMwHYT4I80GYD8J8kHP5crcP8itG3/oGbx+E+SDMB2E+iGu+YRhuZpqm+VW+GKMewkDf97JRnuo9oal9Licln6kQgmykU8k9NzKOY9mvbOSj5JOnSg9hYF1X2ch8Kn51QJgPwnwQ5oMwH4T5IMwHYT4I80GYD8J8EOaDMB+E+SDMB2E+yDuf/sntoqqqP8mXUgohlILO5nnWQ5jxeKbkAspFcObQbtu2F/EnjXC1sPW6AAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>NOT</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/C_eur.png" alt="Porte C" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="C_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAHISURBVHhe7duxbcJAFIdxly4pKRkDpUrpkhGoLEagS0kJG1CyAZQpGcEFAzAGeWcfIVIS/j5yRHry9zWWLR3gn/yOBooL3S0ZqGma2Wz26rCqqo7HY7yN3iUDLRaLwm1mFG+jd8lA8/nc3mm5XL67ar1e28e25yjeRu8eBNput/HcSWYE0L0AEgEkAkgEkAggEUAi90D72l61q97HazlzDhR4OpfT5qV42ZzaqznzDfRVxawA+tZVKBwZsR9raZ6EE/I/YkVd20YUpyv/nHkGuu1A1wkLx8zPkmeg21dYPAnlnjXXIxZQPicqCmWeMO+bdNyi29pnp2XK+RQ5B3p+AIn+BLTb7Wxlz8bj8eCAptOpLU5qWEDn89nW96yqqsEBJcUmLQJIBJAIIBFAIoBEAIkAEgEkAkgEkAggkWugyWTy1rumaWzhsICSKsvSFg4LaDQa2ZT1bLVa2UL2IBFAIoBEAIkAEgEkAkgEkAggEUAigEQAiQASBaAH/qcLkIgR+zX2IBFAIoBEAIkAEgEkAkgEkAggEUAigEQAiQASASQCSASQCCARQCKARACJABJ1QE77D6DD4VCWZXxDb3U/XE0qGWhYXS4fP0zeinEhr5MAAAAASUVORK5CYII=</file>
+<file name="LogicGate-AND_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAHISURBVHhe7duxbcJAFIdxly4pKRkDpUrpkhGoLEagS0kJG1CyAZQpGcEFAzAGeWcfIVIS/j5yRHry9zWWLR3gn/yOBooL3S0ZqGma2Wz26rCqqo7HY7yN3iUDLRaLwm1mFG+jd8lA8/nc3mm5XL67ar1e28e25yjeRu8eBNput/HcSWYE0L0AEgEkAkgEkAggEUAi90D72l61q97HazlzDhR4OpfT5qV42ZzaqznzDfRVxawA+tZVKBwZsR9raZ6EE/I/YkVd20YUpyv/nHkGuu1A1wkLx8zPkmeg21dYPAnlnjXXIxZQPicqCmWeMO+bdNyi29pnp2XK+RQ5B3p+AIn+BLTb7Wxlz8bj8eCAptOpLU5qWEDn89nW96yqqsEBJcUmLQJIBJAIIBFAIoBEAIkAEgEkAkgEkAggkWugyWTy1rumaWzhsICSKsvSFg4LaDQa2ZT1bLVa2UL2IBFAIoBEAIkAEgEkAkgEkAggEUAigEQAiQASBaAH/qcLkIgR+zX2IBFAIoBEAIkAEgEkAkgEkAggEUAigEQAiQASASQCSASQCCARQCKARACJABJ1QE77D6DD4VCWZXxDb3U/XE0qGWhYXS4fP0zeinEhr5MAAAAASUVORK5CYII=</file>
+      <answer>
+        <text>AND</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/D_eur.png" alt="Porte D" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="D_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAJcSURBVHhe7dshb+pQGMbxSiQSgSAoBIogSBWOyn4EFEEimyCQSOYQCCTfYMgr+xEqJpBIJJL7tOdsuzcDnna3u8nJeX4Gelg3+Kfv2ZZAcJOnKgfKsiyO47GDoihK09S+jNIqB5rP54Gz0Mi+jNIqB5pOp/hJSZL8cspms8HTxnVkX0Zp3wy03+/tsSPQSIGeUSBCgQgFIhSIUCBCgQjnA73O8F2N2atdq5PjgfI8psvbSxiEL2/Fap3cDvRnFbRSoC/eC+W3GrG7ijQ/FCfn/ogFsxk2Ijtd9c+Zy4E+d6D3Cctva76WXA70+SvMHuTqnjWnRyyP8jFRtlDNE+b6Jm236EJx7RSZ6ryKHA/08xSI+KdAh8MBZ5bUarW8CzQajXByJX4FOp/POL+kKIq8C1SJNmlCgQgFIpwONBgM7HFpvgTa7XZ42rDdbu1SOX5dQcZisbCrJfgVqNvtFomCOI6v16t97CnvNmn829BoNHAffx5fLhf78GPeBcL9NE2bzSYOO51OlmXmCx7xMRCcTqder4cVlMJDZvEuTwMB5guHWMTEPXk5/gYC7NMfb7lMksSu/s2vQNh0Vl9MJpMiUdDv95fLpV1drcz25FegSjB6ONGvQNiSMWV3DYfDdrsdhqE9Ho/X6zVO9HoPKkOBCAUiFIhQIEKBCAUiFIhQIEKBCAUiFIhQICIP9I3P6SoQoRF7SHsQoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQYQI56n8EOh6P5sMgLjJvXK2kciC/3G6/AdwGmZCfS97sAAAAAElFTkSuQmCC</file>
+<file name="LogicGate-NAND_eur1.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAJkSURBVHhe7duhcuJAAMZxZjAIBIOKRPAAyEwHcTIyj4BikMi4k8j0DZB5g0aeRCIjKpCRSCT3JbulN5eSj/TSm9nu9xMQtqEl/9ldEGVwlVadAxVFEcfxDwdFUXQ4HOxlPKxzoM1mM3AWGtnLeFjnQKvVCn8pSZJfTknTFC8b88hexsM+GWi/39vHjkAjBWqjQIQCEQpEKBChQIQCEc4HelnjtxrrFzvWJ8cDVXlMl9fnp8HT82s92ie3A/1ZBa0UqOGtUHWvJfahOs0Xxam4v8QG6zU2Iru6+l9nLgd634HeVlh13/NccjnQ+1uYfVDpe605vcSqKLcVZQv1vMJc36TtFl2r506dqc9Z5Higr6dAxD8FyrIMz3xQEATeBQrDEE/uxK9AZVni+Q+Kosi7QJ1okyYUiFAgQoEIBSIUiFAgQoGI7xHocrmcz2dz3M67QHmeLxYLHMNsNtvtdvaMO/wKNJ/P6zKV0WhkDuI4tid9xK9Aw+EQt7dZg9k0mUzaL8evQIDXb4dquBAMYq39bCiKAid4FyjLMjtUK8vSjDdhDeIE7wJhatihmhkfj8fYv/9iVqJ3gYIgOJ1OZhBv9giBwSRJzEiTX4Gm0ylusTHjKrbbLbYek6zlM5FfgZbLpXn9N2EYms34Hr8CYUHh+Hg8pmmKLQaD5qctfAzUiQIRCkQoEKFAhAIRCkQoEKFARBXoE9/TVSBCS+wu7UGEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQoUCECeSo/xEoz/Pb/6g7h37xoKlzIL9cr78BI86bZ2DBk54AAAAASUVORK5CYII=</file>
+      <answer>
+        <text>NAND</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/E_eur.png" alt="Porte E" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="E_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAGgSURBVHhe7duxbQIxGEBhyispKRkDpUp5JSNQIUagS0kJG1CyAZQpGeEKBmAM4tNZKFESnk1QpMPv64z06/DT2RUMLropO1DTNNPp9LWH6ro+Ho9xG8myAy0Wi0FvhUZxG8myA81ms/Ck5XL53ivr9Tp87fAexW0kuzPQdruN654IjQx0i4GAgYCBgIGAgYCBgIHA0wY6bV7C4142p7i+11MGauOENPt5aYHCjgfzfVyw8gK12khfjk73wSfXhGUG6nQ3DLxOBjLQDzxiN7QtvKQfIB7Aq4yo3zxloEcyEPhToN1uFyYTjUaj4gJNJpMwnKWsQOfzOcwnquu6uEBZvKSBgYCBgIGAgYCBgIGAgYCBgIGAgYCBQK8Djcfjt2RN04TBsgJlqaoqDJYVaDgchlOWaLVahUHvIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgINAGuuN/ugYCHrFfeQcBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDgS5QT/1HoMPhUFVVfGDfdD9czZIdqCyXywc4pNKMna0+pgAAAABJRU5ErkJggg==</file>
+<file name="LogicGate-NOR_eur1.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAI9SURBVHhe7duhjuJQGMVxEgwCQVCVCB4A2UwQKyv7CKgJElm3Etl5A2TfYCpXIpEVI5CVSCRzyr1pdrdDD2Unm5Tv/ARp77SB+0/vnRHD4CKtOgcqiiKO4x89FEXRfr/307hb50Dr9XrQW2jkp3G3zoFWqxXeKUmSX72Spik+Np4jP427PRhot9v5855AIwVqo0CEAhEKRCgQoUCEAhEKRDxtoI+3F7zdy9uHP3/UUwaq4iDN+6u1QJjx4PXdn3D2AlWqSH8sHTfwmzqhzUCO22HI46RACvQFLbEWVQtt0t/AL8Bah6gNTxnoOykQ8U+BsizDnXcKgsBcoDAMcXMntgKVZYn77xRFkblAnWiTJhSIUCBCgQgFIhSIUCBCgYjnCHQ+n0+nkztuZy5QnueLxQLHMJvNttutv+IGW4Hm8/m1TGU0GrmDOI79RV+xFWg4HOK1fmrwNE0mk/bp2AoE+Px+6AoTwSDW2s+GoihwgblAWZb5oauyLN14E9YgLjAXCI+GH7py4+PxGPv3X9xKNBcoCILj8egG8cseITCYJIkbabIVaDqd4hUbM2ax2Wyw9bhkLX8T2Qq0XC7d56+FYeg241tsBcKCwvHhcEjTFFsMBt1PW1gM1IkCEQpEKBChQIQCEQpEKBChQEQV6IHv6SoQoSV2k/YgQoEIBSIUiFAgQoEIBSIUiFAgQoEIBSIUiFAgQoEIBSIUiFAgQoEIBSIUiFAgwgXqqf8RKM/z+n/Ue4d+8aCpcyBbLpdPHSaPaYUu+BAAAAAASUVORK5CYII=</file>
+      <answer>
+        <text>OR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<img src="@@PLUGINFILE@@/F_eur.png" alt="Porte F" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br>]]></text>
+<file name="F_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAIxSURBVHhe7duhjsJAFIXhSiQSgSAoBIogSBWOyj4CiiCRTRBIJOsQCCRvAHJlH6ECgUQikewtMyFLFnpm2M0m5Z5PMVMa6J/OBBIILlTIO1CWZXEc90soiqI0Te1lOPMONB6Pg9KSRvYynHkHGg6H8kpJknyWymKxkLct95G9DGcvBlqv13ZcEtKIgYowEMBAAAMBDAQwEMBAAAMBbxto/xHKy4Ufezt+1VsGyuNImu1IWyC54mC0tQNMX6BcHulu6ZiJb24JdQYyzA4DbicGYqAHuMQK5C24Sf8BuwBvPKL+8JaB/hIDAb8KtNls5ExHtVpNXaBerycne9EV6Hg8yvmOoihSF8gLN2mAgQAGAkodqNPp2LEzLYFWq5W8bbFcLu2UG113kDGZTOysA12Bms3mNVEQx/H5fLbHCqnbpOVrQ6VSkcfy8fh0OtnDz6kLJI/TNK1WqzJsNBpZlpknPKMxkDgcDq1WS2aklBwykw8pDSRkfclQJmXFFVyO3kBC9unbTy6TJLGz93QFkk1n9sNgMLgmCtrt9nQ6tbOzmdmedAXyIktPTtQVSLZkWWUPdbvder0ehqEd9/vz+VxOVL0HuWAggIEABgIYCGAggIEABgIYCGAggIEABgIYCMgDvfA/XQYCuMSe4h4EMBDAQAADAQwEMBDAQAADAQwEMBDAQAADAQwEMBDAQAADAQwEMBDAQAADAQwEmEAl9R+Bdrud+TNIGZkfrnrxDqTL5fIF1V6NkjRYaGwAAAAASUVORK5CYII=</file>
+<file name="LogicGate-OR_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAGgSURBVHhe7duxbQIxGEBhyispKRkDpUp5JSNQIUagS0kJG1CyAZQpGeEKBmAM4tNZKFESnk1QpMPv64z06/DT2RUMLropO1DTNNPp9LWH6ro+Ho9xG8myAy0Wi0FvhUZxG8myA81ms/Ck5XL53ivr9Tp87fAexW0kuzPQdruN654IjQx0i4GAgYCBgIGAgYCBgIHA0wY6bV7C4142p7i+11MGauOENPt5aYHCjgfzfVyw8gK12khfjk73wSfXhGUG6nQ3DLxOBjLQDzxiN7QtvKQfIB7Aq4yo3zxloEcyEPhToN1uFyYTjUaj4gJNJpMwnKWsQOfzOcwnquu6uEBZvKSBgYCBgIGAgYCBgIGAgYCBgIGAgYCBQK8Djcfjt2RN04TBsgJlqaoqDJYVaDgchlOWaLVahUHvIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgINAGuuN/ugYCHrFfeQcBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDgS5QT/1HoMPhUFVVfGDfdD9czZIdqCyXywc4pNKMna0+pgAAAABJRU5ErkJggg==</file>
+      <answer>
+        <text>NOR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<img src="@@PLUGINFILE@@/G_eur.png" alt="Porte G" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br>]]></text>
+<file name="G_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAGOSURBVHhe7dshbgJBGEBh5EokkmMQVOVKjoAiHAFXiYQbILkByEqOsIIDcAz6UyZpK+DtQNNk2Pe5DZkM8zIzWQG9s+7KDtQ0zWQyeStQXdeHwyEto7XsQPP5vFesaJSW0Vp2oOl0GjMtFouPoqxWq/jasY/SMlp7MNBms0nPhYhGBrrHQMBAwEDAQMBAwEDAQODVAh3X45hlvD6m56e9UqBLnEizmxnoLgN9NfhttkufBAMBAwEDecSeY6Bbru9A335uq4e94A76WwYCTwXabrcxsqXBYNC5QKPRKAZn6Vag0+kU41uq67pzgbJ4SQMDAQMBAwEDAQMBAwEDAQMBAwEDAQOBogMNh8P31pqmiYHdCpSlqqoY2K1A/X4/TllLy+UyBnoHAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDgUugB/6nayDgEbvJOwgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIXAMV6j8C7ff7qqrShKW5/nA1S3agbjmfPwFr9/LoF6S0kAAAAABJRU5ErkJggg==</file>
+<file name="LogicGate-XNOR_eur1.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAIpSURBVHhe7duvbsJAAMfxJRgEgqAqETwAsiGIyco+AoogkXWTyPIGyL4BlZNIZAUCWYlEsh+9C/vD6K+FZUm530eQcrSB+6Z3Q4yXk5SqHSjLsjAMXxsoCILNZmOnUVntQLPZ7KWx0MhOo7LagSaTCd4piqL3RonjGB8b95GdRmV3BlqtVvZ5Q6CRApVRIEKBCAUiFIhQIEKBCAUini3QbjnCu4yWO/v8Yc8U6BwHadZTBSqlQEWD76Zr+wooEKFAhAJpiT1GgW4x34E+fb2t7vaEd9DfUiDioUBJkuDKijzPcy6Q7/u4uBa3AuV5jusrCoLAuUC1aJMmFIhQIEKBCAUiFIhQIEKBiOcIdDweD4eDOS7nXKA0TYfDIY6h3+8vFgt7xg1uBRoMBkWZs3a7bQ7CMLQn/catQK1WC4+XuwZ3U7fbLZ+OW4EAn98OFTARDGKtvV3JsgwnOBcoSRI7VMjz3IxfwxrECc4Fwq1hhwpmvNPpYP/+waxE5wJ5nrff780g/tgjBAajKDIj19wK1Ov18IiNGbOYz+fYekyyku9EbgUaj8fm81/4vm8241vcCoQFhePtdhvHMbYYDJpXS7gYqBYFIhSIUCBCgQgFIhSIUCBCgYhzoDt+p6tAhJbYTdqDCAUiFIhQIEKBCAUiFIhQIEKBCAUiFIhQIEKBCAUiFIhQIEKBCAUiFIhQIEKBCBOoof4jUJqml/9Rbxz6w4NrtQO55XT6AFB5r8W9qVxMAAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>XOR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<img src="@@PLUGINFILE@@/H_eur.png" alt="Porte H" width="96" height="81" class="img-fluid atto_image_button_text-bottom"><br>]]></text>
+<file name="H_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAIfSURBVHhe7duhjsJAAIThSiQSgSAoBIogSBWOyj4CiiCRTRBIJDgEAskbgDzZR6hAIJFIJDfQzd2Rg84WLpeUnU+xWxron+4GEvDOkil3oCRJwjDsFlAQBHEcm8uwljvQcDj0CguNzGVYyx2o3+/jlaIo+iiU2WyGt437yFyGtScDrVYrMy4INFKgLApEKBChQIQCEQpEKBChQMS7BdrNfbyKP9+Z8cveKdAlDtJsBgqUSYGuDW4NNuYIKBChQIQCaYm9RoEeST8Dfft5Wz3tDe+gv6VAxEuB1us1zrRUqVScC9TpdHByLm4FOhwOON9SEATOBcpFmzShQIQCEYUO1Gq1zNiaK4GWyyXeNiwWCzNlx607KDUajcysBbcC1ev1ayIvDMPT6WSOZXJuk8bXhlKphMf4eHw8Hs3hx5wLhMdxHJfLZQxrtVqSJOkTHnExEOz3+0ajgRmUwqF08i5HAwHWF4aYxIrLuBx3AwH26a+fXEZRZGZvuRUIm87kl16vd03kNZvN8XhsZieTdHtyK1AuWHo40a1A2JKxyu5qt9vVatX3fTPudqfTKU50eg+yoUCEAhEKRCgQoUCEAhEKRCgQoUCEAhEKRCgQcQn0xP90FYjQEntIexChQIQCEQpEKBChQIQCEQpEKBChQIQCEQpEKBChQIQCEQpEKBChQIQCEQpEKBCRBiqo/wi03W7TP4MUUfrD1VxyB3LL+fwJCMCt7seqYYgAAAAASUVORK5CYII=</file>
+<file name="LogicGate-XOR_eur.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAABRCAIAAACi3DRnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAGOSURBVHhe7dshbgJBGEBh5EokkmMQVOVKjoAiHAFXiYQbILkByEqOsIIDcAz6UyZpK+DtQNNk2Pe5DZkM8zIzWQG9s+7KDtQ0zWQyeStQXdeHwyEto7XsQPP5vFesaJSW0Vp2oOl0GjMtFouPoqxWq/jasY/SMlp7MNBms0nPhYhGBrrHQMBAwEDAQMBAwEDAQODVAh3X45hlvD6m56e9UqBLnEizmxnoLgN9NfhttkufBAMBAwEDecSeY6Bbru9A335uq4e94A76WwYCTwXabrcxsqXBYNC5QKPRKAZn6Vag0+kU41uq67pzgbJ4SQMDAQMBAwEDAQMBAwEDAQMBAwEDAQOBogMNh8P31pqmiYHdCpSlqqoY2K1A/X4/TllLy+UyBnoHAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDgUugB/6nayDgEbvJOwgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIXAMV6j8C7ff7qqrShKW5/nA1S3agbjmfPwFr9/LoF6S0kAAAAABJRU5ErkJggg==</file>
+      <answer>
+        <text>XNOR</text>
+      </answer>
+    </subquestion>
+  </question>
+
+<!-- question: 141516  -->
+  <question type="matching">
+    <name>
+      <text>Schémas (2)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr">Sélectionnez le nom de chaque porte logique selon son équivalent en schéma<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/A_usa.png" alt="Porte A" width="106" height="42" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="A_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAqCAIAAADUG1msAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAFhSURBVGhD7dmxcYQwEEDRg4gSKIMyKIFQZdAFZRBSgssgpARChXi5zyV26Flpd8c/Elyw6KG5hNf13x8qwZdSGsdx27bnOlDqfMdxvD4NwxAMsRxf3/csIiGW48s5L8sSDLEcH5fBEEvzURjEOnwUALEmH7lGrM9HThGt8JE7RFt85AjRIh+5QLTLR8YRrfORWUQffGQQ0RMfmUL0x0dGEL3yUXVE33xUEfHe1TzPXdcxWy/m6fUDsW1bFkqllGTovSt5Xc89zd571E1O+jRNjGuahoVS8p5k4rOrL7XWdWUeg5QSODkODJJkLXOfJ9DpPE+Zq34otP/7fsPJnec3/Rzz1YUjl3wW4MgZnx04csNnDY4c8NmEI9N8luHIKJ99ODLH5wWODPH5giMTfB7hqDKfXziqxucdjirwxYCjonyR4KgcXzA4KsdHYeBInS/nzPeHYHCkzift+x4P7u66vgEJi2OMYNe+nwAAAABJRU5ErkJggg==</file>
+      <answer>
+        <text>YES</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/B_usa.png" alt="Porte B" width="106" height="42" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="B_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGoAAAAqCAIAAADUG1msAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAICSURBVGhD7dkrk8JAEIXRSCSSn4ChColERiKRkUgkDolEIpFIJBKJREYikcjI7IXbS1Gwz9qZSXfXfoIiM5tkc/ISZPV/fygFX1EUeZ5vt1tZdlR0vtPplL3X7/edIabj63Q6/OIJMR1fVVXL5dIZYjo+LjpDTM3H3CA2w8ccIDbJx0wjNs/HjCJq4WPmEHXxMUOIGvmYCUS9fEw5onY+phbRBh9TiGiJj/0KcbPZzGaz6XS6Xq+xooyGyx4f+xbxeDwOBgPOsm63i0GZDpRVPvYZIsaBhRF8zufzxWJBSvzl+XzmukGyzcdeESeTCb7A7vGGHQ6HGMS9LMshuh4VtthqtW67jhj3F68nRITnnczd2u/3MhGioiiwzetR4XTJWMxuhxA3XOnj8Vj2l2WvT0OZCBHOE7YpR4UzEym8+7g/7ihSgMPlwB2hXq+HT14g9/AQxGCe5/Kf/a3L5YJtRr8oYj/7nuDwHSNlWfJxhOcS3hU4VLw9OIIjlzVDZJjvQziZq+vVaiUTD+EClOlAmeT7Gu7e4XAYjUbtdhvXHe7Z3W4nE+EyxvdDuGSZ4dMGxwzw6YRjqvk0wzGlfPrhmDo+K3BMEZ8tOKaCzyIca5jPLhxrjM86HGuAzwccS8rnCY6l43MGx9LxMTdwLDpfVVX8/cEZHIvOh8qy9Ad3ra7fAEGwFnMCuhiwAAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>NOT</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/C_usa.png" alt="Porte C" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="C_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAALxSURBVGhD7ZsvjOJAFIdXIk8REgQkmAoEiiBPIpGVlZVNMDgkEkWQSBRBIlciK5FIJBLJfb33UrHZuzDT8u91P7XTzS4/vn3zZqZlP64//BcfQePx+Jcv7Xa72+32+/3f7kz/Mp/Pj8ejRrk/PoJ4nx/PptfrIetwOGimu+EjqNlsEpG/5OcD4eUwMplMKKVarSaaAFPb7VaT3QEfQUwTkhFax88AKVEU5bWMtf1+r98rlXcVJFwuF8oq14Qyruj3SuK9BQnn8zlJEpl3zLhyW7gFQUKaphKMgioxmx1BQCnRjMhGNe12O71aDFOCgB5EJ5I6KmWuWRMkDIdDEgZBQE3pJV9sCsKLhMSUXvIlE0QpzmazbBt/G7KsvrIgYJMtOQtuIzNBLI38IldeXBCw+SYnpVRkc5QJWq/X2VnwZmTH8fqC8CITDVN6yR2bPSiH+UXURqPhXUTGBYE0kNVqpWNH7AtaLpekHY1GOnbEviDWaNLSN/1mmX1BMBgMCMxapGMXKiGIXR6B4zjWsQuVEESHJjAbFB27UAlBRCUwy5mOXaiEII4dBK7X6zp2oRKCOLsS2JUoivjZSghigZf37AT7b362EoLyrRCZb0fuJVWoSRNbxy5UQhBbRAL/LPP/RI5jYRjq2IVKCOKkSmA06dgF+4JYwuQOn99DDvuC5J4Z51UdO2JfkDwmm06nOnbEuKA0TWV+eX+SKBNk8rGPIO3Z+3YiZIKkIlx5fUGUDzmpoNPppJfcyQSZfOzD4iW365Mk0UtemO1BcRwTkgNnkfIBm4LkmSqVXvxzeQYF7XY74oHf1vkL1gQhRVpkwdaTY0qQ9B3we4DxLUYEsaKzvIqdUmZWztsLYpcbhqGoKffjm8IbCyIAU0k6DvB1wRX9W3wEtVqtpwji/fOi8hl7NjjiBThJ+N3KuAUfQXIWezoUMkvVvf+fxUdQp9PRjA8nCAKaMQdmurKmuTM+gmCxWLBbdWWz2TBHPHiYjq9cr38AE/0JrfqulOgAAAAASUVORK5CYII=</file>
+      <answer>
+        <text>AND</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/D_usa.png" alt="Porte D" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="D_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAANSSURBVGhD7ZstjOJAFIBXIFDkJAkhkGAqECiCQJxEIisrK5tg6k4iUQSJRBEk8iSyEolEIpHc13uTZlMIMNPyN91PbGghy+u3b957U9iv0w9XMRE0Go1+mdJsNtvtdrfb/a3Pn/9MJpPdbqdCeTwmgrjOr1fT6XSQtd1uVUwPw0RQrVYjRP6Sf58Ib4eRMAxJpXK5LJoAU6vVSkX2AEwEsUyIjKDV8StAiud5SS5jbbPZqOdy5VMFCcfjkbRKNKGMM+q5nPhsQcLhcAiCQNYdKy7fEm6DICGKIgmMhMoxNnsEAalEMSI2smm9Xquz2bBKEFCDqESSR7msNdsECYPBgAgdxyGn1ClT7BSEFwkSU+qUKbEgUnE8Hsdj/H1IW31nQcCQLXFmHCNjQbRGfpEuby4IGL6Jk1TKMhzFghaLRbwXvBuZON5fEF5koWFKndLHzhqUwPoi1Gq1apxElgsCKSDz+Vwda2K/oNlsRrTD4VAda2K/IHo00VI3zVaZ/YKg1+sRML1IHetQCEFMeQTs+74cUrnDMAyCgMJ0c9QuhCBEEDADCstNsimBBnf9QgohiFAJmHYmdpDCfoC0kkMG7v1+r156RiEEse0g4Eqlwk+C/76s6G6c9DxPHZ9RCEEYIWAhNVVHUaSeOEOsFUIQDV6uGVITowwBF2El8oJCCBILpVKJn6mJUTa0/X6fy0khK7FARbper8sNEBo8yrh+hmzZeF+5P1sIQYyIBEyb54EY+Q6+1OsuUQhBsh1zXZfHdDRWGamEKZTdvLdfCEHSy9GkjnWwXxAtTJYVdUed0sF+QXLPjKFZHWtivyD5mIy9hTrWxHJBDMqyvoy/SRQLYnHa97GPIOU5NRxqEQuSjNDl/QXJPosMurJZv0ksyMqPfWhecrv++hx4E2trkO/7BMmGM0v6gJ2CZAtKpmf/Xp6Fgtg9EB6Yjc4pbBOUbNAzlp4EqwRJ3YHkA4zsWCKIjk57FTu5rKyEjxfElOu6rqhhgs09qg8WRAAsJak4wOOMHf0iJoIajcZLBHH9vKl8x54BR7wAOwmzWxn3YCJI9mIvh0SmVT36/1lMBLVaLRXj03Ech2LMhpmqrKJ5MCaCYDqdMq3qslwuWSMGPE1HmtPpH0ijvZZzg8LaAAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>NAND</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/E_usa.png" alt="Porte E" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="E_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAQjSURBVGhD7ZshUCsxEIYRDIOsRFZWICqrOk9WViLrqOxMDQ5RgaysRFYikUgksrKyElnJ+8q/k+nw3uP1kk1ygk9x6Vxu8+9ms7kcZx8/fEuMQE9PT79iub+/5/bNZmN9tZ4YgabT6Vkyl5eX6HV3d7der3e7nXXdPmIEwv8Mj0ESDi9NeH5+5pbRaNTtdiVToN/vI9br66s9ozVE5iDGyagY536/t6aGvL+/Ixn9jMdjyS06nc7Nzc3j42N0z75ECoT1+Jzx4HZrSoPgms1mvV5PMgFKMZerx1SkQPD29ibP+45hu92uViupL1BtuVzWylPxAgHhwwAYjF27QqYjgogjyYQzCLHyMiUJxES7urrCelZua/KGR5CPyOtBpslkQpTZz/lJEggIfuwm0dp1NpjRPEUyATKViaZUgfCwMhEDsKacHMvEcx8eHuyHbKQKBKQGzC0QRAFkCpOOFJ51pTsIxJTGFZQkcczn8/Pzc2wtnEGpDELByYyjsLIfXDkIdLympoBY6rQYTHAeqjnOcpEjlA4CsRvSTjKa6+trTBwMBuq0MMwAbMAAlKKGslYnHHIQEN5yY6Y4PwWlQmCnQmRZazI+AoF8mK8gOgWmgvxE0vBylZtA5AIsw412XQkWOGVuL43cBGJrjlkYZ9f1ICU5auQmENMem6ANb78cNXITCGRTmZL6vwSNSI7WFIWnQKqnqN/sujZopL10SoHmKZDKfzbfdt0ClBmBP6ypIZ4CUe9jSoENZCO0vBJKccnRU6CWrPR/ohqtKfibe/0FUr+tQoY1haDjXk+BVOynZMQcsINVeb1YLMhEp6P6wFMgNkHY4b5dTIFBarGPnvieArVhO/YFvX4cDAbR21dPgeSr6idZAa2qnU6HgsiamuMpkKZ6ijWOSB1MSixc3QRCF7nLrqvipQ64CUQBjU0lX93/FXKNozrgJpDS4XK5tOsaEMXaD3qpA24C6Yy4YgJi9ZQNvV7P8Y3CQSBGlXLsA7e3t1jGKqZOy6OvBIBazOVFYuAgkJbndKpsMqgq9NEM0yrHBD8IlHjsMxwOLy4uMLFwiUikhI8B852vOuQg9MVEsqNdF4GH6mUYgUN+cDzn+YKDQFo4sNiuM0Oc6olA/Ob+YDZVIMzFUJyZz4cBfBCk4YllXl2mCoQPMTdr+YP0aBFWEqThcQX8IZIEohiTxZnMpX9WRrJMFWlEvEAYisXY7R4+pBXqmuPig5m1Wq0KSyPiBdIS6/VFB4MnndHnsS44YDab1f2/hUiBXj6PUwj+ROvZExCA4XMxQbcUxIWrqn8RIxDeVvHKJsOaToZtDYsRM4jsHpKLoE/ixWuT6UWMQOhiY2rIF0WACaV/PKi4y/2eGIF0ehEHaYUJhcTh2KDlROYgNj6fRyPNaMOHH834+PgNcPMgVN1I+lIAAAAASUVORK5CYII=</file>
+      <answer>
+        <text>OR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/F_usa.png" alt="Porte F" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="F_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAASISURBVGhD7ZshUORAEEURFIVciUSuQCARFHUSHBKJA7lVGBwSubiVSORKJBKJRCKRSCT3dn/fVCrLZclMz0wET1yRCSQ9v3t6upPcxtcvncQINJ/P/8Ryc3PDn7++vtq1Bk+MQJeXlxvJbG9vo9f19fXDw8P7+7tdenjECIT/mR6TJBye+vD4+MifHB8f7+7uSqbA/v4+Yj0/P9s9BkNkDmKezIp5fn5+2lBPPj4+kIzrnJ6eSm4xGo3Ozs7u7++jr+xLpEBYj8+ZD263oTQIrslkMh6PJROgFGu5ekxFCgQvLy/yvO8c3t7eZrOZ1BeoNp1Oa+WpeIGA8GECTMaOXSHTEUHEkWTCGYRYeZmSBGKh7ezsYD07tw15wy3IR+T1INP5+TlRZqfzkyQQEPzYTaK142ywormLZAJkKhNNqQLhYWUiJmBDOWnKxH1vb2/tRDZSBQJSA+YWCKIAMoVFRwrPutMtBGJJ4wpKkjiurq42NzextXAGpTIIBScrjsLKTriyEKi5p6aAWLpoMVjg3FRrnO0iRygtBKIbUicZzd7eHiYeHBzoooVhBWADBqAUNZSNOuGQg4DwlhszxflPUCoEOhUiy0aT8REI5MN8BdFPYCnITyQNL1e5CUQuwDLcaMeVYINT5vbSyE0gWnPMwjg7rgcpyVEjN4FY9tgEQ3j65aiRm0Agm8qU1GsJGpEcbegfJErabLIBXd5a+TwFUj1F/WbHtUEj9dKhQGOEWoSRAL9ActDZb/EUSOU/brHjAaDMCFJB6iAKktE86HA0GnWkBU+BqPe5X4EGshfaXhHl7u6OH1h3zWWl1hfL7XgFT4EGstOvohpNTKdTG11CxrQTK0g1f4E6vFELGSZaGYCsZCdWIOj4BU+BVOxjjR0PAzpYldcnJyf823osowd+h4eHJKkWWomeAtEEcTP3djEFJqnNHueRifWEm58JHE5hqrTr2Hk9BRpCO9ZCOZjdSu1raNaadCdNT4Hkq+pvsgLaVYka4sWGli9LUI1BlMKja6s2T4HknKY1FZE6mJRYuLoJpO0Az9hxVbzUATeB2D6xqeSj+28h1ziqA24CKR22yrDCEMXqB73UATeBtINWTEDsnrJhPB47PlFYCMSsUl77wMXFBZaxi+mi5dFXAkAttvYJRi8WAml7TqdKk0FVoY9mWFY5FvhCoMTXPkdHR1tbW5hYuEQkUsLHgPnerzrkIPTFRLKjHReBm+phGIFDfnB8z9PCQSBtHFhsx5khTnVHIH5zfzCbKhDmYijOzOfDAD4I0nDHMo8uUwXCh5ibtfxBerQIOwnScLsC/hBJAlGMyeJM5nJ9dkayTBVpRLxAGIrF2O0ePqQV6ppm8cHKms1mhaUR8QJpi/X6ooPJk864ZlMXHDCZTHKn4W4iBXpavk4h+BOtpycgAMPnYoLLUhAXrqr+R4xAeFvFK02GDf0Y2ho2I1YQ2T0kF8E1iRevJtOLGIHQxebUk5YiwILSfzyo2OV2EyMQfrb59Ye0woJC4vDaYOBE5iAan+WrkX4M4cOPfnx9/QWLu9JvfB7TEgAAAABJRU5ErkJggg==</file>
+      <answer>
+        <text>NOR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/G_usa.png" alt="Porte G" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="G_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAATwSURBVGhD7ZohUCsxEIYrGAZRUYlEVlQgqxgkEonEFUdnEOAqEMjKSmQlEolEIpFIJBLZ9939aV7mjkcvuSR34n2KLNPc3p/dzebuBpv//MpugZ6eni4uLr6+vsy4tJyGslgs+Pn7+7uZq/fsFujq6mowGKCRGW8tLTk4OECvu7u79Xr9+flppu4fuwX6+PjgZril5+dnWVh/WQiHFx+YgZ+cnZ0dHR2VKv3l+PgYsV5fX3WJ/tCoBq1WK+7h8PDQJhr3iYX7/P7+lsUXpkIy5jk/P5fcYjQaEa2Pj4/BM8elaZGeTqd4f3l5qSHes+ZYWHZZWkJwzefz8XhcqlSAUuRy5zHVVCCbViy7LG9vb7LEvQcymoCV+gLVlstlV3WqqUDw8PCAu7huxpsN4VOxRIQlIYKIo1KloqgTYvll8hAItLDs0xqSaBQm1xIdLkE9oq6XKhUykeZEmfl3evwEItTx0g0ZWSi0ZpwMMpqrlCoVIFOeaPITyIaMrURYVIm4AVmS4srEdcl6849k+AkE9ZChNFQsqUEmm3SU8KQ7XSEQKc1S0JI04fb2dm9vD89ms5ksNzc3smSuoHQGtuEk49zDUEQKgdw9tQ2IpUmzQYJzUeU4uZ8ilAqBOA3pJNkQCTocDs349HQymWChmdSkmSED8AEHUIoeylgj4V2DwBZmG9X8UbHkR6UQOKngobG2JkQg0IrRoZjx1pKuIWoCqaB1IsZjLVWgQNrL7NEMqAVYWEYz7gg2OFXuWBoFCoQfOIErZrzZ0BlVLF1BSYqoUaBAgAdgt3bSvmLpkIgahQskD9wGum7pEKsRxdGYgggXSJu9fcwIdUu3oJEORm0atHCB1Oy7G1nd0jmqjGAPj76EC8QWxoXd42Ld0ge0vRJKYcUxXKD6vt6Tnb6OejRf1MS0FajeCrmWniDHfCHo+G24QGrtubYZ/2TpA5xg1V7f399TiZqj/iBcII48XNU9HNYtncNNarMPTvxwgeqHrz4cxyro8eN0Og0+voYLpJVxH8HULd2iXXU0GtEQGZM/4QIpsd1r1y0dInVwqWXjGigQKmhxzPgnS4fEUgcCBaJdxgP3QX3d0gnUmojqQKBAcmK5XJrxthy6lvwQxToPxlIHAgWqH9z1jrjDAsTuKR/G43HEJwqFQNxV89c+cH19rVUy48ViNpthQTVNmh99JQD0YlEeJFoKgRQO7SHvNGlO6Cr00QwLliLBC4F8X/sMh0McmkwmGp6cnOzv72PJ3CISKfZjwHTvV71rECrgkA5yAn2xUB3NOAtcVA/DCBzqQ8T3PBW8BdKnZm4wa+PAYzNODCukKwLxm/qDWT+B9DKDpbMrZgMq3RpaWAMrDVfM8+jSTyA1O2xbZrw9oCZtf5AeLexOgjRcLsN6CA+BqIL4R87bZ5c0Y/I4kbvMz87IFUtlcksjmgqEW9pNbfhgwWMs0cOHskJf4zYfZNZqtcosjWgqkP1e03qpLTbWFx1MSzljTlcXFmA+n6cuw7/TSCBqs+Lc9hov5esUjC29Z2YC0H4uJpiWhjhzV/UvdgvE2mrvsN+MY6mkW3M41rAZMRXV3RYXwZzES6xDZix2C0QbhvdEvk0udNEt+VJRBJiWYGGT6vCU+zu7BWJVuTFyyoydT5UCoKyQUEhsXxv0nKZFugLFqHgz4kkfPvzwY7P5A6/QCa56Ji/tAAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>XOR</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/H_usa.png" alt="Porte H" width="96" height="50" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="H_usa.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAGAAAAAyCAIAAAAsvEmTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAAVKSURBVGhD7ZohUOQwFIaZgWEQK1YikStWYJhhEAwSiUTiwLEzCNatZFDIlUgkEnkSiUQikUjk3tf+2Vymhd0mTdKK+8QNeXDp65/3Xl7abiz+s5L1Aj0/P5+fn399fZlxaTkJZTab8d/f39/NXL1nvUBXV1cbGxtoZMZLS0t2dnbQazqdPj09fX5+mqn7x3qBPj4+uBlu6eXlRRbWXxbC4Y8PzMB/OT093dvbK1X6x/7+PmK9vr7qEv2hUQ2az+fcw+7urk007hML9/n9/S2LL0yFZMxzdnYmucVwOCRaHx8fg2eOS9MifXh4iPcXFxca4j1rjoVll6UlBNdkMhmNRqVKBShFLnceU00FsmnFssvy9vYmS9x7IKMJWKkvUO3h4aGrOtVUILi7u8NdXDfjxYLwqVgiwpIQQcRRqVJR1Amx/DJ5CARaWPZpDUk0CpNriQ6XoB5R10uVCplIc6LM/Do9fgIR6njphowsFFozTgYZzVVKlQqQKU80+QlkQ8ZWIiyqRNyALElxZeK6ZL35RTL8BIJ6yFAaKpbUIJNNOkp40p2uEIiUZiloSZpwe3u7tbWFZ5eXl7Lc3NzIkrmC0hnYhpOMcw9DESkEcvfUNiCWJs0GCc5FlePkfopQKgTiNKSTZEMk6GAwMOOTk/F4jIVmUpNmhgzABxxAKXooY42Edw0CW5htVPNDxZIflULgpIKHxtqaEIFAK0aHYsZLS7qGqAmkgtaJGI+1VIECaS+zRzOgFmBhGc24I9jgVLljaRQoEH7gBK6Y8WJBZ1SxdAUlKaJGgQIBHoDd2kn7iqVDImoULpA8cBvouqVDrEYUR2MqD8B0fJyBKQgN/QwXSJu9fcwIdUu3oJEORmrQVCVdqKFr97twgdTsuxtZ3dI5qoxwf3+vH2gCFEQaSrsVhAuE/FzAPS7WLX1AgbO5ucm/bL7GWp5UsNAWrC5S4QLpwu6+Xrf0hKOjIxwbDodmvES922+oiWkrUL0Vci09gXM1jlGzzXiJ+4CpDvWLvwkXSK09opjxT5Y+wAlW7TW4OxftiEo4/Telqo5SL1wgqh2zu4fDuqVzuElt9gcHB/yLIjoMoZre07hNwI+EC1Q/fPXhOFZBSYQWKKUuxIWqRCtg/vQXwgXSyriPYOqWbtGualWg5ZlOp5JpNBrx2yZNf7hASmx3BeqWDpE6uNSycQ0UCBW0OGb8k6VDYqkDgQLRLuOB+6C+bukE8iiiOhAokJxwG1OVQ9eSH6JYJSaWOhAokOqx21aQXFg6LEDsnvKBAhzxiUIhEHfV/LUPXF9fa5XMeDb7rVXNhr4SAHqxlg+AKhQCKRzaQ95p0pzQVeijGRYsRYIXAvm+9hkMBjg0Ho81PD4+3t7expK5RSRS7FOLdO9XvWsQKuCQDnICfbFQHc04C1xUJykCh/oQ8T1PBW+BdIRxg1kbBx6bcWJYIXtoIH5TfzDrJxC7A26xdHbFbEClW0MLa2Cl4Yp5Hl36CaRmh23LjJcH1KTtD9Kjhd1JkIbLZVgP4SEQVRD/yHl7xtNTy3Thw/zsjFyxVCa3NKKpQLil3dSGDxY8xhI9fCgr9DVu80FmzefzzNKIpgLZ7zWtl9piY33RwbSUM+Z0dWEBJpNJ6jK8mkYCUZsV57bX+FO+TsHY0ntmJgDt52KCaWmIM3dVv7FeINZWewdBZC2VdGsOxxo2I6aiutviIpiTeIl1yIzFeoFow/CeyLfJhS66JV8qigDTEixsUh2eclezXiBWlRsjp8zY+VQpAMoKCYXE9rVBz2lapCtQjIo3I5704cMPPxaLv0+Cv90W0TIKAAAAAElFTkSuQmCC</file>
+      <answer>
+        <text>XNOR</text>
+      </answer>
+    </subquestion>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Portes Logiques/Transformation Circuit//Formule Logique</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Questions sur la représentation des représentations sous forme de circuit ou de formule logique<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141541  -->
+  <question type="multichoice">
+    <name>
+      <text>Schéma A</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Choisissez la formule logique à laquelle correspond ce schéma :</p><p><br></p><p><img src="@@PLUGINFILE@@/schema_A.png" alt="Schéma A" width="385" height="229" class="img-fluid atto_image_button_text-bottom"><br></p><br>]]></text>
+<file name="schema_A.png" path="/" encoding="base64">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</file>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A ET (A OU B)) OU ((A ET B) OU (B ET C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A OU (A ET B)) ET ((A OU B) ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A OU (A ET B)) NON-ET ((A OU B) ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A XOR (A ET B)) ET ((A XOR B) ET (B XOR C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141546  -->
+  <question type="multichoice">
+    <name>
+      <text>Schéma B</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Choisissez la formule logique à laquelle correspond ce schéma :</p><p dir="ltr" style="text-align: left;"><br></p><p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/schema_B.png" alt="Schéma B" width="385" height="229" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="schema_B.png" path="/" encoding="base64">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</file>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[X = (A OU (A NON-OU B)) ET ((A NON-OU B) ET (B XOR C))<br>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A ET (A NON-ET B)) OU ((A NON-ET B) OU (B XOR C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A ET (A NON-ET B)) XOR ((A NON-ET B) XOR (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A XOR (A XNOR B)) ET ((A XNOR B) ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141548  -->
+  <question type="multichoice">
+    <name>
+      <text>Schéma C</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Choisissez la formule logique à laquelle correspond ce schéma :</p><p dir="ltr" style="text-align: left;"><br></p><p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/schema_C.png" alt="Schéma C" width="385" height="229" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="schema_C.png" path="/" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAYEAAADlCAIAAAA6KdyLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHsIAAB7CAW7QdT4AAB8VSURBVHhe7Z0xaBzZGcfPhtgikHgJhqgIhxOEEZcjiCSFYoxRF3Wn7gQpIjji23CFFwKxqqhIoVJuji1SGNJsucURC1eCNFuKVCquUKlS5ZbOb/d7ejdajaXZmdk37+38f4XYGWln347e+833vffmzScfhBCiOZbNQTs7O5+IwnC63IkToiGWzUGubYnCuBMnREMsp4Pchvg45+fnOlciBuSgliIHiUiQg1qKHCQiQQ5qKXKQiAQ5qKXIQSIS5KCWIgeJSJCDWoocJCJBDmopcpCIBDmopchBIhLkoJZSzkGj0eikFHycO4QQ15GDWkoJBx0dHdlbytHpdLa2tg4ODobDoZQkPHJQSynhoMFgYG9ZX1/HJsXZ2NiwN2ZBSTs7O/1+/+Liwn2AaCVyUEspl4ttb2/zls3NTbc9D2RkRFJ7e3s3lcSe/f19Ej33p6JNyEEtpZyDiFmIX3gX8YvbVRaUdHh4iM6sGAYH73a7klGrkINaSjkHwdu3b3nXyspKXX06l5eXZHmo58mTJ1YkIN3DUErT2oAc1FJKOwgsI9va2nLb9XF2doaMVldXrWzAZw2HQ/drsYzIQS2lioN8RrY4OxAZmemMjY0N4i/3O7FcyEEtpYqDoNfr8V7U4LYXA7IjI/NhEcmaTLR8yEEtpaKDsMPKygpvPz09dbsWxng8Pjo6ypqIKMn9TqSPHNRSKjoI9vb2eHuwVfExEUGQ77fe3Nw8OztzvxMpIwe1lOoOIgKyI3AotysI/X7feqNgf3//8vLS/UKkSdsdZHH+QSm4LAfIRBaEd5D7MqVYX1/nCL1ezx00FGSCu7u7Vn5ytOPjY/cLkSBtd5DNdqnI1tYW7TAtJRE+3Lt3z32BapAfuYOGBfWYBCG8B0VdtN1BhAPWt4pH3MW9GFR63mIfl4U0gUs0Pop/fh0B4J///Gf3fcpiZ6+prhnCWBuhA/4dystSpO0OArsdnJC+XA0m9sE4uUpqw21QlhNxDt12EwyHQ+shIiJLNztuLXLQBLtraW9vz21XAOMQHczcBoXgkNFSjuNYMtv4M6M5t5aXEZepeygt5KAJXDwtp6ix+pImcH2euQ0KN/X7/WVKGaxvm7PH93W7GoKzigqtMNJQQshBDoIX3ogvFtGWCI4IskxzwAs2Aw9pLw4LQE5OTtx2o9isJWkoIQo31+/fPJs0n5fv3HakTMpYykGox9pS9VUpPgYXajKXbJq2u7u7BP0X1uwPDw/ddtNIQ2lRtLlOFPTy5cuIJYRErHcZeFEi37G3L/oeKDg7O7N2YpBBJG0iCyGjGh33GlIXdfwUdNBUQe8+vItVQiQCfqqIsbq6Om92gMXspqQwi0WQi82YKP7h/FyIHCk/MZ3bjgMbsKNWNN5RJW6nmIOcgj7EKSFCHnPHDFwG5+1zCRYKefAOEQRF5XM7nU48GU1xbJ3prQUsJ1QFaoWNBiB6t0tESSEHTRT07M33k5cxSmh/f5+qlsu8F+eQt4NnwZV+uRwMmNaUIuJNik3E4bajgdNo/823WvEjYoo4KKOg6etyEiJi51K5CH76059OG28ODx48cH9UmF/84he8sZEJLwQUPqBDrKkkETY8TxDntmPCAtv79+8/f/7c/YPv4sWLF48fP+b8u0OIBVPAQZPQ50pBTkI/bBaH/+60caUB189GFEAG4W8+2NzcTKKHyBwEbjsmzs7OrGzzwsXAHUIsmLvrzURBNyghIZo0Qfsi4BLninWDzz77zP3RPFgwwgtX9ODw0XbzAT8bLEZByFspalN3rt4CVc5GKqghk/9rMV6/fs1buGS6o4gFc6eDrkdBU3J2NQr1hkozg90UXq4jwIarmo3GCS42rp7DdXBw4PZGyfHxMYUkanPb0WD/R+Q410QNu/tEDgrGXQ7K9U1sEvrwodvtThrrdUr36VgtDDk6lguXcRtghpgHd+x0bW9vu+04sBkD5NTzdvDLQYG5w0EfsU18EppWHctfoOIgN5dNO85c188F4SdeRqshm6MYVfHMI8DZc7sKIwcFJsZ+xCqQwoDbqIDlQZE82cq3qDiTMutEj6dsFU+XHBSYZXNQXVhytzTtaqHYzCZK6LYbpfqJkoMCIwflQw2mImIitx0BvnX51k6qyGuKSuLZ4EqGNg+wlvCzItUFBHJQYOSgfKwiNjJT8Rasb4g2j3FOruYQeBoZyLNBycb778HPq6oYKspBgZGD8hkOh3FWRLRIwdbW1h49esSLJ0+eoB7bCeFvN+PT+dxmb5onHuQ/ZWegRCf0DHJQYOSgfEajERUxwnl3tDe7FdPaiZ/MbTeOPnjw4P3795OZdjf473//617VCjbkcxtcqef09NROSF3zOeWgwMhB+ZxfLVHqtmPC/Agzjzz2UxMC09R9LUDcZ71R6+vrdXVIyUGBkYPyidlBXO0nTf/GUNTtDqrraWI3aaS5chL8ilGkojXO5JKDAiMH5RNtLnZxceG7ojc3N30A4qcFBwtJ+CArSeBZVJwBP32cAtSeBspBgZGD8om2T5oiUbDf/e53P//5z3mBJWmQfo3qxS2GfRMbpAupaYKdg4MDH+7tL+Zh83JQYOSgfCysiG1s3gahaISkikRqPhkxAo/NWxBUfRyqCMQ+fDtvH5w7711gxZGDAiMH5RPhHEUrEvjch2yITIT9NJvAUwQtTkRDi079sI9f6xY2NjYWnfrJQYGRg/KJ7V4NLyBaiNvVKHY/3UKnBeEa3+8DSGHR9jHkoMDIQflYmhOm0t9JbAKyRJXMaBHLPJ6dnZF2+X532N7ermXiT0HkoMDIQTnYwDwsostzXvwtCJEIiJNjmVG95Tk9PT08PLTwynjy5AnyDZxjghwUGDkoB6uFjS8MSJThB7wiERDQOClPLSuWjfMeyY/gSMEanHgtBwVGDsrB1gBttjOI7MPyEVKekJnI7fhZSKWzMFKtwWBAtmUu8/A1UQ/tv/HYUw4KTMIOojajiRlevXr1zTffuI2y2Bhwgy2fMkwb5mQYKHwy8jF8FkZ0ZieqOGSUtGo/vOXhC+KjxQ20l0AOCkyqDuJqebNC1wgHDzbhOAut0feJEBc0UoaPgUqsYFXgxNK8ORRZ2CK6tKsjBwUmVQf5bmPqSpanT5+ura25jVI09YxDrGoTAoBALMzcv7kg8OS0uNM0J8RBpGAcwR0rYuSgwCTvILddE1yZLbwK/Kxn6r0fjSb8iTNAaAlyUGDkoGvsT2+GCPmYGlISn3ytr683OB4kDDkoMHLQD4zD3ghOXfc3fJF8HRwcRNX701rkoMDIQT9gN4ITlbjtxYBoqOV+RozZJ4bJkMKQgwIjBzkCBEGj0ajb7drAP/BxWE+xT2zIQYGRgxw2JrWIIOji4qLf72fX2eA1e2SfOJGDAiMHTSBCsaPVOBx2dnZGmGPP/zOIgPb29qKajyduIgcFRg6aZGEWpOzXsQbY8fFxr9fL3gAFm5ub1GwFPkkgBwVGDnLj8WionCOIa0isSOX8/aXGysrKzs4Ov6Ko7k9FCshBgWm7g0i+bFIikQvVbi78vJ4suIw4SNN80kUOCkzbHWQ3gldhdXV1e3v74ODg5OREQ+xLgBwUmLY7CNAQBilBtHddiiqUcNA//vGPTlkIwD///HMS+UloPQ+E21RCai8XvyRuxPsYcpAQ1yjhoB//+MdWGxsEl3W73RQ7AeQgIa5RwkH2rLfBYEBIEgY+y4LxaUi05W94hpWVFWSUUIQuBwlxjRIOsqkY1Em33QSj0Wh/f99PhcVEGCqJDko5SIhrJOogz+npqZ8ZS3xExOR+EStykBDXSN1BBvmanzvSW+Rj4KojBwlxjeVwkGFLQcDOzk60eZkcJMQ1lslBcHx83Jku1UBYFKeG5CAhrrFkDoKzszMrIV8qwpsW5SAhrrF8DgLKZuP33W7X7YoGOUiIayylg2A0GtmtkbE9skUOEuIay+ogGAwG00YT+rExtyMHCXGNN2/eWNWal/gdBLZeaPjH592CHCTENf73v//du3fPatdcJOEg/wS9eO4sa7uDSJJt5LIEROBcTw60akfrSSUXM2zRvkU/P6Y4bXfQcDi041THlHR0dJT0QgqiBGk5aHz1CJlIQqG2Owi2trY4zu7urtsuBoEP4Q9BEN6xKpiFPSTeCE5rSLeBtBwE1FsKHMk4vRw0mcFVPUP2Sso+SMNgT7/fV7K2xCTnoNH0QTIU2203ihw04fDwkEMRoNZlCnRG1p1dcBrNEWrF0xEoaiQ5B4GlYzEM0qfnILKbwWDw17/+ddq0Jw/kYbNiysPbzRe1R6cXFxdv377NBkf87ylzWvVV3E6KDtrb26PMRO5uuxbeveSYL9+5rQmTPc/efO+2cknMQWjbr9KUhZ0Vjc7bLSNb0JWBCop6rLIaVAL1Xi8HKTrIpmLWPVHo+zfPss656aQcUnIQ8Y5pglDiT3/6Ey+AyMWiSn5VcbkmciU7oNteDKRj9kEGlSCGeFhUIUUHUQ8p8+bmptuui4yFpi/vMlBCDuIfbAIifLi8vGRz0oKn/UFsWmDJH1SpB7jADhJgLV7KaWU2ZKKkSdFBVtspuduuj6vgp0AaNiUZB9kIur+LJ+sgw/6gotdxAQcJtu4c34Kwy9wKJGsaPkuRFB3EhdZq3ck8jEYj9/7bmFoIihgoFQf58+X/zTcd5CehV+lk4SxzBI4Tcl4PJcdE028zSTOHw6H7hUiEFB0EVuXmpd/vu/d/nGkWVlBB8TmIf6QZN4uNna+vr7s/ynMQ2NjW69ev3dtKsba2xkHCr2/AFcZ3t29vbwfIB0VdpOggrrJW2Z4/f04OURAShbuv8dYl9KxQZxDE5SDOi3Uw55KdypzrIB9NVGcReXIRsK1Fc51ORwFRKqToIGtBDx8+dNv1cdUPlGZ/kDeLs24GQoOsgHMdxB88ffr0V7/6lXtPKV68eHH//n2O3FSVIgKiGPbt9vf33V4RMSk6iJCfMmdzi3rImGdmoP5jROogt/1xiv9lCUwBb9++ddtN0Ov17AtSGOVlkZOig2w9M2qX266HmeH4QqPzclAOdkdf3dO35iY7H0oj9zGTooOsj7Xe2XA5gc90iOx2C8lBOdgdfZ1Ox203B+qx+k1hpKFoSdFBMQT7hhyUjy1sFkOzv7y8tPE+ipRWLW8PyTmISjVpPJ98EsN8NDkoH5usGMkTCLyGqOvSUIQk56AS6/YvDjkon/3pepfxDEtlNTTTRa0e68ZJzkF2iT08PHTbjSIH5WMP6t7b23PbEeA15C9f1CE/nWp3d1cyaoq0HGR3iq0EuS+yCHJQPlEFqx6+tXVU2Rqy0xPwA/xKi4HUAuf2m2++4SQXxP4pqTjIeqOD3RR5J3JQPjaDi7jDbUdDdhF+LmX9fn88HqMeq1j1L8XQPr799ls7vfOShIOs/sQTBIEclA+tmoOT6bjtmPDTF7P5PFXKdj579gwfzfDixYunT5+iVLLLJJpKg1gITHrlgpwCpBIHkc7bPYlRPe5ZDspn0cevAjXJyjZzQ5n1StzJohdpS50SaXgq/UG2pjClDbksxJ3IQfnEHAf5xc+yw3Y+Dvrb3/7mrs7X2d3dJVPjD6LqaI+QZXWQhc8RdhrKQflE2x9kLeRHP/oRP60/iCp1fHw8M2SWCybib+Sg21lKB1FPKCFE+GQXOSifEhUxAOjG7iAjn/fRkIdL3O3NQA4qwvI5yHcgRtUN5JGD8rE7+qJqrnxlq+v+Zlpai6VX7Keod450yEFFWCYHXV5e+jkccQoI5KB8Ypsn7QVEzkXFcnvnRA4qwtI46OTkxDJ0AuSYH64pB+VjV49ILh21CAjkoCIsgYPI2X34Q9li64SeoVAbvlom31FkfcYSkEq8evXKPoLGf0tj4y///ve/21+SNFVplrmMx2Prdonhvvm6BARyUBGSdhDxDv9fCgPUYQL52ltH7RR2kBdPgUWJSjAYDB49emTnzlhdXSWYdL/OMBwObUqY52N/WRobFONT3HZzUKXsy1YXEMhBRSjhoE8//ZS3NOIgPpTqSpl3d3ez7YL/8p39g5Ewv4OKrc84F8SKDx8+dCcvA3KZOY+ccYtQZmBnjTUgkrZqxQDaQy1XMzmoCCUc9JOf/IS3bG5u8q5g5DaE9fX1Xq8XefI1Q0kH1ZuOZZ99PMNMr7CPM29SY9PiH8wBqYtuOziY18oANd5bKAcVoYSDHj9+PP1fNQMx8vb29tHRUQzJYAnK5WJlFMQ5yjX37czchOmfwBWApv6jJJsEgBSA01XxCfozyEFFKOEgolSqdzm+++47kqkSFHvkaQKU6ZMuFwXZvSrzMvPskZmeoMXxpInni2E9f5YoQO094nJQEUo4SFShbH9QqQ4hJ/AbfPbZZ5Nml0f2uYZwi8ieP3/Ood5PscOWo5HnrI7H48OrpxvCgoYz5KAiyEGBKeGg+nul7VFHucwEnMfHx+4XGe7du8fPWmZh2eoqpEIhbyzmQ32OSe65uA5FOagIclBgonAQ5HZLZ9fH8eQ+0Lmu9Sgszgo2PRr52kxWIM2k9rtfLAY5qAhyUGDK5mKluoRuB+NYXywQF9wS11BLfMfQkydP6uq4DbnOLl/BJrYB3wU7BJhLJgcVQQ4KTLg+6SKcTCcHFukPXkRzsuntNY6F3wS7oVpvH5y7iHneH0MOKoIcFJhCDgpGgw6yj15cEESwlu1Qxz5HR0eBl7OTg4ogBwVGDpqACyw24bBuV02MRqNut+tzTMBE9c76KY4cVAQ5KDBy0IT96Uod6+vrtQQm5FbU45n7d/hSpF3NzmSVg4ogBwVGDpqEKhwKqkw8JYM7Pj6mVLaomIcIiELWMm+gOnJQEeSgwLTdQQQ+NjpOisSnz8VwOKQYvDGbahmYiKgnhqU/slQ/af/5z3+mNxjMx7fffutO2Zw0cjuCHBSYtjvolumR80Kt7fV6HDDYONe8VDxpX331lX3T8HCd4PTu7OwgiEXPnJCDAtN2B3GlvRnFFISG0e12+/1+I5frElQ8aX/4wx/sizcOZ54wc0ETyuWgwKg/qEVUPGm8kbfTRN12KAh8JonZyQnl90uUGru7u7V388tBgZGDWkSiDpphPB4Ph0MrDKysrJAC15j/ykGBkYNaxHI4yEMu5sMiEuq6MmI5KDByUItYMgcZ1BmbD1HXkm9yUGDkoBaxlA4CsjMrG1Rf80AOCowc1CKW1UHG0dERxYOKdx3LQYGRg1rEcjsIbAk66Pf7btf8yEGBkYNaxNI7CCwaWllZoS65XXMiBwVGDmoRbXAQ2EqbnU6n3NQhOSgwclCLsJO2sbHBC/jqq6++/vpre10Eu7EufgeNx2MMQlF3dnbcrnmQgwIjB7WIfr/PSatI/A4CIiDSMUpb4rZhOSgwclCLuLy8nAY0ji+++OLLL790GwVIJQ4yer1eOZXIQYGRg0RRUukPMi4uLiwUGg6Hblcx5KDAyEGiKGk5CA4PDynwzGMy70QOCowcJIqSnIPOz88pcKfTmWuJXjkoMHKQKEpyDgJ7gC31ym0XQA4KjBwkipKig+xpBXPdvSEHBUYOEkVJ0UFWo4iG3HYB5KDAyEGiKCk6yLqEwG0XQA4KjBwkipKig4AyQ/GV8OWgwMhBoiiJOojqRLGLT5iWgwIjB4miJOogW2Xx17/+NVopgg2l/eY3v3HvFwtGDhJFSdRBaIViz8svf/lL936xYOQgUZREHWS3uR0dHVG7CvKvf/0r2gdVLh9ykChKog7qdDoUe0EPRBTVkYNEUVJ00Hg8psyguCZa5CBRlBQd5G8Zc9siPuQgUZQUHTQYDCjzlgbaI0YOEkVJ0UFW5sPDQ7ct4kMOEkVJ0UHqkI4fOUgUJTkHFa9OokHkIFGU5By0s7NDgSs+dlUsGjlIFCUtB1ldWllZUSIWOXJQu6j+eJ9UHGTToxUExY8c1C7K3TyVJQkH2YPnO51O8SU7RFPIQe3CHFTOI6nkYufn5zYcdnR05HaJiJGD2sXSO2g8HtviG3zTuR6nIZpCDmoXS+8gGwujCukGsVSQg9rFEjuIqMdKqLGwtJCD2sWyOuji4sLWS0RAx8fHbq9IgXY5iPbDwUejkdv+8IHX1n9ZAg5F5E9JKHYqkf9SOuj09HR1dZWy8TP7zxVJ0C4H2QPI19fXfW+lDeLWginp6Ogo5kRgyRxE+NPtdqen/5ONjQ2NxKdIuxzkB0329/fdrqtmubu767aLQeBDaSkG3qHAHCELn9Lr9SJMCpbGQZx/Tj6Z1/R8f4KJNAqWKK3rD7KPoO76h70QtlhVrqIMr6Tt7W0O5eHISGowGETSQlJ3EJEOBeCUevtwwos/t0dESBv7pC16J3T3XrAcbXV1tZZuHQ5LisenWMxldDod9jTeW1HFQV9++SXvJYTk3xSMfr/P/5qgkpLb7Reezc1N/sAVTiRLeg6yK6ENgqytrZXof0E01oXpl7bCGla/0YTtqYvz83NaUVZGvOZzm+q5qOKg3//+9/YVmoUgiFPKiXXFEomTmINoPLnDWFyc50p2SLt4F/G8dwHxvIX3CwrsESWC84Xns7i2h29IVRz073//+/Hjx3yFEiB9Lhi//e1vKcC88M8lFKLMVI9IUlpRIyk5iAvgtP1O0iiLg/wLIL6YK7iwN2ZX+dzd3WVP7aFQFprQYDDI9hmRToY0EU2aDy3nICEWQTIOsi4brqjWfrL9QQQ1llvRtqd/WwgbleeN/tJKBMSebHC0OPgsr1QIZiI5SMRGGg7yiZJvPDN90n5sq9/v254iWB9Q9u5q80KwRWf4XnwFPhEo/7wZZQnkIBEbaTiIxsl+BOG288bFUAl7yLDcdgFoijMfZwVAByH7HYiALA20wix0VpEcJGIjRgeRH/Eii/XdZAOWmw6yTOrhw4ffffede9tdvH///mc/+xnv+uc//+l2nZysra3NfFYYUA8C4qOBpHJB+aAcJGIjLgeNRiNrhLlkJ9fcdBBYOlYLN2OxABB8EfHZt+h0OsPh0P2iPuQgERtxOQjQCu3kJjO6yXUQwQvu+PTTT917CmAR1v3791+8eGF7eMEmO5uagXJ2duYH+1CS21sTfEEOKweJeIjOQQXJdVA5LAMiC3PbETRUAqJer0cZgMLUmJfJQSI25CB3G1R2LMwOnu0Cb4TBYGB52erq6mlNMyflIBEbctCkqXOojY0Nt33VLdXpdNx2c6AeC9MozLy3pOQiB4nYkIMmt49xKMjesEqbZ09d0UcVKJXNY0JG1buo5CARG3LQBGvk2XEom6wYfoQ+lxo1JAeJ2JCDJtgUwewca5sVWfuwVGmyGsrGa/MiB4nYkIMm2CAUx3TbV7Ou6zp+LXgNVeksl4NEbMhBE24ejVbKHlqs244DEjHrqCqdJMpBIjbkoAlmnGx8cTK9a4S4w21Hg93uv7KyUm5JRjlIxIYcNMGWNMve73p2dsae1dVVtx0T3elatAREr1+/5jwU5I9//OPXX39tI/1ykIgHOWiCRT20T7c9zXrYA247Ji6vJhOUZhF3oglRDjloQlpxEN+ass0bB33xxRevXr3iRb/fD7kyiRC3IwdNSKg/yIpauj9IiNiQgybcPJo19djGxfxykZFMnhSiOoUc9O4l1f6Kl+/c3kap10HWy8sx3fbV8tV1Hb8Wzs/PrUe58ZtphaiROx009c+zN9+7zcl2Zqsx6nVQ/POkvYBID6vMkxYiNu5w0PdvnsUS+VynXgfZ/ONo7xeTgMQSc7uDJkFQDFFPlvF4TMDy+eefW5usvqKFH4b3zZuPsG6XGO6bl4DEcnOrg+KLgjBO9rnJ8PDhw4rRinU/08Ld9tWgWCeC9YNGo9Hq9NFpEpBYVlJyEOEJTXEinhsMBgP3R/NDQscRsh3S9SZ6pbH7ZmFzc1MCEstKSg6ygCWX7BTnebFMJ6r1pDGOdUhBt9vVlEKxxITrD+Kqbp0sqXDe0HM1/IPGOF1zPTZWiBS53UF1Smh7e9vadhJUCaxKc3Fx4R+4urq6qpnQog3c4aB65weR71ThL3/5i7XPmzx48MD+5v0Ue30nUT1nlZDH1gaCvb09dQCJlnCng2DaLeRprn+IMOHRo0euGNcpN5nQOn2zI2K2Og8xSMguGMTnH2pIYRT+iFZRxEERYc/hmYF2W04ZNsyf7XOxhDHY9Ojj42Pr/waCoMPDQ/cLIVpDYg4CwgQfNRCwHBwclBPQzZDn9PSUPSsrKzU+1/Rj8Ol+ngGf2Ov1AnyoEBGSnoPqwhSQ7fex4fDsA1dr5/LykrDLT7Mk9pF9RMtpqYNsqlE2CDqZzo1eXBBE2uXHvAD7EMGp41mINjoIy9gIlJ+FiIlsSk52tnQtkDkS6SC7qXkmbG1t8bnl8kchlo82Osjikez6ZLZSBylSLWoguhkMBnt7e36sHdAQn9LUvEchoqV1DrKRNXIurwNCFdNElUFxYiuyLcIo319uoB5kxK/c3wkhrtMuBxGhWFrku6IJfKxzent7ezpFcQ6GwyHS4Y3ZVMvARIeHhzEs/SFE5LTLQSjDBOG2PzLhqBwkd71ejwOqp1mI4rTLQW/fviVsyS57Rv51M4opCAFUt9vt9/tVkjghWk4b+6SFEPEgBwkhmkQOEkI0iRwkhGiODx/+D3BrsJN8JDyYAAAAAElFTkSuQmCC</file>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A OU (A NON-OU C)) ET ((B NON-OU C) ET (B XOR C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A ET (A NON-ET C)) OU ((B NON-ET C) OU (B XOR C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A XOR (A XNOR C)) ET ((B XNOR C) ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A OU (A XOR C)) ET ((B XOR C) ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141549  -->
+  <question type="multichoice">
+    <name>
+      <text>Schéma D</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Choisissez la formule logique à laquelle correspond ce schéma :</p><p dir="ltr" style="text-align: left;"><br></p><p dir="ltr" style="text-align: left;"><img src="@@PLUGINFILE@@/schema_D.png" alt="Schéma D" width="385" height="229" class="img-fluid atto_image_button_text-bottom"><br></p>]]></text>
+<file name="schema_D.png" path="/" encoding="base64">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</file>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A NON-ET (A ET C)) XOR ((B OU C) NON-ET (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A NON-OU (A OU C)) NON-ET ((B ET C) NON-OU (B ET C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A NON-ET (A ET C)) OU ((B XOR C) NON-ET (B XOR C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">X = (A XNOR (A OU C)) ET ((B OU C) XNOR (B OU C))<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/Architecture (L1)/Portes Logiques/Formules Logiques</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Questions sur les formules logiques<br></p>]]></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 141517  -->
+  <question type="multichoice">
+    <name>
+      <text>Formule 1</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Sélectionnez la formule équivalente à celle-ci :</p><p dir="ltr" style="text-align: left;"><br></p><p dir="ltr" style="text-align: left;">- ( ( (A et B) ou (C et A) ) et (B ou C) )<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">( (-A ou -B) et (-C ou -A) ) ou (-B et -C)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr">( (-A et -B) et (-C et -A) ) ou (-B ou -C)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">- ( (A et B) ou (C et A) ) et (- (B ou C) )<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141519  -->
+  <question type="multichoice">
+    <name>
+      <text>Formule 2</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Sélectionnez la formule équivalente à celle-ci :</p><p dir="ltr" style="text-align: left;"><br></p><p dir="ltr" style="text-align: left;">- ( ( (A ou B) et (- (A et B) ) ) ou (-A et B) )<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">( (-A et -B) ou (A et B) ) et (A ou -B)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">( (-A et -B) ou (-A ou -B) ) et (A ou -B)<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">( (-A et -B) ou (-A et -B) ) ou (A et -B) )<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 141520  -->
+  <question type="multichoice">
+    <name>
+      <text>Formule 3</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Sélectionnez la formule équivalente à celle-ci :</p><p><br></p><p>( (A et C) ou (B et C) ) et (A et B)<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">- ( ( (-A ou -C) et (-B ou -C) ) ou (-A ou -B) )<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">- ( - ( (-A ou -C) et (-B ou -C) ) ou ( - (-A ou -B) ) )<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text>( - (A et C) et (-B et -C) ) ou (-A ou -B)</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+</quiz>

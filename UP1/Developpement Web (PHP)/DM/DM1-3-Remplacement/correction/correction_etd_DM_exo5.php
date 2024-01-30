@@ -1,0 +1,38 @@
+<html>
+<body>
+<center><h1>Correction DM PHP (Etudiant)</h1></center>
+<br /><br />
+<?php
+
+include_once("exo5_data.php");
+
+include_once("exo5_fun.php");
+// my_NormalisationNom($filenames)
+
+echo("<b>Mute Tests :</b><br />");
+
+echo('<textarea cols="80" rows="25" readonly="readonly">');
+
+echo('$str = my_NormalisationNom($filenames);' . "\n\n");
+$str = my_NormalisationNom($filenames);
+
+echo('</textarea>');
+
+
+echo("<br /><br /><b>Normal Run Tests :</b><br />");
+
+echo('<textarea cols="80" rows="25" readonly="readonly">');
+
+echo('$str = my_NormalisationNom($filenames);' . "\n\n");
+$str = my_NormalisationNom($filenames);
+echo($str . "\n\n");
+
+echo('</textarea>');
+
+
+echo("<br /><br /><b>End of Tests !</b><br />");
+
+?>
+
+</body>
+</html>

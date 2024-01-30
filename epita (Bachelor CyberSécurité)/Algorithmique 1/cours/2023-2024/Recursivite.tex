@@ -1,0 +1,112 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Récursivité}
+\newcommand{\NumeroTD}{Récursivité \& Récursivité Terminale}
+\newcommand{\DateCours}{Septembre 2023}
+\newcommand{\AnneeScolaire}{2023-2024}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec la récursivité et les notions associées telles que la récursivité terminale, les accumulateurs, et les fonctions chapeaux.
+
+\bigskip
+
+Définition informelle de la récursivité~\footnote{Wikipedia : \href{https://fr.wikipedia.org/wiki/R\%C3\%A9cursivit\%C3\%A9}{Récursivité}} : \og \textit{La récursivité est une démarche qui fait référence à l'objet même de la démarche à un moment du processus} \fg{}, ou encore \og \textit{C'est une démarche dont la description mène à la répétition d'une même règle} \fg{} (Edgar Morin, \textit{La méthode : L'éthique} 2004).
+
+\medskip
+
+En pratique cela implique qu'une fonction se rappelle elle-même, ou qu'une structure contient une référence vers elle-même.
+Parmi les termes synonymes, on retrouve \textit{récursion} et d'une certaine manière la \textit{récurrence}.
+
+\medskip
+
+Parmi les exemples les plus classiques de fonctions récursives, on retrouve \textit{factorielle}, \textit{la somme des N premiers entiers}, \textit{le N\up{ième} terme de la suite de fibonacci}, ...
+Pour rappel, la factorielle se calcule à partir des entiers précédents :
+%
+\begin{center}
+\[ facto(n) = n! = \prod_{i=1}^{n} i = 1 \times 2 \times 3 \times \text{...} \times n \]
+\end{center}
+
+
+\begin{center}
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction Factorielle : entier
+  parametres locaux
+    entier   n
+
+debut
+si (n == 0) ou (n == 1) alors
+  retourne (1)
+sinon
+  retourne (n * Factorielle(n - 1))
+fin si
+fin algorithme fonction Factorielle \end{lstlisting}
+\end{center}
+
+
+Pour déclarer une fonction récursive, il est nécessaire de tout d'abord définir le ou les cas d'arrêt, et ensuite seulement les cas récursifs.
+
+Dans le code de la factorielle, on remarque les deux cas d'arrêt : $ n == 0 $ et $ n == 1 $.
+
+
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en septembre 2023}
+\end{center}
+
+\end{document}

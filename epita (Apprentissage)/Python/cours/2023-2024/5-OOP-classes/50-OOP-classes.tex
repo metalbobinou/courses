@@ -1,0 +1,862 @@
+% -*- latex -*-
+
+\part{OOP and Classes}  % OOP and Classes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% How to create a class
+
+\section{Object Oriented Programming}
+
+\begin{frame}<beamer>{OOP}
+
+  Object Oriented Programming (OOP) vocabulary
+
+  \begin{itemize}
+    \item<2-> Class: the type and structure
+    \item<3-> Attribute: a variable that is a member of the class
+    \item<4-> Method: a function/procedure that is a member of the class
+  \end{itemize}
+
+  \begin{itemize}
+    \item<5-> Object: an instance of a class
+    \item<6-> Constructor: the first method called when creating an object
+    \item<7-> Destructor: the method called when deleting an object
+  \end{itemize}
+
+  \begin{itemize}
+    \item<8-> Inheritance: structure of a class reused as a basis for a new one
+    \item<9-> Private: when a member is accessible only by the object itself
+    \item<10-> Public: when a member is accessible by any object
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{OOP}
+
+  Object Oriented Programming (OOP) concepts examples
+
+  \begin{itemize}
+    \item<1-> Class: the type and structure
+    \item<1-> Attribute: a variable that is a member of the class
+    \item<1-> Method: a function/procedure that is a member of the class
+    \item<1-> Object: an instance of a class
+  \end{itemize}
+
+  \begin{itemize}
+    \item<2-> Classes: vehicle, car, airplane, boat, ...
+    \item<3-> Attributes: speed, passengers, engine, ...
+    \item<4-> Methods: accelerate, decelerate, embark, ...
+    \item<5-> Objects/Instances:
+      \begin{itemize}
+        \item<5-> My Peugeot 206 (\textit{BN-340-FT})
+        \item<5-> Your Toyota Corolla (\textit{UE-042-FI})
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{OOP}
+
+  Inheritance explanation
+
+  \begin{itemize}
+    \item<2-> Parent Class: the class more general or abstract
+    \item<3-> Child Class / Sub Class: a specialized class derived from a parent
+    \item<4-> \textit{the child class inherits attributes and methods from its parent}
+  \end{itemize}
+
+  \begin{onlyenv}<5->
+    \vspace*{1cm}
+
+    Attribute/Method access modifiers
+  \end{onlyenv}
+
+  \begin{itemize}
+    \item<6-> Private: only the class itself can access it
+    \item<7-> Protected: the class itself and its childs can access it
+    \item<8-> Public: any class can access it
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{OOP}
+
+  Inheritance example
+
+  \begin{itemize}
+    \item<1-> Parent Class: the class more general or abstract
+    \item<1-> Child Class / Sub Class: a specialized class derived from a parent
+    \item<1-> \textit{the child class inherits attributes and methods from its parent}
+  \end{itemize}
+
+  \begin{onlyenv}<1->
+    \vspace*{1cm}
+  \end{onlyenv}
+
+  \begin{itemize}
+    \item<2-> Class: vehicle
+    \item<3-> Child classes: car, airplane, boat, ...
+    \item<4-> Inherited Attributes: speed, passengers, ...
+  \end{itemize}
+
+\end{frame}
+
+
+% How to create a class
+
+\section{Classes in Python}
+
+\begin{frame}<beamer>{Classes in Python}
+
+  Specificities of classes in Python:
+
+  \begin{itemize}
+    \item<2-> Only one constructor: \lstinline|__init__|
+    \item<3-> No destructor (python manages the memory by references)
+    \item<4-> Attributes are at least \textit{read-only}, and eventually \textit{writable}
+    \item<5-> Writable attributes can be deleted from the object
+    \item<6-> Member beginning by an underscore (\lstinline|_|) aren't strictly private, but should be considered internal to the class
+    \item<7-> \TTBF{self} keyword is required as the first parameter of each method
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Classes in Python}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+  # Method
+  def getSpeed(self):
+    return (self.__speed)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):
+    self.Passengers = 1
+  # Methods
+  def getSpeed(self):
+    return (self.__speed)
+  def Accelerate(self, x):
+    self.__speed += x \end{lstlisting}
+      \end{onlyenv}
+
+
+      \begin{onlyenv}<7->
+        \begin{lstlisting}[style=python]
+class Vehicle:
+  """ General vehicles """
+  __speed = 0
+  Passengers = 0
+  # Constructor
+  def __init__(self):       # Constructor
+    self.Passengers = 1
+  # Methods
+  def getSpeed(self):       # Accessor
+    return (self.__speed)
+  def Accelerate(self, x):  # Mutator
+    self.__speed += x \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Classes in Python}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+  # Constructor
+  def __init__(self, CO2, P):
+    self.Passengers = 1
+    self.__CV = (CO2 / 45) + (P / 40)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        \begin{lstlisting}[style=python]
+class Car(Vehicle):
+  """ Cars inherit from Vehicle """
+  __CV = 0
+  # Constructor
+  def __init__(self, CO2, P):
+    self.Passengers = 1
+    self.__CV = (CO2 / 45) + (P / 40)
+  # Method
+  def getCV(self):
+    return (self.__CV) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Classes in Python}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+Peugeot206Plus.getSpeed()  # 80
+AirbusA340.getSpeed()      # 260
+
+Peugeot206Plus.getCV()
+AirbusA340.getCV() \end{lstlisting}
+      \end{onlyenv}
+
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+Peugeot206Plus = Car(110, 44)  # 110g/km  44kW
+AirbusA340 = Vehicle()
+
+Peugeot206Plus.Accelerate(80)
+AirbusA340.Accelerate(260)
+
+Peugeot206Plus.getSpeed()  # 80
+AirbusA340.getSpeed()      # 260
+
+Peugeot206Plus.getCV()
+AirbusA340.getCV()  # Error \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Method Overriding in Python}
+
+  Method Overriding: when a method is redefined in the child class
+
+  \vspace*{1cm}
+
+  \begin{itemize}
+    \item<2-> Child method is called if redefined
+    \item<3-> Use \TTBF{super()} on current class for calling its parent method: \\
+    \TTBF{super(Class, self).Method()}
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Method Overriding in Python}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{0.47\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+class Shape:
+  def Hello(self):
+    print("Shape: Hello!")
+
+  def SayShape(self):
+    print("--Shape--")
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+class Shape:
+  def Hello(self):
+    print("Shape: Hello!")
+
+  def SayShape(self):
+    print("--Shape--")
+
+class Cube(Shape):
+  def Hello(self):
+    print("Cube: Hello!")
+
+  def SayCube(self):
+    print("--Cube--") \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+
+
+    \begin{column}{0.47\textwidth}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello()
+C.Hello()
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape()
+C.SayShape()
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<10>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+S.SayCube()
+C.SayCube()
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<11->
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+S.SayCube() # ERROR
+C.SayCube() # --Cube--
+ \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{0.47\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+class Shape:
+  def Hello(self):
+    print("Shape: Hello!")
+
+  def SayShape(self):
+    print("--Shape--")
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2->
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+class Shape:
+  def Hello(self):
+    print("Shape: Hello!")
+
+  def SayShape(self):
+    print("--Shape--")
+
+class Cube(Shape):
+  def Hello(self):
+    print("Cube: Hello!")
+
+  def SayCube(self):
+    super(Cube, self).
+   SayShape()
+    print("--Cube--") \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+
+
+    \begin{column}{0.47\textwidth}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello()
+C.Hello()
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape()
+C.SayShape()
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9>
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+S.SayCube()
+C.SayCube()
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<10->
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+S = Shape()
+C = Cube()
+
+
+S.Hello() # Shape: Hello!
+C.Hello() # Cube: Hello!
+
+S.SayShape() # --Shape--
+C.SayShape() # --Shape--
+
+S.SayCube() # ERROR
+C.SayCube() # --Shape--
+            # --Cube--
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Summary of Classes in Python}
+
+  Summary of vocabulary:
+
+  \begin{itemize}
+    \item<2-> \TTBF{Vehicle}: class
+    \item<3-> \TTBF{Car}: class (inherits from \TTBF{Vehicle})
+    \item<4-> \TTBF{Peugeot206Plus}: instance of \TTBF{Car}
+    \item<5-> \TTBF{AirbusA340}: instance of \TTBF{Vehicle}
+  \end{itemize}
+
+  \begin{itemize}
+  \item<6-> \TTBF{Peugeot206Plus} can calculate and give \TTBF{CV}
+  \item<7-> \TTBF{AirbusA340}: doesn't have \TTBF{CV} method nor attribute
+  \end{itemize}
+
+  \begin{center}
+    \onslide<8-> \url{https://docs.python.org/3/tutorial/classes.html}
+  \end{center}
+
+\end{frame}

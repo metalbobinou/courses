@@ -1,0 +1,301 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{L2}
+\newcommand{\NumGroupe}{L2 MIASHS}
+\newcommand{\AnneeUniv}{2018-2019}
+\newcommand{\DateExam}{13 mai 2019}
+\newcommand{\TypeExam}{Partiel}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(1 point) Que signifie l'acronyme ACID ? Expliquez une de ses propriétés.}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(1 point) Quelles sont les 2 étapes qui peuvent alternativement se produire à la fin d'une transaction ?}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour (0, 1, ou \textit{erreur}) que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{1.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{11cm}{| c | p{2cm} | p{2cm} | p{2cm} |}
+  \begin{tabularx}{13cm}{| *{4}{>{\centering \arraybackslash}X |}} % \linewidth
+  \hline
+  Paramètre & \TTBF{isset()} & \TTBF{empty()} & \TTBF{is\_null()} \\ \hline
+  \TTBF{null} &  &  &  \\ \hline
+  [\TTBF{unset(\$var)}] &  &  &  \\ \hline
+  \TTBF{42} &  &  &  \\ \hline
+  \TTBF{0} &  &  &  \\ \hline
+  \TTBF{""} &  &  &  \\ \hline
+  \TTBF{" "} [un espace] &  &  &  \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\newpage
+
+\subsection{(1,5 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\TTBF{http://www.weeklymail.co.uk/articles/9821}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{sftp://s12.cdn.provider.net:3846/data/storage23/res.76/}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\TTBF{https://www2.ibaie.com/shopping/cart.php}
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\newpage
+
+% Code à écrire ou corriger
+\section{Développement}
+
+\subsection{(3,5 points) \'Ecrire une fonction "\textit{CalculTaxes}" qui calculera le prix TTC (toutes taxes comprises) à partir d'un prix HT (hors taxe), sachant que le taux de taxe est de 20\%. Elle prendra en entrée un tableau de valeurs en euros. On attend en sortie un tableau associatif contenant le numéro de facture (IDFacture), le montant HT (montantHT), le montant des taxes (Taxe), le montant TTC (montantTTC). Le tableau de sortie \text doit être renvoyé par un \TTBF{return}.}
+
+\medskip
+
+\textit{L'exercice étant à l'écrit, on supposera qu'il n'y a aucun problème de virgule.}
+
+\medskip
+
+\begin{tabular}{l c l}
+Prix TTC depuis un prix H.T. : & $ Prix TTC = $ & $ Prix H.T. + Taxes $ \\
+Taxes (20\%) depuis un prix H.T. : & $ Taxes = $ & $ Prix H.T. \times 20 \div 100 $ \\
+ & & \\
+Prix H.T. depuis un prix TTC (taxes à 20\%) : & $ Prix H.T. = $ & $ Prix TTC \div 1,2 $ \\
+Taxes depuis des prix H.T. et TTC : & $ Taxes = $ & $ Prix TTC - Prix H.T. $ \\
+\end{tabular}
+
+\bigskip
+
+\begin{center}
+
+\LigneReponseVingt
+
+\medskip
+
+\LigneReponseCinq
+
+\end{center}
+
+\newpage
+
+\subsection{(5 points) \'Ecrire le code pour identifier un utilisateur depuis la table de la base de données décrite ci-dessous : la page doit afficher "OK" si l'identification a réussi, et "NOP" si elle a échoué. L'identification se fera à partir de 2 variables POST envoyées par un formulaire : "login" et "pass". Le mot de passe fourni par le formulaire est déjà chiffré, ainsi que celui de la base de données.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "ibaie", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "fab", et dispose du mot de passe "passbdd".
+\end{WhiteBox}
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{6}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{ID} & \TTBF{login} & \TTBF{password} & \TTBF{nom} & \TTBF{prenom} & \TTBF{ville}\\ \hline
+  0 & fafa & ML0.Qje4sc & Boissier & Fabrice & Paris \\ \hline
+  1 & ali & v/87jVKZhK & Jaffal & Ali & Paris \\ \hline
+  2 & flo & PFjgksmt.G & Owczarek & Floriane & Paris \\ \hline
+  \end{tabularx}
+\caption{Base de données : ibaie     Table : users}\label{tab:bdd-1-1}
+\end{table}
+\end{center}
+
+\begin{center}
+
+\LigneReponseDix
+
+\medskip
+
+\LigneReponseCinq
+
+\medskip
+
+\LigneReponse
+
+\medskip
+
+\LigneReponse
+
+\medskip
+
+\LigneReponse
+
+\medskip
+
+\LigneReponse
+
+\end{center}
+
+
+
+\newpage
+
+% PAGE BLANCHE POUR ECRIRE
+%\mbox{}
+
+\begin{center}
+
+\LigneReponseQuarante
+
+\end{center}
+
+
+\newpage
+
+\subsection{(5 points) Vous devez implémenter une recherche simple d'article à partir de leur nom. Un formulaire est envoyé en GET avec une variable \TTBF{mot}. Une session contient une variable \TTBF{panier} (qui est un tableau d'articles). Pour chaque article trouvé, il faut afficher son nom, sa quantité et sa description, sinon il faut afficher "NOP". \'Ecrire la fonction "\textit{RechercheArticle}" qui récupère les noms d'articles qui correspondent au \TTBF{mot}, et son usage avec la valeur envoyée par le formulaire.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "ibaie", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "ibaieuser", et dispose du mot de passe "dbpass".
+\end{WhiteBox}
+
+\medskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{6}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{ID} & \TTBF{nom} & \TTBF{qte} & \TTBF{prix} & \TTBF{description} \\ \hline
+  0 & Banane & 198 & 2 & Fruits vendu par 6 \\ \hline
+  1 & Huile & 355 & 4 & Bouteille de 1L d'huile \\ \hline
+  2 & Chips & 765 & 3 & Paquet de 200g de chips \\ \hline
+  \end{tabularx}
+\caption{Base de données : ibaie     Table : articles}\label{tab:bdd-2-1}
+\end{table}
+\end{center}
+
+\begin{center}
+
+\LigneReponseDix
+
+\medskip
+
+\LigneReponseCinq
+
+\end{center}
+
+\newpage
+
+% PAGE BLANCHE POUR ECRIRE
+%\mbox{}
+
+\begin{center}
+
+\LigneReponseQuarante
+
+\end{center}
+
+\end{document}

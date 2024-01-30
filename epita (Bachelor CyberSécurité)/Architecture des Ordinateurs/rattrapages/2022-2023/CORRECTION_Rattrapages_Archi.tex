@@ -1,0 +1,509 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{18 avril 2023}
+\newcommand{\TypeExam}{Rattrapage}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Les appareils électroniques sont tous interdits (calculatrices également)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+\vfillFirst
+
+% Questions cours
+\section{Questions (10 points)}
+
+\subsection{(2 points) Rappelez les 14 premières puissances de 2 : }
+
+\bigskip
+
+
+\begin{table}[ht!]
+\centerline{
+\begin{tabular}{ | m{0.5cm} | m{0.5cm} | m{0.5cm} | m{0.5cm} | m{0.65cm} | m{0.65cm} | m{0.65cm} | m{1cm} | m{1cm} | m{1cm} | m{1.5cm} | m{1.5cm} | m{1.5cm} | m{1.5cm} |}
+\hline
+$ 2^{0} $ & $ 2^{1} $ & $ 2^{2} $ & $ 2^{3} $ & $ 2^{4} $ & $ 2^{5} $ & $ 2^{6} $ & $ 2^{7} $ & $ 2^{8} $ & $ 2^{9} $ & $ 2^{10} $ & $ 2^{11} $ &  $ 2^{12} $ &  $ 2^{13} $ \\
+\hline
+ & & & & & & & & & & & & & \\
+1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 & 2048 & 4096 & 8192 \\
+ & & & & & & & & & & & & & \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\bigskip
+
+\subsection{(4 points) Convertissez ces nombres en décimaux. Vous donnerez leur interprétation non-signée puis signée sur 12 bits.}
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ c |  m{2cm}   c   m{2cm} | m{2cm}   c   m{2cm} }
+                                & & non-signé & & & signé & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+$ \% \, 1010 \; 1110 \; 1011 $  & &    2795   & & & -1301 & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+$ \% \, 1001 \; 0111 \; 1001 $  & &    2425   & & & -1671 & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+\$ B01  & &                            2817   & & & -1279 & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+\$ DB2  & &                            3506   & & &  -590 & \\
+ & & & &  & & \\
+\end{tabular}
+}
+
+% \bigskip
+
+\vfillLast
+
+\clearpage
+
+\subsection{(4 points) Convertissez ces nombres décimaux en binaire sur 12 bits, puis en hexadécimal.}
+
+\bigskip
+
+%\centerline{
+%\begin{tabular}{ c |  m{2cm}   c   m{2cm} | m{2cm}   c   m{2cm} }
+%                                & & binaire & & & hexadécimal & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ 42 $    & &           & & &  & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ 1122 $  & &           & & &  & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ 1289 $ & &            & & &  & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ -56 $ & &             & & &  & \\
+% & & & &  & & \\
+%\end{tabular}
+%}
+
+\centerline{
+\begin{tabular}{| c ||c|| c ||C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm} || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm} || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm} ||c|| c ||C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+                   & & \multicolumn{13}{c||}{\multirow{2}{*}{binaire}}  & & \multicolumn{4}{c|}{\multirow{2}{*}{hexadécimal}} \\
+                   & & \multicolumn{13}{c||}{ }                         & & \multicolumn{4}{c|}{ }                            \\
+\hline
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+$ 42 $             & \cellcolor{black!15} & \% & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & \cellcolor{black!15} & \$ & 0 & 2 & A             \\
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+\hline
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+$ 1122 $           & \cellcolor{black!15} & \% & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & \cellcolor{black!15} & \$ & 4 & 6 & 2             \\
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+\hline
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+$ 1289 $           & \cellcolor{black!15} & \% & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & \cellcolor{black!15} & \$ & 5 & 0 & 9             \\
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+\hline
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+$ -56 $            & \cellcolor{black!15} & \% & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & \cellcolor{black!15} & \$ & F & C & 8             \\
+                   & \cellcolor{black!15} &    & & & & & & & & & & & &  & \cellcolor{black!15} &    & & &                                          \\
+\hline
+\end{tabular}
+}
+
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+
+\vfillFirst
+
+\begin{center}
+\includegraphics[scale=0.2]{img/others/Budgerigar_diagram.png}
+\end{center}
+
+\vfillLast
+
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problème (10 points)}
+
+
+Un étudiant en cybersécurité faisant ses premières expériences en \textit{forensic} (analyse forensique ou investigation numérique en français) a besoin de vous pour convertir plusieurs valeurs et retrouver des informations.
+Celui-ci a récupéré un disque dur qui servait dans un RAID 1, et il souhaite retrouver les noms de fichiers, le contenu de ces fichiers, mais également analyser quelques programmes stockés dessus.
+
+\bigskip
+
+\subsection{(2 points) Première étape : lecture d'une structure }
+
+L'étudiant a réussi à extraire un secteur du disque dur formaté en quelque chose de proche de FAT12 qui contenait une liste de fichiers et leurs identifiants uniques associés.
+Il a isolé 2 \textit{direntries}, les a affiché en hexadécimal, et vous demande de séparer les champs.
+Utilisez le modèle de structure d'une \textit{direntry} pour séparer les différentes données et remplir les tableaux suivants avec les valeurs hexadécimales.
+
+\clearpage
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+% %*   *)
+% [style=algorithmique]
+\begin{lstlisting}[language=C]
+struct direntry {
+  char[11] name;
+  char     attributes;
+  int      first_cluster;
+  long     size;
+} __attribute__((packed)) \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+Les types de données font :
+
+\begin{itemize}
+\item char : 1 octet (8 bits)
+\item int : 2 octets (16 bits)
+\item long : 4 octets (32 bits)
+\end{itemize}
+
+\textit{Rappel : char[11] correspond à un tableau de 11 cases (de 0 à 10)}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\vspace*{-0.5cm}
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+direntry 1 :
+47 45 4E 53 48 49
+4E 00 4A 50 47 1F
+00 23 00 00 12 12
+
+direntry 2 :
+49 4D 50 41 43 45
+00 00 54 58 54 1F
+00 2A 00 00 00 0B
+\end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+    \centering
+
+\begin{tabular}{ | c |C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm} | C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+                         & \multicolumn{6}{c|}{direntry[0] (f1)} & \multicolumn{6}{c|}{direntry[1] (f2)} \\
+\hline
+
+\multirow[c]{4}{*}[0in]{name} &             &    &    &    &    &            &    &    &    &    &    &    \\
+                              &          47 & 45 & 4E & 53 & 48 & 49         & 49 & 4D & 50 & 41 & 43 & 45 \\
+\cline{2-13}
+                              &             &    &    &    &    & \cellcolor{black!15} &     & & & & & \cellcolor{black!15} \\
+                              &          4E & 00 & 4A & 50 & 47 & \cellcolor{black!15} &  00 & 00 & 54 & 58 & 54 & \cellcolor{black!15} \\
+\hline
+
+\multirow[c]{3}{*}[0in]{attributes} & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+                              & \multicolumn{6}{c|}{ 1F } & \multicolumn{6}{c|}{ 1F } \\
+                              & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+\hline
+
+\multirow[c]{3}{*}[0in]{first\_cluster} & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+                              & \multicolumn{6}{c|}{ 00 23 } & \multicolumn{6}{c|}{ 00 2A } \\
+                              & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+\hline
+
+\multirow[c]{3}{*}[0in]{size} & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+                              & \multicolumn{6}{c|}{ 00 00 12 12 } & \multicolumn{6}{c|}{ 00 00 00 0B } \\
+                              & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+\hline
+
+\end{tabular}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\bigskip
+
+\subsection{(3 points) Deuxième étape : conversion des noms }
+
+L'étudiant semble dubitatif et vous demande de lui présenter des valeurs lisibles.
+Pour cela, il vous fournit une toute petite table de conversion ASCII... mais vous vous apercevez qu'il n'a pas du tout recopié la partie la plus essentielle de la table (probablement car il ne prenait pas assez de notes) : sa table ne dispose que de la correspondance entre des caractères et leurs valeurs en base 10.
+Il vous faut donc convertir les valeurs hexadécimales à la main (zut alors).
+
+\medskip
+
+Concernant les noms de fichiers, la norme FAT12 précise que sur les caractères, les 8 premiers servent à coder le nom du fichier, et les 3 derniers servent à coder l'extension.
+Vous devez donc ajouter un point pour séparer l'extension du nom de fichier.
+
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{tabular}{ |c|c| m{0.3cm} |c|c| }
+\cline{1-2} \cline{4-5}
+Dec & Char &   & Dec & Char \\
+\cline{1-2} \cline{4-5}
+48 & 0 &  & 49 & 1 \\
+\cline{1-2} \cline{4-5}
+65 & A &  & 78 & N \\
+66 & B &  & 79 & O \\
+67 & C &  & 80 & P \\
+68 & D &  & 81 & Q \\
+69 & E &  & 82 & R \\
+70 & F &  & 83 & S \\
+71 & G &  & 84 & T \\
+72 & H &  & 85 & U \\
+73 & I &  & 86 & V \\
+74 & J &  & 87 & W \\
+75 & K &  & 88 & X \\
+76 & L &  & 89 & Y \\
+77 & M &  & 90 & Z \\
+\cline{1-2} \cline{4-5}
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.65\textwidth}
+    \centering
+
+\begin{tabular}{ c   | m{0.45cm} | m{0.45cm} | m{0.45cm} | m{0.45cm} | m{0.45cm} | m{0.45cm} | m{0.45cm} | m{0.45cm} | c | m{0.45cm} | m{0.45cm} | m{0.45cm} | }
+\cline{2-9} \cline{11-13}
+ & & & & & & & & &   & & & \\
+f1   & G & E & N & S & H & I & N & &  . & J & P & G \\
+ & & & & & & & & &   & & & \\
+\cline{2-9} \cline{11-13}
+ & & & & & & & & &   & & & \\
+f2   & I & M & P & A & C & T & & &  .  & T & X & T \\
+ & & & & & & & & &   & & & \\
+\cline{2-9} \cline{11-13}
+\end{tabular}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+%\bigskip
+
+\newpage
+
+\subsection{(3 points) Troisième étape : conversion des champs }
+
+L'étudiant commence à avoir confiance en vous : vous avez trouvé les bons noms de fichiers (et il reconnait les noms).
+Afin de pouvoir vous donner les bons clusters à lire, il vous demande de convertir cette fois la taille contenue dans les champs de chaque direntry, ainsi que le numéro du premier cluster, en nombre décimaux (afin qu'il puisse les mettre en paramètre de son outil d'extraction).
+
+\smallskip
+
+\textit{Ici, les entiers sont en big endian, c'est-à-dire que les octets sont ordonnés de la même façon que nous représentons les nombres : AUCUNE transformation ou réorganisation n'est nécessaire, vous n'avez qu'à convertir les nombres comme dans la première partie de l'examen.}
+
+\smallskip
+
+\begin{center}
+\begin{tabular}{ | c | C{5cm} | C{7.5cm} | }
+\hline
+ & taille du fichier & numéro du premier cluster \\
+\hline
+ & & \\
+direntry 1 (f1) & 4626 & 35 \\
+ & & \\
+\hline
+ & & \\
+direntry 2 (f2) & 11 & 42 \\
+ & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\smallskip
+
+\subsection{(2 points) Quatrième étape : lecture d'un fichier }
+
+L'étudiant est surexcité, vous êtes sur le point de l'aider à retrouver des fichiers et leurs contenus !
+%En récupérant l'image, l'étudiant vous répond qu'il ne peut pas vous la montrer car celle-ci \textit{serait} corrompue.
+%Néanmoins, tout a l'air correct pour le fichier texte.
+L'image est par définition difficile à interpréter en l'état, il vous propose donc plutôt de regarder le fichier texte.
+Il sait qu'il y a des chiffres et des lettres à l'intérieur.
+
+\smallskip
+
+%Il vous demande de convertir maintenant le contenu du fichier en ASCII, et si possible, de retrouver le numéro codé en binaire dans ce texte.
+Convertissez maintenant le contenu du fichier en ASCII, et si possible, de retrouver le numéro codé en binaire dans ce texte.
+\textbf{Souvenez-vous que la taille du fichier est importante pour cette étape : on ne convertit que les octets nécessaires, pas plus.}
+
+\bigskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+47 52 41 44 49 55
+53 30 30 31 30 31
+30 30 31 30 30 31
+\end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+texte :
+
+\medskip
+
+%\begin{tabular}{ | m{2.5cm} | }
+\begin{tabular}{ | m{3.5cm} | }
+\hline
+ \\ \\ \\ \\ GRADIUS0010  (1001001) \\ \\ \\ \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+numéro :
+
+\medskip
+
+%\begin{tabular}{ | m{2.5cm} | }
+\begin{tabular}{ | m{3.5cm} | }
+\hline
+ \\ \\ \\ \\ 2 \\ \\ \\ \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\bigskip
+
+\end{document}

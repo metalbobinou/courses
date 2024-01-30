@@ -1,0 +1,226 @@
+%% Exercice 2
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{linkedlist.c}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}, \TTBF{memcpy(3)}, \TTBF{printf(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'implémenter une liste chaînée en C.}
+
+\bigskip
+
+\noindent Les fonctions demandées dans cet exercice devront se trouver dans une bibliothèque nommée \TTBF{libmylinkedlist}.
+Après un appel à la commande \texttt{make} à la racine du projet, il faut que votre chaîne de compilation produise à la racine de votre projet une version statique de la bibliothèque (qui se nommera \TTBF{libmylinkedlist.a}) ainsi qu'une version dynamique de la bibliothèque (qui se nommera \TTBF{libmylinkedlist.so}).
+
+\bigskip
+
+\noindent Vous devez écrire plusieurs fonctions permettant de créer, utiliser, vider, et libérer une liste.
+Un fichier \TTBF{linkedlist.h} contenant toutes les fonctions exportables à implémenter vous est fourni en annexe.
+Vous devez déclarer une structure \TTBF{my\_linkedlist} et l'ajouter dans \TTBF{linkedlist.h}.
+N'oubliez pas de déclarer également une structure qui contiendra les éléments de la liste chaînée.
+Pour les premières étapes, vous devrez implémenter une version simplifiée de la file qui ne prend en charge que des entiers positifs.
+
+\bigskip
+
+\noindent Conceptuellement, les fonctions manipulant des files de type \TTBF{my\_linkedlist*} devront pouvoir gérer ces 3 cas :
+
+\bigskip
+
+\begin{center}
+%\includegraphics[scale=0.85]{Cours/Linked_List.png}
+\end{center}
+
+%\bigskip
+\newpage
+
+%\noindent Vous devez implémenter les 11 fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{my\_linkedlist *ll\_create(void)}
+%\item \TTBF{void ll\_delete(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_length(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_head(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_get(int pos, my\_linkedlist *ll)}
+%\item \TTBF{int ll\_tail(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_clear(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_is\_empty(my\_linkedlist *ll)}
+%\item \TTBF{int ll\_insert(int elt, int pos, my\_linkedlist *ll)}
+%\item \TTBF{int ll\_replace(int elt, int pos, my\_linkedlist *ll)}
+%\item \TTBF{int ll\_remove(int pos, my\_linkedlist *ll)}
+%\item \TTBF{int ll\_search(int elt, my\_linkedlist *ll)}
+%\item \TTBF{my\_linkedlist *ll\_reverse(my\_linkedlist *ll)}
+%\item \TTBF{void ll\_print(my\_linkedlist *ll)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Liste des fonctions pour une liste chaînée}]
+my_linkedlist *ll_create(void);
+void ll_delete(my_linkedlist *ll);
+
+int ll_length(my_linkedlist *ll);
+
+int ll_head(my_linkedlist *ll);
+int ll_tail(my_linkedlist *ll);
+int ll_get(int pos, my_linkedlist *ll);
+
+int ll_clear(my_linkedlist *ll);
+int ll_is_empty(my_linkedlist *ll);
+
+int ll_insert(int elt, int pos, my_linkedlist *ll);
+int ll_replace(int elt, int pos, my_linkedlist *ll);
+int ll_remove(int pos, my_linkedlist *ll);
+
+int ll_search(int elt, my_linkedlist *ll);
+my_linkedlist *ll_reverse(my_linkedlist *ll);
+void ll_print(my_linkedlist *ll);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{my\_linkedlist *ll\_create(void)}}
+
+\noindent Cette fonction crée une liste vide.
+En cas d'erreur (pas assez de mémoire), elle renvoie un pointeur \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{void ll\_delete(my\_linkedlist *ll)}}
+
+\noindent Cette fonction vide une liste de l'ensemble de ses éléments, et détruit la structure restante.
+Si le paramètre donné est \TTBF{NULL}, la fonction ne fait rien.
+
+
+\subsubsection*{\TTBF{int ll\_length(my\_linkedlist *ll)}}
+
+\noindent Cette fonction renvoie la longueur de la liste (c'est-à-dire le nombre d'éléments actuellement dans la liste).
+Si le paramètre donné est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{int ll\_head(my\_linkedlist *ll)}}
+
+\noindent Cette fonction renvoie l'élément en tête de liste (position 0).
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int ll\_tail(my\_linkedlist *ll)}}
+
+\noindent Cette fonction renvoie l'élément en queue de liste (dernière position).
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int ll\_get(int pos, my\_linkedlist *ll)}}
+
+\noindent Cette fonction renvoie l'élément stocké à la position \textit{pos} de la liste. %%%%%%%%%%%%%%%%%%%%%%%%%%%
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $. %%%%%%%%%%%%%%%%%%%%
+Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $. %%%%%%%%%%%%%%%%%%
+Si la position n'est pas trouvée, la fonction renvoie $ -4 $. %%%%%%%%%%%%%%%%%%
+
+
+\subsubsection*{\TTBF{int ll\_clear(my\_linkedlist *ll)}}
+
+\noindent Cette fonction vide une liste de l'ensemble de ses éléments, sans détruire la structure de la liste.
+La fonction renvoie le nombre d'éléments supprimés de la mémoire.
+Si le paramètre donné est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la liste donnée en paramètre est vide, la fonction renvoie $ 0 $.
+
+
+\subsubsection*{\TTBF{int ll\_is\_empty(my\_linkedlist *ll)}}
+
+\noindent Cette fonction teste si une liste est vide ou non.
+Si la liste est vide, la fonction renvoie $ 1 $.
+Si la liste n'est pas vide, la fonction renvoie $ 0 $.
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{int ll\_insert(int elt, int pos, my\_linkedlist *ll)}}
+
+\noindent Cette fonction ajoute un élément dans la liste à l'emplacement \textit{pos}.
+L'ancien élément qui était présent à cette position est décalé d'un cran en arrière (vers la queue).
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la liste), cette position sera numérotée $ 0 $.
+Si l'emplacement n'existe pas et est positif, on ajoute l'élément en queue.
+Si l'emplacement n'existe pas et est négatif, on ajoute l'élément en tête.
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+%Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $.
+S'il y a un problème de mémoire, la fonction renvoie $ -3 $.
+En cas de succès, la fonction renvoie $ 0 $.
+
+
+\subsubsection*{\TTBF{int ll\_replace(int elt, int pos, my\_linkedlist *ll)}}
+
+\noindent Cette fonction remplace un élément dans la liste à l'emplacement \textit{pos}, et renvoie l'élément qui était présent à cet endroit.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la liste), cette position sera numérotée $ 0 $.
+Si l'emplacement n'existe pas et est positif, on remplace l'élément en queue.
+Si l'emplacement n'existe pas et est négatif, on remplace l'élément en tête.
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+%En cas de succès, la fonction renvoie $ 0 $.
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int ll\_remove(int pos, my\_linkedlist *ll)}}
+
+\noindent Cette fonction supprime l'élément stocké à la position \textit{pos} de la liste. %%%%%%%%%%%%%%%%%%%%%%%%%%%
+Si la suppression a réussi, la fonction renvoie $ 0 $. %%%%%%%%%%%%%%
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $. %%%%%%%%%%%%%%%%%%%%
+Si la liste donnée en paramètre est vide, la fonction renvoie $ -2 $. %%%%%%%%%%%%%%%%%%
+Si la position n'est pas trouvée, la fonction renvoie $ -4 $. %%%%%%%%%%%%%%%%%%
+
+
+\subsubsection*{\TTBF{int ll\_search(int elt, my\_linkedlist *ll)}}
+
+\noindent Cette fonction recherche un élément dans la liste et renvoie sa position.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la liste), cette position sera numérotée $ 0 $.
+Si l'élément n'est pas trouvé, la fonction renvoie $ -4 $.
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{my\_linkedlist *ll\_reverse(my\_linkedlist *ll)}}
+
+\noindent Cette fonction inverse la position de tous les éléments de la liste.
+Le premier élément devient le dernier, l'avant dernier devient le deuxième, etc.
+En cas de succès, la fonction renvoie le pointeur vers l'éventuelle nouvelle adresse en mémoire de la structure de la liste inversée.
+En cas de problème mémoire, on renvoie \TTBF{NULL}, et l'ancienne liste doit rester à son ancienne adresse mémoire sans subir la moindre modification.
+Si la liste donnée en paramètre est \TTBF{NULL}, la fonction renvoie \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{void ll\_print(my\_linkedlist *ll)}}
+
+\noindent Cette fonction affiche le contenu de la liste.
+Le format d'affichage attendu implique d'afficher un seul élément par ligne, suivi d'un retour à la ligne.
+L'élément en tête de file sera affiché en premier.
+Si la liste donnée en paramètre est vide, seul un retour à la ligne est affiché.
+Si la liste donnée en paramètre est \TTBF{NULL}, rien n'est affiché.
+
+\bigskip
+
+%\lstset{language=sh}
+\lstset{style=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage du cas normal : liste chaînée contenant 42, 5, 13 dans cet ordre précis}]
+%*\LSTPrompt*) ./my_linked_list
+42
+5
+13
+
+%*\LSTPrompt*)
+\end{lstlisting}
+
+\bigskip
+
+\lstset{style=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage d'une liste chainée vide}]
+%*\LSTPrompt*) ./my_linked_list
+
+%*\LSTPrompt*)
+\end{lstlisting}
+
+\bigskip
+
+\lstset{style=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage d'un pointeur NULL}]
+%*\LSTPrompt*) ./my_linked_list
+%*\LSTPrompt*)
+\end{lstlisting}

@@ -1,0 +1,231 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique - Premiers Pas}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Janvier 2023}
+\newcommand{\TypeExam}{Partiel (Sujet 1)}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Vous devez écrire dans le langage algorithmique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CENTRAGE
+\vfillFirst
+
+
+% Questions cours
+\section{Questions (4 points)}
+
+\subsection{(2 points) Sélectionnez les conditions vraies pour A = 6 et B = 9 : }
+
+% Compter pour chaque réponse 0,5 points : si bonne ou pas bonne
+\bigskip
+
+\begin{itemize}
+  \item[\CaseCoche] ((A <= B) et (non (B == A)) et (A - 2 > B - 5)) ou ((A != B) et (B - 1 == A + 3)) \\ % Faux
+  \item[\CaseCoche] ((non (A > B)) et (A != B) et (non (A == B)) ou ((B != A + 3) et (B - 3 == A)) \\ % Vrai
+  \item[\CaseCoche] (non ((A > B) et (B > A))) et ((B == A + 3) et (A == B - 3)) \\ % Vrai
+  \item[\CaseCoche] (non ((A >= B - 4) ou (B >= A + 3))) ou ((B <= A + 4) et (A <= B - 3)) \\ % Vrai
+\end{itemize}
+
+\bigskip
+
+\subsection{(1 point) Lors de la déclaration d'une fonction et dans son implémentation, il faut déclarer : }
+
+\bigskip
+
+\begin{itemize}
+  \item[\CaseCoche] Les paramètres d'entrée   \phantom{(}
+  \item[\CaseCoche] Le nom des variables locales utilisées   \phantom{(}
+  \item[\CaseCoche] Le type des variables locales utilisées   \phantom{(}
+  \item[\CaseCoche] Le type de la valeur de retour   \phantom{(}
+  \item[\CaseCoche] Les instructions à exécuter   \phantom{(}
+\end{itemize}
+
+\bigskip
+
+\subsection{(1 point) Indiquez à quels types de base ces valeurs peuvent être associées : }
+
+\bigskip
+
+\begin{itemize}
+  \item[$\bullet$] 'b'     \phantom{(} \\
+  \item[$\bullet$] 16.64   \phantom{(} \\
+  \item[$\bullet$] 42     \phantom{(} \\
+\end{itemize}
+
+\vfillLast
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CENTRAGE
+
+\newpage
+
+
+\section{Algorithmes (16 points)}
+
+\subsection{(2 points) \'Ecrivez une procédure \og \textit{AfficheMul2} \fg{} itérative affichant les N premiers entiers multiples de 2 (0 inclus). }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{SearchElt} \fg{} récursive cherchant un élément dans un tableau et renvoyant l'index de la case contenant l'élément s'il est trouvé. Si l'élément n'est pas trouvé, la fonction renverra \textit{-1}. }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+\subsection{(2 points) \'Ecrivez une fonction récursive \og \textit{Fibonacci} \fg{} calculant le n\up{ème} terme de la suite de Fibonacci. }
+
+\begin{itemize}
+\item[$\bullet$] $ fibo(0) = fibo(1) = 1 $
+\item[$\bullet$] $ fibo(n) = fibo(n - 1) + fibo(n - 2) $
+\end{itemize}
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{strlen} \fg{} récursive renvoyant la taille d'une chaîne caractères. }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{Miroir} \fg{} itérative renvoyant un entier qui est le miroir de l'entier donné en entrée (afficher ne suffit pas). }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{24}
+\end{center}
+
+\bigskip
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{SuffixStrIter} \fg{} itérative vérifiant si une chaîne de caractères est bien un suffixe d'une autre chaîne de caractères. }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{24}
+\end{center}
+
+\bigskip
+
+\subsection{(4 points) \'Ecrivez une fonction ou une procédure respectant l'algorithme de tri par insertion \og \textit{TriInsertion} \fg{} qui permet de trier en place un tableau. }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{24}
+\end{center}
+
+\end{document}

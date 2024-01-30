@@ -1,0 +1,6 @@
+Le code, pour être exécuté, doit être placé en mémoire.
+
+Sans système d'exploitation, on écrit les programmes dans des ROM (Read-Only Memory).
+Lorsque le processeur est allumé, celui-ci démarre l'exécution du code en lisant une adresse fixée par le constructeur (un z80 démarre l'exécution à l'adresse 0, un 6502 va récupérer deux mots de 8 bits à des adresses fixées pour constituer la première adresse du code, etc...)
+
+Ce que l'on appelle le "boot", c'est la procédure où le système d'exploitation est chargé en mémoire par le processeur grâce à un programme écrit en ROM (dans le cas du PC, cette ROM s'appelle le BIOS ou UEFI).

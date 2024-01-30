@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 2}									%Droite Haut
+\chead{06 novembre 2017}							%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs ; Déplacement dans le Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{144}, \texttt{-120}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1110 0110}, \texttt{\%1001 0111}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Nommer le langage que comprennent les processeurs, puis son équivalent lisible par un.e humain.e}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Citer les 3 bus d'un processeur, puis les 3 classes générales d'ordinateurs}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Expliquer le fonctionnement de la pile, puis faites un petit schéma représentant l'appel de la fonction suivante : \texttt{toupper("Aie", str)} où \textit{str} aura pour adresse \texttt{@1440}}
+
+\end{document}

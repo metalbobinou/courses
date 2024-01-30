@@ -1,0 +1,96 @@
+%% Exercice 1
+
+\ExoSpecs{\TTBF{BDD.sql.gz}}{\TTBF{\RenduDir/}}{}{}{}
+%\ExoSpecsCustom{\TTBF{BDD.sql}}{\TTBF{\RenduDir/BDD.sql}}{}{}{}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but du palier est de faire une base de données sur PhpMyAdmin pour la suite du mini projet.}
+
+\bigskip
+
+\noindent Vous devez créer une base de données simple qui contiendra des produits, des numéros de commande, et des liens entre les commandes et les produits.
+Vous devrez donc créer 3 tables dans MySQL en utilisant PhpMyAdmin, et vous devrez fournir l'extraction de la table et des données de test que vous insèrerez.
+Le fichier contenant l'export doit être nommé : \TTBF{BDD.sql.gz}.
+
+\noindent \textit{\'Etant donné que les paliers suivants impliquent d'ajouter d'autres tables, vous enverrez l'export de la base de données avec l'ensemble des tables requises pour le fonctionnement du site (et pas uniquement les 3 premières tables décrites ici, sauf si vous n'avez pas atteint les paliers en question)}
+
+\noindent Les 3 tables à construire pour ce palier sont : \textit{articles}, \textit{commandes}, \textit{paniers}.
+
+\noindent La table \textit{articles} contiendra les produits disponibles dans le magasin.
+Chaque article dispose d'un ID unique, d'un nom, d'une quantité en stock, et d'un prix unitaire de vente.
+
+\medskip
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{| c | c | c | c |}
+\hline
+\textbf{IDArticle} & \textbf{NomArticle} & \textbf{QuantiteStock} & \textbf{PrixUnitaire} \\
+\hline
+1 & Pomme & 42 & 1 \\
+\hline
+2 & Carotte & 36 & 1 \\
+\hline
+3 & Chocolat & 21 & 5 \\
+\hline
+... & ... & ... & ... \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Table : articles}
+\end{figure}
+
+\bigskip
+
+\noindent La table \textit{commandes} contiendra les commandes passées.
+Chaque commande dispose d'un ID unique, ainsi que du prix total de vente.
+
+\medskip
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{| c | c |}
+\hline
+\textbf{IDCommande} & \textbf{PrixTotal} \\
+\hline
+1 & 7 \\
+\hline
+2 & 1 \\
+\hline
+3 & 38 \\
+\hline
+... & ... \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Table : commandes}
+\end{figure}
+
+\bigskip
+%\newpage
+
+\noindent La table \textit{paniers} contiendra l'ensemble des produits achetés lors des commandes.
+Cette table fait la jointure entre la table contenant les articles et les commandes : c'est ici que chaque article du panier d'un utilisateur est lié à une commande.
+Chaque ligne dans cette table correspond donc à un article dans un panier, et elle contient logiquement : l'ID d'une commande, l'ID d'un article, la quantité de cet article dans le panier.
+
+\medskip
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{| c | c | c |}
+\hline
+\textbf{IDCommande} & \textbf{IDArticle} & \textbf{QuantiteCommande} \\
+\hline
+1 & 1 \textit{(pomme)} & 2 \\
+\hline
+1 & 3 \textit{(chocolat)} & 1 \\
+\hline
+2 & 2 \textit{(carotte)} & 1 \\
+\hline
+... & ... & ... \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Table : paniers}
+\end{figure}

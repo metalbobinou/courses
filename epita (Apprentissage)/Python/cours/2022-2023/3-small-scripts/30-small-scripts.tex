@@ -1,0 +1,571 @@
+% -*- latex -*-
+
+\part{Python Quick Scripting}  % Hello world, print, str/int, Sys module
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{First scripts}
+
+%%% Hello World
+
+\begin{frame}[fragile]{Hello World!}
+
+%  \onslide<1-> Your first python code:
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        %\begin{lstlisting}[style=python,numbers=left,stepnumber=1]
+        \begin{lstlisting}[style=python]
+#! /usr/bin/python
+
+print("Hello World!") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L1: The interpreter can be ajdusted
+
+  \onslide<3-> L3: \TTBF{print} takes a string as a parameter
+
+  \onslide<4-> L3: Strings are enclosed within quotes (\TTBF{\textquotesingle}) or double quotes (\TTBF{\textquotedbl})
+
+\end{frame}
+
+%%% Declaration, strings & integers
+
+\begin{frame}[fragile]{Concatenation \& Printing integers}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+#! /usr/bin/python
+
+var = 42
+print("Hello World! " + str(var)) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> Semicolons (\TTBF{;}) at the end of statements are optional (rarely used)
+
+  \onslide<3-> L3: Declare variables and assign value directly (type not needed)
+
+  \onslide<4-> L4: String concatenation with \TTBF{+}
+
+  \onslide<5-> L4: Conversion from integer or float to string with \TTBF{str()} function
+
+\end{frame}
+
+%%% Read arguments
+
+\begin{frame}[fragile]{Read arguments}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,title={args.py}]
+#! /usr/bin/python
+
+import sys
+print("Hello World! " + sys.argv[0]) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python args.py
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python args.py
+Hello World! args.py \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Read arguments}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+#! /usr/bin/python
+
+import sys
+print("Hello World! " + sys.argv[0]) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L3: Includes an external module (\TTBF{import module})
+
+  \onslide<3-> L3: Access to arguments is made through \TTBF{sys} module
+
+  \onslide<3-> L4: Access to an attribute is made with a dot (\TTBF{.})
+
+  \onslide<4-> L4: \TTBF{argv} is an array (like in C and others)
+
+  \onslide<5-> L4: Arrays begin at index \TTBF{0}
+
+\end{frame}
+
+
+%%% Show types
+\section{Quick overview of types}
+
+\begin{frame}[fragile]{Show types/Quick debug}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,title={types1.py}]
+#! /usr/bin/python
+type(42)
+type("Hello World!") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+    \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python types1.py
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2->
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python types1.py
+<class 'int'>
+<class 'str'> \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<3-> Function \TTBF{type()} writes the type of the parameter
+\end{frame}
+
+
+\begin{frame}[fragile]{Show types/Quick debug}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,title={types2.py}]
+#! /usr/bin/python
+import sys
+type(sys)
+type(print("lol")) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+    \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python types2.py
+
+
+        \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2->
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python types2.py
+<class 'module'>
+lol
+<class 'NoneType'> \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%% Syntax and control flow
+\section{Overview of syntax and control flow}
+
+\begin{frame}[fragile]{Functions overview}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python,title={functions1.py}]
+print("Hello World!")
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python,title={functions1.py}]
+def MyFunction():
+  print("Hello World!")
+  return (0)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python,title={functions1.py}]
+def MyFunction():
+  print("Hello World!")
+  return (0)
+
+MyFunction() \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+    \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python functions1.py
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=sh]
+%*\LSTPrompt*) python functions1.py
+Hello World! \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%% Functions
+
+\begin{frame}[fragile]{Functions overview}
+
+%  Functions
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+def MyFunction():
+  print("Hello World!")
+  return (0)
+
+MyFunction() \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L1: Functions begin by a \TTBF{def} and are followed by their parameters
+
+  \onslide<3-> L1: Definition of functions are terminated by a semicolon (\TTBF{:})
+
+  \onslide<4-> L2: Indentation defines in which scope the line is
+
+  \onslide<5-> L2: \textbf{Indentation is VERY IMPORTANT!}
+
+  \onslide<6-> L3 \& L5: Returning and calling are similar to C
+
+\end{frame}
+
+
+%%% Conditions
+
+\begin{frame}[fragile]{Conditions overview}
+
+%  Conditions
+  \TTBF{if} ... \TTBF{elif} ... \TTBF{else} ...
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+def MyOtherFunction():
+  var = 42
+  if (var < 42):
+    print("Oh no...")
+  elif (var > 42):
+    print("WT...")
+  else:
+    print("OK") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+%  \onslide<2-> L3 \& L5 \& L6: \TTBF{if} ... \TTBF{elif} ... \TTBF{else} ...
+%
+%  \onslide<3-> L3 \& L5 \& L6: Conditions are followed by a semicolon (\TTBF{:})
+  \onslide<2-> L3 \& L5 \& L6: Conditions are followed by a semicolon (\TTBF{:})
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Conditions overview}
+
+%  Conditions \hspace{3cm} \textbf{(only since Python 3.10)}
+  \TTBF{match} ... \TTBF{case} ...  \hspace{3cm}  \textit{(only since Python 3.10)}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+var = "Hello World!"
+match var:
+  case ['Hello']:
+    print("Beginning")
+  case ['World!' | 'Hello World!']:
+    print("End")
+  case _:
+    print("In any other cases") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> Similar to \textit{switch-case} in C, without needing \textit{return} or \textit{break}
+
+  \onslide<3-> More complex than that (check the documentation after the course)
+
+\end{frame}
+
+
+%%% Loops
+
+\begin{frame}[fragile]{Loops overview}
+
+%  Loops (while)
+  \TTBF{while}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+var = 0
+while var < 42:
+  print("Hi Nations!")
+  var += 1 \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L2: Regular \TTBF{while} loop
+
+  \onslide<2-> L4: \TTBF{+=} operator acts like \TTBF{var = var + 1}
+
+  \onslide<3-> Don't forget indentation
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Loops overview}
+
+%  Loops (for)
+  \TTBF{for} (1)
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+for var in range(0, 10):
+  print("Hi Nations!")
+
+my_text = "Yo Countries!"
+for char in my_text:
+  print(char) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L1: \TTBF{range} calculates values from \TTBF{0} to \TTBF{10}
+
+  \onslide<3-> L1: \TTBF{in} iterates through each value of a list
+
+  \onslide<3-> L1: Each value will be put into the variable before \TTBF{in}
+
+  \onslide<4-> L4 \& L5: Strings are considered as characters lists
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Loops overview}
+
+  \TTBF{for} (2)
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+my_list = [ 5, 2, 3, 1, 4 ]
+for var in range(len(my_list)):
+  if (var < 2):
+    break
+  else:
+    print("Hi Nations!") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L1: Declaration of a list
+
+  \onslide<3-> L1: Never put a dash (\TTBF{-}) in variables name (use an underscore \TTBF{\_})
+
+  \onslide<4-> L2: \TTBF{len} gets the length of a list
+
+  \onslide<5-> L4: \TTBF{break} ends the loop
+
+\end{frame}
+
+
+%%% Exceptions
+
+\begin{frame}[fragile]{Exceptions overview}
+
+  \TTBF{try} ... \TTBF{except} ...
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,morekeywords={as}]
+var = 3
+try:
+  var = 42 / var
+except Exception as exc:
+  print("Error: " + str(exc)) \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L3: Begin the block of code to check with a \TTBF{try}
+
+  \onslide<3-> L6: Catch exceptions with a \TTBF{except}
+
+  \onslide<4-> L6: Catch any exception with \TTBF{Exception} and put it in \TTBF{exc}
+
+  \onslide<5-> L6 \& L7: Write the actions to take if an exception occurs
+
+  \onslide<6-> L7: Don't forget to convert to a string with \TTBF{str()}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exceptions overview}
+
+  \TTBF{try} ... \TTBF{except} ... \TTBF{else} ... \TTBF{finally}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,morekeywords={as}]
+try:
+  var = 42 / 3
+except ZeroDivisionError:
+  print("There was a division by zero")
+else:
+  print("It worked, result: ", var)
+finally:
+  print("--After everything--")\end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+  \onslide<2-> L4: Check for a specific exception (division by zero)
+
+  \onslide<3-> L6: If no exception was raised, it executes the \TTBF{else}
+
+  \onslide<4-> L8: In any case (exception or not), it executes the \TTBF{finally} clause
+
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,morekeywords={as}]
+def FragileFunction():
+  var = 42
+  if (var == 42):
+    raise ValueError("Argf")
+  else:
+    return (0)
+
+def MainFunction():
+  print("--Before--")
+  try:
+    FragileFunction()
+  except ValueError as exp:
+    print("Exception caught: ", exp)
+  print("--After--") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{}
+
+    \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python,morekeywords={as}]
+class MyCustomError(Exception):
+  pass
+
+def FragileFunction():
+  raise MyCustomError("Argf")
+
+def MainFunction():
+  print("--Before--")
+  try:
+    FragileFunction()
+  except MyCustomError as exp:
+    print("Exception caught: ", exp)
+  print("--After--") \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exceptions overview}
+
+  \TTBF{raise} and custom exceptions
+
+  \begin{itemize}
+    \item<2-> \TTBF{raise} instruction triggers an exception
+    \item<3-> Use \TTBF{ValueError} in order to customize the message...
+    \item<4-> ...or create a class with the name of your exception and \TTBF{Exception} as a parameter
+    \item<5-> When raising a custom exception, the message is optional
+  \end{itemize}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<6->
+        \begin{lstlisting}[style=python,morekeywords={as}]
+class MyCustomError(Exception):
+  pass
+
+def FragileFunction():
+  raise MyCustomError \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+\end{frame}

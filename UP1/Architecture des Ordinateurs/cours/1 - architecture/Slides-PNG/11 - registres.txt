@@ -1,0 +1,4 @@
+Plusieurs registres sont disponibles pour que les programmes puissent enregistrer des valeurs temporairement (par exemple les variables) selon le modèle de processeur.
+Les langages de développement permettent de s'abstraire de ces registres. Cependant, la connaissance de leur existence lors du développement permet d'optimiser l'exécution des programmes.
+
+En général, les processeurs disposent d'au moins quelques registres pour stocker des données, un registre pour le pointeur de pile (Stack Pointer/SP), et un registre pour connaitre l'instruction en cours d'exécution (Program Counter/PC).

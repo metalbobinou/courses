@@ -1,0 +1,5 @@
+AuthUserFile "/var/www/html/folder_to_protect/.htpasswd"
+AuthName "Acces protege"
+AuthType Basic
+
+require valid-user

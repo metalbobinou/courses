@@ -1,0 +1,94 @@
+Compilation
+cc1 (gcc -S)
+
+Transforme le code dans le langage source (C, C++, ... humainement compréhensible) en code "assembleur" dédié au processeur cible (ASM x86 ou x86-64 pour Intel/AMD, ASM 68k pour Motorolla 68000, ASM ARM9 pour ARM9, ...).
+
+L'assembleur est une suite d'instructions exécutables par un processeur, mais dont la logique "humaine" a été transformée en logique "machine"/processeur.
+
+
+gcc -S file_out.c -o file_asm.s
+
+
+
+file_out.c :
+
+int	my_fun(void);
+
+int	my_fun(void)
+{
+  int a = 3;
+
+  if (a == 3)
+    return (0);
+  else
+    return (42);
+}
+
+
+
+
+
+(debian)
+file_asm.s :
+
+        .file   "file_out.c"
+        .text
+        .globl  my_fun
+        .type   my_fun, @function
+my_fun:
+.LFB0:
+        .cfi_startproc
+        pushq   %rbp
+        .cfi_def_cfa_offset 16
+        .cfi_offset 6, -16
+        movq    %rsp, %rbp
+        .cfi_def_cfa_register 6
+        movl    $3, -4(%rbp)
+        cmpl    $3, -4(%rbp)
+        jne     .L2
+        movl    $0, %eax
+        jmp     .L3
+.L2:
+        movl    $42, %eax
+.L3:
+        popq    %rbp
+        .cfi_def_cfa 7, 8
+        ret
+        .cfi_endproc
+.LFE0:
+        .size   my_fun, .-my_fun
+        .ident  "GCC: (Debian 4.9.2-10) 4.9.2"
+        .section        .note.GNU-stack,"",@progbits
+
+
+
+
+(cygwin)
+file_asm.s :
+
+        .file   "my_test.c"
+        .text
+        .globl  my_fun
+        .def    my_fun; .scl    2;      .type   32;     .endef
+        .seh_proc       my_fun
+my_fun:
+        pushq   %rbp
+        .seh_pushreg    %rbp
+        movq    %rsp, %rbp
+        .seh_setframe   %rbp, 0
+        subq    $16, %rsp
+        .seh_stackalloc 16
+        .seh_endprologue
+        movl    $3, -4(%rbp)
+        cmpl    $3, -4(%rbp)
+        jne     .L2
+        movl    $0, %eax
+        jmp     .L3
+.L2:
+        movl    $42, %eax
+.L3:
+        addq    $16, %rsp
+        popq    %rbp
+        ret
+        .seh_endproc
+        .ident  "GCC: (GNU) 5.4.0"

@@ -1,0 +1,31 @@
+%% Exercice 2
+
+\ExoSpecs{\TTBF{admin.php}}{\TTBF{\RenduDir/MiniProjet/}}{}{}{}
+%\ExoSpecsCustom{\TTBF{exo1\_fun.php} [my\_Calculette(int, int, string)]}{\TTBF{\RenduDir/src/exo1/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{(Maths PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but du palier est de créer une interface complète de gestion d'un site de vente.}
+
+\bigskip
+
+\noindent Vous devez créer une page \TTBF{admin.php} qui permet de suivre les commandes et administrer l'ensemble du site.
+Seuls les utilisateurs considérés comme des \textit{administrateurs} pourront y accéder (à vous d'ajouter une colonne dans la base de données pour le faire).
+
+\medskip
+
+\noindent Les commandes disposeront maintenant d'un état : elles seront soit en mode \textit{panier} (non validée par l'utilisateur), soit en mode \textit{validée} (l'utilisateur a validé la commande), soit en mode \textit{expédiée} (un administrateur a confirmé sur la page \textit{admin.php} qu'une commande \textit{validée} était expédiée).
+À vous d'ajouter une colonne dans la base de données pour le faire.
+
+\medskip
+
+\noindent Les fonctionnalités devront permettre de :
+
+\begin{enumerate}
+\item lister les utilisateurs inscrits sur le site
+\item ajouter/retirer le droit administrateur aux utilisateurs
+\item lister les articles et modifier leurs informations (nom, quantité, prix)
+\item lister les commandes validées
+\item faire passer une commande de l'état \textit{validée} a l'état \textit{expédiée} avec un bouton
+\item lister les commandes expédiées
+\end{enumerate}

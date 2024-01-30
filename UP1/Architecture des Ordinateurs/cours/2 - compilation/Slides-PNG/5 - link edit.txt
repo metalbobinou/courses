@@ -1,0 +1,40 @@
+Link Edit / Edition de Lien
+ld (gcc)
+
+
+Les fichiers objets, dont les fonctions ou variables globales devraient être fournies par d'autres fichiers objets, sont réunis en un seul fichier, et les liens entre les noms des objets sont résolus (les noms de fonctions sont associés à des adresses fixées).
+
+Cette phase a beaucoup évolué avec le temps, et elle contient beaucoup plus d'étapes aujourd'hui.
+
+
+gcc -o programme.exe file.o
+(ld -o programme.exe file.o)
+
+
+ERREUR :
+Pas de fonction "main" / aucun point d'entrée défini
+
+
+
+gcc -o programme.exe file.o -lc --entry my_fun
+(ld -o programme.exe file.o -lc --entry my_fun)
+
+
+
+
+main.o :
+
+main:   E34A CD42
+        DEAD BEEF
+        1337 BABE
+        CEE1 3429
+
+
+
+$10000000 E34A CD42
+$10000004 DEAD BEEF
+$10000008 1337 BABE
+$1000000C CEE1 3429
+
+gcc -o programme.exe file.o main.o
+(ld -o programme.exe file.o main.o)

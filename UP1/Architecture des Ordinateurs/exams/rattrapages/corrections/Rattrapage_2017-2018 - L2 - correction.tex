@@ -1,0 +1,273 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+\usepackage{enumitem}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MODIF TITRES ("Exercice 1", "Question 1.1", ...)
+
+\usepackage{titlesec} % Personaliser les titres, sections, ...
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{Partie \thechapter : }  % {\chaptertitlename\ \thechapter -}
+  {20pt}{\Huge}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{Exercice \thesection : }{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{Question \thesubsection : }{1em}{}
+
+% FIN MODIF TITRES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{19 juin 2018}								%Droite Haut
+\chead{Paris 1 - Panthéon Sorbonne}					%Centre Haut
+\lhead{Rattrapage}										%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+\usepackage{xcolor}
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+%\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+\usepackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{red},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{RATTRAPAGE 2017-2018 - L2 (2h00)} \\
+          \normalsize\textbf{Architecture des Ordinateurs et Systèmes d'Exploitation}
+     \end{center}
+\end{minipage}
+}
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%NOM : \hspace{6.5cm} PR\'ENOM :
+%
+%\smallskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions} % 15 mins
+
+\subsection{(2 points) Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{144}, \texttt{-33}}
+
+\bigskip
+
+144 : \% 1001 0000 (\$ 90)	\qquad	-33 : \% 1101 1111 (\$ DF)
+
+\bigskip
+
+\subsection{(2 points) Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1110 0110}, \texttt{\%1001 0111}}
+
+\bigskip
+
+\% 1110 0110 : -26 ou 230	\qquad	\% 1001 0111 : 151 ou -105
+
+\bigskip
+
+\section{Compilation} % 10 mins
+
+\subsection{(2 points) Expliquer succinctement les principales étapes de compilation. (une ou deux phrase(s) par étape).}
+
+\bigskip
+\begin{enumerate}
+\item Pré-compilation : exécution des directives/macros de précompilation + retrait des commentaires
+\item Compilation : transformation du langage haut niveau source en assembleur dédié au processeur cible
+\item Assemblage : transformation du langage assembleur en langage machine (conservation des noms de fonctions), création de fichiers "objets"
+\item Link Edit : concaténation des fichiers objets et résolution des adresses de fonctions disponibles et variables globales
+\end{enumerate}
+\bigskip
+
+\section{Architecture} % 20 mins
+
+\subsection{(2 point) Expliquer succinctement comment le processeur écrit une donnée en mémoire (comment les bus sont utilisés).}
+
+\bigskip
+\begin{enumerate}
+\item Le processeur met l'adresse qu'il souhaite atteindre sur le bus d'adresse (en parallèle avec 2)
+\item Le processeur met sur le bus de contrôle qu'il souhaite écrire la mémoire (en parallèle avec 1)
+\item La mémoire charge l'adresse demandée
+\item Le processeur indique sur le bus de contrôle qu'il est prêt à écrire la donnée (en parallèle avec 5)
+\item Le processeur met sur le bus de données la donnée à écrire (en parallèle avec 4)
+\item La mémoire prend la donnée et l'écrit à l'adresse indiquée
+\end{enumerate}
+\bigskip
+
+\pagebreak
+
+\subsection{(2 points) Expliquer succinctement quelles sont les fonctions du processeur, de la mémoire, et des périphériques dans un ordinateur.}
+
+\bigskip
+\begin{itemize}
+\item Processeur (CPU) : exécuter des instructions/du code tout en manipulant des données entre la mémoire et les périphériques
+\item Mémoire (RAM) : stocker et envoyer des données à des adresses précises
+\item Périphérique (Device) : intérargir avec le monde extérieur à l'ordinateur voire avec le monde physique par des interfaces homme-machine
+\end{itemize}
+\bigskip
+
+\section{Système d'Exploitation} % 20 mins
+
+\subsection{(2 points) Expliquer la notion de "temps partagé", citer le composant du système d'exploitation qui gère cette notion, et illustrer avec un exemple où le temps est partagé puis un autre exemple où le temps n'est pas partagé.}
+
+\bigskip
+L'ordonnanceur permet de gérer le temps partagé dans un système d'exploitation.
+
+La notion de temps partagé est la capacité d'un système d'exploitation à partager le temps processeur entre plusieurs tâches différentes.
+Ces tâches ne fonctionnent peut être pas exactement au même moment, mais elles sont enregistrées dans l'ordonnanceur, et elles passent alternativement en mode exécution.
+Là où un système d'exploitation coopératif va aider des processus à partager le temps quand ceux-ci le permettent (lors d'une lecture/écriture ou tout autre appel système), un système d'exploitation préemptif va stopper \textit{de force} les processus et partager \textit{de force} le temps processeur.
+
+Sur un PC classique moderne, écouter de la musique et naviguer sur internet en même temps est un exemple où le temps est partagé : le processus jouant la musique et celui navigant sur internet se partagent le temps processeur.
+Un programme batch tournant tout seul sur une machine, et empêchant tout autre programme de fonctionner tant qu'il n'est pas terminé, est un exemple où le temps n'est pas partagé.
+\bigskip
+
+\subsection{(2 points) Citer 5 informations contenues dans un i-node.}
+
+\bigskip
+\begin{itemize}
+\item La taille (en octets)
+\item Les adresses des blocs utilisés sur le disque
+\item L'identification du propriétaire du fichier
+\item Les droits d’accès (chmod et ACL)
+\item Le type du fichier (ordinaire, spécial, ...)
+\item Un compteur de liens
+\item Les dates d'opérations principales (création, modification, consultation)
+\end{itemize}
+\bigskip
+
+\pagebreak
+
+\subsection{(2 point) Donnez 3 raisons différentes qui peuvent empêcher de créer un fichier dans un dossier.}
+
+\bigskip
+\begin{itemize}
+\item Pas le droit de créer fichier
+\item Périphériques visé pas disponible
+\item Pas d'espace disque (tous les blocs sont réservés)
+\item Tous les i-nodes sont utilisés
+\item Le dossier a été supprimé avant que la création du fichier n'ait été effective
+\item Fichier avec même nom déjà existant
+\item Commande a échoué/Mauvaise commande
+\end{itemize}
+\bigskip
+
+\subsection{(1 points) Expliquer ce que fait chaque ligne du script. En admettant qu'une entreprise génère des transactions jusqu'à 20h, indiquez l'heure minimale et l'heure maximale pour lancer ce script et traiter les transactions du jour même.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,numbers=left,title={script.sh}]
+#! /bin/sh
+
+OUTFILE=`mktemp fileXXXX`
+cat transactions.log | tr "[:upper:]" "[:lower:]" | sort -t";" -k1 -o $OUTFILE
+SUFFIXE=`date +%Y-%m-%d`
+NAME=comptabilite-${SUFFIXE}
+grep "$SUFFIXE" $OUTFILE > $NAME
+rm -f $OUTFILE
+
+\end{lstlisting}
+
+\bigskip
+
+\begin{itemize}
+\item Ligne 1 : On appelle l'interpréteur de script shell \texttt{sh}
+\item Ligne 3 : On crée un fichier temporaire dont le préfixe est "file" et qui est fini par 4 caractères aléatoires, le nom sera sauvegardé dans la variable OUTFILE
+\item Ligne 4 : On lit le fichier "transactions.log" et on envoie son contenu sur la sortie standard. Celle-ci est redirigée vers l'entrée de "tr" qui transorme les manjuscules en minuscules et redirige aussi sa sortie standard vers la commande suivante. Finalement, "sort" va trier selon le 1er champs, les champs sont séparés par des point virgules ";", et la sortie sera renvoyée vers le fichier temporaire désigné par la variable OUTFILE
+\item Ligne 5 : La variable SUFFIXE va prendre comme valeur la date du jour formattée de l'année, du mois, puis du jour séparés par des tirets
+\item Ligne 6 : La variable NAME va prendre comme valeur le mot "comptabilite" suivi d'un tiret et de la date précédemment stockée dans SUFFIXE
+\item Ligne 7 : On va chercher avec grep toutes les lignes qui contiennent la date du jour dans le fichier désigné par la variable OUTFILE, puis les mettre dans le fichier désigné par la variable NAME
+\item Ligne 8 : On supprime le fichier temporaire désigné par la variable OUTFILE
+\end{itemize}
+
+De façon générale, on va extraire les lignes du jour actuel du fichier "transactions.log", les mettre en minuscule, et trier selon le champ 1 (séparé par des ";"), et rediriger ces lignes triées dans un fichier comptabilite quotidien.\\
+
+L'heure minimale pour lancer ce script sera après 20h, et l'heure maximale sera minuit/23h59 du jour-même.
+
+\bigskip
+
+\pagebreak
+
+\subsection{(3 points) Citer les commandes, programmes, ou méthodes permettant de :}
+
+\begin{enumerate}[label=\Alph*]
+\item Chercher un fichier par son nom  ( find ; tolérance : ls )
+\item Chercher un mot dans le contenu d'un fichier et retrouver le nom du fichier  ( grep )
+\item Lister les processus  ( ps, top )
+\item Créer un fichier vide  ( touch, echo "" > file ; tolérance : mktemp )
+\item Récupérer l'heure actuelle  ( date )
+\item Concaténer la sortie standard à la sortie d'erreur vers un fichier nommé \TTBF{out-err.txt}  \linebreak ( > out-err.txt 2>\&1 )
+\end{enumerate}
+
+ex : gcc -{}-version -{}-lol > lol 2>\&1
+
+\end{document}

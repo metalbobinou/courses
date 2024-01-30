@@ -1,0 +1,253 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique - Premiers Pas}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Septembre 2022}
+\newcommand{\TypeExam}{QCM}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{20 min}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+
+% \setcounter{section}{1}  % Ne pas faire une liste de 0.1, 0.2, ... mais 1.1, 1.2, ...
+
+\renewcommand{\thesubsection}{\arabic{subsection}} % Subsection sans 0.x, mais juste x
+
+% \newcommand{\thesubsection}{\thesection.\arabic{subsection}} % Subsection avec numero section (0.x)
+
+
+
+\subsection{(4 points) Indiquer si les algorithmes suivants sont récursifs terminaux ou non }
+
+\begin{table}[htb!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+% %*   *)
+  \begin{lstlisting}[style=algorithmique]
+algorithme fonction Calcul1
+  parametres locaux
+    entier    a, b
+debut
+  si (a == 0)
+    retourne (1)
+  sinon
+    var = a + b
+    retourne (Calcul1(a - 1, b + var))
+fin algorithme fonction Calcul1
+  \end{lstlisting}
+
+  \begin{itemize}
+    \item[\CaseCoche] Récursif simple \\
+    \item[\checkmark] Récursif terminal \\ % OK
+  \end{itemize}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+  \begin{lstlisting}[style=algorithmique]
+algorithme fonction Calcul2
+  parametres locaux
+    entier    a, b
+debut
+  si (a == 0)
+    retourne (b)
+  sinon
+    var = a + b
+    retourne (Calcul2(a - 1, b + var))
+fin algorithme fonction Calcul2
+  \end{lstlisting}
+
+  \begin{itemize}
+    \item[\CaseCoche] Récursif simple \\
+    \item[\checkmark] Récursif terminal \\ % OK
+  \end{itemize}
+
+  \end{minipage}
+\end{table}
+
+
+\bigskip
+
+
+\subsection{(4 points) Cochez la (ou les) affirmation(s) vraie(s) : }
+
+\begin{itemize}
+  \item[\checkmark] Un tableau de taille N démarrant à l'index 0 a sa dernière case à l'index (N - 1) \\ % OK
+  \item[\CaseCoche] Un tableau de taille N démarrant à l'index 0 a sa dernière case à l'index N \\
+  \item[\CaseCoche] Un tableau de taille N démarrant à l'index 1 a sa dernière case à l'index (N - 1) \\
+  \item[\checkmark] Un tableau de taille N démarrant à l'index 1 a sa dernière case à l'index N \\ % OK
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Cochez la (ou les) affirmation(s) vraie(s) : }
+
+\begin{itemize}
+  \item[\checkmark] Les récursions successives peuvent facilement entraîner un dépassement de la pile d'appels \\ % OK
+  \item[\CaseCoche] Les itérations successives peuvent facilement entraîner un dépassement de la pile d'appels \\
+  \item[\CaseCoche] Les accumulateurs sont obligatoires dans les algorithmes récursifs \\
+  \item[\CaseCoche] Les algorithmes itératifs terminaux ont aussi besoin d'un accumulateur \\
+\end{itemize}
+
+
+%\bigskip
+\newpage
+
+\subsection{(4 points) Ces deux algorithmes génèrent-ils les mêmes résultats s'ils sont exécutés avec les mêmes paramètres ? }
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+  \begin{lstlisting}[style=algorithmique]
+algorithme fonction Algo1Rec
+  parametres locaux
+    entier    a, b
+debut
+  si (a == 0)
+    retourne (0)
+  sinon
+    retourne (Algo1Rec(a - 1, b) + b)
+fin algorithme fonction Calcul1 \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+  \begin{lstlisting}[style=algorithmique]
+algorithme fonction Algo1Iter
+  parametres locaux
+    entier    a, b
+debut
+  var1 = 0
+  var2 = 0
+  var3 = 0
+  tant que (var1 < a)
+    var3 = (var3 + b) + var1
+    var2 = var2 + var1
+    var1 = var1 + 1
+  fin tant que
+  retourne (var3 - var2)
+fin algorithme fonction Algo1Iter \end{lstlisting}
+  \end{minipage}
+\end{table}
+
+\smallskip
+
+\begin{itemize}
+  \item[\checkmark] Oui \\ % OK
+  \item[\CaseCoche] Non \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Quelle(s) condition(s) est (ou sont) considérée(s) comme vraie(s) pour A = vrai et B = faux ? }
+
+\begin{itemize}
+  \item[\CaseCoche] ((non A) et (non B)) et (A et (non B)) \\ % Faux
+  \item[\CaseCoche] ((non A) et    B)    ou (A et    B)    \\ % Faux
+  \item[\checkmark] ((non A) et (non B)) ou (A et (non B)) \\ % Vrai
+  \item[\checkmark] ((non A) ou (non B)) et (A ou (non B)) \\ % Vrai
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{[BONUS] (0 point) Le Magicien des Ténèbres est : }
+
+\begin{itemize}
+  \item[\CaseCoche] L'évolution XY d'Ectoplasma dans Pokémon \\
+  \item[\CaseCoche] L'ennemi principal de la 1\up{ère} saison de Digimon (Digimon Adventure) \\
+  \item[\CaseCoche] Le leader du Gang du Latex dans Medabots \\
+  \item[\checkmark] La carte préférée de Yûgi Muto (Yu-Gi-Oh!) \\ % OK
+  \item[\checkmark] Votre camarade écrivant des algorithmes parfaits la nuit lors de coupures de courant \\ % OK
+\end{itemize}
+
+\end{document}

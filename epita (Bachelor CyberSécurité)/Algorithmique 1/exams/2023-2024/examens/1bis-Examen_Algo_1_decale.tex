@@ -1,0 +1,386 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2023-2024}
+\newcommand{\DateExam}{novembre 2023}
+\newcommand{\TypeExam}{Examen 1 - Décalé}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+%\vfillFirst
+
+% Questions cours
+\section{Questions (6 points)}
+
+\subsection{(2 points) Sélectionnez les conditions vraies pour A = 8 et B = 5 : }
+
+% Compter pour chaque réponse 0,5 points : si bonne ou pas bonne
+\bigskip
+
+\begin{itemize}
+  \item[\CaseCoche] (A > B) et ((A - 3) > B)  % Faux
+  \item[\CaseCoche] (A <= B) ou ((B + 3) <= A)  % Vrai
+  \item[\CaseCoche] ((A - 2) < (B + 2)) et (A > (B + 3))  % Faux
+  \item[\CaseCoche] ((A - 3) <= B) et ((A / 2) < B)  % Vrai
+\end{itemize}
+
+
+%\bigskip
+\medskip
+
+
+\subsection{(4 points) Exécutez cet algorithme avec les valeurs (x = 3) (y = 2) et (z = 4) en remplissant le tableau, puis donnez les caractéristiques de cet algorithme : }
+
+%\bigskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction Calc : entier
+  parametres locaux
+    entier    x, y, z
+debut
+si (y == 1)
+  retourne (1)
+sinon
+  si ((x %*\texttt{\%}*) y) == 0)
+    retourne (y + Calc(x, (y - 1), z))
+  sinon
+    retourne (Calc(x, (y - 1), z))
+  fin si
+fin si
+fin algorithme fonction Calc \end{lstlisting}
+
+\begin{itemize}
+  \item[\CaseCoche] Il est récursif  \phantom{lfg}\\
+  \item[\CaseCoche] Il est même récursif terminal  \phantom{lfg}\\
+  \item[\CaseCoche] Il s'agit d'une fonction  \phantom{lfg}\\
+  \item[\CaseCoche] Il s'agit d'une procédure  \phantom{lfg}\\
+\end{itemize}
+
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+    \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |}
+        \hline
+   \textit{tour}  &  \textbf{x}  &  \textbf{y}  &  \textbf{z}    \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+
+\end{table}
+
+
+%\vfillLast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\section{Algorithmes (15 points)}
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{Factorielle} \fg{} récursive terminale. (Vous décrirez d'abord le ou les cas d'arrêts, puis le cas général) }
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{equation*}
+n! = \prod^{n}_{i = 1} i = 1 \times 2 \times ... \times N
+\end{equation*}
+%
+\vspace*{-0.5cm}
+%
+\begin{equation*}
+0! = 1
+\end{equation*}
+
+Explications du/des cas d'arrêts, puis du cas général :
+\GrilleReponseN{6}
+
+\bigskip
+
+Algorithme :
+\GrilleReponseN{14}
+\end{center}
+
+
+\clearpage
+
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{SommePow} \fg{} récursive calculant la somme des N premières puissances d'un nombre M. (Vous décrirez d'abord le ou les cas d'arrêts, puis le cas général) }
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{equation*}
+\sum^{N}_{i = 0} M^{i} = M^{0} + M^{1} + M^{2} + ... + M^{N}
+\end{equation*}
+
+Explications du/des cas d'arrêts, puis du cas général :
+\GrilleReponseN{6}
+
+\bigskip
+
+Algorithme :
+\GrilleReponseN{13}
+\end{center}
+
+\smallskip
+%\medskip
+%\bigskip
+
+
+%\clearpage
+
+
+%\subsection{(2 points) \'Ecrivez une fonction \og \textit{RechercheTab} \fg{} cherchant l'emplacement d'un élément dans un tableau d'entiers. Si l'élément n'est pas trouvé, vous renverrez \textit{-1}. (Vous décrirez d'abord le fonctionnement général) }
+%
+%%\smallskip
+%\bigskip
+%
+%\begin{center}
+%Explications du/des cas d'arrêts, puis du cas général :
+%\GrilleReponseN{6}
+%
+%\bigskip
+%
+%Algorithme :
+%\GrilleReponseN{16}
+%\end{center}
+
+
+\clearpage
+
+
+\subsection{(3 points) \'Ecrivez une procédure \og \textit{NbPairsTab} \fg{} itérative affichant la quantité de nombres pairs d'un tableau d'entiers. (Vous décrirez d'abord le fonctionnement général) }
+
+%\bigskip
+
+\begin{center}
+Explications du fonctionnement :
+\GrilleReponseN{6.5}
+
+Algorithme :
+\GrilleReponseN{16}
+\end{center}
+
+
+%\clearpage
+
+
+\subsection{(3 points) \'Ecrivez une fonction \og \textit{TabToInt} \fg{} transformant un tableau d'entiers en un unique entier, et l'affichant à l'écran. Chaque case contient un nombre positif entre 10 et 99. Si une case possède un nombre plus petit que 10 ou plus grand que 99, la fonction renverra -1. (Vous décrirez d'abord le fonctionnement général) }
+
+%\medskip
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    42 & 10 & 21 & 32 \\
+    \hline
+  \end{tabular}
+
+  \smallskip
+
+  Ce tableau doit devenir $ 42102132 $ sous forme d'entier
+\end{center}
+
+%\bigskip
+
+\begin{center}
+Explications du fonctionnement :
+\GrilleReponseN{5}
+
+Algorithme :
+\GrilleReponseN{14}
+\end{center}
+% tabtoint(tab, len, acc, mul)
+% si len == 0
+%  retourner (acc + (mul * tab[0]))
+% sinon
+%  retourner (f(tab, len - 1, acc + (mul * tab[len]), mul * 10)
+
+
+\subsection{(5 points) \'Ecrivez une fonction \og \textit{Swap} \fg{} qui échange la position de deux valeurs dans un tableau, puis, écrivez une procédure de tri. (Vous décrirez d'abord le fonctionnement général de l'algorithme de tri) }
+
+\vfillFirst
+
+\begin{center}
+Swap :
+\GrilleReponseN{12}
+\end{center}
+
+\vfillLast
+
+\clearpage
+
+\vfillFirst
+
+\begin{center}
+Explications du fonctionnement :
+\GrilleReponseN{6}
+
+\medskip
+
+Algorithme de tri :
+\GrilleReponseN{15}
+\end{center}
+
+\vfillLast
+
+\newpage
+
+
+
+%\thispagestyle{empty}
+
+\vfillFirst
+
+\begin{center}
+
+\begin{LARGE}
+\textbf{\MakeUppercase{Sujet Décalé}}
+
+\bigskip
+
+\textbf{\MakeUppercase{\TitreMatiere}}
+\end{LARGE}
+
+\end{center}
+
+\vfillLast
+
+\end{document}

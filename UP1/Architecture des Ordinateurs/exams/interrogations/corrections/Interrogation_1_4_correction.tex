@@ -1,0 +1,87 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe X}									%Droite Haut
+\chead{10 novembre 2017}							%Centre Haut
+\lhead{Interrogation 1}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 1} \\
+          \normalsize\textbf{Architecture des Ordinateurs ; Déplacement dans le Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{124}, \texttt{-66}}
+
+\bigskip
+124 : \% 0111 1100 (\$ 7C)	\qquad	-66 : \% 1011 1110 (\$ BE)
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1001 1111}, \texttt{\%1010 0010}}
+
+\bigskip
+\% 1001 1111 : -97 ou 159	\qquad	\% 1010 0010 : 162 ou -94
+\bigskip
+
+\section{Citer les 3 types de périphériques, et les 2 types d'interruptions d'un processeur}
+
+\bigskip
+Périphérique d'entrée, de sortie, d'entrée/sortie \qquad Interruptions matérielles et logicielles
+\bigskip
+
+\section{Citer 5 flags dont disposent généralement tous les processeurs}
+
+\bigskip
+Zero, Negative, Carry, Overflow, Supervisor
+\bigskip
+
+\section{Expliquer comment un système d'exploitation charge un programme pour l'exécuter}
+
+\bigskip
+
+\noindent L'OS va tout d'abord chercher le fichier contenant le programme sur le disque dur en résolvant le chemin où il se trouve.
+Puis, un processus va être créé, et l'OS va lire le contenu du fichier pour le transférer en mémoire dans l'espace d'adressage alloué au processus.
+Enfin, le processeur sautera (jump ou call) à l'adresse du début du programme, et exécutera les instructions.
+
+\end{document}

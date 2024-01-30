@@ -1,0 +1,19 @@
+In order to test your library:
+1) copy "libmylinkedlist.a" in this folder
+2) copy your "linkedlist.h" here
+3) launch "make" one time
+4) you can now launch the tests with the .exe!
+
+./main_array_1_NULL.exe
+./main_array_2_empty.exe
+./main_array_3_regular.exe
+./main_array_4_hard.exe
+
+Don't forget to check for leaks and errors with valgrind
+For debugging binaries, just launch the configure with "DEBUG" as a parameter
+
+valgrind ./main_array_3_regular.exe
+
+ll: linked list version
+
+Don't forget: be sure to validate a step before going further

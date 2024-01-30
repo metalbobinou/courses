@@ -1,0 +1,12 @@
+Un périphérique (ou "device") peut émettre des données (périphérique d'entrée / input tels que les souris, claviers, scanners), recevoir des données (périphérique de sortie / output, telles que les imprimantes, les cartes graphiques), ou encore émettre et recevoir (telles que les cartes réseaux, les disques durs, les clés USB).
+
+Un périphérique d'entrée, pour émettre ses données, ne peut pas écrire sur le bus directement, car celui-ci est "peut être" utilisé par un autre périphérique ou par le processeur lui-même.
+Pour demander l'autorisation d'utiliser le bus, il va émettre une "interruption" matérielle (envoyer des bits sur le bus de contrôle) qui sera entendue par le processeur.
+Le processeur va décider si oui ou non il laisse le bus libre au périphérique en lui renvoyant des données sur le bus de contrôle.
+
+Une fois que le périphérique obtient le droit d'écrire sur le bus, celui-ci va émettre ses données sur le bus de données.
+Le processeur va prendre chacun des mots (mot par mot), et les renvoyer vers la mémoire.
+Depuis plusieurs années, des "DMA" (Direct Memory Access) permettent au processeur de se décharger de la fonction de copie : le périphérique va directement écrire en mémoire, laissant le processeur reprendre ses activités immédiatement.
+
+
+Une "interruption" interrompt l'exécution du programme en cours dans le processeur, et force celui-ci à exécuter un programme précis enregistré au préalable. Une fois que l'interruption est gérée (le programme lancé par l'interruption se termine), le processeur peut reprendre l'exécution du programme précédent, exactement où il s'était arrêté.

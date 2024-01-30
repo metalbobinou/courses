@@ -1,0 +1,231 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs}
+\newcommand{\TitreSeance}{TD1 - Conversions}
+\newcommand{\NumeroTD}{Entiers \& Flottants}
+\newcommand{\DateCours}{Novembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les conversions entre plusieurs bases dans le cas des entiers, mais également dans le cas des flottants en respectant la norme IEEE 754.
+
+\bigskip
+
+La plupart des conversions que nous effectuerons seront entre les bases 2, 8, 10, et 16 pour les entiers, et entre les bases 10 et 2 pour les flottants IEEE 754.
+
+Pour rappel, plusieurs notations pour représenter les bases existent : celles où l'on explicite par un indice en suffixe de nombre dans quelle base celui-ci a été écrit, ou par un caractère en préfixe du nombre.
+
+$ 42_{(10)} $ indique l'on écrit le nombre \og $42$ \fg{} en base $ 10 $.
+
+$ 1010_{(2)} $ indique que l'on écrit le nombre \og $6$ \fg{} en base $ 2 $, c'est-à-dire $ 1010 $.
+
+\medskip
+
+Parmi les caractères servant de préfixe, on retrouvera : $ \%   \; \;  0o  \; \;  \$  $
+
+$ \% 00101111 $ le pourcentage indique que l'on manipule un nombre binaire (ici $ 47 $)
+
+$ 0o 42 $ le zéro suivi d'un O minuscule indiquent que l'on manipule un nombre octal (ici $ 34 $)
+
+$ \$ 15AB $ le dollar indique l'on manipule un nombre hexadécimal (ici $ 5547 $)
+
+Un nombre sans préfixe est considéré par défaut comme un nombre décimal.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Entiers}
+
+\bigskip
+
+On appelle \textit{entier signé} (qui dispose d'un signe) un entier pouvant être positif, négatif, ou nul.
+\`A l'inverse, un \textit{entier non-signé} est un entier positif ou nul.
+
+\medskip
+
+Pour représenter les entiers signés, on réserve le bit de poids fort pour représenter le signe.
+$ 0 $ signifiant $ + $, et $ 1 $ signifiant $ - $.
+
+\medskip
+
+N'oubliez pas que les nombres négatifs sont construits à partir du complètement à 2 : on transforme tous les $ 0 $ en $ 1 $, et tous les $ 1 $ en $ 0 $, puis, on ajoute $ 1 $.
+
+Une autre façon de représenter ce concept est tout simplement de partir sur la notion d'\textit{overflow}/dépassement :  $ 0 $ en décimal correspond à $ 0000 $ en binaire, donc lui appliquer $ -1 $ revient à faire un overflow et obtenir $ 1111 $.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 2}
+
+\bigskip
+
+Rappelez tout d'abord les bornes inférieures et supérieures (le plus petit/grand nombre) pour les différents cas : \textit{[au delà de 1 million, arrondissez à un chiffre et une puissance de 10]}
+
+
+\begin{center}
+\centerline{
+\begin{tabular}{| c | C{3.5cm} | C{3.5cm} || c | C{3.5cm} | C{3.5cm} |}
+\hline
+  &  entier signé  &  entier non-signé  & &  entier signé  &  entier non-signé \\
+\hline
+ & & & & & \\
+ 4 bits & & &   32 bits & & \\
+ & & & & & \\
+\hline
+ & & & & & \\
+ 8 bits & & &   48 bits & & \\
+ & & & & & \\
+\hline
+ & & & & & \\
+16 bits & & &   64 bits & & \\
+ & & & & & \\
+\hline
+ & & & & & \\
+24 bits & & &   128 bits & & \\
+ & & & & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+\bigskip
+
+Convertissez vers la base 2 sur 8 bits ces valeurs :
+
+\bigskip
+
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+$ 0_{(10)} $
+
+\bigskip
+
+$ 42_{(10)} $
+
+\bigskip
+
+$ 10_{(10)} $
+
+\bigskip
+
+$ 142_{(10)} $
+
+\bigskip
+
+$ 143_{(10)} $
+
+\bigskip
+
+$ 88_{(10)} $
+
+\bigskip
+
+$ 255_{(10)} $
+
+\bigskip
+
+$ 203_{(10)} $
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+$ -1_{(10)} $
+
+\bigskip
+
+$ -42_{(10)} $
+
+\bigskip
+
+$ -10_{(10)} $
+
+\bigskip
+
+$ -113_{(10)} $
+
+\bigskip
+
+$ -112_{(10)} $
+
+\bigskip
+
+$ -88_{(10)} $
+
+\bigskip
+
+$ -127_{(10)} $
+
+\bigskip
+
+$ 127_{(10)} $
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+
+
+
+
+\bigskip
+
+
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en novembre 2022}
+\end{center}
+
+\end{document}

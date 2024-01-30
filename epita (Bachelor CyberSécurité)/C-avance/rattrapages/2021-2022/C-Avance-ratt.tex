@@ -1,0 +1,150 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Preparation des infos generales
+\newcommand{\TitreMatiere}{Rattrapages C-Avancé}
+\newcommand{\DateExo}{31 juillet 2022}
+\newcommand{\TypeExo}{Rattrapage}
+\newcommand{\TitreExercice}{C-Avancé}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+%\newcommand{\NomAuteurB}{ }
+%\newcommand{\MailAuteurB}{ }
+\newcommand{\VersionExo}{Version 2}
+\newcommand{\LoginEtudiant}{2021-2022} % Watermark de protection
+
+%\newcommand{\RenduTarball}{nom1-nom2-TP1.tar.bz2}
+%\newcommand{\RenduDir}{nom1-nom2-TP1}
+\newcommand{\RenduTarball}{login-RATT-CAV.tar.bz2}
+\newcommand{\RenduDir}{login-RATT-CAV}
+
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExo} % Appelle un .sty
+
+
+% Redefinition headers
+\lhead{\TitreExercice}		%Gauche Haut
+\chead{\TypeExo}			%Centre Haut
+\rhead{\thepage}			%Droite Haut
+\lfoot{}					%Gauche Bas
+\cfoot{\TitreMatiere}		%Centre Bas
+\rfoot{}					%Droite Bas
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}		% RGB model
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash }m{#1}}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+
+\newcolumntype{G}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % another L
+\newcolumntype{M}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}   % another C
+\newcolumntype{D}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}  % another R
+
+\begin{document}
+
+%% Titre
+\maketitle
+
+%\newpage
+
+%% Copyright
+\pagenumbering{Roman}
+
+\input{1-copyright.tex}
+
+\newpage
+
+%% Table des matieres
+\tableofcontents
+
+\newpage
+
+%% Consignes generales
+\section{Consignes Générales}
+
+\bigskip
+
+\input{2-consignes.tex}
+
+\newpage
+
+%% Format de Rendu
+\section{Format de Rendu}
+\label{sec:FormatDeRendu}
+
+\vspace*{1cm}
+
+\input{3-rendu.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AIDE MEMOIRE AU CAS OU %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\section{Aide Mémoire}
+\label{sec:AideMemoire}
+
+\vspace*{1cm}
+
+\input{4-aidememoire.tex}
+
+\newpage
+
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%
+%%   COURS   %%
+%%%%%%%%%%%%%%%
+%\section{Cours}
+
+%\vspace*{0.7cm}
+
+%\input{Cours/Cours.tex}
+
+%\newpage
+
+%%%%%%%%%%%%%%%
+%% EXERCICES %%
+%%%%%%%%%%%%%%%
+
+%% Exercice 1
+\section{Exercice 1 - Bibliothèques statique et dynamique}
+
+\vspace*{0.7cm}
+
+\input{Exercice1/Exercice1.tex}
+
+\newpage
+
+%% Exercice 2
+\section{Exercice 2 - Liste chaînée}
+
+\vspace*{0.7cm}
+
+\input{Exercice2/Exercice2.tex}
+
+\newpage
+
+%% Exercice 3
+\section{Exercice 3 - Suite de tests}
+
+\vspace*{0.7cm}
+
+\input{Exercice3/Exercice3.tex}
+
+\end{document}

@@ -1,0 +1,99 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+%\ExoSpecsCustom{\TTBF{is\_even}}{\TTBF{\RenduDir/src/is\_even.c}}{750}{640}{Commandes autorisées}{\TTBF{sh}, \TTBF{echo}, \TTBF{exit}}
+\ExoSpecsSimple{\TTBF{is\_even.py}}{\TTBF{\RenduDir/src/is\_even.py}}{750}{640}
+
+%\vspace*{0.5cm}
+%
+%\noindent \textbf{(2 points)}
+%
+%\vspace*{0.2cm}
+
+\vspace{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'afficher si un nombre est pair ou impair.}
+
+\bigskip
+
+\noindent Vous devez écrire un programme qui prendra un paramètre, et affichera selon ce paramètre s'il est pair ou impair.
+
+\noindent Si le nombre est pair, vous devez écrire le mot \TTBF{even} dans le terminal et renvoyer 0.
+
+\noindent Si le nombre est impair, vous devez écrire le mot \TTBF{odd} dans le terminal et renvoyer 1.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ python is_even.py 3
+odd
+$ echo $?
+1
+$ python is_even.py 6
+even
+$ echo $?
+0
+$ python is_even.py 0
+even
+$ echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si plusieurs ou aucun paramètre ne sont donnés, vous devez afficher le message d'erreur suivant, et renvoyer 255.
+
+\bigskip
+
+\noindent \TTBF{Usage:\textvisiblespace python\textvisiblespace is\_even.py\textvisiblespace number}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1}]
+$ python is_even.py 0 4
+Usage: python is_even.py number
+$ echo $?
+255
+$ python is_even.py
+Usage: python is_even.py number
+$ echo $?
+255
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si le paramètre n'est pas un nombre, vous devez écrire le mot \TTBF{error} dans le terminal et renvoyer 254.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2}]
+$ python is_even.py abcd
+error
+$ echo $?
+254
+$ python is_even.py 42a
+error
+$ echo $?
+254
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si plusieurs paramètres non numériques sont donnés, c'est l'erreur sur le nombre de paramètres qui primera.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2}]
+$ python is_even.py 42 42a
+Usage: python is_even.py number
+$ echo $?
+255
+$ python is_even.py 42a 42
+Usage: python is_even.py number
+$ echo $?
+255
+\end{lstlisting}

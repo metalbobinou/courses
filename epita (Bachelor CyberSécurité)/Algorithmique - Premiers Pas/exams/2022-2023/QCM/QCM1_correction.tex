@@ -1,0 +1,205 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique - Premiers Pas}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Septembre 2022}
+\newcommand{\TypeExam}{QCM}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{20 min}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+
+% \setcounter{section}{1}  % Ne pas faire une liste de 0.1, 0.2, ... mais 1.1, 1.2, ...
+
+\renewcommand{\thesubsection}{\arabic{subsection}} % Subsection sans 0.x, mais juste x
+
+% \newcommand{\thesubsection}{\thesection.\arabic{subsection}} % Subsection avec numero section (0.x)
+
+
+
+\subsection{(4 points) Sélectionnez le ou les types algorithmiques de base/fondamentaux (qui ne dépendent pas d'autres) }
+
+\begin{itemize}
+  \item[\checkmark] Entier \\ % OK
+  \item[\CaseCoche] Relatif \\
+  \item[\checkmark] Flottant \\ % OK
+  \item[\checkmark] Caractère \\ % OK
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Ce qui définit précisément les algorithmes récursifs terminaux est : }
+
+\begin{itemize}
+  \item[\checkmark] On ne fait que retourner une valeur sans rien exécuter lors du retour récursif \\ % OK
+  \item[\CaseCoche] La fonction se rappelle elle-même \\
+  \item[\CaseCoche] L'utilisation d'un accumulateur \\
+  \item[\CaseCoche] L'utilisation d'une fonction chapeau \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Cet algorithme est-il une procédure ou une fonction ? }
+
+\begin{lstlisting}[style=algorithmique]
+algorithme *** Fibonacci ***
+  parametres locaux
+    entier    n
+debut
+  si (n != 0)
+    var1 = 0
+    var2 = 1
+    tant que (n > 0)
+      total = var1 + var2
+      var1 = var2
+      var2 = total
+      ecrire (total)
+      fin tant que
+  fin si
+fin algorithme *** Fibonacci ***
+\end{lstlisting}
+
+\begin{itemize}
+  \item[\checkmark] Procédure \\ % OK
+  \item[\CaseCoche] Fonction \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) En donnant 5 et 4 en paramètre, que renverra cet algorithme ? }
+
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction Calcul1 : entier
+  parametres locaux
+    entier    a, b
+debut
+  si (b == 1)
+    retourner(1)
+  sinon si (b <= 0)
+    retourner(-a + Calcul1(a, (b + 1))
+  sinon
+    retourner(a + Calcul1(a, (b - 1))
+  fin si
+fin algorithme fonction Calcul1
+\end{lstlisting}
+
+
+\begin{itemize}
+  \item[\CaseCoche] 15 \\
+  \item[\checkmark] 16 \\ % OK
+  \item[\CaseCoche] 20 \\
+  \item[\CaseCoche] 21 \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Qu'est-ce qui définit au mieux les effets de bord ? }
+
+\begin{itemize}
+  \item[\CaseCoche] L'exécution d'une instruction impacte les variables de la fonction courante \\
+  \item[\checkmark] L'exécution d'une instruction impacte des variables hors de la fonction \\ % OK
+  \item[\CaseCoche] L'exécution d'une instruction impacte les paramètres locaux \\
+  \item[\CaseCoche] L'exécution d'une instruction n'a aucun impact sur quoique ce soit \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{[BONUS] (0 point) "Attrapez-les tous" provient de : }
+
+\begin{itemize}
+  \item[\checkmark] Pokémon \\ % OK
+  \item[\CaseCoche] Digimon \\
+  \item[\CaseCoche] Medabots \\
+  \item[\CaseCoche] Yu-Gi-Oh! \\
+  \item[\CaseCoche] La réponse D \\
+\end{itemize}
+
+\end{document}

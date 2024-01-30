@@ -1,0 +1,166 @@
+%% Exercice 3
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo3/}}{750}{640}{\TTBF{write}}
+\ExoSpecsSimple{\TTBF{my\_pintree.py}}{\TTBF{\RenduDir/src/my\_pintree.py}}{750}{640}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'afficher un sapin en ASCII art, dont la taille varie selon le paramètre donné.}
+
+\bigskip
+
+\noindent Vous devez écrire un programme qui prendra un paramètre, et affichera selon ce paramètre un sapin.
+\noindent Dans le cas général, affichez le sapin, et renvoyez 0.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ python my_pintree.py 1
+ /\
+/  \
+____
+ ||
+$ echo $?
+0
+$ python my_pintree.py 4
+    /\
+   /  \
+  /    \
+ /      \
+/        \
+__________
+    ||
+$ echo $?
+0
+$ python my_pintree.py 5
+     /\
+    /  \
+   /    \
+  /      \
+ /        \
+/          \
+____________
+     ||
+$ echo $?
+0
+\end{lstlisting}
+
+\newpage
+
+\noindent De façon précise, voici les spécifications pour les cas 1, 4, et 5 :
+
+\bigskip
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 1}]
+ /\     1 espace / 0 espace  \
+/  \    0 espace / 2 espaces \
+____    4 _
+ ||     1 espace 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 4}]
+    /\          4 espaces / 0 espace  \
+   /  \         3 espaces / 2 espaces \
+  /    \        2 espaces / 4 espaces \
+ /      \       1 espace  / 6 espaces \
+/        \      0 espace  / 8 espaces \
+__________      10 _
+    ||          4 espaces 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 5}]
+     /\         5 espaces / 0 espace   \
+    /  \        4 espaces / 2 espaces  \
+   /    \       3 espaces / 4 espaces  \
+  /      \      2 espaces / 6 espaces  \
+ /        \     1 espace  / 8 espaces  \
+/          \    0 espace  / 10 espaces \
+____________    12 _
+     ||         5 espaces 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\bigskip
+
+\noindent Plusieurs cas spéciaux sont à prendre en compte.\\
+
+\noindent Tout d'abord, dans le cas où le paramètre 0 est donné, vous retournerez 0 et afficherez :
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas 0}]
+$ python my_pintree.py 0
+/\
+||
+$ echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si aucun ou plus de 1 paramètre est donné, vous devrez afficher le message d'erreur suivant, et retourner 1 : \\
+
+\bigskip
+
+\noindent \TTBF{Usage:\textvisiblespace python\textvisiblespace my\_pintree.py\textvisiblespace number}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur}]
+$ python my_pintree.py
+Usage: python my_pintree.py number
+$ echo $?
+1
+$ python my_pintree.py 0 4
+Usage: python my_pintree.py number
+$ echo $?
+1
+\end{lstlisting}
+
+
+%%%%%
+
+\noindent Si un paramètre texte est donné, il sera interprété comme 0 :
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas texte}]
+$ python my_pintree.py blob
+/\
+||
+$ echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si plusieurs paramètres sont donnés, qu'ils soient texte ou nombre, vous devez afficher le message d'erreur suivant et retourner 1.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas texte d'erreur}]
+$ python my_pintree.py plop plop
+Usage: python my_pintree.py number
+$ echo $?
+1
+$ python my_pintree.py 3 plop
+Usage: python my_pintree.py number
+$ echo $?
+1
+\end{lstlisting}

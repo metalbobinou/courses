@@ -1,0 +1,566 @@
+% -*- latex -*-
+
+\part{Files and Directories}  % Files and Directories
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% File management in python
+
+\section{Files Processing}
+
+% How to open, read, write, close, seek
+\subsection{Open, Read, Write, Close, Seek, Tell}
+
+
+\begin{frame}[fragile]{Files Operations}
+
+  Files are managed as usual:
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+      \item \TTBF{open}
+      \item \TTBF{read}
+      \item \TTBF{write}
+      \item \TTBF{close}
+      \item \TTBF{seek}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read}
+      \item \TTBF{write}
+      \item \TTBF{close}
+      \item \TTBF{seek}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<4>
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write}
+      \item \TTBF{close}
+      \item \TTBF{seek}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<5>
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(string)}
+      \item \TTBF{close}
+      \item \TTBF{seek}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<6>
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(string)}
+      \item \TTBF{close()}
+      \item \TTBF{seek}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<7>
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(string)}
+      \item \TTBF{close()}
+      \item \TTBF{seek(offset, \textit{[whence]})}
+      \item \TTBF{tell}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<8->
+    \begin{itemize}
+      \item \TTBF{open(filename, mode, \textit{[encoding]})}
+      \item \TTBF{read(NbCharacters)}
+      \item \TTBF{write(string)}
+      \item \TTBF{close()}
+      \item \TTBF{seek(offset, \textit{[whence]})}
+      \item \TTBF{tell()}
+    \end{itemize}
+  \end{onlyenv}
+
+  \medskip
+
+  \onslide<9-> Always close files in order to be sure to write changes on the physical support
+
+  \medskip
+
+  \onslide<10-> Files are managed by an internal python's \textbf{class}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Open}
+
+  Open mode:
+
+  \begin{itemize}
+    \item<2-> \TTBF{"r"} - open for reading
+    \item<3-> \TTBF{"w"} - truncate the file for overwriting
+    \item<4-> \TTBF{"a"} - append/begin from the end for writing
+    \item<5-> \TTBF{"x"} - create a new file, fail if it already exists
+    \item<6-> \TTBF{"r+"} - open for reading and writing
+    \item<7-> \TTBF{"b"} - binary mode (read/write with bytes objects)
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<8-> Open encoding:
+
+  \begin{itemize}
+    \item<9-> \TTBF{encoding="utf-8"} - read/write in \texttt{utf-8}
+    \item<10-> Can be omitted for platform encoding \textit{[do this for now]}
+    \item<11-> Cannot be used when in binary mode
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Text \& Binary mode}
+
+  \onslide<1-> Text mode: \onslide<2-> \TTBF{open(filename, "r+")}
+
+  \begin{itemize}
+    \item<3-> For reading/writting text files (CSV, configuration, log, ...)
+    \item<4-> When writing in a file: \TTBF{\textbackslash n} is transformed into platform specific line ending (\TTBF{\textbackslash r\textbackslash n}, \TTBF{\textbackslash n\textbackslash r}, ...)
+    \item<5-> When reading from a file: platform specific line endings are transformed into simple \TTBF{\textbackslash n}
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<6-> Binary mode: \onslide<7-> \TTBF{open(filename, "wb")}
+
+  \begin{itemize}
+    \item<8-> For reading/writting binary data (music, video, web page, ...)
+    \item<9-> The line ending characters are never transformed when reading/writting
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<10-> \textit{For now: do not use binary mode, except if you work on raw data}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Read \& Write}
+
+  Read:
+
+  \begin{itemize}
+    \item<1-> \TTBF{read()} - get the whole text
+    \item<2-> \TTBF{read(Nb)} - get the next \textit{Nb} characters
+    \item<3-> \TTBF{readline()} - get the next line (whole text until next \TTBF{\textbackslash n})
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> Write:
+
+  \begin{itemize}
+    \item<5-> \TTBF{open(filename, "wb")}
+    \item<6-> \TTBF{write(str)} - Write the string and return how many characters were written
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Tell \& Seek}
+
+  Tell:
+
+  \begin{itemize}
+    \item<1-> \TTBF{tell()} - get current position in the file (in bytes)
+    \item<2-> Useful in binary mode
+    \item<3-> More difficult in text mode (because of the \textit{encoding)}
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> Seek:
+
+  \begin{itemize}
+    \item<5-> \TTBF{seek(offset)} - put read/write cursor at the offset
+    \item<5-> \TTBF{seek(offset, whence)} - move the cursor relatively
+    \item<6-> \TTBF{whence=}
+      \begin{itemize}
+       \item \TTBF{0} : from the beginning of the file \textit{[default]}
+       \item \TTBF{1} : from the current cursor position
+       \item \TTBF{2} : from the end of the file
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%
+
+% Examples of read/write
+\subsection{Read \& Write examples}
+
+% Reading files
+
+\begin{frame}[fragile]{Read (1) example}
+
+  Open existing file for reading
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+line = f.readline()
+print(line)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+chars = f.read(10)
+print(chars)
+line = f.readline()
+print(line)
+f.close() \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Read (2) example}
+
+  Read line by line a file with python specificities
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+for x in f:
+  print(x)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "r")
+for x in f:
+  print(x)
+f.close() \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+% Writing files
+
+\begin{frame}[fragile]{Write example}
+
+  Write at the end of a file (add content)
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+f.close()
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+f = open("file.txt", "a")
+nb = f.write("-add content-")
+f.close()
+print(nb)  # 13 chars were added \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{Documentation}
+
+  \begin{center}
+    \onslide<1-> Check documentation for more informations
+
+    \bigskip
+
+    \onslide<1-> \url{https://docs.python.org/3/tutorial/inputoutput.html}
+  \end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Test file existence and delete
+\section{File existence and management}
+
+\begin{frame}<beamer>{Files and Directories}
+
+  Management of files is done through the \TTBF{os} module
+
+  \begin{itemize}
+    \item<2-> \TTBF{os.chdir(path)} - change the current directory
+    \item<3-> \TTBF{os.mkdir(dirname)} - create a directory
+    \item<4-> \TTBF{os.makedirs(path)} - create the full path (recursively)
+    \item<5-> \TTBF{os.remove(filename)} - remove the file
+    \item<6-> \TTBF{os.rmdir(dirname)} - remove the directory
+    \item<7-> \TTBF{os.listdir(path)} - list files in a directory
+    \item<8-> \TTBF{os.scandir(path)} - list files in a directory (generator)
+  \end{itemize}
+
+\end{frame}
+
+%%%
+
+\begin{frame}<beamer>{File type}
+
+  Type of file and names are done with \TTBF{path} submodule
+
+  \begin{itemize}
+    \item<2-> \TTBF{os.path.exist(path)} - test if \textit{path} is an existing file
+    \item<3-> \TTBF{os.path.isfile(path)} - test if \textit{path} is a file
+    \item<4-> \TTBF{os.path.isdir(path)} - test if \textit{path} is a directory
+    \item<5-> \TTBF{os.path.abspath(path)} - get absolute pathname
+    \item<6-> \TTBF{os.path.dirname(path)} - get dirname of pathname
+    \item<7-> \TTBF{os.path.basename(path)} - get basename of pathname
+    \item<8-> \TTBF{os.path.join(parent, child)} - build a pathname from two paths
+  \end{itemize}
+
+  \medskip
+
+  \begin{center}
+    \onslide<9-> \url{https://docs.python.org/3/library/os.path.html}
+  \end{center}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{File browsing example}
+
+  Browse a directory:
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+import os
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+import os
+
+
+entries = os.listdir(".")
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+import os
+
+# Print files & dirs
+entries = os.listdir(".")
+for entry in entries:
+  print(str(entry))
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+import os
+
+# Print files & dirs
+entries = os.listdir(".")
+for entry in entries:
+  print(str(entry))
+
+
+files = [f for f in os.listdir() if os.path.isfile(f)]
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,basicstyle=\ttfamily\footnotesize]
+import os
+
+# Print files & dirs
+entries = os.listdir(".")
+for entry in entries:
+  print(str(entry))
+
+# Print files only
+files = [f for f in os.listdir() if os.path.isfile(f)]
+for f in files:
+  print(str(f)) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}

@@ -1,0 +1,28 @@
+Pré-Processeur :  gcc -E -P file.c -o file_out.c
+
+Compilation :        gcc -S file_out.c -o file_asm.s
+
+                             gcc -c file_asm.s -o file.o
+Assemblage :                  OU
+                             as file_asm.s -o file.o
+
+                             gcc -o programme.exe file.o main.o
+Edition de Liens :            OU
+                             ld -o programme.exe file.o main.o -lc --entry main
+
+
+
+Ceci est valable pour tout fichier "file.c" contenant du C, et un fichier main.c préalablement compilé et assemblé contenant une fonction "int main(void)".
+
+L'option -o de GCC désigne "output", donc le fichier de sortie qui sera écrit.
+Par exemple :
+gcc -c file_asm.s -o file.o
+
+GCC prend en entrée file_asm.s,
+il doit effectuer une compilation d'après le paramètre -c,
+et il écrira en sortie dans le fichier file.o.
+
+
+De très très très nombreuses options à GCC existent, vous pouvez les consulter en tapant dans votre terminal :
+man gcc
+

@@ -1,0 +1,7 @@
+# UPDATE :
+
+# Lire la ligne de commande
+echo "Texte2Texte" | sed -nE '/[^0-9]+[0-9]{1}[^0-9]+/p'
+# Texte2Texte
+
+#{3} il doit y avoir exactement 3 caracteres

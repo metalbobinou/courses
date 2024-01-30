@@ -1,0 +1,262 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{Novembre 2022}
+\newcommand{\TypeExam}{QCM}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{20 min}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+
+% \setcounter{section}{1}  % Ne pas faire une liste de 0.1, 0.2, ... mais 1.1, 1.2, ...
+
+\renewcommand{\thesubsection}{\arabic{subsection}} % Subsection sans 0.x, mais juste x
+
+% \newcommand{\thesubsection}{\thesection.\arabic{subsection}} % Subsection avec numero section (0.x)
+
+
+%\vfillFirst
+
+\subsection{(4 points) Cochez les valeurs qui ne sont pas des puissances de 2 : }
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+\begin{itemize}
+  \item[\CaseCoche] 1      \phantom{(} \\
+  \item[\CaseCoche] 16     \phantom{(} \\
+  \item[\CaseCoche] 12     \phantom{(} \\
+  \item[\CaseCoche] 514    \phantom{(} \\
+  \item[\CaseCoche] 1020   \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 8192   \phantom{(} \\
+  \item[\CaseCoche] 8194   \phantom{(} \\
+  \item[\CaseCoche] 2046   \phantom{(} \\
+  \item[\CaseCoche] 2044   \phantom{(} \\
+  \item[\CaseCoche] 258    \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+
+
+\subsection{(4 points) Combien fait en décimal : $ \% \; 0110 \; 1011 $ }
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+\begin{itemize}
+  \item[\CaseCoche] -20    \phantom{(} \\
+  \item[\CaseCoche] -21    \phantom{(} \\
+  \item[\CaseCoche] -107   \phantom{(} \\
+  \item[\CaseCoche] -148   \phantom{(} \\
+  \item[\CaseCoche] -149   \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 20     \phantom{(} \\
+  \item[\CaseCoche] 21     \phantom{(} \\
+  \item[\CaseCoche] 107    \phantom{(} \\  %%%
+  \item[\CaseCoche] 148    \phantom{(} \\
+  \item[\CaseCoche] 149    \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+
+
+\subsection{(4 points) Combien fait en décimal : $ \$ \; \text{AB} $ }
+% 1010 1011
+%  43 - 128 = ???
+%  101 0100
+%  101 0101 = -85
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+\begin{itemize}
+  \item[\CaseCoche] -43    \phantom{(} \\
+  \item[\CaseCoche] -84    \phantom{(} \\  
+  \item[\CaseCoche] -85    \phantom{(} \\ %%%
+  \item[\CaseCoche] -171   \phantom{(} \\
+  \item[\CaseCoche] -172   \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] 43     \phantom{(} \\
+  \item[\CaseCoche] 84     \phantom{(} \\
+  \item[\CaseCoche] 85     \phantom{(} \\
+  \item[\CaseCoche] 171    \phantom{(} \\ %%%
+  \item[\CaseCoche] 172    \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+
+
+\subsection{(4 points) Cochez la (ou les) affirmation(s) vraie(s) : }
+
+\begin{itemize}
+  \item[\CaseCoche] Certains processeurs 32 bits peuvent exécuter des instructions 16 bits \\
+  \item[\CaseCoche] Les instructions de processeurs RISC sont de tailles fixes \\
+  \item[\CaseCoche] Les instructions de processeurs CISC sont de tailles variables \\
+  \item[\CaseCoche] Les bus d'adresses et de données peuvent être de tailles différentes \\
+  \item[\CaseCoche] Les principaux étages du pipeline d'un processeur sont : \\
+  Fetch, Decode, Execute, Memory R/W, Write Back \\
+  \item[\CaseCoche] Il existe différents types de registres dans les processeurs \\
+  (certains gèrent les flottants, d'autres des valeurs entières, des flags, ...) \\
+  \item[\CaseCoche] On compare des valeurs en testant l'état de flags \\
+\end{itemize}
+
+
+\bigskip
+
+
+\subsection{(4 points) Que peut-on dire de cette valeur lorsqu'elle est interprétée comme un flottant IEEE 754 en simple précision : \$ 8F 81 00 01 }
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+\begin{itemize}
+  \item[\CaseCoche] - 0            \phantom{(} \\
+  \item[\CaseCoche] - $ \infty $   \phantom{(} \\  
+  \item[\CaseCoche] - NaN          \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+\begin{itemize}
+  \item[\CaseCoche] + 0           \phantom{(} \\
+  \item[\CaseCoche] + $ \infty $  \phantom{(} \\
+  \item[\CaseCoche] + NaN         \phantom{(} \\
+\end{itemize}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\begin{center}
+\CaseCoche
+
+{ \large Rien de tout cela : c'est un nombre flottant normalisé ou dénormalisé }
+\end{center}
+
+\bigskip
+
+
+\subsection{[BONUS] (0 point) Pour obtenir des points supplémentaires en cours d'archi et d'algo, il faut... }
+
+\begin{itemize}
+  \item[\CaseCoche] avoir les compétences exceptionnelles de négociation du premier rang \\
+  \item[\CaseCoche] ostensiblement jouer pendant le cours malgré les rappels \\
+  \item[\CaseCoche] se dévouer à coder le Quick Sort au tableau \\
+  \item[\CaseCoche] travailler, réviser le soir, et dormir la nuit. \\
+  \item[\CaseCoche] envoyer des mèmes à l'enseignant \\
+  \item[\CaseCoche] dormir en cours... ZZZzzz... \\
+  \item[\CaseCoche] \phantom{autre :} \\
+\end{itemize}
+
+\end{document}

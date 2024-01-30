@@ -1,0 +1,38 @@
+%% Exercice 4
+
+\ExoSpecs{\TTBF{panier.php}}{\TTBF{\RenduDir/MiniProjet/}}{}{}{}
+%\ExoSpecsCustom{\TTBF{exo1\_fun.php} [my\_Calculette(int, int, string)]}{\TTBF{\RenduDir/src/exo1/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{(Maths PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but du palier est de créer un panier, d'y ajouter des produits, et enregistrer les commandes.}
+
+\bigskip
+
+\noindent Vous devez tout d'abord créer une page \TTBF{panier.php} dans laquelle le contenu de la commande courante est affiché (en utilisant l'ID de la commande en cours).
+Chaque article ajouté dans le panier est enregistré dans la table \textit{paniers}.
+
+\medskip
+
+\noindent L'ID de la commande en cours s'obtiendra de 2 façons différentes selon le cas :
+\begin{enumerate}
+\item Si la table \textbf{commandes} est vide, alors la page \textbf{panier.php} doit créer une ligne dedans avec l'ID \TTBF{1}
+\item Si la table n'est pas vide, alors on utilise le dernier ID existant (l'ID le plus grand) de la table \textbf{commandes} pour créer une nouvelle ligne
+\end{enumerate}
+
+\medskip
+
+\noindent Un bouton permettra à l'utilisateur de supprimer un article de son panier.
+
+\medskip
+
+\noindent Cette page contiendra également un bouton \textbf{commander} qui permettra de passer une commande.
+C'est-à-dire, dans le cadre de ce mini-projet et de ce palier, de fixer le montant total de la commande en cours, puis de créer une nouvelle ligne vide dans la table \textbf{commandes} avec un nouvel ID.
+
+\medskip
+
+\noindent N'oubliez pas d'ajouter des boutons sur la page \textbf{index.php} pour pouvoir ajouter des articles au panier.
+
+\medskip
+
+\noindent Vous aurez besoin de faire des requêtes SQL contenant un \TTBF{SELECT}, un \TTBF{UPDATE}, et un \TTBF{INSERT INTO}.

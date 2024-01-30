@@ -1,0 +1,59 @@
+1) Pre-Processing / Pré-Processeur
+cpp (gcc -E)
+
+2) Compilation
+cc1 (gcc -S)
+
+3) Assembler / Assemblage
+as (gcc -c)
+
+4) Link Edit / Edition de Lien
+ld (gcc)
+
+
+/*
+** Ma fonction
+*/
+
+int	my_fun(void)
+{
+  return (42); // Return 42
+}
+
+
+
+
+int	my_fun(void)
+{
+  return (42);
+}
+
+
+
+
+.globl my_fun
+	.type my_fun, @function
+my_fun:
+	leal 4(%esp), %ecx
+	andl $-16, %esp
+	pushl -4(%ecx)
+	pushl %ebp
+	movl %esp, %ebp
+	push 42
+
+
+
+
+my_fun: A31E 09FF
+	423A CC45
+	DF32 6BA5
+	23CB BDF4
+
+
+
+
+$10000000 A31E 09FF
+$10000004 423A CC45
+$10000008 DF32 6BA5
+$1000000C 23CB BDF4
+

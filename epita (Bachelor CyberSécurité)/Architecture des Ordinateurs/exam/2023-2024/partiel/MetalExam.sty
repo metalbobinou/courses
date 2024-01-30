@@ -1,0 +1,671 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{MetalExam}[2023/12/24 Classe pour generer des examens, V1.4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% S'appelle par un \usepackage{MetalExam}
+
+%% Necessite comme fichiers :
+
+% Necessite dans le .tex :
+%\newcommand{\NomAuteur}{Fabrice BOISSIER}
+%\newcommand{\TitreMatiere}{Développement Web - PHP}
+%\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+%\newcommand{\NiveauUniv}{L2}
+%\newcommand{\NumGroupe}{Groupe 1}
+%\newcommand{\AnneeUniv}{2018-2019}
+%\newcommand{\DateExam}{2 avril 2019}
+%\newcommand{\TypeExam}{Devoir sur Table}
+%\newcommand{\TitreExam}{\TitreMatiere}
+%\newcommand{\DureeExam}{3h00}
+%\newcommand{\LoginEtudiant}{2018-2019} % Watermark de protection
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Macros creees dans ce package :
+
+%%%% COMMANDES GENERALES
+
+% \TTBF{texte}
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+
+% \begin{WhiteBox}
+%    texte
+% \end{WhiteBox}
+%% Creer une boite blanche dans laquelle on ecrit des choses
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+
+
+%%%% TITRE
+
+% \MakeExamTitle
+%% La boite titre + le nom et prenom de l'etudiant(e)
+
+% \MakeExamTitleDuree
+%% La boite titre + la duree de l'examen + le nom et prenom de l'etudiant(e)
+
+% \MakeExamTitleSimple
+%% Creer une boite en haut avec les infos utiles
+
+% \MakeStudentName
+%% L'espace pour que l'étudiant(e) mette son nom et prenom
+
+
+%%%% EXERCICES
+
+% \CaseCoche
+%% Definition de \CaseCoche qui produira une case à cocher
+%% usage : \begin{itemize}   \item[\CaseCoche] Le Processeur\\   \item[\CaseCoche] L'Ordonnanceur\\  \end{itemize}
+
+% Utiliser : [\checkmark] pour bonnes réponses
+
+%% DECONSEILLE
+% \CaseCocheTexte{Texte}
+%% Definition de \CaseCocheTexte{*} qui produira une ligne avec une case et un texte
+
+% \mbox{}
+% Page blanche pour écrire (déjà existant)
+% usage :     \newpage    \mbox{}    \newpage
+
+
+% \CadreReponse{}
+%% 1 Cadre à remplir avec N vspaces
+%% usage : \begin{center}    \CadreReponse{5cm}    \end{center}
+
+
+% \GrilleReponseXY{}{}
+%% 1 Grille de taille variable Largeur x Longueur
+%% usage : \begin{center}    \GrilleReponseXY{16}{8}    \end{center}
+
+% \GrilleReponseN{}
+%% 1 Grille sur largeur de la page, mais longueur de #1
+%% usage : \begin{center}    \GrilleReponseN{5}    \end{center}
+
+% \GrilleReponse
+%% 1 Grille sur quelques centimètres (longueur page)
+%% usage : \begin{center}    \GrilleReponse    \end{center}
+
+
+% \LigneReponse
+%% 1 Ligne pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponse    \end{center}
+
+% \LigneReponseDeux
+%% 2 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseDeux    \end{center}
+
+% \LigneReponseTrois
+%% 3 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseTrois    \end{center}
+
+% \LigneReponseQuatre
+%% 4 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseQuatre    \end{center}
+
+% \LigneReponseCinq
+%% 5 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseCinq    \end{center}
+
+% \LigneReponseDix
+%% 10 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseDix   \medskip   \LigneReponseCinq    \end{center}
+
+% \LigneReponseVingt
+%% 20 Lignes pour écrire en suivant un joli format
+%% usage : \begin{center}    \LigneReponseVingt   \medskip   \LigneReponseCinq    \end{center}
+
+% \LigneReponseQuarante
+%% 40 Lignes pour écrire en suivant un joli format (une page complète)
+%% usage : \begin{center}    \LigneReponseQuarante    \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% extensions
+
+\RequirePackage{lmodern}  % Fonte CM/Computer Modern depassee, usage de Latin Modern
+\RequirePackage{courier}  % ttfamily en bold
+\RequirePackage{lastpage} % Page max connue dans variable \pageref*{LastPage}      ex : \thepage{} / \pageref{LastPage}
+
+%%%%%%% Geometrie de la page
+%%\RequirePackage[top=100pt, bottom=80pt, left=80pt, right=80pt]{geometry}
+%%\RequirePackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+%\RequirePackage[margin=2.5cm,headheight=2cm,headsep=30pt]{geometry}
+\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\RequirePackage{fancyhdr} % En-tetes jolies
+
+\pagestyle{fancy}								% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}			% Ligne au dessus du footer
+\fancyhf{}										% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+\lhead{}		%Gauche Haut
+\chead{}		%Centre Haut
+\rhead{}		%Droite Haut
+\lfoot{}		%Gauche Bas
+\cfoot{}		%Centre Bas
+\rfoot{}		%Droite Bas
+
+%\lhead{\TypeExam}							%Gauche Haut
+%\chead{\NomUniv}							%Centre Haut
+%\rhead{\NumGroupe}							%Droite Haut
+%\lfoot{\DateExam}							%Gauche Bas
+%\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+%\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+\RequirePackage{enumitem} % http://ctan.org/pkg/enumitem
+
+% TikZ
+\RequirePackage{tikz}
+%\RequirePackage{tikz-qtree}   % Syntaxe plus simple pour les ABR
+%\usetikzlibrary{shapes.geometric}  % Formes pour tikz
+\usetikzlibrary{shapes, decorations}  % Formes pour tikz
+\usetikzlibrary{fit,positioning}  % ??? pour tikz
+\usetikzlibrary{arrows.meta}  % Ajout de fleches pour les lignes
+\usetikzlibrary{tikzmark}  % Retient des marques a certains endroits
+\usetikzlibrary{backgrounds} % background for filling
+
+\RequirePackage{xcolor} % Definition de couleurs
+%\RequirePackage[table]{xcolor} % Definition de couleurs + \cellcolor{black!25}
+
+\RequirePackage{colortbl} % \cellcolor{black}
+
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+\definecolor{commentgreen}{RGB}{2,112,10} %  commentstyle=\color{commentgreen},
+\definecolor{eminence}{RGB}{108,48,130}   %  keywordstyle=\color{eminence},
+\definecolor{weborange}{RGB}{255,165,0}   %  keywordstyle=\color{weborange},
+\definecolor{frenchplum}{RGB}{129,20,83}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{forestgreen(traditional)}{rgb}{0.0, 0.27, 0.13}
+\definecolor{green(htmlcssgreen)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{harvardcrimson}{rgb}{0.79, 0.0, 0.09}  % Rouge
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1} % Marron/Rouge
+\definecolor{gray}{rgb}{0.5, 0.5, 0.5} % Gris
+
+
+\RequirePackage{pgf, tikz} % Active TikZ
+
+\RequirePackage[pdftex,
+            pdfauthor={\NomAuteur},
+            pdftitle={\TitreMatiere},
+            pdfsubject={\TitreExam},
+            pdfkeywords={},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={pdflatex}]{hyperref} % Gestion des liens cliquables + metadata
+
+\hypersetup{
+    colorlinks = true,
+    linkbordercolor = {white},
+	linkcolor = {blue},
+	urlcolor = {blue}
+}
+
+%\RequirePackage{tabularx}
+
+% Tableau personnalisables
+\RequirePackage{array}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+
+% Tableau a colonnes Left/Center/Right avec taille fixe
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+
+\RequirePackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+	% My parameters
+  xleftmargin=2em,
+  framexleftmargin=1.5em,
+	% Regular parameters
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{green},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% Nice example:
+%\lstset {
+%    language=C++,
+%    frame=tb,
+%    tabsize=4,
+%    showstringspaces=false,
+%    numbers=left,
+%    %upquote=true,
+%    commentstyle=\color{commentgreen},
+%    keywordstyle=\color{eminence},
+%    stringstyle=\color{red},
+%    basicstyle=\small\ttfamily, % basic font setting
+%    emph={int,char,double,float,unsigned,void,bool},
+%    emphstyle={\color{blue}},
+%    escapechar=\&,
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={>,<,.,;,-,!,=,~},
+%    morekeywords={>,<,.,;,-,!,=,~},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+%}
+
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{red}]{@}{@},
+}
+
+\lstdefinestyle{sh}{
+  language=sh,                     % the language of the code
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  emph={int,char,double,float,unsigned,void,bool},
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},          % $ if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%  literate={\$}{{\textcolor{weborange}{\$}}}1
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={$},
+%    morekeywords={$},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+}
+
+\lstdefinestyle{python}{
+  language=Python,                     % the language of the code
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  emph={int,char,double,float,unsigned,void,bool},
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},          % $ if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%  literate={\$}{{\textcolor{weborange}{\$}}}1
+%    % keyword highlighting
+%    classoffset=1, % starting new class
+%    otherkeywords={$},
+%    morekeywords={$},
+%    keywordstyle=\color{weborange},
+%    classoffset=0,
+}
+
+\lstdefinestyle{cplusplus}{
+    language=C++,
+    frame=tb,
+    tabsize=4,
+    showstringspaces=false,
+    numbers=left,
+    %upquote=true,
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{eminence},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily, % basic font setting
+    emph={int,char,double,float,unsigned,void,bool},
+    emphstyle={\color{blue}},
+    escapechar=\&,
+    % keyword highlighting
+    classoffset=1, % starting new class
+    otherkeywords={>,<,.,;,-,!,=,~},
+    morekeywords={>,<,.,;,-,!,=,~},
+    keywordstyle=\color{weborange},
+    classoffset=0,
+}
+
+%\lstnewenvironment{algorithm}[1][] %defines the algorithm listing environment
+%{
+%    % \refstepcounter{nalg} %increments algorithm number
+%    % \captionsetup{labelformat=algocaption,labelsep=colon} %defines the caption setup for: it ises label format as the declared caption label above and makes label and caption text to be separated by a ':'
+%    \lstset{ %this is the stype
+%        mathescape=true,
+%        frame=tB,
+%        numbers=left,
+%        numberstyle=\tiny,
+%        basicstyle=\scriptsize,
+%        keywordstyle=\color{black}\bfseries\em,
+%        keywords={,input, output, return, datatype, function, in, if, else, foreach, while, begin, end, } %add the keywords you want, or load a language as Rubens explains in his comment above.
+%        numbers=left,
+%        xleftmargin=.04\textwidth,
+%        #1 % this is to add specific settings to an usage of this environment (for instnce, the caption and referable label)
+%    }
+%}
+%{}
+%
+%\begin{algorithm}[caption={Integer division.}, label={alg1}]
+%\end{algorithm}
+%
+
+\lstdefinestyle{algorithmique}{
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    keepspaces=true,
+    keywordstyle=\color{black}\bfseries,
+    %keywords={,input, output, return, datatype, function, in, if, else, foreach, while, begin, end, }
+	keywords={,input, output, return, datatype, function, in, if, then, else, foreach, for, do, while, begin, end,
+               algorithme, parametres, retourne, fonction, dans, si, alors, sinon, pour, faire, tant, que, debut, fin,
+			   variables, locaux, globaux, struct }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\RequirePackage{draftwatermark} % Ajoute une watermark sur toutes les pages
+\RequirePackage[firstpage]{draftwatermark} % Ajoute une watermark, variantes : *none*, [firstpage], [nostamp]
+
+\SetWatermarkText{\MyWaterMark}
+\SetWatermarkScale{1}
+\SetWatermarkColor[gray]{0.97}
+\SetWatermarkAngle{30}
+%
+% AUTRE VERSION DE LA WATERMARK
+%
+%\RequirePackage[printwatermark]{xwatermark}
+%\newwatermark[allpages,color=gray!15,angle=30,scale=4,xpos=0,ypos=0]{\LoginEtudiant}
+
+
+\RequirePackage{etoolbox} % Faire des If Then Else en LaTeX
+%\RequirePackage{forloop} % Faire des boucles For en LaTeX
+%\RequirePackage{pgffor} % ForEach depuis des tableaux {1, 2, 3} en LaTeX
+
+\RequirePackage{graphicx} % Inserer des images
+
+\RequirePackage{tcolorbox} % Faire des boites colorees
+
+\RequirePackage[export]{adjustbox} % Image sur la gauche ou la droite
+
+\author{\NomAuteur}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% commandes personnelles
+
+% horizontal centering
+\newcommand{\hfillx}{\hspace*{ -\textwidth} \hfill}
+
+% vertical centering between \vfillFirst and \vfillLast
+\newcommand{\vfillFirst}{\hspace{0pt}
+\vfill}
+\newcommand{\vfillLast}{\vfill
+\hspace{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMANDES GENERALES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \TTBF (texte)
+%% Texte en ttfamily + textbf (TeleType + Bold Font)
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+% \begin{WhiteBox}
+%    texte
+% \end{WhiteBox}
+%% Creer une boite blanche dans laquelle on ecrit des choses
+\newtcolorbox{WhiteBox}{colback=white!75!white,colframe=white!75!black,halign=center,boxsep=3mm}
+
+% \begin{YellowBox}
+%    texte
+% \end{YellowBox}
+%% Creer une boite jaune dans laquelle on ecrit des choses
+\newtcolorbox{YellowBox}{colback=yellow!75!white,colframe=yellow!75!black,halign=center,boxsep=3mm}
+
+% \begin{RedBoxTitle}{Titre}
+%    texte
+% \end{RedBoxTitle}
+%% Creer une boite rouge (alerte) avec un titre dans laquelle on ecrit des choses
+\newtcolorbox{RedBoxTitle}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+
+
+%%%%%%%%%%%
+%% TITRE %%
+%%%%%%%%%%%
+
+%% Creer une boite en haut avec les infos utiles
+\newcommand{\MakeExamTitleSimple}[1]{
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{\TypeExam #1 \AnneeUniv{} - \NiveauUniv{} (\DureeExam) } \\
+          \normalsize\textbf{\TitreExam}
+     \end{center}
+\end{minipage}
+}
+}
+
+%% L'espace pour que l'étudiant(e) mette son nom et prenom
+\newcommand{\MakeStudentName}{
+NOM : \hspace{6.5cm} PR\'ENOM :
+}
+
+%% La boite titre + le nom et prenom de l'etudiant(e)
+\newcommand{\MakeExamTitle}{
+\MakeExamTitleSimple{}
+
+\bigskip
+
+\MakeStudentName
+
+\smallskip
+}
+
+%% La boite titre + la duree de l'examen + le nom et prenom de l'etudiant(e)
+\newcommand{\MakeExamTitleDuree}{
+\MakeExamTitleSimple{ - \DureeExam}
+
+\bigskip
+
+\MakeStudentName
+
+\smallskip
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% EXERCICES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Definition de \CaseCoche qui produira une case à cocher
+\newcommand{\CaseCoche}{\fontsize{20}{20}\selectfont $ \square $}
+
+%% USAGE DECONSEILLE
+% Definition de \CaseCocheTexte{*} qui produira une ligne avec une case et un texte
+\newcommand{\CaseCocheTexte}[1]{{\fontsize{20}{20}\selectfont $ \square $} {\large #1}}
+
+
+%%%%%%%%%% Cadre de réponse
+
+% 1 Cadre à remplir avec N vspaces
+\newcommand{\CadreReponse}[1]{
+\begin{tcolorbox}[arc=1ex, boxrule=0.2mm, colback=white, colframe=black, left=3pt, right=3pt, top=3pt, bottom=2pt]
+\vspace{#1}
+\end{tcolorbox}
+}
+
+
+%%%%%%%%%% Grille de réponse
+
+% 1 Grille sur une largeur de #1 et une longueur de #2
+\newcommand{\GrilleReponseXY}[2]{
+\begin{tikzpicture}
+\draw[step=0.5cm, lightgray, very thin] (0, 0) grid (#1, #2);
+\end{tikzpicture}
+}
+
+% 1 Grille sur largeur de la page, mais longueur de #1
+\newcommand{\GrilleReponseN}[1]{\GrilleReponseXY{16}{#1}}
+
+% 1 Grille sur quelques centimètres (longueur page)
+\newcommand{\GrilleReponse}{\GrilleReponseXY{16}{8}}
+
+%%%%%%%%%% Lignes de réponse
+
+% 1 Ligne pour écrire en suivant un joli format
+\newcommand{\LigneReponse}{\line(1,0){450}}
+
+% 2 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseDeux}{\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+}
+
+% 3 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseTrois}{\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+}
+
+% 4 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseQuatre}{\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+}
+
+% 5 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseCinq}{\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+
+\line(1,0){450}
+
+\medskip
+}
+
+% 10 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseDix}{\LigneReponseCinq
+
+\LigneReponseCinq}
+
+% 20 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseVingt}{\LigneReponseDix
+
+\LigneReponseDix}
+
+% 30 Lignes pour écrire en suivant un joli format
+\newcommand{\LigneReponseTrente}{\LigneReponseVingt
+
+\LigneReponseDix}
+
+% 40 Lignes pour écrire en suivant un joli format (une page)
+\newcommand{\LigneReponseQuarante}{\LigneReponseVingt
+
+\LigneReponseVingt}

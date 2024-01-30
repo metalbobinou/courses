@@ -1,0 +1,23 @@
+%% Exercice 5
+
+\ExoSpecs{\TTBF{login.php profil.php}}{\TTBF{\RenduDir/MiniProjet/}}{}{}{}
+%\ExoSpecsCustom{\TTBF{exo1\_fun.php} [my\_Calculette(int, int, string)]}{\TTBF{\RenduDir/src/exo1/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{(Maths PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but du palier est de créer une gestion des sessions utilisateurs.}
+
+\bigskip
+
+\noindent Vous devez tout d'abord créer une page \TTBF{login.php} dans laquelle un utilisateur peut créer un compte, s'identifier, ou se délogger.
+Sur cette page, plusieurs boutons permettront de gérer chaque cas (authentification, fin de session, ou création de compte).
+Vous devez créer une table \TTBF{utilisateurs} dans la base de données qui contient au moins un nom d'utilisateur et un mot de passe, mais vous êtes libres d'ajouter d'éventuelles colonnes supplémentaires.
+
+\medskip
+
+\noindent Ensuite, vous devrez créer une page \TTBF{profil.php} dans laquelle l'utilisateur peut modifier son mot de passe et éventuellement les autres informations.
+
+\medskip
+
+\noindent La gestion des utilisateurs authentifiés implique que les commandes soient gérées séparément pour chacun.
+À vous d'ajouter les colonnes nécessaires dans les autres tables de la base de données, ainsi que le code nécessaire dans les autres pages PHP (\textit{index.php}, \textit{commande.php}, \textit{panier.php} principalement) pour pouvoir gérer les sessions utilisateur.

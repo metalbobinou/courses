@@ -1,0 +1,692 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algo et Structure de Données 2}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2022-2023}
+\newcommand{\DateExam}{juillet 2023}
+\newcommand{\TypeExam}{Rattrapage}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{enumerate}[label=\Roman*)]
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{enumerate}
+
+%\bigskip
+
+\vfillFirst
+
+% Questions cours
+\section{Arbres Binaires (10 points)}
+
+\subsection{(3 points) Indiquez toutes les propriétés que possède cet arbre, puis écrivez les clés lors d'un parcours profondeur main gauche de l'arbre dans les 3 ordres ainsi que lors d'un parcours largeur : }
+
+\begin{center}
+\begin{tikzpicture}[sibling distance=1.5cm,
+  level/.style = {sibling distance = 55mm/#1},
+  level 1/.style = {sibling distance = 55mm},
+  level 2/.style = {sibling distance = 30mm},
+  level 3/.style = {sibling distance = 15mm},
+  level 4/.style = {sibling distance = 10mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (nX1) {X}
+  child { node (nA2) {A}
+          child { node (nO3) {O}
+                  child { node (nP4) {P} }
+                  child { node (nT5) {T} }
+                }
+          child { node (nA6) {A}
+                  child { node (nE7) {E}
+                          child { node (nG8) {G} }
+                          child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                        }
+                  child { node (nU9) {U} }
+                }
+         }
+   child { node (nU10) {U}
+           child { node (nE11) {E}
+                   child { node (nL12) {L} }
+                   child { node (nG13) {G} }
+                 }
+           child { node (nE14) {E}
+                   child { node (nM15) {M} }
+                   child { node (nS16) {S} }
+                 }
+        };
+\end{tikzpicture}
+%  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+\end{center}
+
+\begin{tabular}{C{3cm} C{3cm} C{3cm} C{3cm}}
+Arité : & Taille : & Hauteur : & Nb feuilles : \\
+\end{tabular}
+
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+  \item[\CaseCoche] Arbre binaire strict / localement complet \phantom{()}
+  \item[\CaseCoche] Arbre binaire parfait \phantom{()}
+  \item[\CaseCoche] Peigne gauche \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+  \item[\CaseCoche] Arbre binaire (presque) complet \phantom{()}
+  \item[\CaseCoche] Arbre filiforme \phantom{()}
+  \item[\CaseCoche] Peigne droit \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+\bigskip
+
+Parcours profondeur :
+
+\medskip
+
+\centerline{
+\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+ordre préfixe : & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+ordre infixe :  & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+ordre suffixe : & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+\end{tabular}
+}
+
+\bigskip
+
+Parcours largeur :
+
+\medskip
+
+\centerline{
+\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+ordre : & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfillLast
+
+\clearpage
+
+%\vfillFirst
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(4 points) Dessinez le résultat de l'insertion dans cet ordre précis des éléments suivants dans un ABR (insertion en feuille) et dans un AVL : }
+
+\begin{center}
+
+%\'Eléments insérés : 18 - 46 - 55 - 36 - 12 - 38 - 96 - 71
+%\'Eléments insérés : 46 - 18 - 55 - 36 - 12 - 38 - 96 - 71
+\'Eléments insérés : 32 - 8 - 16 - 96 - 64 - 72 - 24 - 4
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\vspace*{6cm}
+
+ABR
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\vspace*{6cm}
+
+AVL
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(3 points) \'Ecrivez une fonction récursive \og \textit{parc\_prof\_rec} \fg{} effectuant un parcours profondeur main gauche dans un arbre binaire, et affichant les nœuds dans chacun des ordres : }
+
+%\noindent Pour expliciter les ordres, vous devrez afficher au format : \og Ordre : nœud \fg{} (exemple : \og Préfixe : node \fg{})
+\noindent Il faut expliciter les éventuels ordres au format : \og Ordre : nœud \fg{} (exemple : \og Préfixe : 42 \fg{})
+
+\begin{center}
+\GrilleReponseN{14}
+\end{center}
+
+%\bigskip
+
+%\vfillLast
+
+\clearpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Arbres Binaires : Parcours Largeur (10 points)}
+
+
+%\noindent Afin de tester l'ensemble des compétences acquises au cours de cette année, vous allez maintenant toutes les exploiter pour interpréter des données et des structures.
+%Le but de ces exercices est de vous faire changer de point de vue : vous avez construit des structures durant l'année, vous allez maintenant analyser des structures existantes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2 points) Effectuez les opérations suivantes et affichez la structure dans son état final : }
+
+
+\begin{center}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+Pile
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+
+File
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\begin{enumerate}[label=\roman*]
+\item push 5
+\item push 12
+\item push 14
+\item pop
+\item push 7
+\item push 6
+\item pop
+\item pop
+\end{enumerate}
+
+\vspace*{2cm}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+
+\begin{enumerate}[label=\roman*]
+\setcounter{enumi}{8}
+\item pop
+\item push 2
+\item push 8
+\item push 11
+\item pop
+\end{enumerate}
+
+\vspace*{1.75cm}
+
+\vspace*{2cm}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.01\textwidth}
+
+\begin{tikzpicture}
+\draw (0,0) -- (0,7.5);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\begin{enumerate}[label=\roman*]
+\item enqueue 5
+\item enqueue 12
+\item enqueue 14
+\item dequeue
+\item enqueue 7
+\item enqueue 6
+\item dequeue
+\item dequeue
+\end{enumerate}
+
+\vspace*{2cm}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\begin{enumerate}[label=\roman*]
+\setcounter{enumi}{8}
+\item dequeue
+\item enqueue 2
+\item enqueue 5
+\item enqueue 11
+\item dequeue
+\end{enumerate}
+
+\vspace*{1.75cm}
+
+\vspace*{2cm}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+1) Quelle est la spécificité d'une pile concernant l'ordre d'entrée et de sortie des éléments ?
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+2) Quelle est la spécificité d'une file concernant l'ordre d'entrée et de sortie des éléments ?
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+\vspace*{1cm}
+
+\end{center}
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(1 point) En admettant que l'on dispose d'une pile et que l'on insère les données \og 1 2 3 4 5 6 \fg{} dans cet ordre exclusivement, décrivez les scénarios permettant d'obtenir les sorties suivantes : }
+%%% PREFERER CE TEXTE :
+%\subsection{(3 points) En admettant que l'on dispose d'une pile vide et que les éléments \og 1 2 3 4 5 6 \fg{} arrivent en entrée dans cet ordre exclusivement, décrivez les scénarios permettant d'obtenir les sorties suivantes : }
+
+\bigskip
+
+\begin{center}
+\noindent \textit{exemple : pour \og A B C \fg{} en entrée, on peut obtenir \og B C A \fg{} en sortie en faisant : \linebreak
+\og push A \fg, \og push B \fg, \og pop \fg, \og push C \fg, \og pop \fg, \og pop \fg }
+
+\textit{On a bien inséré A, puis B, puis C, mais l'ordre de sortie est différent suivant les \og pop \fg}
+\end{center}
+
+\medskip
+
+
+\begin{center}
+
+\begin{large}
+2, 4, 3, 5, 6, 1
+\end{large}
+
+\begin{center}
+\GrilleReponseN{5}
+% push 1, push 2, pop, push 3, push 4, pop, pop, push 5, pop, push 6, pop, pop
+\end{center}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2 points) \`A partir de l'arbre affiché, répondez aux questions et effectuez le parcours largeur : }
+
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.60\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1.5cm,
+  level/.style = {sibling distance = 55mm/#1},
+  level 1/.style = {sibling distance = 55mm},
+  level 2/.style = {sibling distance = 30mm},
+  level 3/.style = {sibling distance = 15mm},
+  level 4/.style = {sibling distance = 10mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n3) {3}
+  child { node (n8) {8}
+          child { node (n2) {2}
+                  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                  child { node (n15) {15} }
+                }
+          child { node (n20) {20} }
+         }
+   child { node (n42) {42}
+           child { node (n11) {11}
+                   child { node (n9) {9} }
+                   child { node (n4) {4} }
+                 }
+           child { node (n21) {21}
+                   child { node (n36) {36} }
+                   child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                 }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+
+1) Quelle structure est requise pour effectuer un parcours largeur ?
+
+\vspace*{2cm}
+
+  \end{minipage}
+\end{table}
+
+\end{center}
+
+\bigskip
+\vspace*{-1cm}
+
+
+2) Effectuez le parcours largeur de l'arbre en détaillant pas à pas l'état de la structure associée.
+
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+%    \centering
+
+\begin{tabular}{ L{4cm} L{2.5cm} }
+Structure : & N\oe{}ud traité : \\
+\end{tabular}
+
+%\bigskip
+\smallskip
+
+\begin{tabular}{ |C{0.5cm}| C{3cm} L{2cm} }
+\cline{1-1}
+ & & \textit{Ø} \\
+\cline{1-1}
+\end{tabular}
+
+%\bigskip
+\medskip
+
+\begin{tabular}{ |C{0.5cm}| C{3cm} L{2cm} }
+\cline{1-1}
+3 & & \textit{Ø} \\
+\cline{1-1}
+\end{tabular}
+
+%\bigskip
+\medskip
+
+\begin{tabular}{ |C{0.5cm}| C{3cm} L{2cm} }
+\cline{1-1}
+ & & 3 \\
+\cline{1-1}
+\end{tabular}
+
+\vspace*{7.5cm}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.01\textwidth}
+
+\begin{tikzpicture}
+\draw (0,0) -- (0,10.85);
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tabular}{ L{4cm} L{2.5cm} }
+Structure : & N\oe{}ud traité : \\
+\end{tabular}
+
+\vspace*{9.65cm}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+\end{center}
+
+
+\vspace*{-1.45cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(1 point) \`A partir du tableau et de l'arbre affiché, répondez à la question suivante : }
+
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[sibling distance=1cm,
+  level/.style = {sibling distance = 35mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n21) {21}
+  child { node (n42) {42}
+          child { node (n14) {14} }
+          child { node (n20) {20}
+                  child { node (n17) {17} }
+                  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                }
+        }
+  child { node (n55) {55}
+          child { node (n6) {6}
+                  child { node (n9) {9} }
+                  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                }
+          child { node (n15) {15}
+                  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                  child { node (n13) {13} }
+                }
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.40\textwidth}
+
+
+\begin{center}
+
+\begin{tabular}{ |C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}| }
+\hline
+15 & 6 & 20 & 14 \\
+\hline
+\end{tabular}
+
+\end{center}
+
+\bigskip
+
+Dans le cas d'un parcours largeur, quel n\oe{}ud est actuellement traité d'après l'état de la structure ?
+
+\vspace*{2cm}
+
+  \end{minipage}
+\end{table}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(4 points) \'Ecrivez une fonction itérative \og \textit{parc\_larg} \fg{} effectuant un parcours largeur dans un arbre binaire, et affichant chacun des nœuds dans l'ordre hiérarchique : }
+
+%\noindent Il faut expliciter les éventuels ordres au format : \og Ordre : nœud \fg{} (exemple : \og Préfixe : 42 \fg{})
+
+%\medskip
+
+\noindent \textit{Vous pouvez utiliser les structures externes :}
+
+\noindent \textit{stack\_t (create, push, head, pop, delete) \hfill queue\_t (create, enqueue, head, dequeue, delete) }
+
+\begin{center}
+\GrilleReponseN{22}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+
+%\thispagestyle{empty}
+
+\vfillFirst
+
+\begin{center}
+
+\begin{LARGE}
+\textbf{RATTRAPAGE ALGORITHMIQUE ET STRUCTURES DE DONN\'EES 2}
+\end{LARGE}
+
+\end{center}
+
+\vfillLast
+
+\end{document}

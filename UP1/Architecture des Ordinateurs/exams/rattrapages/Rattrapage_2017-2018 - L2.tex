@@ -1,0 +1,205 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+\usepackage{enumitem}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MODIF TITRES ("Exercice 1", "Question 1.1", ...)
+
+\usepackage{titlesec} % Personaliser les titres, sections, ...
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{Partie \thechapter : }  % {\chaptertitlename\ \thechapter -}
+  {20pt}{\Huge}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{Exercice \thesection : }{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{Question \thesubsection : }{1em}{}
+
+% FIN MODIF TITRES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{19 juin 2018}								%Droite Haut
+\chead{Paris 1 - Panthéon Sorbonne}					%Centre Haut
+\lhead{Rattrapage}										%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+\usepackage{xcolor}
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+%\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+\usepackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{red},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{RATTRAPAGE 2017-2018 - L2 (2h00)} \\
+          \normalsize\textbf{Architecture des Ordinateurs et Systèmes d'Exploitation}
+     \end{center}
+\end{minipage}
+}
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%NOM : \hspace{6.5cm} PR\'ENOM :
+%
+%\smallskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions} % 15 mins
+
+\subsection{(2 points) Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{144}, \texttt{-33}}
+% 1001 0000 = 144
+% 1101 1111 = -33
+\bigskip
+
+\subsection{(2 points) Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1110 0110}, \texttt{\%1001 0111}}
+% 1110 0110 = -26  ou 230
+% 1001 0111 = -105 ou 151
+\bigskip
+\bigskip
+\bigskip
+
+\section{Compilation} % 10 mins
+
+\subsection{(2 points) Expliquer succinctement les principales étapes de compilation. (une ou deux phrase(s) par étape).}
+
+\bigskip
+\bigskip
+\bigskip
+
+%\pagebreak
+
+\section{Architecture} % 20 mins
+
+\subsection{(2 point) Expliquer succinctement comment le processeur écrit une donnée en mémoire (comment les bus sont utilisés).}
+
+\bigskip
+
+\subsection{(2 points) Expliquer succinctement quelles sont les fonctions du processeur, de la mémoire, et des périphériques dans un ordinateur.}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Système d'Exploitation} % 20 mins
+
+\subsection{(2 points) Expliquer la notion de "temps partagé", citer le composant du système d'exploitation qui gère cette notion, et illustrer avec un exemple où le temps est partagé puis un autre exemple où le temps n'est pas partagé.}
+
+\bigskip
+
+\subsection{(2 points) Citer 5 informations contenues dans un i-node.}
+
+\bigskip
+
+\subsection{(2 point) Donnez 3 raisons différentes qui peuvent empêcher de créer un fichier dans un dossier.}
+
+\bigskip
+% pas le droit de créer fichier
+% pas d'espace disque
+% périphériques visé pas disponible
+
+\pagebreak
+
+\subsection{(1 points) Expliquer ce que fait chaque ligne du script. En admettant qu'une entreprise génère des transactions jusqu'à 20h, indiquez l'heure minimale et l'heure maximale pour lancer ce script et traiter les transactions du jour même.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,numbers=left,title={script.sh}]
+#! /bin/sh
+
+OUTFILE=`mktemp fileXXXX`
+cat transactions.log | tr "[:upper:]" "[:lower:]" | sort -t";" -k1 -o $OUTFILE
+SUFFIXE=`date +%Y-%m-%d`
+NAME=comptabilite-${SUFFIXE}
+grep "$SUFFIXE" $OUTFILE > $NAME
+rm -f $OUTFILE
+
+\end{lstlisting}
+
+\bigskip
+
+\subsection{(3 points) Citer les commandes, programmes, ou méthodes permettant de :}
+
+\begin{enumerate}[label=\Alph*]
+\item Chercher un fichier par son nom
+\item Chercher un mot dans le contenu d'un fichier et retrouver le nom du fichier
+\item Lister les processus
+\item Créer un fichier vide
+\item Récupérer l'heure actuelle
+\item Concaténer la sortie standard à la sortie d'erreur vers un fichier nommé \TTBF{out-err.txt}
+\end{enumerate}
+
+\end{document}

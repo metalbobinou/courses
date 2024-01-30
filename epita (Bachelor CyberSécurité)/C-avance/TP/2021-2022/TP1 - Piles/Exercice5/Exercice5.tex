@@ -1,0 +1,161 @@
+%% Exercice 5
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{stack\_static.c}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{write(2)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'implémenter une pile en C utilisant un tableau statique et sans jamais modifier le tas du processus (c'est-à-dire sans utiliser \texttt{malloc(3)}, \texttt{mmap(2)}, ou tout autre appel système ou fonction modifiant le tas ou réservant des pages mémoire lors de l'exécution).}
+
+\bigskip
+
+\noindent Les fonctions demandées dans cet exercice devront également se trouver dans la bibliothèque nommée \TTBF{libmystack}.
+
+\bigskip
+
+\noindent Vous devez écrire plusieurs fonctions permettant de créer, utiliser, vider, et libérer une pile.
+Un fichier \TTBF{stack\_static.h} contenant toutes les fonctions exportables à implémenter vous est fourni en annexe.
+Vous devez déclarer une structure \TTBF{stack\_static} et l'ajouter dans \TTBF{stack\_static.h}.
+N'oubliez pas qu'un tableau statique est généré par le compilateur : vous devrez indiquer dans la constante de pré-compilation \TTBF{STACK\_STATIC\_MAX\_LEN} la taille maximum.
+La pile étant statique, il vous faudra déclarer une variable globale statique nommée \TTBF{g\_stack\_static} qui pointera vers la structure (elle-même déclarée dans la variable globale nommée \TTBF{g\_s\_stack\_static}).
+Pour les premières étapes, vous devrez implémenter une version simplifiée de la pile qui ne prend en charge que des entiers positifs.
+
+\noindent \textit{Attention : étant donné qu'il s'agit d'une version statique, vous ne devez \textbf{JAMAIS} utiliser \TTBF{malloc}, \TTBF{free}, ou toute autre fonction ou appel système visant à réserver de la mémoire.}
+
+%\noindent Vous devez implémenter les 11 fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{void stack\_static\_create(void)}
+%\item \TTBF{void stack\_static\_delete(void)}
+%\item \TTBF{int stack\_static\_length(void)}
+%\item \TTBF{int stack\_static\_max\_length(void)
+%\item \TTBF{int stack\_static\_push(int elt)}
+%\item \TTBF{int stack\_static\_pop(void)}
+%\item \TTBF{int stack\_static\_head(void)}
+%\item \TTBF{int stack\_static\_clear(void)}
+%\item \TTBF{int stack\_static\_is\_empty(void)}
+%\item \TTBF{int stack\_static\_search(int elt)}
+%\item \TTBF{void stack\_static\_reverse(void)}
+%\item \TTBF{void stack\_static\_print(void)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Liste des fonctions pour une pile avec liste chaînée}]
+void stack_static_create(void);
+void stack_static_delete(void);
+
+int stack_static_length(void);
+int stack_static_max_length(void);
+
+int stack_static_push(int elt);
+int stack_static_pop(void);
+int stack_static_head(void);
+
+int stack_static_clear(void);
+int stack_static_is_empty(void);
+
+int stack_static_search(int elt);
+void stack_static_reverse(void);
+void stack_static_print(void);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{void stack\_static\_create(void)}}
+
+\noindent Cette fonction initialise les valeurs de la structure.
+
+
+\subsubsection*{\TTBF{void stack\_static\_delete(void)}}
+
+\noindent Cette fonction vide une pile de l'ensemble de ses éléments.
+
+
+\subsubsection*{\TTBF{int stack\_static\_max\_length(void)}}
+
+\noindent Cette fonction renvoie la longueur du tableau contenant la pile.
+
+
+\subsubsection*{\TTBF{int stack\_static\_length(void)}}
+
+\noindent Cette fonction renvoie la longueur de la pile (c'est-à-dire le nombre d'éléments actuellement dans la pile).
+
+
+\subsubsection*{\TTBF{int stack\_static\_push(int elt)}}
+
+\noindent Cette fonction empile un élément dans une pile, c'est-à-dire qu'elle ajoute un élément au sommet.
+En cas de succès, la fonction renvoie $ 0 $.
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+Si le tableau est déjà plein, la fonction renvoie $ -3 $.
+
+
+\subsubsection*{\TTBF{int stack\_static\_pop(void)}}
+
+\noindent Cette fonction dépile un élément d'une pile, c'est-à-dire qu'elle supprime l'élément au sommet.
+En cas de succès, la fonction renvoie $ 0 $.
+Si la pile est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int stack\_static\_head(void)}}
+
+\noindent Cette fonction renvoie l'élément au sommet de la pile.
+Si la pile est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int stack\_static\_clear(void)}}
+
+\noindent Cette fonction vide une pile de l'ensemble de ses éléments, sans détruire la structure de la pile.
+La fonction renvoie le nombre d'éléments supprimés de la mémoire.
+Si la pile est vide, la fonction renvoie $ 0 $.
+
+
+\subsubsection*{\TTBF{int stack\_static\_is\_empty(void)}}
+
+\noindent Cette fonction teste si une pile est vide ou non.
+Si la pile est vide, la fonction renvoie $ 1 $.
+Si la pile n'est pas vide, la fonction renvoie $ 0 $.
+
+
+\subsubsection*{\TTBF{int stack\_static\_search(int elt)}}
+
+\noindent Cette fonction recherche un élément dans la pile et renvoie sa position dans le tableau.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire le fond de la pile), cette position sera numérotée $ 0 $.
+Si l'élément n'est pas trouvé, la fonction renvoie $ -4 $.
+
+
+\subsubsection*{\TTBF{void stack\_static\_reverse(void)}}
+
+\noindent Cette fonction inverse la position de tous les éléments de la pile.
+Le premier élément devient le dernier, l'avant dernier devient le deuxième, etc.
+\textit{Attention : vous ne devez pas utiliser de \TTBF{malloc} ou de tableau temporaire pour effectuer cette fonction.}
+
+\subsubsection*{\TTBF{void stack\_static\_print(void)}}
+
+\noindent Cette fonction affiche le contenu de la pile.
+Le format d'affichage attendu implique d'afficher un seul élément par ligne, suivi d'un retour à la ligne.
+L'élément en tête de pile sera affiché en premier.
+Si la pile est vide, seul un retour à la ligne est affiché.
+\textit{Attention, en version statique, vous devrez utiliser \texttt{write(2)} et non pas \texttt{printf(3)}.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage du cas normal : pile contenant 42, 5, 13}]
+$ ./my_stack_static
+42
+5
+13
+
+$
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage d'une pile vide}]
+$ ./my_stack_static
+
+$
+\end{lstlisting}

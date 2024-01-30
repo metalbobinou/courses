@@ -1,0 +1,245 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+
+\usepackage{tabularx}
+
+% Definition de \CaseCoche{*} qui produira une ligne avec une case et un texte
+%\newcommand{\CaseCoche}[1]{{\fontsize{20}{20}\selectfont $ \square $} {\large #1}}
+
+% Definition de \CaseCoche qui produira une case à cocher
+\newcommand{\CaseCoche}{\fontsize{20}{20}\selectfont $ \square $}
+
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{Groupe 1}									%Droite Haut
+\chead{14 décembre 2017}							%Centre Haut
+\lhead{Interrogation 2}								%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+% \texttt{Paris 1 - Panthéon Sorbonne}
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{INTERROGATION 2} \\
+          \normalsize\textbf{Système d'Exploitation et Shell}
+     \end{center}
+\end{minipage}
+}
+
+\bigskip
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\smallskip
+
+\section{Choisir la notion ou l'élément le mieux illustré par chaque exemple : }
+
+\medskip
+\noindent Il/Elle permet de partager équitablement le temps d'exécution entre plusieurs processus.\\
+
+\begin{itemize}
+\item[\CaseCoche] Le Processeur\\
+\item[\CaseCoche] L'Ordonnanceur\\
+\item[\CaseCoche] L'Espace d'Adressage\\
+\item[\CaseCoche] La Gestion des Threads\\
+\end{itemize}
+
+\bigskip
+\noindent Plusieurs utilisateurs se connectent sur la même machine et peuvent travailler sur plusieurs tâches grâce à ce système.\\
+
+\begin{itemize}
+\item[\CaseCoche] Système d'Exploitation Temps Réel Multi-Tâches\\
+\item[\CaseCoche] Système d'Exploitation de Fichiers\\
+\item[\CaseCoche] Système d'Exploitation Multi-Processeurs Préemptif\\
+\item[\CaseCoche] Système d'Exploitation Multi-Tâches à Temps Partagé\\
+\end{itemize}
+
+\bigskip
+\noindent Il/Elle identifie et stocke les méta-données d'un fichier sur disque.\\
+
+\begin{itemize}
+\item[\CaseCoche] L'I-Node\\
+\item[\CaseCoche] Le Bloc\\
+\item[\CaseCoche] L'Arborescence\\
+\item[\CaseCoche] Le Système de Fichiers\\
+\end{itemize}
+
+\bigskip
+\noindent Un utilisateur avec bash peut personnaliser son shell à chaque connection avec cela.\\
+
+\begin{itemize}
+\item[\CaseCoche] .bashrc\\
+\item[\CaseCoche] /etc/passwd\\
+\item[\CaseCoche] variable d'environnement SHELL\\
+\item[\CaseCoche] LDAP\\
+\end{itemize}
+
+\bigskip
+
+\section{Définir ce que sont les appels systèmes (au delà des 6 que vous connaissez).}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{Indiquer les commandes pour donner les bons droits aux fichiers suivants :}
+
+\medskip
+
+\noindent fichier1 (tous les droits pour le propriétaire, lecture et exécution pour le groupe et les autres)
+
+\medskip
+
+\noindent fichier2 (lecture pour le propriétaire, exécution pour le groupe, écriture pour les autres)
+
+\medskip
+
+\noindent \#monfichier\# (lecture et écriture pour le propriétaire, aucun droit pour tous les autres)
+
+\medskip
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{\'Ecrire les lignes de commande permettant de créer cette arborescence : }
+
+\medskip
+
+\noindent \TTBF{Dossier/}\\
+\noindent \TTBF{Dossier/Fichier1}\\
+\noindent \TTBF{Dossier/Fichier2}\\
+\noindent \TTBF{Dossier/Contenu}\\
+\noindent \TTBF{Dossier/Contenu/Fichier}\\
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\newpage
+
+NOM : \hspace{6.5cm} PR\'ENOM :
+
+\section{Remettre dans l'ordre les phases de compilation, indiquer la commande du principal compilateur/linkeur et ses options si nécessaire}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabularx}{15.5cm}{| c | c | c | X |}
+  \hline
+  \No \'Etape & Nom de l'\'Etape & Programme/Commande & Paramètre(s) \\ \hline
+  & \textbf{Assemblage} & & \\
+  \hline
+  & \textbf{Compilation} & & \\
+  \hline
+  & \textbf{Link Edit/\'Edition de Liens} & & \\
+  \hline
+  & \textbf{Pré-Compilation} & & \\ 
+  \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+
+\section{Remplir le tableau avec les commandes ou leur description}
+
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+  \begin{tabular}{| c | c |}
+  \hline
+  \textbf{Commande/Programme} & \textbf{Description} \\ \hline
+  ls & \\ \hline
+  & Afficher le chemin du répertoire courant \\ \hline
+  & Renommer un fichier \\ \hline
+  & Supprimer un fichier \\ \hline
+  & Supprimer un dossier \\ \hline
+  & Envoyer un signal à un processus \\ \hline
+  & Faire revenir au premier plan une tâche \\ \hline
+  touch & \\ \hline
+  & Afficher les chaînes de caractères correspondantes à un motif \\ \hline
+  & Afficher la liste des processus \\ \hline
+  & Déplacer un dossier \\
+  \hline
+  \end{tabular}
+\end{center}
+\bigskip
+
+\renewcommand\arraystretch{1}
+
+\section{Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{214}, \texttt{-78}}
+
+\bigskip
+\bigskip
+\bigskip
+
+\section{Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1010 1101}, \texttt{\%1110 1011}}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\section{\'Ecrivez un script shell qui lancera le script \TTBF{autre\_script.sh} (et redirigera sa sortie d'erreur vers le fichier \TTBF{error.log}) si aucun paramètre n'est donné, sinon, le nom donné en premier paramètre sera considéré comme un script et sera exécuté (et sa sortie standard sera redirigée vers le fichier \TTBF{std.log}) }
+
+\bigskip
+
+
+\end{document}

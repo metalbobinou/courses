@@ -1,0 +1,185 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{exo1\_fun.php} [my\_Calculette(int, int, string)]}{\TTBF{\RenduDir/src/exo1/}}{}{}{Fonctions recommandées}{\TTBF{(Bases PHP)}, \TTBF{(Maths PHP)}, \TTBF{return}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de créer une mini calculatrice en PHP.}
+
+\bigskip
+
+\noindent Vous devez écrire une fonction nommée \TTBF{my\_Calculette} qui prendra trois paramètres (deux nombres, puis l'opérateur), et renverra le résultat de l'opération désignée ou un message d'erreur.
+
+\noindent Vous devez implémenter les 5 opérations suivantes : l'addition (symbole \TTBF{+}), la soustraction (symbole \TTBF{-}), la multiplication (lettre \TTBF{*}), la division (symbole \TTBF{/}), et le reste de la division euclidienne (symbole  \TTBF{\%}).
+
+\noindent \`A la fin du calcul, votre fonction doit renvoyer le résultat.
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas général PHP}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette(42, 38, "+");
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas général PHP exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+80</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Les deux premiers paramètres doivent être des entiers, et le troisième doit être une chaîne de caractères. Si ça n'est pas le cas, vous devez renvoyer le texte suivant.
+
+\bigskip
+
+\noindent \TTBF{Incorrect\textvisiblespace parameters\textvisiblespace type}
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 : mauvais paramètres}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette("+", 38, 42);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+Incorrect parameters type</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si le troisième paramètre donné n'est ni un \TTBF{+}, ni un \TTBF{-}, ni un \TTBF{*}, ni un \TTBF{/}, ni un \TTBF{\%}, alors vous devez renvoyer le message d'erreur suivant.
+
+\bigskip
+
+\noindent \TTBF{Unknown\textvisiblespace operator}
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 : opérateur inconnu}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette(42, 38, "A");
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+Unknown operator</textarea>
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si le deuxième paramètre donné à la division est 0, vous devez renvoyer le message d'erreur suivant.
+
+\bigskip
+
+\noindent \TTBF{Division\textvisiblespace by\textvisiblespace 0\textvisiblespace is\textvisiblespace forbidden}
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 3 : division par 0}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette(42, 0, "/");
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 3 exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+Division by 0 is forbidden</textarea>
+\end{lstlisting}
+
+\bigskip
+
+%\noindent Si le deuxième paramètre donné au modulo est 0, vous devez renvoyer le message d'erreur suivant.
+%
+%\bigskip
+%
+%\noindent \TTBF{Modulo\textvisiblespace 0\textvisiblespace is\textvisiblespace forbidden}
+%
+%\bigskip
+%
+%\lstset{language=php}
+%\begin{lstlisting}[frame=single,title={Cas d'erreur 3 : division par 0}]
+%<textarea cols="80" rows="25" readonly="readonly">
+%<?php
+%  require_once("exo1_fun.php");
+%  $my_text = my_Calculette(42, 0, "%");
+%  echo($my_text);
+%?>
+%</textarea>
+%\end{lstlisting}
+%
+%\lstset{language=php}
+%\begin{lstlisting}[frame=single,title={Cas d'erreur 3 exécuté}]
+%<textarea cols="80" rows="25" readonly="readonly">
+%Modulo 0 is forbidden</textarea>
+%\end{lstlisting}
+%
+%\bigskip
+
+\noindent Si plusieurs des problèmes précédents sont rencontrés simultanément, vous devez les gérer dans cet ordre de priorité : le problème de type en priorité, l'opérateur inconnu en second, et la division par 0 en dernier.
+
+%\noindent Si plusieurs des problèmes précédents sont rencontrés simultanément, vous devez les gérer dans cet ordre de priorité : le problème de type en priorité, l'opérateur inconnu en second, et enfin le modulo ou la division par 0 en dernier.
+
+\bigskip
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreurs}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette("A", 42, 0);
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreurs exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+Incorrect parameters type</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreurs}]
+<textarea cols="80" rows="25" readonly="readonly">
+<?php
+  require_once("exo1_fun.php");
+  $my_text = my_Calculette(42, 0, "A");
+  echo($my_text);
+?>
+</textarea>
+\end{lstlisting}
+
+\lstset{language=html}
+\begin{lstlisting}[frame=single,title={Cas d'erreurs exécuté}]
+<textarea cols="80" rows="25" readonly="readonly">
+Unknown operator</textarea>
+\end{lstlisting}

@@ -1,0 +1,139 @@
+# SED
+
+### EXTENDED REGEXP
+# [a-z]+
+# ?
+
+# Créer un fichier exemple
+echo -e "Coucou, ceci est un test pour aider a comprendre\n"\
+"le fonctionnement de sed. Il y aura au moins 3 lignes de\n"\
+"test." > FILE
+
+# Vérification contenu du fichier
+cat FILE
+# Coucou, ceci est un test pour aider a comprendre
+# le fonctionnement de sed. Il y aura au moins 3 lignes de
+# test.
+
+
+
+# Créer un fichier exemple
+echo -e "Ceci est un test pour\n"\
+"aider a comprendre le\n"\
+"fonctionnement de sed.\n"\
+"Il y aura au moins 3 lignes de\n"\
+"test." > FILE
+
+# Vérification contenu du fichier
+cat FILE
+# Ceci est un test pour
+# aider a comprendre le
+# fonctionnement de sed.
+# Il y aura au moins 3 lignes de
+# test.
+
+
+# Affiche le texte + ce qui matche
+sed 's/test/&/p' FILE
+# Ceci est un test pour
+# Ceci est un test pour
+# aider a comprendre le
+# fonctionnement de sed.
+# Il y aura au moins 3 lignes de
+# test.
+# test.
+
+
+# Affiche seulement les matchs
+sed -n 's/test/&/p' FILE
+# Ceci est un test pour
+# test.
+
+# "test" ou "Il" matchés
+sed -n 's/test\|Il/&/p' FILE
+#Ceci est un test pour
+#Il y aura au moins 3 lignes de
+#test.
+
+# Remplacement des occurences
+sed -n 's/test\|Il/MDR/p' FILE
+#Ceci est un MDR pour
+#MDR y aura au moins 3 lignes de
+#MDR.
+
+# Affiche seulement ce qui est changé
+sed -n 's/test/PTDR/p' FILE
+#Ceci est un PTDR pour
+#PTDR.
+
+# Affiche tout le texte changé
+sed 's/test/PTDR/g' FILE
+#Ceci est un PTDR pour
+#aider a comprendre le
+#fonctionnement de sed.
+#Il y aura au moins 3 lignes de
+#PTDR.
+
+
+# Changer les / en # est possible
+sed -n 's#Ceci#&#p' FILE
+#Ceci est un test pour
+
+# Travaille sur la ligne 5 seulement
+sed -n '5 s/test/&/p' FILE
+#test.
+
+# Travaille sur lignes 1 à 4 seulement
+sed -n '1,4 s/test/&/p' FILE
+#Ceci est un test pour
+
+# Supprime les lignes contenant "test"
+sed '/test/ d' FILE
+#aider a comprendre le
+#fonctionnement de sed.
+#Il y aura au moins 3 lignes de
+
+
+# !p affiche ce qui ne contient pas "test"
+sed -n '/test/!p' FILE
+#aider a comprendre le
+#fonctionnement de sed.
+#Il y aura au moins 3 lignes de
+
+
+# Remplacer des caractères par d'autres (comme tr)
+sed 'y/abcdefghijk/ABCDEFGHIJK/' FILE
+#CECI Est un tEst pour
+#AIDEr A ComprEnDrE lE
+#FonCtIonnEmEnt DE sED.
+#Il y AurA Au moIns 3 lIGnEs DE
+#tEst.
+
+
+# Insertion dans le fichier
+sed -i 'y/t/T/' FILE
+cat FILE
+#Ceci esT un TesT pour
+#aider a comprendre le
+#foncTionnemenT de sed.
+#Il y aura au moins 3 lignes de
+#TesT.
+
+
+# Ajoute une ligne après chaque occurence
+sed '/test/ a LOL' FILE
+#Ceci est un test pour
+#LOL
+#aider a comprendre le
+#fonctionnement de sed.
+#Il y aura au moins 3 lignes de
+#test.
+#LOL
+
+# Exemples utiles, supprimer lignes vides
+sed '/^$/d'
+sed '/./!d'
+
+# Réutilisation de motifs \( \) et \1
+sed -n 's/.*\(Ceci\).*\(test\).*\(pour\).*/\3 \2 \1/p' FILE
+#pour test Ceci

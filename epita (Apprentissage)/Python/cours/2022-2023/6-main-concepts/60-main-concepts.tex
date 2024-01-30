@@ -1,0 +1,3394 @@
+% -*- latex -*-
+
+\part{Python's Main Concepts}  % Types, lists (comprehension, ...)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}<beamer>{Built-in types}
+
+  \begin{itemize}
+    \item Numerics
+    \item Sequences
+    \item Mappings
+    \item Classes
+    \item Instances
+    \item Exceptions
+  \end{itemize}
+
+\end{frame}
+
+
+%%% Numeric types
+\section{Numeric types}
+
+\begin{frame}<beamer>{Numeric types}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+      \item<1> int
+      \item<1> float
+      \item<1> complex
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2->
+    \begin{itemize}
+      \item<2-> int
+      \begin{itemize}
+        \item<2-> booleans \textit{- (subtype of int)}
+      \end{itemize}
+      \item<2-> float
+      \item<2-> complex
+      \begin{itemize}
+        \item<3-> \textit{(pair of floats for real and imaginary parts)}
+      \end{itemize}
+    \end{itemize}
+  \end{onlyenv}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Numeric types}
+
+  \begin{center}
+
+%  Numeric types examples:
+%
+%  \bigskip
+
+  \begin{tabular}{| l | c  c  c |}
+    \hline
+    \textbf{Type} & \multicolumn{3}{ c |}{\textbf{Examples}} \\
+    \hline
+    int 		& 0 		& 42 		& 1337 	\\
+    float 	& 0.0 	& 1.8e30 	& 1. 	\\
+    complex 	& 3j 	& 2J 		& 5+7j 	\\
+    \hline
+  \end{tabular}
+
+%  \bigskip
+  \vspace{1.5cm}
+
+  \textquotedbl 1.8e30\textquotedbl{} is equivalent to \textquotedbl $ 1,8 \times {10}^{30} $\textquotedbl
+
+  \medskip
+
+  \textquotedbl 5j\textquotedbl{} is equivalent in french to \textquotedbl 5i\textquotedbl
+  \end{center}
+
+\end{frame}
+
+
+%%% Numeric operations
+
+\begin{frame}<beamer>{Numeric operations}
+
+  \begin{center}
+
+%  Main integers operations:
+%
+%  \bigskip
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    $ \text{x} \: + \: \text{y} $ 	& sum of \textit{x} and \textit{y} \\
+    $ \text{x} \: - \: \text{y} $ 	& difference of \textit{x} and \textit{y} \\
+    $ \text{x} \: * \: \text{y} $ 	& product of \textit{x} and \textit{y} \\
+    $ \text{x} \: / \: \text{y} $ 	& quotient of \textit{x} and \textit{y} \\
+    $ \text{x} \: // \: \text{y} $ 	& floored quotient of \textit{x} and \textit{y} \\
+    $ \text{x} \: \% \: \text{y} $ 	& remainder of $ \text{x} / \text{y} $ \\
+    $ \text{pow}(\text{x}, \text{y}) $ 	& \textit{x} to the power \textit{y} \\
+    $ \text{x} \: ** \: \text{y} $ 		& \textit{x} to the power \textit{y} \\
+    $ - \text{x} $ 		& \textit{x} negated \\
+    $ + \text{x} $ 		& \textit{x} unchanged \\
+    $ \text{abs(x)} $ 	& absolute value or magnitude of \textit{x} \\
+    \hline
+  \end{tabular}
+
+  \medskip
+
+  \textquotedbl /\textquotedbl{} gives a float as a result
+
+  \textquotedbl //\textquotedbl{} gives an integer as a result (euclidean division)
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Numeric operations}
+
+  \begin{center}
+
+%  Useful integers operations:
+%
+%  \bigskip
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    $ \text{abs(x)} $ 	& absolute value or magnitude of \textit{x} \\
+    $ \text{floor(x)} $ 	& the largest integer not greater than \textit{x} \\
+    $ \text{ceil(x)} $ 	& the smallest integer greater than or equal to \textit{x} \\
+    \hline
+  \end{tabular}
+
+  \medskip
+
+  \begin{lstlisting}[style=python,morekeywords={floor,ceil}]
+import math
+
+Absolue = abs(-42.7)  # 42.7
+ParDefaut1 = math.floor(3.2)  # 3
+ParDefaut2 = math.floor(3.7)  # 3
+ParExces1 = math.ceil(5.2)  # 6
+ParExces2 = math.ceil(5.7)  # 6 \end{lstlisting}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Numeric operations}
+
+  \begin{center}
+
+  Constructors and type conversion:
+
+  \bigskip
+
+  \begin{tabular}{| l | p{5cm} |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    $ \text{int(x)} $ 	& \textit{x} converted to integer \\
+    $ \text{float(x)} $ 	& \textit{x} converted to floating point \\
+    $ \text{complex(re, im)} $ 	& a complex number with real part \textit{re}, imaginary part \textit{im}. (\textit{im} defaults to zero) \\
+    \hline
+  \end{tabular}
+
+  \medskip
+
+  \begin{lstlisting}[style=python,morekeywords={int,float}]
+entier = %*\color{blue}int*)(42.7)     # 42
+flottant = %*\color{blue}float*)(3)    # 3.0
+complexe1 = complex(4)     # 4+0j
+complexe2 = complex(5, 6)  # 5+6j \end{lstlisting}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Other numeric types
+
+\begin{frame}<beamer>{Other numeric types}
+
+  Booleans values:
+  \begin{itemize}
+    \item<1-> \TTBF{False} (equivalent to \TTBF{int(0)})
+    \item<1-> \TTBF{True} (equivalent to \TTBF{int(1)})
+  \end{itemize}
+
+  \bigskip
+
+%  \begin{onlyenv}<2->
+    \begin{center}
+    More details on types
+
+    \url{https://docs.python.org/3/library/stdtypes.html}
+    \end{center}
+%  \end{onlyenv}
+
+\end{frame}
+
+
+%%% Sequence types
+\section{Sequence types}
+
+\begin{frame}<beamer>{Sequence types}
+
+  \begin{itemize}
+    \item<1-> list
+    \item<1-> tuple
+    \item<1-> range
+    \item<2-> str \textit{- (text sequence type)}
+    \item<3-> \textit{binary sequence types}
+  \end{itemize}
+
+  \bigskip
+
+  \begin{center}
+    \begin{onlyenv}<4->
+
+    index begins at 0
+
+    \end{onlyenv}
+  \end{center}
+
+\end{frame}
+
+
+%%% Sequence operations
+\subsection{Sequence operations}
+
+\subsubsection{Common operations}
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \begin{center}
+
+    Sequences do have common operations:
+
+    \begin{itemize}
+      \item Access
+      \item Search
+      \item Concatenation
+      \item min/max/len
+      \item ...
+    \end{itemize}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \begin{center}
+
+%  Common sequence operations:
+%
+%  \bigskip
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    $ \text{x} \: \text{in} \: \text{s} $ 		& \TTBF{True} if an item of \textit{s} is equal to \textit{x}, else \TTBF{False} \\
+    $ \text{x} \: \text{not in} \: \text{s} $ 	& \TTBF{False} if an item of \textit{s} is equal to \textit{x}, else \TTBF{True} \\
+    $ \text{s} \: + \: \text{t} $ 	& the concatenation of \textit{s} and \textit{t} \\
+    $ \text{s} \: * \: \text{n} $ 	& equivalent to adding \textit{s} to itself \textit{n} times \\
+    s[i] 		& access to the \textit{i}th item of \textit{s} (first index: 0) \\
+    s[i:j] 		& slice of \textit{s} from \textit{i} (included) to \textit{j} (excluded) \\
+    s[i:j:k] 	& slice of \textit{s} from \textit{i} to \textit{j} (excluded) with step \textit{k} \\
+    len(x) 	& length of \textit{s} \\
+    min(x) 	& smallest item of \textit{s} \\
+    max(x) 	& largest item of \textit{s} \\
+    \hline
+  \end{tabular}
+
+%    $ \text{s}[\text{i}] $ 					& access to the \textit{i}th item of \textit{s} (first index: \textit{0}) \\
+%    $ \text{s}[\text{i}:\text{j}] $ 			& slice of \textit{s} from \textit{i} to \textit{j} \\
+%    $ \text{s}[\text{i}:\text{j}:\text{k}] $ 	& slice of \textit{s} from \textit{i} to \textit{j} with step \textit{k} \\
+
+
+  \medskip
+
+  \textit{s} and \textit{t} are sequences of the same type
+
+  \textit{n}, \textit{i}, \textit{j} and \textit{k} are integers
+
+  \textit{x} is an arbitrary object
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \begin{center}
+
+  Access to items:
+
+  \medskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+print(len(mylist)) # length: 5
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+print(len(mylist)) # length: 5
+print(min(mylist)) # smallest: 15
+print(max(mylist)) # biggest: 1337
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+print(len(mylist)) # length: 5
+print(min(mylist)) # smallest: 15
+print(max(mylist)) # biggest: 1337
+print(42 in mylist)  # test presence 42: True
+print(mylist[3])       # 4th item: 666
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+print(len(mylist)) # length: 5
+print(min(mylist)) # smallest: 15
+print(max(mylist)) # biggest: 1337
+print(42 in mylist)  # test presence 42: True
+print(mylist[3])       # 4th item: 666
+print(mylist[1:3])     # slice: 1337, 42
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 1337, 42, 666, 15 ]
+print(len(mylist)) # length: 5
+print(min(mylist)) # smallest: 15
+print(max(mylist)) # biggest: 1337
+print(42 in mylist)  # test presence 42: True
+print(mylist[3])       # 4th item: 666
+print(mylist[1:3])     # slice: 1337, 42
+print(mylist[0:4:2])   # slice: 42, 42 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \begin{center}
+
+%  Common sequence operations:
+%
+%  \bigskip
+
+  \begin{tabular}{| c | p{8.5cm} |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    s[i] 		& access to the \textit{i}th item of \textit{s} [first index: 0] \\
+    s[i:j] 		& slice beginning at \textit{i} ending before \textit{j} [ends at \textit{j - 1}] \\
+    s[i:j:k] 	& slice beginning at \textit{i} ending before \textit{j} by steps of \textit{k} \\
+    s.count(x) 		& total number of occurrences of \textit{x} in \textit{s} \\
+    s.index(x) 			& index of the first occurrence of \textit{x} in \textit{s} \\
+    s.index(x, i) 		& index of the first occurrence of \textit{x} in \textit{s} at or after index \textit{i} \\
+    s.index(x, i, j) 	& index of the first occurrence of \textit{x} in \textit{s} at or after index \textit{i} and before index \textit{j} \\
+    \hline
+  \end{tabular}
+
+%    $ \text{s}[\text{i}] $ 					& access to the \textit{i}th item of \textit{s} (first index: \textit{0}) \\
+%    $ \text{s}[\text{i}:\text{j}] $ 			& slice of \textit{s} from \textit{i} to \textit{j} \\
+%    $ \text{s}[\text{i}:\text{j}:\text{k}] $ 	& slice of \textit{s} from \textit{i} to \textit{j} with step \textit{k} \\
+
+
+  \medskip
+
+  \textit{s} and \textit{t} are sequences of the same type
+
+  \textit{n}, \textit{i}, \textit{j} and \textit{k} are integers
+
+  \textit{x} is an arbitrary object
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Slices
+\subsubsection{Slices}
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \begin{center}
+
+  Slicing tips (1):
+
+  \bigskip
+
+  \begin{itemize}
+    \item<1-> s[:3] is equivalent to s[0:3] \\
+      { \footnotesize (prints everything from start until 3) } \\
+    \item<2-> s[5:] is equivalent to s[5:{\footnotesize\textit{(last index + 1)}}] \\
+      { \footnotesize (prints everything from 5) } \\
+    \item<3-> s[:] is equivalent to s[0:{\footnotesize\textit{(last index + 1)}}] \\
+      { \footnotesize (prints everything) } \\
+    \item<4-> s[::2] is equivalent to s[0:{\footnotesize\textit{(last index + 1)}}:2] \\
+      { \footnotesize (prints everything by steps of 2) } \\
+  \end{itemize}
+
+  \bigskip
+
+  \begin{onlyenv}<5->
+    \textit{(last index + 1)} is equivalent to \textit{len(s)} \\
+  \end{onlyenv}
+
+  \end{center}
+
+\end{frame}
+
+
+
+%%% Slicing (1) : positive values
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \begin{center}
+
+  Slicing (1): Positive indexes
+
+  \smallskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)
+
+
+
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])
+
+
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])
+
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])   #     37, 42, 66
+print(mylist[2:])
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])   #     37, 42, 66
+print(mylist[2:])    #         42, 66, 15
+print(mylist[:3])
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])   #     37, 42, 66
+print(mylist[2:])    #         42, 66, 15
+print(mylist[:3])    # 42, 37, 42
+print(mylist[::2])
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])   #     37, 42, 66
+print(mylist[2:])    #         42, 66, 15
+print(mylist[:3])    # 42, 37, 42
+print(mylist[::2])   # 42,     42,     15
+print(mylist[1:5:3])
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist)        # 42, 37, 42, 66, 15
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[1:4])   #     37, 42, 66
+print(mylist[2:])    #         42, 66, 15
+print(mylist[:3])    # 42, 37, 42
+print(mylist[::2])   # 42,     42,     15
+print(mylist[1:5:3]) #     37,         15
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \begin{center}
+
+  Slicing tips (2):
+
+  \bigskip
+
+  \begin{onlyenv}<1->
+    you can go back from the last item thanks to negative values \\
+  \end{onlyenv}
+
+  \bigskip
+
+  \begin{itemize}
+    \item<2-> s[-1] is equivalent to s[{\footnotesize\textit{(last index + 1)}}] \textit{(last item)} \\
+    \item<3-> s[-4:] prints the last 4 items \\
+    \item<5-> s[:-1] prints all of the items, except the last one \\
+    \item<6-> s[-4:-1] prints the last 4 items, except the last one \textit{(stop at -1)} \\
+    \item<7-> s[2:-1] prints all the items from index 2, except the last one \\
+    \item<8-> s[-4:3] prints all the items from index -4 to index 2 \textit{(stop at 3)} \\
+  \end{itemize}
+
+  \bigskip
+
+  \begin{onlyenv}<9->
+    don't forget that the second index is not selected/it is the limit \\
+  \end{onlyenv}
+
+  \end{center}
+
+\end{frame}
+
+
+
+
+%%% Slicing (2): negative values
+\begin{frame}[fragile]{Sequence operations}
+
+  \begin{center}
+
+  Slicing (2): Negative indexes
+
+  \bigskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+
+
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])
+
+
+
+
+#                      [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])    #                 15
+print(mylist[:-1])
+
+
+
+#                     [-5][-4][-3][-2][-1] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])    #                 15
+print(mylist[:-1])   # 42, 37, 42, 66
+print(mylist[2:-1])
+
+
+#                     [-5][-4][-3][-2][-1] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])    #                 15
+print(mylist[:-1])   # 42, 37, 42, 66
+print(mylist[2:-1])  #         42, 66
+print(mylist[-4:-1])
+
+#                     [-5][-4][-3][-2][-1] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])    #                 15
+print(mylist[:-1])   # 42, 37, 42, 66
+print(mylist[2:-1])  #         42, 66
+print(mylist[-4:-1]) #     37, 42, 66
+print(mylist[-4:4])
+#                     [-5][-4][-3][-2][-1] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42, 66, 15 ]
+#                      [0] [1] [2] [3] [4]
+print(mylist[:])     # 42, 37, 42, 66, 15
+print(mylist[-1])    #                 15
+print(mylist[:-1])   # 42, 37, 42, 66
+print(mylist[2:-1])  #         42, 66
+print(mylist[-4:-1]) #     37, 42, 66
+print(mylist[-4:4])  #     37, 42, 66
+#                     [-5][-4][-3][-2][-1] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Shallow copy and Deep copy
+\subsubsection{References, Shallow copy, Deep copy}
+
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \onslide<1-> Beware of \textbf{references}!
+
+  \bigskip
+
+  \onslide<2-> Python does not copy everything
+
+  \onslide<3-> It "\textit{creates bindings between a target and an object}"
+
+  \bigskip
+
+  \onslide<4-> Modifying a sequence will change the assigned values in other sequences where it is referenced
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \onslide<1-> \TTBF{id()} is a builtin that gives the identifier of an object
+
+  \onslide<2-> {\footnotesize \textit{(in a specific context, it gives the memory address of the object)} }
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+
+
+
+
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+print(id(L1))
+print(id(L2))
+print(L1 == L2)
+print(id(L1) == id(L2))
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+print(id(L1))
+print(id(L2))
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  True
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+print(id(L1))
+print(id(L2))
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  True
+L2[0] = 88
+print(L1)
+print(L2)
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+print(id(L1))
+print(id(L2))
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  True
+L2[0] = 88
+print(L1)               #  88, 37, 42
+print(L2)               #  88, 37, 42
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \onslide<1-> Lists are not copied, only their references are used \phantom{\TTBF{id()}}
+
+  \onslide<1-> { \footnotesize  \phantom{\textit{(list)}} }
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 42, 37, 42 ]     #  [0] [1] [2] [3] [4]
+L2 = L1                 #  42, 37, 42
+print(id(L1))
+print(id(L2))
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  True
+L2[0] = 88
+print(L1)               #  88, 37, 42
+print(L2)               #  88, 37, 42
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+
+
+
+
+
+
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+L2 = L1.copy()          #   2   7 [4,3]
+print(L1 == L2)
+print(id(L1) == id(L2))
+
+
+
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+L2 = L1.copy()          #   2   7 [4,3]
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  False
+L2[0] = 8
+
+
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+L2 = L1.copy()          #   2   7 [4,3]
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  False
+L2[0] = 8
+print(L1)
+print(L2)
+
+
+
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+L2 = L1.copy()          #   2   7 [4,3]
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  False
+L2[0] = 8
+print(L1)               #   2   7 [4,3]
+print(L2)               #   8   7 [4,3]
+L2[2][0] = 9
+print(L1)
+print(L2)
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+L1 = [ 2, 7, [4, 3] ]   #  [0] [1] [2] [3] [4]
+L2 = L1.copy()          #   2   7 [4,3]
+print(L1 == L2)         #  True
+print(id(L1) == id(L2)) #  False
+L2[0] = 8
+print(L1)               #   2   7 [4,3]
+print(L2)               #   8   7 [4,3]
+L2[2][0] = 9
+print(L1)               #   2   7 [9,3]
+print(L2)               #   8   7 [9,3]
+                        #  [0] [1] [2] [3] [4] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Sequence operations}
+
+  \onslide<1-> Module \textit{copy}
+
+  \medskip
+
+  \begin{itemize}
+    \item<2-> \textbf{Shallow copy}: creates a new sequence and inserts references to each contained object of the original sequence
+    \item<3-> \textbf{Deep copy}: creates a new sequence and recursively inserts copies of each object of the original sequence
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> \TTBF{NewList1 = list(MyList)} works as a shallow copy
+
+  \onslide<5-> \TTBF{NewList2 = MyList[:]} works as a shallow copy
+
+  \onslide<6-> \TTBF{NewList3 = MyList.copy()} works as a shallow copy
+
+  %\bigskip
+
+  %\onslide<6-> \TTBF{list.copy()} and \TTBF{list[:]} works like shallow copies at different levels
+\end{frame}
+
+
+\begin{frame}[fragile]{Sequence operations}
+
+  \onslide<1-> Major difficulties concern containers containing containers
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+L2 = copy.copy(L1)     # shallow copy
+L3 = copy.deepcopy(L1) # deep copy
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+L2 = copy.copy(L1)     # shallow copy
+L3 = copy.deepcopy(L1) # deep copy
+L1[1][1] = 9
+print(L2)
+print(L3)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+L2 = copy.copy(L1)     # shallow copy
+L3 = copy.deepcopy(L1) # deep copy
+L1[1][1] = 9
+print(L2)   # [ [1,1], [2,9], [3,3] ]
+print(L3)   # [ [1,1], [2,2], [3,3] ]
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+L2 = copy.copy(L1)     # shallow copy
+L3 = copy.deepcopy(L1) # deep copy
+L1[1][1] = 9
+print(L2)   # [ [1,1], [2,9], [3,3] ]
+print(L3)   # [ [1,1], [2,2], [3,3] ]
+L1[1] = [0,0]
+print(L2) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+import copy
+
+L1 = [ [1,1], [2,2], [3,3] ]
+L2 = copy.copy(L1)     # shallow copy
+L3 = copy.deepcopy(L1) # deep copy
+L1[1][1] = 9
+print(L2)   # [ [1,1], [2,9], [3,3] ]
+print(L3)   # [ [1,1], [2,2], [3,3] ]
+L1[1] = [0,0]
+print(L2)   # [ [1,1], [2,9], [3,3] ] \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+
+%%% Lists
+\subsection{Lists}
+
+\begin{frame}<beamer>{Lists}
+
+  \begin{itemize}
+    \item<1-> mutable (can be modified after creation)
+    \begin{itemize}
+      \item<2-> \textit{beware of shallow and deep copies}
+    \end{itemize}
+    \item<3-> ordered (only the functions of reorganization change the order)
+    \item<4-> same value can be recorded multiple times
+    \item<5-> different types of items are allowed in the same list
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Lists}
+
+  \begin{center}
+
+  Creation of a list:
+
+  \medskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = []
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = []
+initialisee1 = [ 42 ]
+initialisee2 = [ 42, 1337, 666 ]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = []
+initialisee1 = [ 42 ]
+initialisee2 = [ 42, 1337, 666 ]
+comprehension = [ x for x in range(0, 10) ]
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = []
+initialisee1 = [ 42 ]
+initialisee2 = [ 42, 1337, 666 ]
+comprehension = [ x for x in range(0, 10) ]
+constructeurVide = list()
+constructeur1 = list("abc")
+constructeur2 = list( (58, "abc", 58) ) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \medskip
+
+  \begin{itemize}
+    \item<5-> list initialized by comprehension or with a constructor can use any \textit{iterable} object
+  \end{itemize}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% List operations
+
+\begin{frame}<beamer>{Lists operations}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    list.append(x) 		& add an item \textit{x} to the end of the list \\
+    list.insert(pos, x) 	& insert an item \textit{x} at position \textit{pos} \\
+     					& {\footnotesize(items are pushed back/+1 applied to indexes) } \\
+    list.extend(L) 		& concatenates lists : \textit{L} added at the end of \textit{list} \\
+     					& {\footnotesize(any iterable objects can be concatenated) } \\
+    list.pop(pos) 		& remove the item at position \textit{pos} \\
+     					& {\footnotesize(if no parameter given, it removes the last one) } \\
+    list.remove(x) 		& remove the first item \textit{x} found in the list \\
+    list.copy() 		& copy the list \\
+    list.reverse() 		& reverse the order of the list \\
+    list.sort() 		& sort alphabetically the list \\
+     					& {\footnotesize(add the parameter \textit{reverse = True} to reverse) } \\
+    \hline
+  \end{tabular}
+
+%    $ \text{s}[\text{i}] $ 					& access to the \textit{i}th item of \textit{s} (first index: \textit{0}) \\
+%    $ \text{s}[\text{i}:\text{j}] $ 			& slice of \textit{s} from \textit{i} to \textit{j} \\
+%    $ \text{s}[\text{i}:\text{j}:\text{k}] $ 	& slice of \textit{s} from \textit{i} to \textit{j} with step \textit{k} \\
+
+  \medskip
+
+  \textit{x} is an arbitrary object, \textit{pos} is an integer, and \textit{L} is a list
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Lists}
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)
+
+
+
+
+
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)
+
+
+
+
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)
+
+
+
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()
+
+
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()        # 66, 42, 37, 99
+mylist.sort()
+
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()        # 66, 42, 37, 99
+mylist.sort()           # 37, 42, 66, 99
+mylist.pop()
+
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()        # 66, 42, 37, 99
+mylist.sort()           # 37, 42, 66, 99
+mylist.pop()            # 37, 42, 66
+mylist.pop(1)
+
+
+       \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()        # 66, 42, 37, 99
+mylist.sort()           # 37, 42, 66, 99
+mylist.pop()            # 37, 42, 66
+mylist.pop(1)           # 37, 66
+l2 = mylist.copy()
+l2.append(88)
+mylist.extend(l2) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+mylist = [ 42, 37, 42 ] # [0] [1] [2] [3] [4]
+mylist.append(66)       # 42, 37, 42, 66
+mylist.insert(1, 99)    # 42, 99, 37, 42, 66
+mylist.remove(42)       # 99, 37, 42, 66
+mylist.reverse()        # 66, 42, 37, 99
+mylist.sort()           # 37, 42, 66, 99
+mylist.pop()            # 37, 42, 66
+mylist.pop(1)           # 37, 66
+l2 = mylist.copy()  # 37, 66
+l2.append(88)       # 37, 66, 88
+mylist.extend(l2)       # 37, 66, 37, 66, 88 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Tuples
+\subsection{Tuples}
+
+\begin{frame}<beamer>{Tuples}
+
+  \begin{itemize}
+    \item<1-> immutable (when created, cannot be modified)
+    \item<2-> ordered
+    \item<3-> same value can be recorded multiple times
+    \item<4-> different types of items are allowed in the same tuple
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Tuples}
+
+  \begin{center}
+
+  Creation of a tuple:
+
+  \medskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = ()
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = ()
+initialisee1 = ( 42, )
+initialisee2 = ( 42, 1337, 666 )
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = ()
+initialisee1 = ( 42, )
+initialisee2 = ( 42, 1337, 666 )
+constructeurVide = tuple()
+constructeur1 = tuple("abc",)
+constructeur2 = tuple( (58, "abc", 58) ) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \medskip
+
+  \begin{itemize}
+    \item<4-> Tuple with only $ 1 $ element must have a comma (\TTBF{,})
+    \item<5-> Tuples can be initialized with any iterable object
+  \end{itemize}
+
+  \end{center}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Tuples}
+
+  \onslide<1-> Creating a tuple requires commas OR the iterable property
+
+  \onslide<2-> Parenthesis are mandatory when a tuple is used as an argument or when creating an empty tuple
+
+  \medskip
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+my_tuple = tuple('a', 2)     # ('a', 2)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+my_tuple = tuple('a', 2)     # ('a', 2)
+nb_tuple = tuple([1, 2, 3])
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+my_tuple = tuple('a', 2)     # ('a', 2)
+nb_tuple = tuple([1, 2, 3])  # (1, 2, 3)
+str_tuple = tuple('abc')
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+my_tuple = tuple('a', 2)     # ('a', 2)
+nb_tuple = tuple([1, 2, 3])  # (1, 2, 3)
+str_tuple = tuple('abc')     # ('a', 'b', 'c')
+f('a', 'b', 'c')
+f( ('a','b','c') ) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+my_tuple = tuple('a', 2)     # ('a', 2)
+nb_tuple = tuple([1, 2, 3])  # (1, 2, 3)
+str_tuple = tuple('abc')     # ('a', 'b', 'c')
+f('a', 'b', 'c')   # Calls f with 3 arguments
+f( ('a','b','c') ) # Calls f with 1 argument \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+
+%%% Ranges
+\subsection{Ranges}
+
+\begin{frame}<beamer>{Ranges}
+
+  \begin{itemize}
+    \item<1-> immutable (when created, cannot be modified)
+    \item<2-> ordered
+    \item<3-> same value can be recorded multiple times
+    \item<4-> only for integers numbers
+    \item<5-> always takes the same amount of memory
+    \begin{itemize}
+      \item<6-> only 3 parameters are used (\TTBF{start}, \TTBF{stop}, \TTBF{step})
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ranges}
+
+  \onslide<1-> Ranges are defined at least by the \textit{stop} boundary
+
+  \onslide<2-> \textit{Start} defines the first value to take, by default it is 0
+
+  \onslide<2-> \textit{Step} defines the step between each value, by default it is 1
+
+  \medskip
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(6))
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(6))       # 0 1 2 3 4 5
+list(range(1, 6))
+  \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(6))       # 0 1 2 3 4 5
+list(range(1, 6))    #   1 2 3 4 5
+list(range(0, 6, 2)) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(6))       # 0 1 2 3 4 5
+list(range(1, 6))    #   1 2 3 4 5
+list(range(0, 6, 2)) # 0   2   4 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ranges}
+
+  \onslide<1-> Main range formulae: $ r[i] = \text{start} + \text{step} \cdot i $
+
+  \onslide<2-> Constraint: $ i \geq 0 $ and $ r[i] < \text{stop} $
+
+  \onslide<3-> Ranges can go backward with negative steps!
+
+  \onslide<4-> Constraint (negative step): $ i \geq 0 $ and $ r[i] > \text{stop} $
+
+  \medskip
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1))
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1)) #  0 -1 -2 -3 -4
+list(range(5,  0, -1))
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1)) #  0 -1 -2 -3 -4
+list(range(5,  0, -1)) #  5  4  3  2  1
+list(range(0))
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1)) #  0 -1 -2 -3 -4
+list(range(5,  0, -1)) #  5  4  3  2  1
+list(range(0))         # []  step+  0 == stop
+list(range(1,  0))
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<10>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1)) #  0 -1 -2 -3 -4
+list(range(5,  0, -1)) #  5  4  3  2  1
+list(range(0))         # []  step+  0 == stop
+list(range(1,  0))     # []  step+  1 > stop
+list(range(0, -1)) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<11->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+list(range(-5, 0))     # -5 -4 -3 -2 -1
+list(range(0, -5, -1)) #  0 -1 -2 -3 -4
+list(range(5,  0, -1)) #  5  4  3  2  1
+list(range(0))         # []  step+  0 == stop
+list(range(1,  0))     # []  step+  1 > stop
+list(range(0, -1))     # []  step+  0 > stop \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ranges}
+
+  \onslide<1-> Ranges are a type, and can be compared with \TTBF{==} and \TTBF{!=}
+
+  \onslide<2-> They are equal if they represent the same sequence of values
+
+  \onslide<3-> (\TTBF{start}, \TTBF{stop}, and \TTBF{step} might be differents)
+
+  \medskip
+
+  \begin{center}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)
+r1 = range(0, 5, 1)
+r2 = range(0, 3, 2)
+r3 = range(0, 4, 2)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)          # []
+r1 = range(0, 5, 1)    # 0 1 2 3 4
+r2 = range(0, 3, 2)    # 0     3
+r3 = range(0, 4, 2)    # 0     3
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)          # []
+r1 = range(0, 5, 1)    # 0 1 2 3 4
+r2 = range(0, 3, 2)    # 0     3
+r3 = range(0, 4, 2)    # 0     3
+print(r0 == r1)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)          # []
+r1 = range(0, 5, 1)    # 0 1 2 3 4
+r2 = range(0, 3, 2)    # 0     3
+r3 = range(0, 4, 2)    # 0     3
+print(r0 == r1)    # False
+print(r1 == r2)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)          # []
+r1 = range(0, 5, 1)    # 0 1 2 3 4
+r2 = range(0, 3, 2)    # 0     3
+r3 = range(0, 4, 2)    # 0     3
+print(r0 == r1)    # False
+print(r1 == r2)    # False
+print(r2 == r3) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+r0 = range(0)          # []
+r1 = range(0, 5, 1)    # 0 1 2 3 4
+r2 = range(0, 3, 2)    # 0     3
+r3 = range(0, 4, 2)    # 0     3
+print(r0 == r1)    # False
+print(r1 == r2)    # False
+print(r2 == r3)    # True \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Mapping types
+\section{Mapping types}
+
+\begin{frame}<beamer>{Mapping types}
+
+  \begin{itemize}
+    \item<1-> dict \textit{(dictionnary)}
+  \end{itemize}
+
+  \begin{itemize}
+    \item<2-> "\textit{maps hashable values to arbitrary objects}"
+    \begin{itemize}
+      \item<3-> keys = hashable values
+      \item<4-> keys must be hashable (a list can't be a key)
+      \item<5-> if two values are equal, they refer to the same key
+    \end{itemize}
+    \item<6-> mutable
+  \end{itemize}
+
+%  \TTBF{key: value}
+
+\end{frame}
+
+%% Dict
+\subsection{Dictionnaries}
+
+\begin{frame}[fragile]{Dictionnaries}
+
+  \begin{center}
+
+  Creation of a dict:
+
+  \medskip
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = dict()
+dict1 = {"one": 1, "two": 2, "three": 3}
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = dict()
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict2 = dict(one=1, two=2, three=3)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = dict()
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict2 = dict(one=1, two=2, three=3)
+dict3 = dict({'three': 3, 'one': 1, 'two': 2})
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = dict()
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict2 = dict(one=1, two=2, three=3)
+dict3 = dict({'three': 3, 'one': 1, 'two': 2})
+dict4 = dict({'one': 1, 'three': 3}, two=2)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+vide = dict()
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict2 = dict(one=1, two=2, three=3)
+dict3 = dict({'three': 3, 'one': 1, 'two': 2})
+dict4 = dict({'one': 1, 'three': 3}, two=2)
+dict5 = dict([('two',2),('one',1), ('three',3)]) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \end{center}
+
+\end{frame}
+
+
+%%% Dicts operations
+
+\begin{frame}<beamer>{Dicts operations}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    list(d) 			& return a list of all the keys of \textit{d} \\
+    len(d) 				& number of items in \textit{d} \\
+    {\footnotesize \textit{d.get(key, default)}} & {\small like \TTBF{d[key]}, but return \textit{default} if \textit{key} not found} \\
+%     					& return \textit{default} if \textit{key} not found \\
+    d.keys() 			& return the dictionnary's keys \\
+    iter(d) 			& return an iterator over the keys of \textit{d} \\
+    d[key] = value 		& set \textit{value} at key \textit{key} \\
+    del d[key] 			& Remove the value at \TTBF{d[key]} \\
+     					& {\footnotesize(Raise a KeyError if \textit{key} not found) } \\
+    d.pop(key) 			& remove \textit{key} and return the associated value \\
+    d.clear() 			& remove all items from the dictionnary \\
+    d.copy() 			& shallow copy of the dictionnary \textit{d} \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Dicts operations}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]
+dict1["one"] + dict1["two"]
+len(dict1)
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]       # 1
+dict1["one"] + dict1["two"] # 3
+len(dict1)         # 3
+list(dict1)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]       # 1
+dict1["one"] + dict1["two"] # 3
+len(dict1)         # 3
+list(dict1)        # ['one','two','three']
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]       # 1
+dict1["one"] + dict1["two"] # 3
+len(dict1)         # 3
+list(dict1)        # ['one','two','three']
+dict1.get("one")
+dict1.get("A", 42)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]       # 1
+dict1["one"] + dict1["two"] # 3
+len(dict1)         # 3
+list(dict1)        # ['one','two','three']
+dict1.get("one")   # 1
+dict1.get("A", 42) # 42
+dict1["A"] = 8
+dict1.get("A", 42)\end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2, "three": 3}
+dict1["one"]       # 1
+dict1["one"] + dict1["two"] # 3
+len(dict1)         # 3
+list(dict1)        # ['one','two','three']
+dict1.get("one")   # 1
+dict1.get("A", 42) # 42
+dict1["A"] = 8
+dict1.get("A", 42) # 8 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Dicts operations}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    d | e 				& new dict with merged keys and values from \textit{d} and \textit{e} \\
+     					& (values of \textit{e} erase those from \textit{d} if same key) \\[0.5cm]
+    d |= e 				& like \TTBF{d | e} except that \textit{d} is updated \\
+     					& (values of \textit{e} erase those from \textit{d} if same key) \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Dicts operations}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2}
+dict2 = {"one": 4, "six": 6}
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2}
+dict2 = {"one": 4, "six": 6}
+dict1["one"] + dict2["one"]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2}
+dict2 = {"one": 4, "six": 6}
+dict1["one"] + dict2["one"]   # 5
+NewD = dict1 | dict2
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2}
+dict2 = {"one": 4, "six": 6}
+dict1["one"] + dict2["one"]   # 5
+NewD = dict1 | dict2
+NewD["two"]
+NewD["six"]
+NewD["one"] \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+dict1 = {"one": 1, "two": 2}
+dict2 = {"one": 4, "six": 6}
+dict1["one"] + dict2["one"]   # 5
+NewD = dict1 | dict2
+NewD["two"]   # 2
+NewD["six"]   # 6
+NewD["one"]   # 4 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+%%% Other types
+\section{Other types}
+
+\begin{frame}<beamer>{Other Built-in types}
+
+  \begin{itemize}
+    \item<1-> Set (and FrozenSet)
+    \item<1-> Text sequence type - \TTBF{str}
+    \item<1-> Binary sequence type
+      \begin{itemize}
+      \item<2-> \textit{(we won't see it)}
+      \end{itemize}
+  \end{itemize}
+
+  \begin{center}
+
+  \bigskip
+
+  More details on types
+
+  \url{https://docs.python.org/3/library/stdtypes.html}
+
+  \end{center}
+
+\end{frame}
+
+%%% Set and FrozenSet
+\subsection{Set and FrozenSet}
+
+\begin{frame}<beamer>{Set}
+
+  \begin{itemize}
+    \item<1-> mutable
+    \begin{itemize}
+      \item<2-> \textit{FrozenSet are immutables}
+    \end{itemize}
+    \item<3-> unordered
+    \begin{itemize}
+      \item<4-> \textit{sequences cannot be used (index, slicing, ...)}
+    \end{itemize}
+    \item<5-> distinct values only
+    \item<6-> only hashable objects can be added
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Set}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+set1 = {'world', 'hello'}
+set2 = set( [4, 42, 6] )
+set3 = {x for x in 'abracadabra'
+         if x not in 'abc'}
+set3 \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+set1 = {'world', 'hello'}  # {'hello', 'world'}
+set2 = set( [4, 42, 6] )
+set3 = {x for x in 'abracadabra'
+         if x not in 'abc'}
+set3 \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+set1 = {'world', 'hello'}  # {'hello', 'world'}
+set2 = set( [4, 42, 6] )   # {42, 4, 6}
+set3 = {x for x in 'abracadabra'
+         if x not in 'abc'}
+set3 \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+set1 = {'world', 'hello'}  # {'hello', 'world'}
+set2 = set( [4, 42, 6] )   # {42, 4, 6}
+set3 = {x for x in 'abracadabra'
+         if x not in 'abc'}
+set3                       # {'d', 'r'} \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \bigskip
+
+  \onslide<5-> Main usages: membership testing, removing duplicates from a sequence, mathematical operations (union, intersection, ...)
+
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Set operations}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    add(e) 				& add an element to a set \\
+    remove(e) 			& remove an element from a set \\
+    len(s) 				& number of elements in set \textit{s} \\
+    x in s 				& test \textit{x} for membership in \textit{s} \\
+    copy() 				& shallow copy of set \\
+    isdisjoint(s2) 		& test if no element are in common with \textit{s2} \\
+    issubset(s2) 		& test if every element is in the set \textit{s2} \\
+	issuperset(s2) 		& test if every element of \textit{s2} is in the set \\
+	                    & new set with elements: \\
+	union(s2) 			& - from the set and \textit{s2} \\
+	intersection(s2) 	& - common to the set and \textit{s2} \\
+	difference(s2) 		& - in the set that are not in \textit{s2} \\
+	{\scriptsize symmetric\_difference(s2)} 	& - in either the set or \textit{s2} but not both \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Set operations}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)     # True
+s3.issubset(s1)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)     # True
+s3.issubset(s1)       # True
+s3.issuperset(s1)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)     # True
+s3.issubset(s1)       # True
+s3.issuperset(s1)     # False
+s4.issubset(s1)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)     # True
+s3.issubset(s1)       # True
+s3.issuperset(s1)     # False
+s4.issubset(s1)       # False
+s4.issuperset(s1)\end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8->
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python,morekeywords={for, in, range, list}]
+s1 = { 1, 2, 3, 4 }
+s2 = { 3, 4, 5, 6 }
+s3 = { 1, 2 }
+s4 = { 1, 2, 3, 4, 5}
+s2.isdisjoint(s1)     # False
+s2.isdisjoint(s3)     # True
+s3.issubset(s1)       # True
+s3.issuperset(s1)     # False
+s4.issubset(s1)       # False
+s4.issuperset(s1)     # True \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+%%% Text sequence type
+\subsection{Text sequence type}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{itemize}
+    \item<1-> immutable (when created, cannot be modified)
+    \item<2-> ordered
+    \item<3-> same value can be recorded multiple times
+    \item<4-> only \TTBF{str} objets can be used inside
+  \end{itemize}
+
+\end{frame}
+
+
+\subsubsection{Literals}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \onslide<1-> Three ways to write literals:
+
+  \medskip
+
+  \begin{itemize}
+    \item<1-> Single quotes: \lstinline|'Text'|
+    \begin{itemize}
+      \item<2-> \textit{(may embed double quotes \lstinline|'The "only" Text'| )}
+    \end{itemize}
+
+    \medskip
+
+    \item<3-> Double quotes: \lstinline|"Text"|
+    \begin{itemize}
+      \item<4-> \textit{(may embed single quotes \lstinline|"The 'only' Text"| )}
+    \end{itemize}
+
+    \medskip
+
+    \item<5-> Triple quotes: \lstinline|'''Text'''| or \lstinline|"""Text"""|
+    \begin{itemize}
+      \item<6-> \textit{(triple quotes can be on multiple lines)}
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \onslide<1-> As strings are immutables, you must:
+
+  \medskip
+
+  \begin{itemize}
+    \item<2-> concatenate strings into a new string
+    \item<3-> extract substrings with slices
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> \TTBF{str()} constructor converts native types into strings
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+A = str('My String')
+B = str("A sentence")
+C = str('''The giant
+text with a lot of
+lines''')
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+A = str('My String')
+B = str("A sentence")
+C = str('''The giant
+text with a lot of
+lines''')
+D = B[0:2] + A[3:10]
+
+print(D) \end{lstlisting}
+      \end{onlyenv}
+
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python]
+A = str('My String')
+B = str("A sentence")
+C = str('''The giant
+text with a lot of
+lines''')
+D = B[0:2] + A[3:10]
+
+print(D)        #  "A String" \end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\subsubsection{Types of characters}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    {\small \texttt{str.}\TTBF{isprintable()}} 	& \TTBF{True} if only printable characters and \\
+     											& more than one char \\
+    {\small \texttt{str.}\TTBF{isascii()}} 		& \TTBF{True} if only ASCII characters and \\
+     											& more than one char \\
+    {\small \texttt{str.}\TTBF{isalpha()}} 		& \TTBF{True} if only alphabetic characters and \\
+     											& more than one char \\
+    {\small \texttt{str.}\TTBF{isalnum()}} 		& \TTBF{True} if only alphanumeric characters \\
+     											& and more than one char \\
+    {\small \texttt{str.}\TTBF{isdigit()}} 		& \TTBF{True} if only numbers characters and \\
+     											& more than one char \\
+    {\small \texttt{str.}\TTBF{isnumeric()}} 		& \TTBF{True} if only numeric characters and \\
+     											& more than one char \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1->
+        \begin{lstlisting}[style=python]
+"abc42".isprintable()  #  True
+"abc42".isascii()      #  True
+"abc42".isalpha()      # False
+"abc".isalpha()        #  True
+"abc42".isalnum()      #  True
+"42".isdigit()         #  True
+"42.2".isdigit()       # False
+"-42".isdigit()        # False
+"-42".isnumeric()      # False \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\subsubsection{Capitalization}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    \texttt{str.}\TTBF{lower()} 			& Put the string into lowercase \\
+    \texttt{str.}\TTBF{upper()} 			& Put the string into uppercase \\
+    \texttt{str.}\TTBF{capitalize()} 	& $\text{1}^{\text{st}}$ character is capitalized, other are \\
+    	 									& lowercased \\
+    \texttt{str.}\TTBF{title()} 			& Same as capitalized, but on each word \\
+    \texttt{str.}\TTBF{swapcase()} 		& Reverse upper to lower case characters, \\
+     									& and lower to upper \\
+    \texttt{str.}\TTBF{isspace()} 		& \TTBF{True} if there are only whitespaces \\
+     									& and at least one character \\
+    \texttt{str.}\TTBF{isupper()} 		& \TTBF{True} if all characters are uppercase \\
+     									& and at least one character \\
+    \hline
+  \end{tabular}
+
+  \medskip
+
+  Don't forget: a string is immutable!
+
+  All of the string methods \textit{always} return a copy of the string
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize())
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize()) # "This is a text with"
+print(A.title())
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize()) # "This is a text with"
+print(A.title())      # "THis Is A TExT WIth"
+print(A.swapcase())
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize()) # "This is a text with"
+print(A.title())      # "THis Is A TExT WIth"
+print(A.swapcase())   # "ThIS IS a teXt WiTH"
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize()) # "This is a text with"
+print(A.title())      # "THis Is A TExT WIth"
+print(A.swapcase())   # "ThIS IS a teXt WiTH"
+
+B = str("   ")
+print(B.isspace())
+print(B.isupper()) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6->
+        \begin{lstlisting}[style=python]
+A = str('tHis is A TExT wIth')
+print(A.capitalize()) # "This is a text with"
+print(A.title())      # "THis Is A TExT WIth"
+print(A.swapcase())   # "ThIS IS a teXt WiTH"
+
+B = str("   ")
+print(B.isspace())   # True
+print(B.isupper())   # False \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\subsubsection{Prefixes, Suffixes, Stripping}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    \texttt{str.}\TTBF{removeprefix(p)} 	& If the string begins with prefix \textit{p}, \\
+     									& then it is removed \\[0.25cm]
+
+    \texttt{str.}\TTBF{removesuffix(s)} 	& If the string ends with suffix \textit{s}, \\
+     									& then it is removed \\[0.25cm]
+
+    \texttt{str.}\TTBF{lstrip(\textit{[chars]})} 	& Remove leading characters present \\
+     									& in \textit{chars}. If no argument, remove \\
+     									& whitespaces. \\[0.25cm]
+
+    \texttt{str.}\TTBF{rstrip(\textit{[chars]})} 	& Remove trailing characters present \\
+     									& in \textit{chars}. If no argument, remove \\
+     									& whitespaces. \\[0.25cm]
+
+    \texttt{str.}\TTBF{strip(\textit{[chars]})} 	& Apply \TTBF{lstrip()} and \TTBF{rstrip()} \\
+    \hline
+  \end{tabular}
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')        # ee!
+
+'www.example.com'.lstrip('cmowz.')
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')        # ee!
+
+'www.example.com'.lstrip('cmowz.')  # 'example.com'
+'   spacious   '.lstrip()
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')        # ee!
+
+'www.example.com'.lstrip('cmowz.')  # 'example.com'
+'   spacious   '.lstrip()           # 'spacious   '
+
+'Monty Python'.rstrip(' Python')
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')        # ee!
+
+'www.example.com'.lstrip('cmowz.')  # 'example.com'
+'   spacious   '.lstrip()           # 'spacious   '
+
+'Monty Python'.rstrip(' Python')        # M
+'Monty Python'.removesuffix(' Python') \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9->
+        \begin{lstlisting}[style=python,basicstyle=\small,keepspaces=true,columns=fullflexible]
+'TestHook'.removeprefix('Test')      # Hook
+'BaseTestCase'.removeprefix('Test')  # BaseTestCase
+
+'Arthur: three!'.removeprefix('Arthur: ')  # three!
+'Arthur: three!'.lstrip('Arthur: ')        # ee!
+
+'www.example.com'.lstrip('cmowz.')  # 'example.com'
+'   spacious   '.lstrip()           # 'spacious   '
+
+'Monty Python'.rstrip(' Python')        # M
+'Monty Python'.removesuffix(' Python')  # Monty \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\subsubsection{Find, Index, Replace}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    {\footnotesize \texttt{str.}\TTBF{find(sub)}} 			& {\normalsize Find $1^{\text{st}}$ index of substring \textit{sub} within} \\
+    {\scriptsize \textit{\TTBF{find(sub,start,end)}}}	 		& {\normalsize the slice \TTBF{[start:end]}, or return \TTBF{-1}} \\[0.5cm]
+
+    {\footnotesize \texttt{str.}\TTBF{index(sub)}} 				& {\normalsize Like \TTBF{find}, but raise \TTBF{ValueError}} \\
+    {\scriptsize \textit{\TTBF{index(sub,start,end)}}} 		& {\normalsize instead of returning \TTBF{-1}} \\[0.5cm]
+
+    {\footnotesize \texttt{str.}\TTBF{replace(old,new)}} 		& {\normalsize Replace all (or the \textit{count} firsts) of the} \\
+    {\scriptsize \textit{\TTBF{replace(old,new,count)}}} 		& {\normalsize occurrencies of \textit{old} by \textit{new}} \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)   #  3
+"ah".index("b")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)   #  3
+"ah".index("b")               # [Exception]
+"ahehih".replace("ih", "oh")
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)   #  3
+"ah".index("b")               # [Exception]
+"ahehih".replace("ih", "oh")  #  "ahehoh"
+"hohoho".replace("ho", "ha")
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9>
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)   #  3
+"ah".index("b")               # [Exception]
+"ahehih".replace("ih", "oh")  #  "ahehoh"
+"hohoho".replace("ho", "ha")  #  "hahaha"
+"hohoho".replace("ho", "ha",2) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<10->
+        \begin{lstlisting}[style=python]
+"ballo" in "C'est ballo"      # True
+"C'est ballo".find("ballo")   #  6
+"alalala".find("la", 2, 5)    #  3
+"ah".find("b")                # -1
+"alalala".index("la", 2, 5)   #  3
+"ah".index("b")               # [Exception]
+"ahehih".replace("ih", "oh")  #  "ahehoh"
+"hohoho".replace("ho", "ha")  #  "hahaha"
+"hohoho".replace("ho", "ha",2)#  "hahaho" \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+
+\subsubsection{Splitting}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    {\footnotesize \texttt{str.}\TTBF{join(iterable)}} 		& {\normalsize Separate each element of \textit{iterate}} \\
+     														& {\normalsize with the calling string} \\[0.25cm]
+
+    {\footnotesize \texttt{str.}\TTBF{partition(sep)}} 		& {\normalsize Separate the string in a 3-tuple:} \\
+     														& {\normalsize - the substring before the $1^{\text{st}}$ \textit{sep}} \\
+     														& {\normalsize - \textit{sep}} \\
+     														& {\normalsize - the substring after the $1^{\text{st}}$ \textit{sep}} \\[0.25cm]
+
+    {\footnotesize \texttt{str.}\TTBF{split(sep,maxsplit)}} 	& {\normalsize Split the string into a list of words} \\
+    {\scriptsize \textit{\TTBF{split(sep=None,maxsplit=-1)}}}	& {\normalsize Split \textit{maxsplit} times ($-1$ for all)} \\
+     														& {\small \textit{(Whitespaces are treated differently)}} \\[0.25cm]
+
+    {\footnotesize \texttt{str.}\TTBF{splitlines(keepends)}} 	& {\normalsize Split a string by lines} \\
+    {\scriptsize \textit{\TTBF{splitlines(keepends=False)}}}	& {\small \textit{(see manual for line boundaries)}} \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ")
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()        # ['abcbdbe']
+"abcbdbe".split("b", 1)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()        # ['abcbdbe']
+"abcbdbe".split("b", 1)  # ['a', 'cbdbe']
+"abcbdbe".split("b", -1)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()        # ['abcbdbe']
+"abcbdbe".split("b", 1)  # ['a', 'cbdbe']
+"abcbdbe".split("b", -1) # ['a','c','d','e']
+'::1:2:'.split(':')
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<9>
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()        # ['abcbdbe']
+"abcbdbe".split("b", 1)  # ['a', 'cbdbe']
+"abcbdbe".split("b", -1) # ['a','c','d','e']
+'::1:2:'.split(':')      # ['','','1','2', '']
+"   a   b c   ".split() \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<10->
+        \begin{lstlisting}[style=python]
+"|".join("alo alo")      # 'a|l|o| |a|l|o'
+"alo alo".partition(" ") # ('alo', ' ', 'alo')
+"a b c".partition(" ")   # ('a', ' ', 'b c')
+"a b c".split()          # ['a', 'b', 'c']
+"abcbdbe".split()        # ['abcbdbe']
+"abcbdbe".split("b", 1)  # ['a', 'cbdbe']
+"abcbdbe".split("b", -1) # ['a','c','d','e']
+'::1:2:'.split(':')      # ['','','1','2', '']
+"   a   b c   ".split()  # ['a', 'b', 'c']  \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\subsubsection{Centering, Filling, Justifying}
+
+\begin{frame}<beamer>{Text sequence type}
+
+  \begin{center}
+
+  \begin{tabular}{| c | l |}
+    \hline
+    \textbf{Operation} & \textbf{Result} \\
+    \hline
+    {\small \texttt{str.}\TTBF{center(width)}} 	& Center the string with leading and \\
+     											& trailing whitespaces and make its \\
+     											& length equal to \textit{fill} \\[0.25cm]
+
+    {\small \texttt{str.}\TTBF{zfill(width)}} 	& Put leading $ 0 $ to fill the string and \\
+     											& make its length equal to \textit{fill} \\
+     											& (eventually add $ - $ as a prefix) \\[0.25cm]
+
+    {\small \texttt{str.}\TTBF{ljust(width)}} 	& Left justify for length \textit{width}, and \\
+    {\scriptsize \textit{\TTBF{ljust(width,fillchar)}}} 	& fill with \textit{fillchar} characters \\[0.25cm]
+
+    {\small \texttt{str.}\TTBF{rjust(width)}} 	& Right justify like \TTBF{str.ljust()} \\
+    {\scriptsize \textit{\TTBF{rjust(width,fillchar)}}} 	& \\
+    \hline
+  \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Text sequence type}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+"abc".center(7)
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)   # 'abc '
+"  abc".center(7)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)   # 'abc '
+"  abc".center(7) # '   abc '
+"abc".rjust(7)
+"abc".ljust(7)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)   # 'abc '
+"  abc".center(7) # '   abc '
+"abc".rjust(7)    # '    abc'
+"abc".ljust(7)    # 'abc    '
+"42".zfill(5)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)   # 'abc '
+"  abc".center(7) # '   abc '
+"abc".rjust(7)    # '    abc'
+"abc".ljust(7)    # 'abc    '
+"42".zfill(5)     # '00042'
+"42.3".zfill(5) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8->
+        \begin{lstlisting}[style=python]
+"abc".center(7)   # '  abc  '
+"abc".center(2)   # 'abc'
+"abc".center(4)   # 'abc '
+"  abc".center(7) # '   abc '
+"abc".rjust(7)    # '    abc'
+"abc".ljust(7)    # 'abc    '
+"42".zfill(5)     # '00042'
+"42.3".zfill(5)   # '042.3' \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}

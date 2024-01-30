@@ -1,0 +1,14 @@
+Les lignes de commande pour compiler sont longues.
+Comment accélérer ça ?
+En automatisant les lignes de compilation avec des outils spéciaux.
+Exemple :
+- script shell générant les paramètres utiles (architecture cible, flags, ...)
+- Makefile qui regroupe les noms de fichiers et les lignes de commande
+- génération automatique de Makefiles
+- génération automatique de packages contenant les programmes
+- ...
+
+Plus loin encore pour développer :
+- écriture automatique du code à partir de modèles graphiques
+- pas d'architecture cible, mais une "VM" dédiée au code (bytecode)
+- ...

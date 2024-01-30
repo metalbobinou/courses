@@ -1,0 +1,687 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2023-2024}
+\newcommand{\DateExam}{décembre 2023}
+\newcommand{\TypeExam}{Partiel}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+\item Les appareils électroniques sont tous interdits (calculatrices également)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+\vfillFirst
+
+% Conversions binaires
+\section{Conversions Binaires (6 points)}
+
+\subsection{(1 point) Rappelez les 14 premières puissances de 2 : }
+
+\bigskip
+
+%\begin{table}[ht!]
+\centerline{
+\begin{tabular}{ | m{0.5cm} | m{0.5cm} | m{0.5cm} | m{0.5cm} | m{0.65cm} | m{0.65cm} | m{0.65cm} | m{1cm} | m{1cm} | m{1cm} | m{1.5cm} | m{1.5cm} | m{1.5cm} | m{1.5cm} |}
+\hline
+$ 2^{0} $ & $ 2^{1} $ & $ 2^{2} $ & $ 2^{3} $ & $ 2^{4} $ & $ 2^{5} $ & $ 2^{6} $ & $ 2^{7} $ & $ 2^{8} $ & $ 2^{9} $ & $ 2^{10} $ & $ 2^{11} $ &  $ 2^{12} $ &  $ 2^{13} $ \\
+\hline
+ & & & & & & & & & & & & & \\
+ & & & & & & & & & & & & & \\
+ & & & & & & & & & & & & & \\
+\hline
+\end{tabular}
+}
+%\end{table}
+
+\bigskip
+\bigskip
+
+\subsection{(2 points) Convertissez ces nombres en décimaux : }
+
+\bigskip
+
+%\begin{table}[ht!]
+\centerline{
+\begin{tabular}{ c |  m{2cm}   c   m{2cm} | m{2cm}   c   m{2cm} }
+ & & & &  & & \\
+                                & & non-signé & & & signé & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+$ \% \, 1010 \; 0011 \; 1011 $  & &           & & &  & \\
+ & & & &  & & \\
+\hline
+ & & & &  & & \\
+\$ B52  & &           & & &  & \\
+ & & & &  & & \\
+\end{tabular}
+}
+%\end{table}
+
+\bigskip
+\bigskip
+
+\subsection{(3 points) Convertissez ces nombres décimaux en binaire sur 12 bits, puis en hexadécimal.}
+
+\bigskip
+
+%\centerline{
+%\begin{tabular}{ c |  m{2cm}   c   m{2cm} | m{2cm}   c   m{2cm} }
+%                                & & binaire & & & hexadécimal & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ 42 $    & &           & & &  & \\
+% & & & &  & & \\
+%\hline
+%% & & & &  & & \\
+%%$ 1664 $  & &           & & &  & \\
+%% & & & &  & & \\
+%%\hline
+% & & & &  & & \\
+%$ 2051 $  & &           & & &  & \\
+% & & & &  & & \\
+%\hline
+% & & & &  & & \\
+%$ -218 $  & &           & & &  & \\
+% & & & &  & & \\
+%\end{tabular}
+%}
+
+
+%\begin{table}[ht!]
+\centerline{
+\begin{tabular}{ | c |C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| c |}
+\hline
+                         & \multicolumn{13}{c|}{binaire} & \multicolumn{1}{c|}{hexadécimal} \\
+%                         & \multicolumn{12}{c|}{binaire} & \multicolumn{1}{c|}{hexadécimal} \\
+\hline
+
+\multirow[c]{2}{*}[0in]{42}   & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+                              & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+\hline
+
+\multirow[c]{2}{*}[0in]{1789} & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+                              & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+\hline
+\multirow[c]{2}{*}[0in]{-404} & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+                              & \cellcolor{black!15}   & & & & & & & & & & & &    & \\
+\hline
+%\multirow[c]{2}{*}[0in]{2051} & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+%                              & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+%                              & \multicolumn{6}{c|}{ } & \multicolumn{6}{c|}{ } \\
+%\hline
+\end{tabular}
+}
+%\end{table}
+
+\vfillLast
+
+%\bigskip
+
+
+%\vfillFirst
+%
+%\begin{center}
+%\includegraphics[scale=0.2]{img/others/Budgerigar_diagram.png}
+%\end{center}
+%
+%\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Conversions flottants
+\section{Conversions Flottants (3 points)}
+
+\subsection{(1 point) Rappelez les formats IEEE 754 des flottants, les formules décimales associées, et les biais : }
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{c | C{2cm} | C{2.5cm} | C{3cm} }
+ & & & \\
+précision & & & \\
+ & & & \\
+\hline
+ & & & \\
+simple précision (\_\_\_ bits) & & \\
+ & & & \\
+\hline
+ & & & \\
+double précision (\_\_\_ bits) & & \\
+ & & & \\
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.40\textwidth}
+    \centering
+
+\begin{tabular}{| c | C{1.5cm} |}
+\hline
+ & \\
+ & biais \\
+ & \\
+\hline
+ & \\
+simple précision & \\
+ & \\
+\hline
+ & \\
+double précision & \\
+ & \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.60\textwidth}
+    \centering
+
+Formule(s) mathématique(s) simple précision :
+
+\vspace*{2.5cm}
+
+Formule(s) mathématique(s) double précision :
+
+\vspace*{1.75cm}
+
+  \end{minipage}
+\end{table}
+
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\subsection{(2 points) Calculez la valeur décimale du plus petit flottant dénormalisé en double précision : }
+
+\bigskip
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Conversions dans tous les formats
+\section{Interprétations (6 points)}
+
+\subsection{(6 points) Convertissez la donnée suivante selon chaque interprétation : }
+
+\bigskip
+
+\begin{center}
+\textbf{\Large \$ 4231 2000 }
+\end{center}
+
+%\medskip
+\smallskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Un flottant simple précision
+% 44.28125
+
+\medskip
+
+\begin{tabular}{| C{5cm} |}
+\hline
+\phantom{42} \\
+\phantom{42} \\
+\phantom{42} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Quatre caractères
+% 'B'   '1'   ' '   '\0'
+
+\medskip
+
+\begin{tabular}{| m{1cm} | m{1cm} | m{1cm} | m{1cm} |}
+\hline
+\phantom{I} & \phantom{I} & \phantom{I} & \phantom{I} \\
+\phantom{I} & \phantom{I} & \phantom{I} & \phantom{I} \\
+\phantom{I} & \phantom{I} & \phantom{I} & \phantom{I} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+\end{table}
+
+\smallskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Deux entiers non signés en base 10
+
+\medskip
+
+\begin{tabular}{| C{3cm} | C{3cm} |}
+\hline
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Deux entiers signés en base 10
+
+\medskip
+
+\begin{tabular}{| C{3cm} | C{3cm} |}
+\hline
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+\end{table}
+
+\smallskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Deux entiers base 10 depuis le code Gray
+
+\medskip
+
+\begin{tabular}{| C{3cm} | C{3cm} |}
+\hline
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+Deux entiers base 10 depuis le BCD
+
+\medskip
+
+\begin{tabular}{| C{3cm} | C{3cm} |}
+\hline
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\phantom{42} & \phantom{42} \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+\end{table}
+
+\bigskip
+
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Circuits logiques
+\section{Circuits logiques (5 points)}
+
+\subsection{(1 point) \'Ecrivez la formule associée à ce schéma : }
+
+%\bigskip
+%\medskip
+\smallskip
+
+\begin{figure}[ht!]
+\centering{
+\includegraphics[scale=2]{./img/circuit_logique_1.png}
+}
+\end{figure}
+
+
+%\bigskip
+\clearpage
+
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\subsection{(1 point) Remplissez la table de vérité de la formule précédente : }
+
+%\bigskip
+
+%\begin{center}
+%\begin{tabular}{|c|c|c|c||c|}
+%\hline
+%\textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}  &  \textbf{X} \\
+%\hline
+%\hline
+%0 & 0 & 0 & 0  &  1 \\ \hline
+%0 & 0 & 0 & 1  &  1 \\ \hline
+%0 & 0 & 1 & 0  &  0 \\ \hline
+%0 & 0 & 1 & 1  &  0 \\ \hline
+%0 & 1 & 0 & 0  &  0 \\ \hline
+%0 & 1 & 0 & 1  &  0 \\ \hline
+%0 & 1 & 1 & 0  &  0 \\ \hline
+%0 & 1 & 1 & 1  &  0 \\ \hline
+%1 & 0 & 0 & 0  &  0 \\ \hline
+%1 & 0 & 0 & 1  &  0 \\ \hline
+%1 & 0 & 1 & 0  &  0 \\ \hline
+%1 & 0 & 1 & 1  &  0 \\ \hline
+%1 & 1 & 0 & 0  &  1 \\ \hline
+%1 & 1 & 0 & 1  &  1 \\ \hline
+%1 & 1 & 1 & 0  &  0 \\ \hline
+%1 & 1 & 1 & 1  &  0 \\ \hline
+%\end{tabular}
+%\end{center}
+
+\begin{center}
+\begin{tabular}{|C{0.75cm}|C{0.75cm}|C{0.75cm}|C{0.75cm} | C{0.75cm}|}
+\hline
+\cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15}  &  \cellcolor{black!15} \\
+\cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15}  &  \cellcolor{black!15} \\
+\hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+ & & &   & \cellcolor{black!15} \\
+ & & &   & \cellcolor{black!15} \\ \hline
+\end{tabular}
+\end{center}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+%    \centering
+
+\subsection{(2 points) Déduisez-en la formule des mintermes, ainsi que la formule des maxtermes : }
+
+\bigskip
+
+Mintermes :
+
+%%\vspace*{3.35cm}
+%\vspace*{7.22cm}
+\vspace*{3cm}
+
+%\begin{equation*}
+%    \begin{split}
+%X = & ( \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} ) \; + \; ( \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D ) \; + \; \\
+%    & ( A \cdot B \cdot \overline{C} \cdot \overline{D} ) \; + \; ( A \cdot B \cdot \overline{C} \cdot D )
+%    \end{split}
+%\end{equation*}
+
+\bigskip
+
+Maxtermes :
+
+%%\vspace*{3.35cm}
+%\vspace*{7.22cm}
+\vspace*{11.44cm}
+
+%\begin{equation*}
+%    \begin{split}
+%X = & ( \overline{A} + \overline{B} + \overline{C} + \overline{D} ) \; \cdot \; ( \overline{A} + \overline{B} + \overline{C} + D ) \; \cdot \; \\
+%    & ( A + B + \overline{C} + \overline{D} ) \; \cdot \; ( A + B + \overline{C} + D )
+%    \end{split}
+%\end{equation*}
+
+  \end{minipage}
+\end{table}
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\subsection{(1 point) Remplissez le tableau de Karnaugh, formez les groupes, et déduisez-en la formule réduite : }
+
+%\bigskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.08\textwidth}
+    \centering
+
+\vfillFirst
+
+\_\_  \_\_
+
+% AB
+
+\vfillLast
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.37\textwidth}
+    \centering
+
+\begin{center}
+
+\_\_  \_\_
+
+% CD
+
+\medskip
+
+%\begin{tabular}{|C{0.75cm} || C{0.75cm}|C{0.75cm}|C{0.75cm}|C{0.75cm}|}
+%\hline
+% & 00 & 01 & 11 & 10 \\
+%\hline
+%\hline
+% 00 &  1 & 1 & 0 & 0 \\ \hline
+% 01 &  0 & 0 & 0 & 0 \\ \hline
+% 11 &  1 & 1 & 0 & 0 \\ \hline
+% 10 &  0 & 0 & 0 & 0 \\ \hline
+%\end{tabular}
+
+\begin{tabular}{|C{0.75cm} | C{0.75cm}|C{0.75cm}|C{0.75cm}|C{0.75cm}|}
+\hline
+\cellcolor{black!65}  &  \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\cellcolor{black!65}  &  \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\cellcolor{black!15}  &  & & & \\
+\cellcolor{black!15}  &  & & & \\ \hline
+\cellcolor{black!15}  &  & & & \\
+\cellcolor{black!15}  &  & & & \\ \hline
+\cellcolor{black!15}  &  & & & \\
+\cellcolor{black!15}  &  & & & \\ \hline
+\cellcolor{black!15}  &  & & & \\
+\cellcolor{black!15}  &  & & & \\ \hline
+\end{tabular}
+\end{center}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.55\textwidth}
+    \centering
+
+\vfillFirst
+
+\phantom{42}
+
+% $ X = ( \overline{A} \cdot \overline{B} \cdot \overline{C} ) \; + \; ( A \cdot B \cdot \overline{C} ) $
+
+\vfillLast
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vfillFirst
+%
+%\begin{center}
+%\includegraphics[scale=0.2]{img/others/Budgerigar_diagram.png}
+%\end{center}
+%
+%\vfillLast
+
+%\clearpage
+
+%
+%%\thispagestyle{empty}
+%
+%\vfillFirst
+%
+%\begin{center}
+%
+%\begin{LARGE}
+%\textbf{SUJET}
+%
+%\bigskip
+%
+%\textbf{\MakeUppercase{\TitreMatiere}}
+%\end{LARGE}
+%
+%\end{center}
+%
+%\vfillLast
+
+\end{document}

@@ -1,0 +1,34 @@
+#! /bin/bash
+
+DEBUG_MODE=F
+
+CC="gcc"
+CFLAGS="-W -Wall -Werror -std=c99 -pedantic"
+LDFLAGS=
+
+while [ $# -gt 0 ]; do
+    ARG_BRUT=$1
+    ARG=`echo "${ARG_BRUT}" | tr '[:lower:]' '[:upper:]'`
+    if [ "${ARG}" == "DEBUG" ]; then
+        DEBUG_MODE=T
+    fi
+    shift
+done
+
+
+if [ "${DEBUG_MODE}" == "T" ]; then
+    CFLAGS="${CFLAGS} -g -ggdb"
+fi
+
+
+echo "CC=${CC}" > Makefile.rules
+echo "CFLAGS=${CFLAGS}" >> Makefile.rules
+echo "LDFLAGS=${LDFLAGS}" >> Makefile.rules
+
+
+if [ "${DEBUG_MODE}" == "T" ]; then
+    echo "DEBUG mode"
+fi
+echo "CC=${CC}"
+echo "CFLAGS=${CFLAGS}"
+echo "LDFLAGS=${LDFLAGS}"

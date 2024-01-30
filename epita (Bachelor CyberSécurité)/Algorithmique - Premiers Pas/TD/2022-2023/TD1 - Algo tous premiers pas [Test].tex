@@ -1,0 +1,916 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 0}
+\newcommand{\TitreSeance}{Algo tous premiers pas}
+\newcommand{\NumeroTD}{TD 1}
+\newcommand{\DateCours}{XX septembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce TD a pour objectif de vous familiariser avec l'algorithmique.
+Les tous premiers algorithmes que vous allez exécuter et écrire sont issus de connaissances communes vues lors de vos cours de l'enseignement primaire ou secondaire.
+
+Pour exécuter les algorithmes en mode dit \textit{pas à pas}, pensez à toujours avoir une feuille de brouillon et un stylo pour pouvoir noter le déroulé de l'algorithme à chaque instruction ou série d'instructions.
+
+\bigskip
+
+Définition informelle d'un algorithme~\footnote{Introduction à l'Algorithmique. 2001 ($2^{e}$ édition) T.Cormen et al.} : \og \textit{procédure de calcul bien définie qui prend en entrée une valeur, ou un ensemble de valeurs, et qui donne en sortie une valeur, ou un ensemble de valeurs. Un algorithme est donc une séquence d'étapes de calcul qui transforment l'entrée en sortie} \fg .
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exécution pas à pas}
+
+\bigskip
+
+\question{Afin de bien comprendre comment fonctionne un algorithme, comment l'exécuter, et potentiellement comment le corriger, utilisez cet algorithme calculant la somme des $ n $ premiers entiers en l'exécutant à la main et en remplissant le tableau suivant pour $ n = 5 $.}
+
+\begin{center}
+\begin{equation*}
+\sum^{n}_{i = 1} i = 1 + 2 + 3 + ... + n
+\end{equation*}
+\end{center}
+
+%\begin{center}
+%\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+%python
+%\end{lstlisting}
+%\end{center}
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+algorithme fonction Somme : entier
+  parametres locaux
+    entier    n
+  variables
+    entier    i, sum
+
+debut
+i %*$\leftarrow$*) 1
+sum %*$\leftarrow$*) 0
+tant que (i <= n) faire
+  sum %*$\leftarrow$*) sum + i
+  i %*$\leftarrow$*) i + 1
+fin tant que
+retourne sum
+fin algorithme fonction Somme \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &  sum  \\
+%        \hline
+%        0    &  1 &  0  \\
+%        1    &  2 &  1  \\
+%        2    &  3 &  3  \\
+%        3    &  4 &  6  \\
+%        4    &  5 & 10  \\
+%        5    &  6 & 15  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  i &  sum  \\
+        \hline
+             &    &       \\
+        0    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        1    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        2    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        3    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        4    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        5    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        6    &    &       \\
+             &    &       \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+  \caption{Algorithme de la somme des N premiers entiers}
+  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\newpage
+
+\vfillFirst
+
+
+Reprenez maintenant l'exemple de la multiplication égyptienne en l'exécutant cette fois-ci à la main en remplissant le tableau suivant.
+
+\question{Vous prendrez comme premières valeurs de test : $ a = 4 $ et $ b = 5 $.}
+
+\question{Remplissez un tableau similaire sur un brouillon pour les valeurs $ a = 3 $ et $ b = 13 $.}
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+algorithme fonction MultEgpytienne : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    x, y, z
+
+debut
+x %*$\leftarrow$*) a
+y %*$\leftarrow$*) b
+z %*$\leftarrow$*) 0
+tant que (y > 0) faire
+  si (y EST IMPAIRE) alors
+     z %*$\leftarrow$*) z + x
+  fin si
+  x %*$\leftarrow$*) 2 %*×*) x
+  y %*$\leftarrow$*) y %*÷*) 2
+fin tant que
+retourne z
+fin algorithme fonction MultEgpytienne \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la multiplication égyptienne}
+    % \label{algo-multiplication-egyptienne}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y &  z  \\
+%        \hline
+%        0    &  4 &  5 &  0  \\
+%        1    &  8 &  2 &  4  \\
+%        2    & 16 &  1 &  4  \\
+%        3    & 32 &  0 & 20  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  x &  y &  z  \\
+        \hline
+             &    &    &   \\
+        0    &    &    &     \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        1    &    &    &     \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        2    &    &    &     \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        3    &    &    &     \\
+             &    &    &   \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-multiplication-egyptienne-execution}
+  \end{minipage}
+  \caption{Algorithme de la multiplication égyptienne}
+  \label{multiplication-egyptienne}
+\end{table}
+
+%\bigskip
+%
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y &  z  \\
+%        \hline
+%        0    &  3 & 13 &  0  \\
+%        1    &  6 &  6 &  3  \\
+%        2    & 12 &  3 &  3  \\
+%        3    & 24 &  1 & 15  \\
+%        3    & 48 &  0 & 39  \\
+%        \hline
+%    \end{tabular}
+
+\bigskip
+
+
+\vfillLast
+
+\newpage
+
+\vfillFirst
+
+
+\question{Faites maintenant tourner cet algorithme avec la valeur $ n = 5 $, et déterminez le résultat.}
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+
+algorithme fonction calcul1 : entier
+  parametres locaux
+    entier    n
+  variables
+    entier    i, j, k
+
+debut
+  j %*$\leftarrow$*) 1
+  k %*$\leftarrow$*) 0
+  i %*$\leftarrow$*) 1
+  tant que (i <= n) faire
+    j %*$\leftarrow$*) i*j
+    k %*$\leftarrow$*) j+k
+    i %*$\leftarrow$*) i+1
+  fin tant que
+retourne k
+fin algorithme fonction calcul1
+ \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &   j &  k  \\
+%        \hline
+%        0    &  1 &   1 &   0 \\
+%        1    &  2 &   1 &   1 \\
+%        2    &  3 &   2 &   3 \\
+%        3    &  4 &   6 &   9 \\
+%        4    &  5 &  24 &  33 \\
+%        5    &  6 & 120 & 153 \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+             &     &     &     \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+%  \caption{Somme des factorielles croissantes (1! + 2! + 3! + ...)}
+%  \label{somme-factorielle}
+\end{table}
+
+\bigskip
+
+Dans le domaine informatique, on appelle \textit{traces d'exécution} le résultat d'exécution des programmes, avec si possible l'affichage de l'évolution de certaines variables et résultats.
+En remplissant à la main les tableaux avec l'évolution des valeurs, vous avez produit des traces d'exécution.
+
+Vous l'aurez compris, les traces sont beaucoup plus utiles lorsqu'il y a beaucoup de valeurs intéressantes suivies (il faut donc que les développeurs prévoient l'affichage de ces valeurs, ou une option permettant d'afficher ces traces).
+
+En anglais, l'activation des options ou modes \textit{verbose} (qui pourrait être traduit par \textit{verbeux}) impliquent d'afficher un peu plus de variables qu'initialement prévu.
+Ces affichages se font généralement dans des \textit{logs} (traduit par \textit{journaux}) ou à minima une sortie spécifique aux traces d'exécution pour ne pas les mélanger avec les résultats du comportement normal.
+
+\vfillLast
+
+\newpage
+
+\vfillFirst
+
+
+Effectuez maintenant l'algorithme de la division euclidienne.
+L'algorithme renverra le quotient.
+
+\question{Vous prendrez comme premières valeurs de test : $ a = 19 $ et $ b = 3 $.}
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+algorithme fonction DivEuclideQuotient : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    x, y
+
+debut
+x %*$\leftarrow$*) a
+y %*$\leftarrow$*) 0
+tant que (x > 0) faire
+  x %*$\leftarrow$*) x - b
+  y %*$\leftarrow$*) y + 1
+fin tant que
+retourne y
+fin algorithme fonction DivEuclideQuotient \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme du quotient de la division euclidienne}
+    % \label{algo-division-euclidienne-quotient}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y  \\
+%        \hline
+%        0    &  19 & 0  \\
+%        1    &  16 & 1  \\
+%        2    &  13 & 2  \\
+%        3    &  10 & 3  \\
+%        4    &   7 & 4  \\
+%        5    &   4 & 5  \\
+%        6    &   1 & 6  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  i &  sum  \\
+        \hline
+             &    &       \\
+        0    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        1    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        2    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        3    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        4    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        5    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        6    &    &       \\
+             &    &       \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-division-euclidienne-quotient-execution}
+  \end{minipage}
+  \caption{Algorithme du quotient de la division euclidienne}
+  \label{division-euclidienne-quotient}
+\end{table}
+
+%\bigskip
+%
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y &  z  \\
+%        \hline
+%        0    &  3 & 13 &  0  \\
+%        1    &  6 &  6 &  3  \\
+%        2    & 12 &  3 &  3  \\
+%        3    & 24 &  1 & 15  \\
+%        3    & 48 &  0 & 39  \\
+%        \hline
+%    \end{tabular}
+
+\bigskip
+
+\question{Quelle variable faut-il renvoyer pour obtenir le reste ?}
+
+\bigskip
+
+\question{Si le test dans le \textit{tant que} était un $ >= $ plutôt qu'un $ > $ : quels changements à l'exécution cela produirait-il ?}
+
+\question{Quelles modifications faudrait-il apporter pour obtenir le bon quotient ? le bon reste ?}
+
+\bigskip
+
+\question{Cet algorithme est incapable de gérer le cas où $ 0 $ est fourni en tant que diviseur.
+Comment pourrait-on corriger cela afin de protéger l'algorithme d'une boucle infinie ?}
+
+
+\vfillLast
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\'Ecriture d'algorithmes simples}
+
+\bigskip
+
+\question{Maintenant que vous savez lire, exécuter (y compris en mode pas à pas), et corriger un algorithme, écrivez l'algorithme de la multiplication classique ($ N \text{×} M = $ N additions de la valeur M) dans le cas de nombres positifs uniquement.}
+
+\bigskip
+
+N'hésitez pas à utiliser un exemple général simple (mais pas trop) pour bien déterminer la boucle à écrire :
+\begin{center}
+
+$ 5 \text{×} 3 = 5 + 5 + 5 = 15 $
+
+\end{center}
+
+On peut donc s'attendre à avoir une accumulation dans une variable pour le résultat :
+\begin{center}
+
+$ 0, 5, 10, 15 $
+
+\medskip
+
+$ 0 (+ 5) $
+
+$ 5 (+ 5) $
+
+$ 10 (+ 5) $
+
+$ 15 $
+\end{center}
+
+
+Mais, on doit également connaître le cas d'arrêt : lorsque le multiplicateur est à $ 0 $.
+
+
+\begin{center}
+\begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+ \hline
+  5 & 3 &  0 \\
+  5 & 2 &  5 \\
+  5 & 1 & 10 \\
+  5 & 0 & 15 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+\bigskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+
+algorithme fonction MultClassique : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    
+
+debut
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction MultClassique
+ \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &   j &  k  \\
+%        \hline
+%        0    &  1 &   1 &   0 \\
+%        1    &  2 &   1 &   1 \\
+%        2    &  3 &   2 &   3 \\
+%        3    &  4 &   6 &   9 \\
+%        4    &  5 &  24 &  33 \\
+%        5    &  6 & 120 & 153 \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+             &     &     &     \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+%  \caption{Multiplication classique}
+%  \label{multiplication-classique}
+\end{table}
+
+\bigskip
+
+\question{Comment peut-on traiter les nombres négatifs ? Écrivez maintenant une fonction \textit{MultRelatifs} permettant de multiplier des nombres entiers négatifs (n'hésitez pas à appeler la fonction de multiplication que vous avez précédemment écrite).}
+
+
+\newpage
+
+\vfillFirst
+
+\question{Écrivez l'algorithme calculant la puissance de $ x^{n} $ (pour $ n $ positif ou nul).}
+
+Au lieu d'utiliser les symbole × ou * pour multiplier, vous ferez un appel à votre dernière fonction \textit{MultRelatifs} en lui donnant deux paramètres et en récupérant le résultat.
+
+\bigskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+
+algorithme fonction Puissance : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    
+
+debut
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction Puissance
+ \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &   j &  k  \\
+%        \hline
+%        0    &  1 &   1 &   0 \\
+%        1    &  2 &   1 &   1 \\
+%        2    &  3 &   2 &   3 \\
+%        3    &  4 &   6 &   9 \\
+%        4    &  5 &  24 &  33 \\
+%        5    &  6 & 120 & 153 \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+             &     &     &     \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+%  \caption{Puissance}
+%  \label{puissance}
+\end{table}
+
+\vfillLast
+
+
+\newpage
+
+
+\vfillFirst
+
+\question{Écrivez l'algorithme testant la parité d'un nombre $ n $.}
+
+La parité est simplement la qualité d'un nombre d'être pair ou impair.
+Vous renverrez $ 0 $ en cas de nombre pair, et $ 1 $ en cas de nombre impair.
+
+\bigskip
+
+
+\begin{center}
+
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+
+algorithme fonction Parite : entier
+  parametres locaux
+    entier    n
+  variables
+    entier    
+
+debut
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction Parite
+\end{lstlisting}
+
+\end{center}
+
+
+\vfillLast
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Récursivité}
+
+\bigskip
+
+La récursivité est un principe très simple où une fonction se rappelle elle-même, comme lorsque l'on effectue une boucle et qu'une variable évolue petit à petit.
+
+L'écriture d'algorithmes récursifs implique au moins deux choses dans cet ordre très précis : une condition d'arrêt où l'on retourne le résultat, puis, un appel récursif avec un paramètre modifié.
+
+\bigskip
+
+Maintenant que vous avez écrit quelques algorithmes simples avec des boucles, nous allons passer à leurs versions récursives.
+
+\bigskip
+
+\question{Commencez par exécuter l'algorithme de la somme des N premiers entiers en remplissant le tableau avec l'évolution des paramètres donnés dans un premier temps, puis des résultats. Vous effectuerez cette exécution avec $ 5 $ comme paramètre.}
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.55\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithm]
+algorithme fonction SommeRec : entier
+  parametres locaux
+    entier    n
+
+debut
+si (n == 1) alors
+  retourne (1)
+sinon
+  retourne (n + SommeRec(n - 1))
+fin si
+fin algorithme fonction SommeRec \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers-recursif}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.17\textwidth}
+    \centering
+    \begin{tabular}{|C{1cm}|C{1cm}|}
+        \hline
+        appel &  n  \\
+        \hline
+              &     \\
+        0     &     \\
+              &     \\
+        \hline
+              &     \\
+        1     &     \\
+              &     \\
+        \hline
+              &     \\
+        2     &     \\
+              &     \\
+        \hline
+              &     \\
+        3     &     \\
+              &     \\
+        \hline
+              &     \\
+        4     &     \\
+              &     \\
+        \hline
+              &     \\
+        5     &     \\
+              &     \\
+        \hline
+              &     \\
+        6     &     \\
+              &     \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'appels}
+    % \label{table-somme-n-premiers-entiers-appels}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.17\textwidth}
+    \centering
+    \begin{tabular}{|C{1cm}|C{1cm}|}
+        \hline
+        appel &  retour  \\
+        \hline
+              &     \\
+        6     &     \\
+              &     \\
+        \hline
+              &     \\
+        5     &     \\
+              &     \\
+        \hline
+              &     \\
+        4     &     \\
+              &     \\
+        \hline
+              &     \\
+        3     &     \\
+              &     \\
+        \hline
+              &     \\
+        2     &     \\
+              &     \\
+        \hline
+              &     \\
+        1     &     \\
+              &     \\
+        \hline
+              &     \\
+        0     &     \\
+              &     \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau de retours}
+    % \label{table-somme-n-premiers-entiers-retours}
+  \end{minipage}
+  \caption{Somme des N premiers entiers (récursif)}
+  \label{somme-n-premiers-entiers-recursif}
+\end{table}
+
+
+\bigskip
+
+Vous remarquerez que l'algorithme est beaucoup plus court en quantité d'instructions.
+Ceci est principalement dû au fait que le calcul que nous exécutons est déjà dans une forme adaptée (souvenez-vous du principe de récurrence, ou encore des suites) : la même opération est répétée avec un paramètre réduit ou augmenté de $ 1 $ (ou d'un pas bien défini).
+
+\bigskip
+
+\question{Écrivez maintenant l'algorithme de la factorielle, mais de façon récursive. N'oubliez pas : on écrit d'abord la ou les conditions d'arrêt, et ensuite seulement on effectue l'opération avec l'appel récursif.}
+
+
+\newpage
+
+\question{Écrivez une fonction récursive calculant le $ n^{ème} $ terme de la suite de Fibonacci.}
+
+\begin{equation*}
+  \begin{aligned}
+& fibo(0) = fibo(1) = 1 \\
+& fibo(n) = fibo(n - 1) + fibo(n - 2)
+  \end{aligned}
+\end{equation*}
+
+\question{Écrivez maintenant sa version itérative}
+
+\end{document}

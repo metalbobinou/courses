@@ -1,0 +1,309 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{courier}
+
+\newcommand{\TTBF}[1]{\texttt{\textbf{#1}}}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}														% definition du style : FancyHDR
+\renewcommand{\footrulewidth}{0.4pt}									% Ligne au dessus du footer
+\fancyhf{}																% Remise a zero des entetes
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}}
+{\vspace*{\fill}\par\pagebreak}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MODIF TITRES ("Exercice 1", "Question 1.1", ...)
+
+\usepackage{titlesec} % Personaliser les titres, sections, ...
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{Partie \thechapter : }  % {\chaptertitlename\ \thechapter -}
+  {20pt}{\Huge}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{Exercice \thesection : }{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{Question \thesubsection : }{1em}{}
+
+% FIN MODIF TITRES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{11 janvier 2018}								%Droite Haut
+\chead{Paris 1 - Panthéon Sorbonne}					%Centre Haut
+\lhead{Partiel}										%Gauche Haut
+\rfoot{}											%Droite Bas
+\cfoot{\texttt{Architecture des Ordinateurs et Systèmes d'Exploitation}}	%Centre Bas
+\lfoot{}											%Gauche Bas
+
+\usepackage{xcolor}
+
+\definecolor{light-gray}{gray}{0.95}	% Gray model : 1 (white), 0 (dark)
+%\definecolor{bg-gray}{gray}{0.97}	% Gray model : 1 (white), 0 (dark)
+\definecolor{mauve}{rgb}{0.58,0,0.82}	% RGB model : R (0 - 1), G (0 - 1), B (0 - 1)
+
+\usepackage{listings} % Affichage du code dans le document
+
+\lstset{ %
+  backgroundcolor=\color{light-gray},    % choose the background color; should come as last argument
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code (e.g \footnotesize\ttfamily)
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{red},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  framesep=10pt,                   % separate the code from the border
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mauve},       % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Fabrice BOISSIER}
+\begin{document}
+
+\setlength{\fboxrule}{2pt}
+
+\noindent \framebox[17cm]{
+\begin{minipage}{1\textwidth}
+     \begin{center}
+          \LARGE\textbf{PARTIEL 2017-2018 - L2 (2h00)} \\
+          \normalsize\textbf{Architecture des Ordinateurs et Systèmes d'Exploitation}
+     \end{center}
+\end{minipage}
+}
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%NOM : \hspace{6.5cm} PR\'ENOM :
+%
+%\smallskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions (2 points)} % 15 mins
+
+\subsection{(1 point) Convertir ces nombres décimaux en binaires sur 8 bits : \texttt{164}, \texttt{-34}}
+
+\bigskip
+164 : \% 1010 0100 (\$ A4)	\qquad	-34 : \% 1101 1110 (\$ DE)
+\bigskip
+
+\subsection{(1 point) Convertir ces nombres binaires (8 bits signés et non signés) en décimaux : \texttt{\%1111 0101}, \texttt{\%1101 1011}}
+
+\bigskip
+\% 1111 0101 : -11 ou 245	\qquad	\% 1101 1011 : 219 ou -37
+\bigskip
+
+\section{Compilation (2 points)} % 10 mins
+
+\subsection{(2 points) Expliquer succinctement les 4 étapes du pipeline de compilation. (une ou deux phrase(s) par étape)}
+
+\bigskip
+\begin{enumerate}
+\item Pré-Compilation : suppression des commentaires, et résolution des macros/pragma/routines de précompilation
+\item Compilation : transformation du code source écrit en langage haut niveau vers un code en assembleur dédié à la plateforme cible
+\item Assemblage/Assembler : transformation du code assembleur (encore lisible et compréhensible par un humain) en code objet composé écrit en langage machine (suite de 0 et 1)
+\item \'Edition de liens/Link Edit : résolution des adresses des fonctions et variables globales, concaténation des fichiers objets en un exécutable final, et indication du point d'entrée dans le programme
+\end{enumerate}
+\bigskip
+
+\section{Architecture (4 points)} % 20 mins
+
+\subsection{(2 points) Expliquer succinctement les 5 principales étapes qu'un processeur effectue lorsqu'il lit et exécute une instruction. (une phrase par étape)}
+
+\bigskip
+\begin{enumerate}
+\item Instruction Fetch : récupération de l'instruction à exécuter depuis la mémoire (instruction à l'adresse indiquée par le registre PC (Program Counter), puis incrémentation de 1 de l'adresse)
+\item Decode : l'instruction récupérée est analysée pour connaitre quelle opération doit etre appliquée et quelles sont les opérandes impliquées (une addition a deux opérandes, un décalage n'a qu'une opérande, ...) afin de les rassembler
+\item Execute : l'opération est exécutée sur les opérandes
+\item Memory : si un accès mémoire en lecture/écriture doit etre fait, celui-ci est exécuté
+\item Write-Back : l'état final est propagé dans les registres modifiés (si un JUMP/CALL est fait, le registre PC est mis à jour avec la bonne valeur)
+\end{enumerate}
+\bigskip
+
+\subsection{(1 point) Expliquer succinctement quelles sont les fonctions/l'utilité du processeur, de la mémoire, et des périphériques dans un ordinateur.}
+
+\bigskip
+\begin{itemize}
+\item Processeur : c'est le composant qui exécute les instructions des programmes et réagit aux interruptions qu'il reçoit des périphériques. Il accès à la mémoire pour mettre les données qui s'y trouvent.
+\item Mémoire : elle stocke les données du programme de façon volatile (si l'ordinateur est éteint, la mémoire perd son état/les données). Les données peuvent être des variables, des structures, et toute forme plus complexe.
+\item Périphériques : ils servent à intéragir avec l'utilisateur/le monde physique (périphériques d'entrée et périphériques de sortie) et d'autres machines/périphériques (périphériques d'entrées/sorties).
+\end{itemize}
+\bigskip
+
+\subsection{(1 point) Pour un même programme dont les sources sont compilées pour un processeur CISC puis pour un processeur RISC, expliquer quelles seront les différences dans les deux binaires exécutables finaux. En admettant que les deux processeurs fonctionnent exactement à la même vitesse (chaque instruction prend un temps fixe à s'exécuter sur les deux processeurs), quelles seraient les conséquences lors de l'exécution ?}
+
+\bigskip
+\'Etant donné qu'un processeur CISC effectue des instructions complexes, et qu'un RISC effectue des instructions simples, pour un même code source, on obtiendra un code assembleur "généralement" plus court en CISC/plus long en RISC, et donc des exécutables probablement plus gros en RISC qu'en CISC.\\
+Si deux processeurs CISC et RISC exécutent chacun leur version de l'exécutable avec une durée fixe  pour chaque instruction, alors l'exécutable sur RISC prendra plus de temps que sur CISC.\\
+(malgré tout, dans la pratique, les processeurs CISC sont plus lents et plus complexes, et très peu de CISC "purs" existent de nos jours... il s'agit très souvent de RISC offrant une surcouche CISC).
+\bigskip
+
+%\pagebreak
+
+\section{Système d'Exploitation (12 points)} % 20 mins
+
+\subsection{(2 points) Expliquer la notion de "temps partagé". Citer le composant du système d'exploitation qui gère cette notion, le mécanisme du processeur sur lequel il s'appuie, et le composant physique permettant cela. Puis illustrer avec un exemple où le temps est partagé puis un autre exemple où le temps n'est pas partagé.}
+
+\bigskip
+Le temps partagé est la capacité d'un système à faire fonctionner plusieurs tâches "en apparence" en même en leur donnant régulièrement à chacune un peu de temps pour s'exécuter.
+Le composant du système d'exploitation qui permet de partager le temps est l'ordonnanceur, il s'appuie sur les interruptions que reçoit le processeur générées par un quartz.\\
+Exemple de temps partagé : plusieurs tâches s'exécutent sur un système, un lecteur de musiques et un navigateur web... l'utilisateur utilise son navigateur et écoute la musique en même temps, il ne perçoit pas que les deux processus ne s'exécutent que quelques microsecondes chacun en alternance.
+Dans l'ordonnanceur, les deux tâches sont alternées pour permettre un usage optimal du temps : le temps que le fichier contenant de la musique soit lu par le disque dur au fur et à mesure de l'écoute, le navigateur web peut afficher des pages... et lorsque le navigateur attend une réponse des serveurs sur internet, le lecteur de musique peut prendre plus de temps CPU.\\
+Exemple de temps non partagé : les "batchs".
+On lance une tâche, et uniquement lorsque celle-ci se termine, on peut en lancer une deuxième.
+Ce mode n'a que très peu de sens/intérêt sur nos PC, car l'intéractivité est quasi inexistante.
+Dans le cas de la musique et du navigateur web, si on lance la musique en premier, il faudra attendre que l'ensemble du processus de lecture soit terminé avant de lancer une autre tâche... et lorsque le navigateur web est lancé, aucune musique externe ne peut être lancée, seule la navigation est possible.
+\bigskip
+
+\subsection{(1,5 points) Expliquer la différence entre un programme et un processus, et donner les propriétés classiques d'un processus.}
+
+\bigskip
+\begin{itemize}
+\item Programme : c'est le code qui sera exécuté. Il est stocké dans un fichier et peut être chargé en mémoire.\\
+\item Processus : c'est l'instance d'un programme en mémoire qui est en cours d'exécution. Chaque instance est différenciée par son PID.\\
+\end{itemize}
+
+Les propriétés classiques d'un processus sont :
+\begin{itemize}
+\item PID : identifiant du processus
+\item PPID : identifiant du processus parent/père
+\item \'Etat : état actuel du processus (actif, dormant, zombie, ...)
+\item User (UID) : les droits de l'utilisateur avec lequel le processus fonctionne
+\item Group (PGID) : les droits du groupe avec lequel le processus fonctionne
+\item Command : la commande avec laquelle le processus a été lancé
+\item Pages Mémoire : les pages mémoires associées à cette instance précise
+\end{itemize}
+\bigskip
+
+%\pagebreak
+
+\subsection{(1 point) Expliquer la différence entre processus et threads.}
+
+\bigskip
+Un processus dispose des propriétés précédentes, et chaque processus est isolé des autres grâce à la mémoire virtuelle.
+Les threads sont des \textit{fils d'exécution}/\textit{processus légers} qui partagent le code/programme du processus auquel ils sont rattachés, ainsi que la section \textit{tas} de l'espace d'adressage.
+Cependant, chaque thread dispose de sa propre pile d'appels pour pouvoir exécuter son propre "cheminement dans le code"/fil d'exécution.\\
+\bigskip
+
+\subsection{(2 points) Expliquer la relation entre i-node et blocs, puis expliquer la différence entre fichier et dossier et particulièrement où sont stockés les noms de fichiers.}
+
+\bigskip
+Un i-node est une structure référençant les blocs constituant le contenu du fichier.
+L'i-node contient donc une liste de numéros de blocs, et l'ordre dans lequel les lire (ainsi que d'autres métadonnées propres au fichier).
+Les blocs, au contraire, ne contiennent "que" de la donnée.\\
+Les blocs d'un fichier ne contiennent donc que le contenu du fichier (de la donnée brute).
+\`A l'inverse, les blocs d'un dossier contiennent la liste des fichiers présents dans le dossier, et le numéro de chaque i-node associé à chaque fichier.\\
+Ainsi, les i-nodes ne contiennent pas les noms de chaque fichier référencé, mais on retrouve le nom de chaque fichier dans les blocs du dossier les contenant.
+\bigskip
+
+\subsection{(1,5 points) Donnez 3 raisons différentes qui peuvent empêcher cette ligne de commande de fonctionner : \TTBF{./\_script.sh}}
+
+\bigskip
+\begin{itemize}
+\item Droit exécution pas donné/Problème de droit
+\item Erreur dans le script (le langage n'est pas du script shell)
+\item Le script n'existe pas
+\item L'interpréteur indiqué au début n'existe pas (le \texttt{\#! /bin/sh} remplacé par \texttt{\#! /lol})
+\end{itemize}
+\bigskip
+
+\subsection{(2 points) Expliquer ce que fait chaque ligne du script, puis globalement ce que le script semble faire.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,numbers=left,title={script.sh}]
+#! /bin/sh
+
+OUTFILE=`mktemp fileXXXX`
+cat streams.list | sort -t";" -k1 -o $OUTFILE
+NB=`wc -l streams.list | cut -c 1`
+rm -f $1
+for i in `seq 0 $NB`; do
+	FILE=`tail -n $i $OUTFILE | head -n 1`
+	cat "${FILE}$i" >> $1
+done
+rm -f $OUTFILE
+\end{lstlisting}
+
+\bigskip
+
+\begin{itemize}
+\item Ligne 1 : On appelle l'interpréteur de script shell \texttt{sh}
+\item Ligne 3 : On crée un fichier temporaire dont le préfixe est "file" et qui est fini par 4 caractères aléatoires, le nom sera sauvegardé dans la variable OUTFILE
+\item Ligne 4 : On lit le fichier "streams.list" et on envoie son contenu sur la sortie standard. Celle-ci est redirigée vers l'entrée de "sort" qui va trier selon le 1er champs, les champs sont séparés par des point virgules ";", et écrira dans le fichier temporaire désigné par la variable OUTFILE
+\item Ligne 5 : La variable NB va prendre comme valeur le nombre de lignes contenues dans le fichier "streams.list" (wc va compter le nombre de lignes et affichera plusieurs résultats, puis cut ne sélectionnera que le 1er caractère contenant le nombre de lignes... il faut en déduire que streams.list doit contenir moins de 10 lignes)
+\item Ligne 6 : Le fichier passé en premier paramètre du script sera supprimé (qu'il existe ou non : aucun message ne sera affiché)
+\item Ligne 7 : On va itérer avec la variable "i" depuis l'entier 0 jusqu'à l'entier contenu dans la variable "NB" (elle contient le nombre de ligne de streams.list)
+\item Ligne 8 : La variable FILE va prendre comme valeur chaque ligne du fichier temporaire désigné par la variable "OUTFILE" (tail va afficher les "i" dernières lignes, et head ne va garder que la 1ère ligne de ce que tail a affiché... tail va afficher de moins en moins de lignes)
+\item Ligne 9 : Chaque ligne contenue dans la variable "FILE" sera concaténée à la valeur de "i", et cela formera le nom d'un fichier (cat travaille sur des fichiers, echo travaille sur des phrases). On va afficher le contenu du fichier dont le nom est listé dans "streams.list" + suivi du numéro de ligne, et on va renvoyer le tout vers le fichier passé en paramètre du script SANS écraser le contenu précédent
+\item Ligne 11 : On supprime le fichier temporaire désigné par la variable OUTFILE
+\end{itemize}
+
+\bigskip
+
+De façon générale, le script va lister des fichiers référencés dans "streams.list" et concaténer leur contenu dans le fichier passé en 1er paramètre du script.
+
+%\pagebreak
+
+\subsection{(2 points) \'Ecrire un script qui listera tous les fichiers commençant par le nom "transaction-" modifié durant les 24 dernières heures, puis afficher pour chaque fichier la colonne contenant le montant de chacune des lignes, et renvoyer le tout vers le fichier passé en premier paramètre du script.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Format des fichiers de transactions}]
+ID Transaction ; Date ; Montant ; Numero Carte Fidelite ; Remarques
+\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={transaction-2017-12-08}]
+1445;2017-12-08;42;1001;fait a 11h01
+1446;2017-12-08;200;1002;fait a 11h11
+1447;2017-12-08;100;1001;fait a 12h04
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={script.sh}]
+#! /bin/sh
+
+find . -name "transaction-*" -mtime -1 -exec cut -f 3 {} \; >> $1 
+\end{lstlisting}
+
+\end{document}

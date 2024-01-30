@@ -1,0 +1,6 @@
+Dans un but d'extension de la mémoire, mais aussi de protection, la "mémoire virtuelle" est un mécanisme supplémentaire dans les ordinateurs.
+
+Au sein du code exécuté dans le processeur, les adresses utilisées (adresses virtuelles) ne correspondent pas directement à celles sur le bus d'adresse (adresses physiques).
+Une table contient la correspondance entre les adresses virtuelles et les adresses physiques : la "table de pages".
+
+Les adresses virtuelles sont traduites en adresses physiques grâce à la "MMU" (Memory Management Unit).

@@ -1,0 +1,384 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{L2}
+\newcommand{\NumGroupe}{L2 MIASHS}
+\newcommand{\AnneeUniv}{2018-2019}
+\newcommand{\DateExam}{13 mai 2019}
+\newcommand{\TypeExam}{Partiel}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{Questions de Cours}
+
+\subsection{(1 point) Que signifie l'acronyme ACID ? Expliquez une de ses propriétés.}
+
+\bigskip
+
+ACID : Atomicité, Cohérence, Isolation, Durabilité  \textbf{(0,5 points)}
+
+\textbf{(0,5 points)}
+\begin{enumerate}
+\item \TTBF{L'Atomicité} : transaction se déroule intégralement ou pas du tout
+\item \TTBF{La Cohérence} : la base de données doit passer d'un état cohérent à un autre état cohérent
+\item \TTBF{L'Isolation} : une transaction ne peut pas dépendre d'une autre transaction
+\item \TTBF{La Durabilité} : les modifications de la base de données à la fin de chaque transaction sont sauvegardées et doivent résister aux crashs/une reprise dans le dernier état cohérent en cas de crash doit être possible
+\end{enumerate}
+
+\bigskip
+
+\subsection{(1 point) Quelles sont les 2 étapes qui peuvent alternativement se produire à la fin d'une transaction ?}
+
+\bigskip
+
+\`A la fin d'une transaction, il se produit soit un COMMIT, soit un ROLLBACK.
+
+\bigskip
+
+\subsection{(3 points) Remplir le tableau avec la valeur booléenne de retour (0, 1, ou \textit{erreur}) que chaque fonction renverrai pour chaque valeur de variable en entrée.}
+
+\bigskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\bigskip
+\begin{center}
+%  \begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{4}{>{\centering \arraybackslash}X |}}
+  \hline
+  Paramètre & \TTBF{isset()} & \TTBF{empty()} & \TTBF{is\_null()} \\ \hline
+  \TTBF{null} & false / 0 & true / 1 & true / 1 \\ \hline
+  [\TTBF{unset(\$var)}] & false / 0 & true / 1 & error/true / 1 \\ \hline
+  \TTBF{42} & true / 1 & false / 0 & false / 0 \\ \hline
+  \TTBF{0} & true / 1 & true / 1 & false / 0 \\ \hline
+  \TTBF{""} & true / 1 & true / 1 & false / 0 \\ \hline
+  \TTBF{" "} [un espace] & true / 1 & false / 0 & false / 0 \\ \hline
+  \end{tabularx}
+\end{center}
+\medskip
+
+\renewcommand\arraystretch{1}
+
+\bigskip
+
+\subsection{(1,5 points) Expliquez les différentes parties des URL suivantes, et ce qu'un serveur web standard comprendra :}
+
+\bigskip
+
+\begin{enumerate}
+\item \TTBF{http://www.weeklymail.co.uk/articles/9821} : protocole : http (web), domaine : www.weeklymail.co.uk, ressource : /articles/9821
+\item \TTBF{sftp://s12.cdn.provider.net:3846/data/storage23/res.76/} : protocole : sftp, (port : 3846), domaine : s12.cdn.provider.net, ressource : /data/storage23/res.76/ (dossier)
+\item \TTBF{https://www2.ibaie.com/shopping/cart.php} : protocole : https (secure web), www2.ibaie.com, ressource : /shopping/cart.php (file : cart.php)
+\end{enumerate}
+
+\bigskip
+
+\newpage
+
+% Code à écrire ou corriger
+\section{Développement}
+
+\subsection{(3,5 points) \'Ecrire une fonction "\textit{CalculTaxes}" qui calculera le prix TTC (toutes taxes comprises) à partir d'un prix HT (hors taxe), sachant que le taux de taxe est de 20\%. Elle prendra en entrée un tableau de valeurs en euros. On attend en sortie un tableau associatif contenant le numéro de facture (IDFacture), le montant HT (montantHT), le montant des taxes (Taxe), le montant TTC (montantTTC). Le tableau de sortie \text doit être renvoyé par un \TTBF{return}.}
+
+\medskip
+
+\textit{L'exercice étant à l'écrit, on supposera qu'il n'y a aucun problème de virgule.}
+
+\medskip
+
+\begin{tabular}{l c l}
+Prix TTC depuis un prix H.T. : & $ Prix TTC = $ & $ Prix H.T. + Taxes $ \\
+Taxes (20\%) depuis un prix H.T. : & $ Taxes = $ & $ Prix H.T. \times 20 \div 100 $ \\
+ & & \\
+Prix H.T. depuis un prix TTC (taxes à 20\%) : & $ Prix H.T. = $ & $ Prix TTC \div 1,2 $ \\
+Taxes depuis des prix H.T. et TTC : & $ Taxes = $ & $ Prix TTC - Prix H.T. $ \\
+\end{tabular}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<?php
+function CalculTaxes($tab)
+{
+  $id = 0;
+
+  foreach ($tab as $line)  // Boucle
+  {
+    $taxe = ($line * 20) / 100;    // Calcul
+    $prix_ttc = $line + $taxe;     // Calcul
+    $out_line['IDFacture'] = $id;         //Assignation
+    $out_line['montantHT'] = $line;       //Assignation
+    $out_line['Taxe'] = $taxe;            //Assignation
+    $out_line['montantTTC'] = $prix_ttc;  //Assignation
+    $out[] = $out_line;        // Ajout tableau
+    $id++;                 // Boucle
+  }
+
+  return ($out);
+}
+?>
+\end{lstlisting}
+
+\medskip
+
+\subsection{(5 points) \'Ecrire le code pour identifier un utilisateur depuis la table de la base de données décrite ci-dessous : la page doit afficher "OK" si l'identification a réussi, et "NOP" si elle a échoué. L'identification se fera à partir de 2 variables POST envoyées par un formulaire : "login" et "pass". Le mot de passe fourni par le formulaire est déjà chiffré, ainsi que celui de la base de données.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "ibaie", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "fab", et dispose du mot de passe "passbdd".
+\end{WhiteBox}
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{6}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{ID} & \TTBF{login} & \TTBF{password} & \TTBF{nom} & \TTBF{prenom} & \TTBF{ville}\\ \hline
+  0 & fafa & ML0.Qje4sc & Boissier & Fabrice & Paris \\ \hline
+  1 & ali & v/87jVKZhK & Jaffal & Ali & Paris \\ \hline
+  2 & flo & PFjgksmt.G & Owczarek & Floriane & Paris \\ \hline
+  \end{tabularx}
+\caption{Base de données : ibaie     Table : users}\label{tab:bdd-1-1}
+\end{table}
+\end{center}
+
+\renewcommand\arraystretch{1}
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $login = $_POST['login'];  // Assignation variables "hors" SQL
+  $pass = $_POST['pass'];
+
+  $mysqli = new mysqli("localhost", "fab", "passbdd", "ibaie");
+
+  if ($mysqli->connect_errno)
+  {
+    die ("Echec lors de la connexion " . $mysqli->connect_error);
+  }
+
+  $sql = "SELECT * FROM users WHERE login='$login'" ;
+  $resultat = $mysqli->query($sql);
+  if ($resultat->num_rows > 0)
+  {
+    $infos = $resultat->fetch_array();
+    if ($infos['password'] == $pass)
+    {
+      echo "OK";
+    }
+    else
+    {
+      echo "NOP";
+    }
+  }
+  else
+  {
+    echo "NOP";
+  }
+  $mysqli->close();  // Pas obligatoire
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\medskip
+
+\newpage
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $login = $_POST['login'];
+  $pass = $_POST['pass'];
+
+  try {  // fab / passbdd
+    $pdo = new PDO("mysql:host=localhost;dbname=ibaie", "fab", "passbdd");
+  } catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+  }
+
+  $sql = $pdo->query("SELECT * FROM users WHERE login='$login'");
+  $infos = $sql->fetch();
+  if ($infos)
+  {
+    if ($infos['password'] == $pass)
+    {
+      echo "OK";
+    }
+    else
+    {
+      echo "NOP";
+    }
+    $sql->closeCursor();  // Pas obligatoire
+  }
+  else
+  {
+    echo "NOP";
+  }
+?>
+</body>
+</html>
+\end{lstlisting}
+
+
+
+\subsection{(5 points) Vous devez implémenter une recherche simple d'article à partir de leur nom. Un formulaire est envoyé en GET avec une variable \TTBF{mot}. Une session contient une variable \TTBF{panier} (qui est un tableau d'articles). Pour chaque article trouvé, il faut afficher son nom, sa quantité et sa description, sinon il faut afficher "NOP". \'Ecrire la fonction "\textit{RechercheArticle}" qui récupère les noms d'articles qui correspondent au \TTBF{mot}, et son usage avec la valeur envoyée par le formulaire.}
+
+\medskip
+
+\begin{WhiteBox}
+La base de donnée se nomme "ibaie", elle est accessible en "localhost", l'utilisateur ayant les droits d'accès s'appelle "ibaieuser", et dispose du mot de passe "dbpass".
+\end{WhiteBox}
+
+\medskip
+
+% Allonge les cases en hauteur
+\renewcommand\arraystretch{2.5}
+
+\begin{center}
+\begin{table}[ht!]
+  %\begin{tabularx}{15.5cm}{| c | p{4cm} | p{4cm} | p{4cm} |}
+  \begin{tabularx}{\linewidth}{| *{6}{>{\centering \arraybackslash}X |}}
+  \hline
+  \TTBF{ID} & \TTBF{nom} & \TTBF{qte} & \TTBF{prix} & \TTBF{description} \\ \hline
+  0 & Banane & 198 & 2 & Fruits vendu par 6 \\ \hline
+  1 & Huile & 355 & 4 & Bouteille de 1L d'huile \\ \hline
+  2 & Chips & 765 & 3 & Paquet de 200g de chips \\ \hline
+  \end{tabularx}
+\caption{Base de données : ibaie     Table : articles}\label{tab:bdd-2-1}
+\end{table}
+\end{center}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $nom = $_GET['nom'];
+
+  RechercheArticle($produit);
+
+function RechercheArticle($produit)
+{
+  try {
+    $pdo = new PDO("mysql:host=localhost;dbname=ibaie", "ibaieuser", "dbpass");
+  } catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+  }
+
+  $sql = $pdo->query("SELECT * FROM articles WHERE nom='$produit'");
+  $i = 0;
+  while ($infos = $sql->fetch(PDO::FETCH_ASSOC))
+  {
+    $name = $infos['nom'];
+    $qte = $infos['qte'];
+    $descr = $infos['description'];
+    echo "$name $qte $descr <br />\n";
+    $i++;
+  }
+  $sql->closeCursor();  // Pas obligatoire
+  if ($i == 0)
+  {
+    echo "NOP";
+  }
+}
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\medskip
+
+\lstset{language=php}
+\begin{lstlisting}[frame=single,numbers=left]
+<html>
+<body>
+<?php
+  $nom = $_GET['nom'];
+  
+  RechercheArticle($nom);
+
+function RechercheArticle($produit)
+{
+  $mysqli = new mysqli("localhost", "ibaieuser", "dbpass", "ibaie"); // fab / passbdd
+
+  if ($mysqli->connect_errno)
+  {
+    die ("Echec lors de la connexion " . $mysqli->connect_error);
+  }
+
+  $sql = "SELECT * FROM articles WHERE nom='$produit'" ;
+  $resultat = $mysqli->query($sql);
+  if ($resultat->num_rows > 0)
+  {
+    while ($infos = $resultat->fetch_array())
+    {
+      $name = $infos['nom'];
+      $qte = $infos['qte'];
+      $descr = $infos['description'];
+      echo "$name $qte $descr <br />\n";
+    }
+  }
+  else
+  {
+    echo "NOP";
+  }
+  $mysqli->close();   // Pas obligatoire
+}
+
+?>
+</body>
+</html>
+\end{lstlisting}
+
+\end{document}

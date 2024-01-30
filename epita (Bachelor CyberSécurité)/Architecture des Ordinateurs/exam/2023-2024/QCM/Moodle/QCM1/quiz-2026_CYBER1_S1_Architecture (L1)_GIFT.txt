@@ -1,0 +1,323 @@
+// question: 0  name: Switch category to $course$/top/Architecture (L1)
+$CATEGORY: $course$/top/Architecture (L1)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions
+$CATEGORY: $course$/top/Architecture (L1)/Conversions
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 2
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 2
+
+
+// question: 59523  name: 115 -> Base 2
+::115 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 115 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0111 0011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 1111<br></p>#<p dir\="ltr" style\="text-align\: left;">% 0111 0110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1101<br></p>
+}
+
+
+// question: 59567  name: 133 -> Base 2
+::133 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 133 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1000 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 1101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1001<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1101<br></p>
+}
+
+
+// question: 59569  name: 142 -> Base 2
+::142 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 142 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1000 1110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 1000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 1100<br></p>
+}
+
+
+// question: 59568  name: 172 -> Base 2
+::172 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 172 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1010 1100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1100 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1110<br></p>
+}
+
+
+// question: 59524  name: 234 -> Base 2
+::234 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 234 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1110 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 1010<br></p>
+}
+
+
+// question: 59522  name: 42 -> Base 2
+::42 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0000 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1000<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 2 -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 2 -> 10
+
+
+// question: 59528  name: %00101010 -> Base 10
+::%00101010 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0010 1010 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">38<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">30<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">210<br></p>
+}
+
+
+// question: 59530  name: %01101101 -> Base 10
+::%01101101 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0110 1101 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">109<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">613<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">119<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">103<br></p>
+}
+
+
+// question: 59565  name: %01111100 -> Base 10
+::%01111100 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0111 1100 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">124<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">248<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">126<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">250<br></p>
+}
+
+
+// question: 59566  name: %10111011 -> Base 10
+::%10111011 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1011 1011 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">187<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">251<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">123<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">191<br></p>
+}
+
+
+// question: 59529  name: %11001011 -> base 10
+::%11001011 -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1100 1011 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">203<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">184<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">183<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1211<br></p>
+}
+
+
+// question: 59564  name: %11010111 -> Base 10
+::%11010111 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1101 0111 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">215<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">231<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">183<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">240<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 16
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 16
+
+
+// question: 59521  name: 238 -> base 16
+::238 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 238 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ EE<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 1414<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ E4<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 4E<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ DD<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ CC<br></p>
+}
+
+
+// question: 59519  name: 42 -> base 16
+::42 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ 2A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ A2<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 24<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 28<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 82<br></p>
+}
+
+
+// question: 59520  name: 56 -> base 16
+::56 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 56 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ 38<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 83<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 3A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ A3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 24<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 16 -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 16 -> 10
+
+
+// question: 59527  name: $34 -> base 10
+::$34 -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $34 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">52<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">484<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">34<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">48<br></p>
+}
+
+
+// question: 59526  name: $5E -> base 10
+::$5E -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $5E en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">94<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">64<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">90<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">74<br></p>
+}
+
+
+// question: 59525  name: $AB -> base 10
+::$AB -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $AB en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">171<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">170<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">172<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions BCD -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions BCD -> 10
+
+
+// question: 59534  name: BCD %01011001 -> Base 10
+::BCD %01011001 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0101 1001 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">59<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">89<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">105<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Ce n'est pas un nombre correct en BCD<br></p>
+}
+
+
+// question: 59536  name: BCD %01100111 -> Base 10
+::BCD %01100111 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0110 0111 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">67<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">103<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">107<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">83<br></p>
+}
+
+
+// question: 59535  name: BCD %11001001 -> Base 10
+::BCD %11001001 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1100 1001 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Ce n'est pas un nombre correct en BCD<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">129<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">21<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1209<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> BCD
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> BCD
+
+
+// question: 59531  name: 42 -> BCD
+::42 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0100 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 0101<br></p>
+}
+
+
+// question: 59532  name: 72 -> BCD
+::72 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 72 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0111 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0100 1000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0100 0110<br></p>
+}
+
+
+// question: 59533  name: 96 -> BCD
+::96 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 96 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1001 0110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 0000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 1110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 0100<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 10 -> 16 (s)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 10 -> 16 (s)
+
+
+// question: 59545  name: -108 -> Base 2
+::-108 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez -108 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1001 0100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 0011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1011<br></p>
+}
+
+
+// question: 59544  name: -37 -> Base 2
+::-37 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez -37 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1101 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1101 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 0100<br></p>
+}
+
+
+// question: 59542  name: -53 -> Base 2
+::-53 -> Base 2::[html]<p dir\="ltr">Convertissez -53 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1100 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1100 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0100<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 16 -> 10 (s)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 16 -> 10 (s)
+
+
+// question: 59538  name: $B4 -> Base 10
+::$B4 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $B4 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-76<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-54<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-75<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-53<br></p>
+}
+
+
+// question: 59540  name: $C4 -> Base 10
+::$C4 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $C4 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-60<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-59<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-68<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-67<br></p>
+}
+
+
+// question: 59541  name: $D8 -> Base 10
+::$D8 -> Base 10::[html]<p dir\="ltr">Convertissez $D8 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-40<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-39<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-88<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-87<br></p>
+}
+
+

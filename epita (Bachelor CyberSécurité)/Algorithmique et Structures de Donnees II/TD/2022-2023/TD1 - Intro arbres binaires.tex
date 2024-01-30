@@ -1,0 +1,748 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique et Structures de Données 2}
+\newcommand{\TitreSeance}{Arbres Binaires}
+\newcommand{\NumeroTD}{Première implémentation - v3}
+\newcommand{\DateCours}{Mars 2023}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec l'implémentation des arbres binaires.
+Vous devrez y utiliser une pile et une file à un moment donné pour les algorithmes itératifs appliqués aux arbres.
+
+\bigskip
+
+Pour rappel, les arbres binaires sont constitués de \textit{nœuds} stockant une \textit{clé} (l'élément ou l'identifiant de l'élément), et chaque nœud dispose de liens vers un \textit{fils gauche} et un \textit{fils droit}.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Types, structures, et exemples}
+
+\bigskip
+
+Toutes les clés qui seront stockées seront strictement supérieures à 0.
+
+
+\question{Implémentez une structure d'arbre binaire nommée \TTBF{node} pouvant contenir une clé qui sera un entier. L'arbre doit être stocké avec des pointeurs entre des nœuds.}
+
+%\question{Implémentez une fonction \TTBF{create\_node} créant un \TTBF{node}. Cette fonction prendra un entier en paramètre qui sera mis dans la clé, et les adresses des deux fils.}
+
+% %*   *)
+%\begin{lstlisting}[language=C]
+%node *create_node(int key, node *left_child, node *right_child); \end{lstlisting}
+
+
+\question{Implémentez maintenant une structure d'arbre binaire nommée \TTBF{bin\_tree\_t} qui stockera un arbre binaire sous forme de tableau (n'oubliez pas qu'un tableau a besoin que l'on stocke sa taille dans un entier). Les nœuds vides contiendront $ -1 $.}
+
+\question{Implémentez une fonction \TTBF{create\_bin\_tree\_t} créant un \TTBF{bin\_tree\_t} dont tous les nœuds seront à $ -1 $ (un arbre vide). La fonction prendra en paramètre un entier servant de taille maximale au tableau.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+bin_tree_t *create_bin_tree_t(int max_len); \end{lstlisting}
+
+\vspace*{-0.25cm}
+
+\question{Implémentez maintenant \textit{à la main} les arbres suivants. Pour cela vous allez écrire une fonction renvoyant un pointeur vers un \TTBF{node} racine ou un \TTBF{bin\_tree\_t}. (La version \textit{node} des arbres doit être entièrement faite à la main, mais vous êtes libres pour la version \textit{bin\_tree\_t})}
+
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node *build_Arbre0_p(void);
+node *build_Arbre1_p(void);
+node *build_Arbre2_p(void);
+node *build_Arbre3_p(void);
+node *build_Arbre4_p(void); \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+bin_tree_t *build_Arbre0_t(void);
+bin_tree_t *build_Arbre1_t(void);
+bin_tree_t *build_Arbre2_t(void);
+bin_tree_t *build_Arbre3_t(void);
+bin_tree_t *build_Arbre4_t(void); \end{lstlisting}
+
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.18\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] {Ø}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+%\bigskip
+%\bigskip
+
+\centering{Arbre0}
+
+\smallskip
+
+\centering{\textit{Racine vide (arbre vide)}}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+%\bigskip
+%\bigskip
+
+\centering{Arbre1}
+
+\smallskip
+
+\centering{\textit{Nœud sans fils (feuille)}}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21} }
+  child { node [draw=none] {} edge from parent[draw=none] }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Arbre2}
+
+%\smallskip
+%
+%\centering{\phantom{Nœud avec fils gauche (nœud interne)}}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node [draw=none] {} edge from parent[draw=none] }
+  child { node {64} }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Arbre3}
+%\centering{Nœud avec fils droit (nœud interne)}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.18\textwidth}
+
+% sibling distance=0cm, level distance=15mm,
+\centering{
+\begin{tikzpicture}[
+  triangle/.style={isosceles triangle, anchor=apex, shape border rotate=90, minimum height=5mm, minimum width=10mm, inner sep=0},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21} }
+  child { node {64} }
+  ;
+\end{tikzpicture}
+}
+
+\bigskip
+
+\centering{Arbre4}
+%\centering{Nœud avec fils gauche et droit (nœud interne)}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\bigskip
+
+\question{Implémentez une fonction \TTBF{create\_node} créant un \TTBF{node}. Cette fonction prendra un entier en paramètre qui sera mis dans la clé, et les adresses des deux fils.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node *create_node(int key, node *left_child, node *right_child); \end{lstlisting}
+
+
+%\bigskip
+
+
+\question{Implémentez \textit{à la main} avec les fonctions \textit{create\_node} et \textit{create\_bin\_tree\_t} les arbres suivants, toujours en produisant des fonctions générant des arbres et renvoyant un pointeur vers le nœud racine ou vers la structure contenant le tableau.}
+
+Astuces : allouez d'abord chaque nœud grâce à une fonction dédiée, écrivez une ligne pour placer chaque nœud comme fils d'un autre, et commencez par l'arbre le plus rempli pour pouvoir copier/coller le code et retirer les nœuds qui ne servent pas.
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node *build_Arbre5_p(void);
+node *build_Arbre6_p(void);
+node *build_Arbre7_p(void);
+node *build_Arbre8_p(void);
+node *build_Arbre9_p(void);
+node *build_Arbre10_p(void);
+node *build_Arbre11_p(void);
+node *build_Arbre12_p(void); \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+bin_tree_t *build_Arbre5_t(void);
+bin_tree_t *build_Arbre6_t(void);
+bin_tree_t *build_Arbre7_t(void);
+bin_tree_t *build_Arbre8_t(void);
+bin_tree_t *build_Arbre9_t(void);
+bin_tree_t *build_Arbre10_t(void);
+bin_tree_t *build_Arbre11_t(void);
+bin_tree_t *build_Arbre12_t(void); \end{lstlisting}
+
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8} }
+          child { node {24} }
+         }
+  child { node {64}
+          child { node {48} }
+          child [missing] { }
+        };
+\end{tikzpicture}
+
+Arbre5
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8} }
+          child { node {24} }
+         }
+  child { node {64}
+          child { node {48} }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+Arbre6
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres binaires presque complets}
+%\label{fig:example3-almost-complete-binary-trees}
+\end{table}
+
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ù
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child {node {8}
+                child {node {2}}
+                child {node {16}}
+               }
+         child {node {24}}
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+Arbre7
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child [missing] {}
+         child {node {24}
+                child {node {22}}
+                child {node {32}}
+               }
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+Arbre8
+
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child [missing] {}
+          child { node {24}
+                  child { node {22} }
+                  child [missing] {}
+                }
+         }
+  child [missing] {};
+\end{tikzpicture}
+
+Arbre9
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child [missing] {}
+  child { node {64}
+          child [missing] {}
+          child { node {96}
+                  child [missing] {}
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+Arbre10
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\clearpage
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+		  child { node {8}
+                  child { node {2}
+                          child { node {1} }
+                          child { node {3} }
+                        }
+                  child { node {16} }
+                }
+          child { node {24} }
+        }
+  child { node {64} }
+  ;
+\end{tikzpicture}
+
+Arbre11
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21} }
+  child { node {64}
+          child { node {48} }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98}
+                          child { node {97} }
+                          child { node {99} }
+                        }
+                }
+        };
+\end{tikzpicture}
+
+Arbre12
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Arbres filiformes}
+%\label{fig:example4-degenerated-trees}
+\end{table}
+
+\bigskip
+
+Le but de ces exemples est de vous aider à tester les algorithmes suivants.
+Utilisez donc ces exemples pour vérifier le bon fonctionnement des algorithmes suivants.
+
+\vfillFirst
+
+\vfillLast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Premiers algorithmes (récursifs)}
+
+\bigskip
+
+Vous allez maintenant implémenter les fonctions de base analysant et parcourant des arbres.
+Ces fonctions fonctionnent en autonomie (elles n'ont pas besoin de pile ou de file externes), mais certaines peuvent être des fonctions chapeau (donc ayant besoin de sous fonctions).
+
+\bigskip
+
+\question{Implémentez les fonctions récursives suivantes calculant la taille et la hauteur de l'arbre. (Pour rappel : la \textit{taille} est le nombre de nœuds contenus dans l'arbre, et la \textit{hauteur} est le niveau du nœud le plus profond de l'arbre, sachant que la racine est à la hauteur 0)}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int size_btp_r(node *T);
+int height_btp_r(node *T); \end{lstlisting}
+
+
+\question{Implémentez maintenant les mêmes fonctions pour un arbre stocké sous forme de tableau (la récursion n'est pas obligatoire).}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int size_btt(bin_tree_t *T);
+int height_btt(bin_tree_t *T); \end{lstlisting}
+
+
+\question{Implémentez trois fonctions récursives effectuant un parcours profondeur main gauche, et affichant les clés des nœuds dans l'ordre préfixe, infixe, ou suffixe.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_dfs_preorder_btp_r(node *T);
+int print_dfs_inorder_btp_r(node *T);
+int print_dfs_postorder_btp_r(node *T); \end{lstlisting}
+
+
+\question{Implémentez maintenant une fonction écrivant le numéro d'ordre hiérarchique de chaque nœud suivi de la clé contenue.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_hierarchical_btp_r(node *T); \end{lstlisting}
+
+
+\question{Implémentez maintenant une fonction renvoyant le numéro d'ordre hiérarchique du nœud contenant la clé données en paramètre. Si la clé n'est pas trouvée, alors on renverra $ -1 $.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int hierarchical_number_btp_r(node *T, int key); \end{lstlisting}
+
+
+\question{Implémentez une fonction construisant un arbre binaire sous forme de tableau à partir d'un arbre binaire sous forme de pointeurs.}
+
+Pour limiter les réallocations, vous avez le droit d'appeler une fois au tout début la fonction \textit{size} que vous avez précédemment réalisée.
+
+% %*   *)
+\begin{lstlisting}[language=C]
+bin_tree_t *btp_r_to_btt(node *T); \end{lstlisting}
+
+
+\question{Implémentez une fonction transformant un arbre binaire sous forme de pointeurs en un arbre binaire sous forme de pointeurs \textit{avec} un champs supplémentaire dans la structure des nœuds : la taille du sous-arbre démarrant au nœud courant.}
+
+Il est nécessaire de définir une nouvelle structure \TTBF{node\_ext} dans laquelle vous ajouterez un champs supplémentaire.
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node_ext *extend_btp_r(node *T); \end{lstlisting}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Algorithmes itératifs}
+
+\bigskip
+
+Pour cette seconde partie, il est nécessaire de disposer d'une file et d'une pile fonctionnelles.
+C'est-à-dire qu'elles doivent implémenter au \textit{minimum absolu} ces fonctions (pour permettre une correction automatique, vous devez strictement respecter ces prototypes) :
+
+\bigskip
+
+% /* La creation peut eventuellement prendre une taille max */
+% my_stack *create_stack(int sizeof_elt);
+% // my_stack *create_stack(int sizeof_elt, int max_size);
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/* Selon l'implementation, max_size peut ne pas etre pris en compte */
+my_stack *create_stack(int sizeof_elt, int max_size);
+
+void *head_stack(my_stack *s);
+my_stack *push(my_stack *s, void *elt);
+my_stack *pop(my_stack *s);
+
+void delete_stack(my_stack *s); \end{lstlisting}
+
+
+%\clearpage
+
+% /* La creation peut eventuellement prendre une taille max */
+% my_queue *create_queue(int sizeof_elt);
+% // my_queue *create_queue(int sizeof_elt, int max_size);
+
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/* Selon l'implementation, max_size peut ne pas etre pris en compte */
+my_queue *create_queue(int sizeof_elt, int max_size);
+
+void *head_queue(my_queue *q);
+my_queue *enqueue(my_queue *q, void *elt);
+my_queue *dequeue(my_queue *q);
+
+void delete_queue(my_queue *q); \end{lstlisting}
+
+
+Comme vous l'aurez remarqué, au lieu de prendre un élément sous forme d'entier, ces structures prendront des pointeurs vers ces éléments.
+La taille de chaque élément est indiqué lors de la création de la structure par le paramètre \textit{sizeof\_elt} (la structure contiendra donc N éléments de taille \textit{sizeof\_elt}).
+La suppression d'un élément (avec \textit{dequeue} ou \textit{pop}) ne doit pas libérer de la mémoire ces éléments.
+
+Le paramètre \textit{max\_size} donné à la fonction \textit{create\_stack} doit absolument exister, mais peut ne pas être utilisé si vous implémentez les piles/files avec des pointeurs (le code doit néanmoins compiler avec tous les flags de compilation : vous devez utiliser l'astuce pour forcer les variables à exister).
+
+
+\bigskip
+
+\question{Implémentez une fonction itérative effectuant un parcours largeur dans l'ordre hiérarchique et affichant la clé de chaque nœud.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_bfs_btp_i(node *T); \end{lstlisting}
+
+
+\bigskip
+
+\question{Implémentez trois fonctions itératives effectuant un parcours profondeur main gauche, et affichant les clés des nœuds dans l'ordre préfixe, infixe, ou suffixe.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_dfs_preorder_btp_i(node *T);
+int print_dfs_inorder_btp_i(node *T);
+int print_dfs_postorder_btp_i(node *T); \end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2023.
+Certains exercices sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

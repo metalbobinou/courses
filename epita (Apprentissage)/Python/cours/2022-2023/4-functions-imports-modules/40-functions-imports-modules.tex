@@ -1,0 +1,863 @@
+% -*- latex -*-
+
+\part{Functions, Imports \& Modules}  % Declaring functions, imports, modules
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Functions}
+
+\begin{frame}[fragile]{Functions}
+
+  Usual function definition and call:
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+def MyFunction(name):
+  print("Hello " + str(name) + "!")
+  return (0)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+def MyFunction(name):
+  print("Hello " + str(name) + "!")
+  return (0)
+
+MyFunction("Fabrice")
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4->
+        \begin{lstlisting}[style=python]
+def MyFunction(name):
+  print("Hello " + str(name) + "!")
+  return (0)
+
+MyFunction("Fabrice")
+MyFunction(42) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \onslide<5-> \textit{MyFunction} is the function name
+
+  \onslide<6-> \textit{name} is a parameter (without a type)
+
+  \onslide<7-> \textit{"Fabrice"} and \textit{42} are arguments
+
+\end{frame}
+
+
+%%% Parameters
+\subsection{Parameters}
+
+\begin{frame}<beamer>{Parameters}
+
+  \begin{itemize}
+    \item<1-> Positional arguments
+      \begin{itemize}
+      \item<2-> \TTBF{def MyFun(param1, param2, param3)}
+      \item<3-> \TTBF{MyFun("abc", 42, 1337)}
+      \item<4-> \only<4>{\TTBF{MyFun(42, "abc", 1337)}} \only<5->{\TTBF{MyFun(\sout{42}, \sout{"abc"}, 1337)}}
+      \end{itemize}
+    \item<6-> \only<6>{Keywords arguments} \only<7->{Keywords arguments (with default values)}
+      \begin{itemize}
+      \item<7-> \TTBF{def MyFun(p1="A", p2=1, p3=9)}
+      \item<8-> \TTBF{MyFun("abc", 42, 1337)}
+      \item<9-> \TTBF{MyFun(p1="abc", p2=42, p3=1337)}
+      \item<10-> \TTBF{MyFun(p3=1337, p2=42, p1="abc")}
+      \item<11-> \TTBF{MyFun(p2=42)}
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+%%% Positional arguments
+
+\begin{frame}[fragile]{Positional arguments}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+from datetime import date
+def GreetingsPos(Name, Year):
+  print("Hi " + Name + "!")
+  if (Year <= 0):
+    print("(unknown age)")
+  else:
+    age = date.today().year - Year
+    print("(" + str(age) + " years)")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+from datetime import date
+def GreetingsPos(Name, Year):
+  print("Hi " + Name + "!")
+  if (Year <= 0):
+    print("(unknown age)")
+  else:
+    age = date.today().year - Year
+    print("(" + str(age) + " years)")
+
+GreetingsPos("Fabrice", 1988)
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+from datetime import date
+def GreetingsPos(Name, Year):
+  print("Hi " + Name + "!")
+  if (Year <= 0):
+    print("(unknown age)")
+  else:
+    age = date.today().year - Year
+    print("(" + str(age) + " years)")
+
+GreetingsPos("Fabrice", 1988) # OK
+GreetingsPos("Fabrice") \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+from datetime import date
+def GreetingsPos(Name, Year):
+  print("Hi " + Name + "!")
+  if (Year <= 0):
+    print("(unknown age)")
+  else:
+    age = date.today().year - Year
+    print("(" + str(age) + " years)")
+
+GreetingsPos("Fabrice", 1988) # OK
+GreetingsPos("Fabrice")       # error \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \onslide<6-> All of the parameters are required if positional arguments
+
+\end{frame}
+
+
+%%% Keywords arguments / Default parameter values
+
+\begin{frame}[fragile]{Keywords arguments}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey("Fabrice", 1988)
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey("Fabrice", 1988)  # OK
+GreetingsKey("Fabrice")
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey("Fabrice", 1988)  # OK
+GreetingsKey("Fabrice")        # OK
+GreetingsKey(BYear=1988, FName="Fabrice")
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey("Fabrice", 1988)  # OK
+GreetingsKey("Fabrice")        # OK
+GreetingsKey(BYear=1988, FName="Fabrice") # OK
+GreetingsKey("Fabrice", BYear=1988) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7->
+        \begin{lstlisting}[style=python]
+def GreetingsKey(FName="Unknown", BYear=0):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey("Fabrice", 1988)  # OK
+GreetingsKey("Fabrice")        # OK
+GreetingsKey(BYear=1988, FName="Fabrice") # OK
+GreetingsKey("Fabrice", BYear=1988) # OK \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \onslide<8-> Keywords arguments are more flexibles
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Keywords arguments}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)  # OK
+GreetingsKey2(BYear=1988, FName="Fabrice")
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)  # OK
+GreetingsKey2(BYear=1988, FName="Fabrice") # OK
+GreetingsKey2(BYear=1988)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<6>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)  # OK
+GreetingsKey2(BYear=1988, FName="Fabrice") # OK
+GreetingsKey2(BYear=1988)  # OK
+GreetingsKey2()
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<7>
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)  # OK
+GreetingsKey2(BYear=1988, FName="Fabrice") # OK
+GreetingsKey2(BYear=1988)  # OK
+GreetingsKey2() # error
+GreetingsKey2("Fabrice") \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<8->
+        \begin{lstlisting}[style=python]
+def GreetingsKey2(FName="", BYear=""):
+  GreetingsPos(FName, BYear)
+
+GreetingsKey2("Fabrice", 1988)  # OK
+GreetingsKey2(BYear=1988, FName="Fabrice") # OK
+GreetingsKey2(BYear=1988)  # OK
+GreetingsKey2() # error
+GreetingsKey2("Fabrice") # error \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \onslide<9-> Keywords arguments forces a default value
+
+\end{frame}
+
+
+%%% Scope of variables
+\subsection{Scope of variables}
+
+\begin{frame}<beamer>{Scope of variables}
+
+  Variables are searched within scopes in a specific order:
+
+  \begin{itemize}
+    \item<1-> Local (scope of the current function)
+    \item<2-> Global (global variables of the program)
+    \item<3-> Internal (variables of the interpreter)
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> LGI rule
+
+  \medskip
+
+  \onslide<5-> Constants are global variables (uppercase name)
+
+\end{frame}
+
+%%% Return values
+\subsection{Return values}
+
+%%% Multiple return of values in functions (return a tuple)
+
+\begin{frame}[fragile]{Multiple return of values}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+temps = ConvertTemperature(42)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        % Balises exception :  %* *)
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+temps = ConvertTemperature(42)
+print("%*\textdegree*)K : " + str(42))
+print("%*\textdegree*)C : " + str(temps[0]))
+print("%*\textdegree*)F : " + str(temps[1]))
+print("%*\textdegree*)Re: " + str(temps[2])) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+temps = ConvertTemperature(42)
+print("%*\textdegree*)K : " + str(42))       # 42
+print("%*\textdegree*)C : " + str(temps[0])) # -231
+print("%*\textdegree*)F : " + str(temps[1])) # -383
+print("%*\textdegree*)Re: " + str(temps[2])) # 33 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+  \onslide<6-> Multiple return values uses tuples
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Multiple return of values}
+
+  Multiple affectations are also possible
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+tC, tF, tR = ConvertTemperature(42)
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+tC, tF, tR = ConvertTemperature(42)
+print("%*\textdegree*)K : " + str(42))
+print("%*\textdegree*)C : " + str(tC))
+print("%*\textdegree*)F : " + str(tF))
+print("%*\textdegree*)Re: " + str(tR)) \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+def ConvertTemperature(kelvin):
+  celsius = kelvin - 273
+  fahrenheit = ((celsius * 9) / 5) + 32
+  reaumur = (kelvin * 4) / 5
+  return celsius, fahrenheit, reaumur
+
+tC, tF, tR = ConvertTemperature(42)
+print("%*\textdegree*)K : " + str(42)) # 42
+print("%*\textdegree*)C : " + str(tC)) # -231
+print("%*\textdegree*)F : " + str(tF)) # -383
+print("%*\textdegree*)Re: " + str(tR)) # 33 \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Modules \& Imports}
+
+%%% Modules
+\subsection{Modules}
+
+% Module : just put your functions with variables in a .py file
+%     triple quotes """ text """ is not a comment, but a "docstring"
+%     put one at the beginning for documenting the module, then one per function
+
+\begin{frame}[fragile]{Modules}
+
+  A module contains functions and variables (and classes)
+
+  \medskip
+
+  \onslide<1-> Module name is the filename withtout \TTBF{.py}
+
+  \medskip
+
+  \onslide<2-> Some conventions for a nice documentation:
+
+  \begin{itemize}
+    \item<3-> Begin your module with a \textit{docstring}
+    \begin{itemize}
+      \item triple quotes \lstinline|""" docstring """|
+      \item write the description of your module
+      \item docstring can be on multiple lines
+    \end{itemize}
+    \item<4-> Within each function, write a docstring about it
+    \item<5-> Eventually, add useful constants
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<7-> Check result with \TTBF{help(module)} (after importing it)
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Modules}
+
+  \TTBF{MyModule.py} \hspace*{2cm} (module name: \TTBF{MyModule})
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+""" Module for explaining modules """
+
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3>
+        \begin{lstlisting}[style=python]
+""" Module for explaining modules """
+MYCONST=42
+
+
+
+
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<4>
+        \begin{lstlisting}[style=python]
+""" Module for explaining modules """
+MYCONST=42
+
+def MyFunc(test):
+  print("Hello World!")
+
+
+def OtherFunc(var):
+  print("Test.")
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<5->
+        \begin{lstlisting}[style=python]
+""" Module for explaining modules """
+MYCONST=42
+
+def MyFunc(test):
+  """ Function for explaining modules """
+  print("Hello World!")
+
+def OtherFunc(var):
+  """ Another function """
+  print("Test.") \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+%%% Imports
+\subsection{Imports}
+
+\begin{frame}[fragile]{Imports}
+
+  Multiple ways for importing modules:
+
+  \begin{itemize}
+    \item<1-> Method 1: \TTBF{import MyModule}
+    \item<2-> Method 2: \TTBF{import MyModule as MyM}
+    \item<3-> Method 3: \TTBF{from MyModule import MyFunc}
+  \end{itemize}
+
+  \bigskip
+
+  \onslide<4-> Variables and constants can be imported too
+
+  \medskip
+
+  \onslide<5-> Beware: with method 1, \textit{everything} is imported
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Imports}
+
+  Method 1: \TTBF{MyModule.py}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+import MyModule
+# function: def MyFunc(test)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python]
+import MyModule
+# function: def MyFunc(test)
+
+MyModule.MyFunc(42) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Imports}
+
+  Method 2: \TTBF{MyModule.py}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+import MyModule as MyM
+# function: def MyFunc(test)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python]
+import MyModule as MyM
+# function: def MyFunc(test)
+
+MyM.MyFunc(42) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Imports}
+
+  Method 3: \TTBF{MyModule.py}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{\textwidth}
+
+      \begin{onlyenv}<1>
+        \begin{lstlisting}[style=python]
+
+
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<2>
+        \begin{lstlisting}[style=python]
+from MyModule import MyFunc
+# function: def MyFunc(test)
+
+ \end{lstlisting}
+      \end{onlyenv}
+
+      \begin{onlyenv}<3->
+        \begin{lstlisting}[style=python]
+from MyModule import MyFunc
+# function: def MyFunc(test)
+
+MyFunc(42) \end{lstlisting}
+      \end{onlyenv}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+%%% Packages
+\subsection{Packages}
+
+\begin{frame}[fragile]{Packages}
+
+  \begin{center}
+
+  Packages contain multiple modules and dependencies
+
+  \bigskip
+
+  \onslide<2-> \textit{(see documentation and tutorials about how to build one)}
+
+  \end{center}
+
+\end{frame}

@@ -1,0 +1,86 @@
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child [missing] {}
+          child { node [dashed] {32} edge from parent [dashed]  }
+         }
+  child { node {64}
+          child [missing] {}
+          child [missing] {}
+        };
+\end{tikzpicture}
+
+\textit{suppression d'une feuille}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n42) {42}
+  child { node [dashed] (n21) {21} edge from parent [dashed]
+          child [missing] {}
+          child [dashed] { node [solid] (n32) {32} edge from parent [dashed]  }
+         }
+  child { node (n64) {64}
+          child [missing] {}
+          child [missing] {}
+        };
+
+\draw [gray] (n42) -- (n32);
+\end{tikzpicture}
+
+\textit{suppression d'un point simple}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.30\textwidth}
+    \centering
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child [missing] {}
+          child { node {32} }
+         }
+  child { node {64}
+          child [missing] {}
+          child [missing] {}
+        };
+\end{tikzpicture}
+%%%%% PAS FINI
+\textit{suppression d'un nœud à 2 fils [PAS FINI]}
+%%%%%%
+  \end{minipage}
+\stepcounter{figure}
+\caption{Fig.\thefigure : Suppression dans un ABR}
+\label{fig:example3-BST-insertion-leaf-1}
+\end{table}
+
+
+
+
+
+
+

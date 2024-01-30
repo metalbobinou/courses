@@ -1,0 +1,118 @@
+%% Format de Rendu
+
+%\ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org, Tayst/tayst@tayst.org}
+%\begin{tabular}{p{7cm} p{10cm}}
+\begin{tabular}{p{7cm} p{8.5cm}}
+	%\ResponsablesProjetRow{Fabrice BOISSIER/fabrice.boissier@univ-paris1.fr, Ali JAFFAL/ali.jaffal@univ-paris1.fr}
+	\ResponsablesProjetRow{Fabrice BOISSIER/fabrice.boissier@epita.fr}
+	& \\
+%	\RenduSpecsGenerales{[PHP][DM]}{2}{Envoi par mail}{\RenduDir}{\RenduTarball}{10/02/2020 23h42}{2 semaines}
+%	\RenduSpecsGenerales{[CAV][TP1]}{1}{Pas de rendu}{\RenduDir}{\RenduTarball}{Pas de rendu}{Pas de rendu}
+%	\RenduSpecsGenerales{[CAV][TP1]}{1}{Envoi par mail}{\RenduDir}{\RenduTarball}{31/03/2022 23h42}{2 semaines}
+	\RenduSpecsGenerales{[CAV][TP1+]}{1}{Envoi par mail}{\RenduDir}{\RenduTarball}{14/04/2022 23h42}{1 semaine}
+	& \\
+%	\RenduSpecsTechniques{WAMP ou MAMP}{PHP}{Apache/PHP}{ }
+	\RenduSpecsTechniques{Linux - Ubuntu (x86\_64)}{C}{/usr/bin/gcc}{-W -Wall -Werror -std=c99 -pedantic}
+%	& \\
+%	Fonctions autorisées : & malloc(3), free(3), printf(3)
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent Les fichiers suivants sont requis :
+
+\medskip
+
+\begin{tabular}{l p{12cm}}
+\texttt{AUTHORS} & contient le(s) nom(s) et prénom(s) de(s) auteur(s).\\
+\texttt{Makefile} & le Makefile principal.\\
+\texttt{README} & contient la description du projet et des exercices, ainsi que la fa\c con d'utiliser le projet.\\
+%\texttt{configure} & le script shell de configuration pour l'environnement de compilation.\\
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent Un fichier \TTBF{Makefile} doit être présent à la racine du dossier, et doit obligatoirement proposer ces règles :
+
+\medskip
+
+\begin{tabular}{l p{13cm}}
+\texttt{all} & \textit{[Première règle]} lance la règle \texttt{libmystack}.\\
+\texttt{clean} & supprime tous les fichiers temporaires et ceux créés par le compilateur.\\
+\texttt{dist} & crée une archive propre, valide, et répondant aux exigences de rendu.\\
+\texttt{distclean} & lance la règle \texttt{clean}, puis supprime les binaires et bibliothèques.\\
+\texttt{check} & lance le(s) script(s) de test.\\
+\texttt{libmystack} & lance les règles \texttt{shared} et \texttt{static} \\
+\texttt{shared} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque dynamique.\\
+\texttt{static} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque statique.\\
+\end{tabular}
+
+
+%\vspace*{1cm}
+\newpage
+
+\noindent Votre code sera testé automatiquement, vous devez donc scrupuleusement respecter les spécifications pour pouvoir obtenir des points en validant les exercices.
+Votre code sera testé en générant les exécutables ou bibliothèques avec les commandes suivantes :
+
+\medskip
+
+\begin{tabular}{l}
+\texttt{./configure}\\
+\texttt{make}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Suite à cette étape de génération, les exécutables ou bibliothèques doivent être placés à ces endroits :
+
+\medskip
+
+\begin{tabular}{l}
+\TTBF{\RenduDir/libmystack.a}\\
+\TTBF{\RenduDir/libmystack.so}\\
+\end{tabular}
+
+\bigskip
+
+\noindent L'arborescence attendue pour le projet est la suivante :
+
+\medskip
+
+\begin{tabular}{l}
+\TTBF{\RenduDir/}\\
+\TTBF{\RenduDir/AUTHORS}\\
+\TTBF{\RenduDir/README}\\
+\TTBF{\RenduDir/Makefile}\\
+\TTBF{\RenduDir/configure}\\
+\TTBF{\RenduDir/check/}\\
+\TTBF{\RenduDir/check/check.sh}\\
+\TTBF{\RenduDir/src/}\\
+\TTBF{\RenduDir/src/stack\_array.c}\\
+\TTBF{\RenduDir/src/stack\_array.h}\\
+\TTBF{\RenduDir/src/stack\_linked\_list.c}\\
+\TTBF{\RenduDir/src/stack\_linked\_list.h}\\
+\TTBF{\RenduDir/src/stack\_static.c}\\
+\TTBF{\RenduDir/src/stack\_static.h}\\
+%\TTBF{\RenduDir/src/exo1/}\\
+%\TTBF{\RenduDir/src/exo1/exo1\_test.sh}\\
+%\TTBF{\RenduDir/src/exo2/}\\
+%\TTBF{\RenduDir/src/exo2/exo2.sh}\\
+%\TTBF{\RenduDir/src/exo3/}\\
+%\TTBF{\RenduDir/src/exo3/exo3.sh}\\
+%\TTBF{\RenduDir/src/exo4/}\\
+%\TTBF{\RenduDir/src/exo4/exo4.sh}\\
+%\TTBF{\RenduDir/src/exo5/}\\
+%\TTBF{\RenduDir/src/exo5/exo5.sh}\\
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent \textit{Vous ne serez jamais pénalisés pour la présence de makefiles ou de fichiers sources (code et/ou headers) dans les différents dossiers du projet tant que leur existence peut être justifiée (des makefiles vides ou jamais utilisés sont pénalisés).}
+
+\noindent \textit{Vous ne serez jamais pénalisés pour la présence de fichiers de différentes natures dans le dossier \texttt{check} tant que leur existence peut être justifiée (des fichiers de test jamais utilisés sont pénalisés).}

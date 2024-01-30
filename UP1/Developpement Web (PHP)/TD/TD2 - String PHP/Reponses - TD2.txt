@@ -1,0 +1,399 @@
+TD 1 :
+
+TD 2 :
+
+Exercice 1 :
+
+ssh://pouletsdu49.anjou.fr:8080/ressource/cotcot.codac
+Protocole : ssh
+Domaine (en incluant sous-domaine) : pouletsdu49.anjou.fr
+Port de connexion : 8080
+Chemin ressource : /ressource/cotcot.codac
+
+
+http://avenue42.fr:3864/1337/8912.php
+Protocole : http
+Domaine (avec sous-domaine) : avenue42.fr
+Port de connexion (pas celui par défaut) : 3864
+Ressource : /1337/8912.php
+
+
+
+Protocole: web sécurisé
+Port : 747
+Sous-domaine : pool08.datalake
+Domaine : mystore
+TLD : com
+Chemin : Ressource/Report
+Fichier : cour.des.comptes.2020
+
+https://pool08.datalake.mystore.com:747/Ressource/Report/cour.des.comptes.2020
+
+Fichier: fichier
+Domaine : mamie
+Protocole : web
+Sous-domaine : tata.y0y0
+Chemin : annuaire
+Port : 9999
+TLD : fr
+
+http://tata.y0y0.mamie.fr:9999/annuaire/fichier
+
+
+
+# Exercice 2 :
+
+function phrase()
+{
+    $phrase = " Bonjour, aujourd’hui il fait plutot beau.";
+
+    return($phrase);
+}
+
+
+echo(phrase());
+
+
+$var = strlen(phrase());
+
+$var = substr(phrase(), 0, 30);
+
+$var = substr(phrase(), 37);
+
+echo $var;
+
+
+
+echo "<br><br>";
+
+function remplace1($str1, $str2)
+{
+    $debut = substr(phrase(), 0, 30);
+    $milieu = $str2;
+    $fin = substr(phrase(), 37);
+
+    $out = $debut . $milieu . $fin;
+
+    return ($out);
+}
+
+$new_str = remplace1(phrase(), " super");
+
+echo $new_str;
+echo "<br><br>";
+
+$var = strlen($new_str);
+
+echo($var);
+
+echo "<br><br>";
+
+for ($i = 0; $i < strlen($new_str); $i++)
+    echo($i . " " . $new_str[$i] . "<br>");
+
+echo "<br><br>";
+
+
+
+
+
+
+function decoupeEspace($str)
+{
+    $out = "";
+
+    for ($i = 0; $i < strlen($str); $i++)
+    {
+        $char = $str[$i];
+        if ($char == " ")
+        {
+            $tableau[] = $out;
+            $out = "";
+        }
+        else
+            $out = $out . $char;
+    }
+    $tableau[] = $out;
+
+    return ($tableau);
+}
+
+$tab = decoupeEspace($new_str);
+
+foreach ($tab as $cell)
+    echo($cell . "<br>");
+
+echo("<br><br>");
+
+
+
+
+function my_strstr($str1, $str2)
+{
+    $out = "";
+
+    for ($i = 0; $i < strlen($str1); $i++)
+    {
+        $char = $str1[$i];
+        $j = 0;
+        while (($j < strlen($str2)) && ($char != $str2[$j]))
+            $j++;
+
+        if ($j < strlen($str2))
+        {
+            $tableau[] = $out;
+            $out = "";
+        }
+        else
+            $out = $out . $char;
+    }
+    $tableau[] = $out;
+
+    return ($tableau);
+}
+
+$tab = my_strstr($new_str, ",' ");
+
+foreach ($tab as $cell)
+    echo($cell . "<br>");
+
+echo("<br><br>");
+
+var_dump($tab);
+
+echo("<br><br>");
+
+
+function remplace2($str1, $nb, $str2)
+{
+    $tab = my_strstr($str1, " ");
+
+    $out = "";
+    for ($i = 0; $i < sizeof($tab); $i++)
+    {
+         if ($i == $nb)
+            $tmp = $str2;
+    else
+            $tmp = $tab[$i];
+    $out = $out . " " . $tmp;
+    }
+
+    return ($out);
+}
+
+
+$var = remplace2($new_str, 5, "lol");
+
+echo $var;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TD 2 :
+
+URL :
+
+ssh://pouletsdu49.anjou.fr:8080/ressource/cotcot.codac
+
+Protocole : ssh
+Domaine complet : pouletsdu49.anjou.fr
+Port : 8080
+Ressource (chemin complet) : /ressource/cotcot.codac
+
+
+http://avenue42.fr:3864/1337/8912.php
+
+Protocole : http (web)
+Domaine complet : avenue42.fr
+Port : 3864
+Ressource (chemin complet) : /1337/8912.php
+
+
+Protocole:web sécurisé
+Port : 747
+Sous-domaine : pool08.datalake
+Domaine : mystore
+TLD : com
+Chemin : Ressource/Report
+Fichier : cour.des.comptes.2020
+
+Construction du domaine :
+. TLD . Domaine . Sous-domaine & Machines
+.com.mystore.datalake.pool08
+⇒ inversion
+Machines & Sous-domaine . Domaine . TLD
+
+https://pool08.datalake.mystore.com:747/Ressource/Report/cour.des.comptes.2020
+
+
+Fichier:fichier
+Domaine : mamie
+Protocole : web
+Sous-domaine : tata.y0y0
+Chemin : annuaire
+ Port : 9999
+TLD : fr
+http://tata.y0y0.mamie.fr:9999/annuaire/fichier
+
+
+# Question 1 :
+function phrase()
+{
+    return("Bonjour, aujourd'hui il fait plutot beau.");
+}
+
+echo(phrase());
+
+echo("\n\n<br><br>\n\n");
+# Question 2
+echo(strlen(phrase()));
+
+echo("\n\n<br><br>\n\n");
+
+echo(substr(phrase(), 0, 30));
+
+echo("\n\n<br><br>\n\n");
+
+echo(substr(phrase(), 37));
+
+echo("\n\n<br><br>\n\n");
+
+
+
+# Question 3
+function remplace1($str1, $str2)
+{
+    $tmp1 = substr($str1, 0, 29);
+    $tmp2 = substr($str1, 35);
+
+    return ($tmp1 . $str2 . $tmp2);
+}
+
+echo(remplace1(phrase(), "lol"));
+
+echo("\n\n<br><br>\n\n");
+
+# Question 4
+
+echo(strlen(remplace1(phrase(), "lol")));
+$str = remplace1(phrase(), "lol");
+echo("\n\n<br><br>\n\n");
+
+for ($i = 0; $i < strlen($str); $i++)
+{
+    echo($str[$i] . "<br>\n");
+}
+
+echo("\n\n<br><br>\n\n");
+
+for ($i = 0; $i < strlen($str); $i++)
+{
+    if ($str[$i] == " ")
+        echo("<br>\n");
+    else
+        echo($str[$i]);
+}
+
+echo("\n\n<br><br>\n\n");
+
+# Question 5
+function decoupeEspace($str)
+{
+    $array = array();
+    $tmp = "";
+    for ($i = 0; $i < strlen($str); $i++)
+    {
+        if ($str[$i] == " ")
+        {
+            $array[] = $tmp;
+            $tmp = "";
+        }
+        else
+            $tmp = $tmp . $str[$i];
+    }
+$array[] = $tmp;
+    return ($array);
+}
+
+$my_array = decoupeEspace(phrase());
+var_dump($my_array);
+echo("\n\n<br><br>\n\n");
+foreach($my_array as $cell)
+    echo("--" . $cell . "--<br>\n");
+
+echo("\n\n<br><br>\n\n");
+
+# Question 6
+function my_strstr($str1, $str2)
+{
+    $array = array();
+    $tmp = "";
+    for ($i = 0; $i < strlen($str1); $i++)
+    {
+        $index = 0;
+        while (($index < strlen($str2)) && ($str1[$i] != $str2[$index]))
+            $index++;
+        if ($index < strlen($str2))
+        {
+            $array[] = $tmp;
+            $tmp = "";
+        }
+        else
+            $tmp = $tmp . $str1[$i];
+
+    }
+    $array[] = $tmp;
+
+    return ($array);
+}
+
+
+$my_array = my_strstr(phrase(), ",:");
+
+echo("\n\n<br><br>\n\n");
+
+foreach($my_array as $cell)
+    echo("--" . $cell . "--<br>\n");
+
+
+# Question 7
+
+function remplace2($str1, $nb, $str2)
+{
+    $array = my_strstr($str1, " ");
+
+    for ($i = 0; $i < sizeof($array); $i++)
+    {
+        if ($i == $nb)
+            echo($str2);
+        else
+            echo($array[$i]);
+        echo(" ");
+    }
+
+}
+
+echo(remplace2(phrase(), 5, "lololol"));
+
+
+
+

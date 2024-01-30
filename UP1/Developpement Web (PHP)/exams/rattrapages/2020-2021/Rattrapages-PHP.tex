@@ -1,0 +1,171 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Preparation des infos generales
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\DateExo}{28 juin 2021}
+\newcommand{\TypeExo}{DM}
+\newcommand{\TitreExercice}{PHP - Rattrapages}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@univ-paris1.fr}
+%\newcommand{\NomAuteurB}{}
+%\newcommand{\MailAuteurB}{}
+\newcommand{\VersionExo}{Version 1}
+\newcommand{\LoginEtudiant}{2020-2021} % Watermark de protection
+
+\newcommand{\RenduTarball}{nom-Rattrapages.zip}
+\newcommand{\RenduDir}{nom-Rattrapages}
+
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExo} % Appelle un .sty
+
+
+% Redefinition headers
+\lhead{\TitreExercice}		%Gauche Haut
+\chead{\TypeExo}			%Centre Haut
+\rhead{\thepage}			%Droite Haut
+\lfoot{}					%Gauche Bas
+\cfoot{\TitreMatiere}		%Centre Bas
+\rfoot{}					%Droite Bas
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}		% RGB model
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\begin{document}
+
+%% Titre
+\maketitle
+
+%\newpage
+
+%% Copyright
+\pagenumbering{Roman}
+
+\input{1-copyright.tex}
+
+\newpage
+
+%% Table des matieres
+\tableofcontents
+
+\newpage
+
+%% Consignes generales
+\section{Consignes Générales}
+
+\bigskip
+
+\input{2-consignes.tex}
+
+\newpage
+
+%% Format de Rendu
+\section{Format de Rendu}
+\label{sec:FormatDeRendu}
+
+\vspace*{1cm}
+
+\input{3-rendu.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AIDE MEMOIRE AU CAS OU %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\section{Aide Mémoire}
+\label{sec:AideMemoire}
+
+\vspace*{1cm}
+
+\input{4-aidememoire.tex}
+
+
+%%%%%%%%%%%%%%%
+%% EXERCICES %%
+%%%%%%%%%%%%%%%
+\newpage
+
+\pagenumbering{arabic}
+
+%% Introduction
+\section{Mini Projet}
+
+\vspace*{0.7cm}
+
+\input{Exercices/exercice.tex}
+
+\newpage
+
+%% Pré-Requis
+\section{Palier 0 - Base de Données (Pré-Requis)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/BDD.tex}
+
+\newpage
+
+%% Exercice 1
+\section{Palier 1 - Présentation des Produits (2 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/index.tex}
+
+\newpage
+
+%% Exercice 2
+\section{Palier 2 - Modification des Produits (3 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/admin_simple.tex}
+
+\newpage
+
+%% Exercice 3
+\section{Palier 3 - Commande (3 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/commande.tex}
+
+\newpage
+
+%% Exercice 4
+\section{Palier 4 - Panier (5 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/panier.tex}
+
+\newpage
+
+%% Exercice 5
+\section{Palier 5 - Utilisateurs (4 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/user.tex}
+
+\newpage
+
+%% Exercice 5
+\section{Palier 6 - Administrateurs (3 points)}
+
+\vspace*{0.7cm}
+
+\input{Exercices/admin.tex}
+
+\end{document}

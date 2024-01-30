@@ -1,0 +1,185 @@
+Convertissez 115 en base 2
+A) % 0111 0011
+B) % 0110 1111
+C) % 1000 1101
+ANSWER: A
+Convertissez 133 en base 2
+A) % 1000 0101
+B) % 0111 1101
+C) % 1000 1001
+D) % 1000 1101
+ANSWER: A
+Convertissez 142 en base 2
+A) % 1000 1110
+B) % 1001 0010
+C) % 1001 1000
+D) % 1001 1100
+ANSWER: A
+Convertissez 172 en base 2
+A) % 1010 1100
+B) % 1100 0010
+C) % 1011 0100
+D) % 1010 1110
+ANSWER: A
+Convertissez 234 en base 2
+A) % 1110 1010
+B) % 1110 1011
+C) % 0111 0101
+D) % 0111 1010
+ANSWER: A
+Convertissez 42 en base 2
+A) % 0010 1010
+B) % 1010 1010
+C) % 0000 1010
+D) % 1010 1000
+ANSWER: A
+Convertissez % 0010 1010 en base 10
+A) 42
+B) 38
+C) 30
+D) 210
+ANSWER: A
+Convertissez % 0110 1101 en base 10
+A) 109
+B) 613
+C) 119
+D) 103
+ANSWER: A
+Convertissez % 0111 1100 en base 10
+A) 124
+B) 248
+C) 126
+D) 250
+ANSWER: A
+Convertissez % 1011 1011 en base 10
+A) 187
+B) 251
+C) 123
+D) 191
+ANSWER: A
+Convertissez % 1100 1011 en base 10
+A) 203
+B) 184
+C) 183
+D) 1211
+ANSWER: A
+Convertissez % 1101 0111 en base 10
+A) 215
+B) 231
+C) 183
+D) 240
+ANSWER: A
+Convertissez 238 en base 16
+A) $ EE
+B) $ 1414
+C) $ E4
+D) $ 4E
+E) $ DD
+F) $ CC
+ANSWER: A
+Convertissez 42 en base 16
+A) $ 2A
+B) $ A2
+C) $ 42
+D) $ 24
+E) $ 28
+F) $ 82
+ANSWER: A
+Convertissez 56 en base 16
+A) $ 38
+B) $ 83
+C) $ 3A
+D) $ A3
+E) $ 42
+F) $ 24
+ANSWER: A
+Convertissez $34 en base 10
+A) 52
+B) 484
+C) 34
+D) 48
+ANSWER: A
+Convertissez $5E en base 10
+A) 94
+B) 64
+C) 90
+D) 74
+ANSWER: A
+Convertissez $AB en base 10
+A) 171
+B) 1011
+C) 170
+D) 172
+ANSWER: A
+Convertissez % 0101 1001 du BCD vers la base 10
+A) 59
+B) 89
+C) 105
+D) Ce n'est pas un nombre correct en BCD
+ANSWER: A
+Convertissez % 0110 0111 du BCD vers la base 10
+A) 67
+B) 103
+C) 107
+D) 83
+ANSWER: A
+Convertissez % 1100 1001 du BCD vers la base 10
+A) Ce n'est pas un nombre correct en BCD
+B) 129
+C) 21
+D) 1209
+ANSWER: A
+Convertissez 42 en BCD
+A) % 0100 0010
+B) % 0010 1010
+C) % 1010 1010
+D) % 0101 0101
+ANSWER: A
+Convertissez 72 en BCD
+A) % 0111 0010
+B) % 0100 1000
+C) % 0101 0010
+D) % 0100 0110
+ANSWER: A
+Convertissez 96 en BCD
+A) % 1001 0110
+B) % 0110 0000
+C) % 0101 1110
+D) % 0110 0100
+ANSWER: A
+Convertissez -108 en binaire signé sur 8 bits
+A) % 1001 0100
+B) % 1001 0011
+C) % 1110 1100
+D) % 1110 1011
+ANSWER: A
+Convertissez -37 en binaire signé sur 8 bits
+A) % 1101 1011
+B) % 1101 1010
+C) % 1010 0101
+D) % 1010 0100
+ANSWER: A
+Convertissez -53 en binaire signé sur 8 bits
+A) % 1100 1011
+B) % 1100 1010
+C) % 1011 0101
+D) % 1011 0100
+ANSWER: A
+Convertissez $B4 comme un nombre signé en base 10
+A) -76
+B) -54
+C) -75
+D) -53
+ANSWER: A
+Convertissez $C4 comme un nombre signé en base 10
+A) -60
+B) -59
+C) -68
+D) -67
+ANSWER: A
+Convertissez $D8 comme un nombre signé en base 10
+A) -40
+B) -39
+C) -88
+D) -87
+ANSWER: A

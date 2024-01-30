@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AIDE MEMOIRE AU CAS OU %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+
+%{\Large \textbf{Aide Mémoire}}
+
+%\vspace{30px}
+
+\noindent Vous allez recevoir sur vos boîtes mails un login et un mot de passe pour vous connecter et envoyer vos fichiers.
+La première consigne évidente : ne tentez pas de casser la machine ou d'en prendre le contrôle, cela est pénalement répréhensible (sans parler du 0 qui viendrait évidemment avec...).
+Même chose sur les projets de vos camarades de classe : vous n'êtes autorisés à accéder et modifier \textit{que} votre espace personnel.
+
+\bigskip
+
+\subsection{Accès aux fichiers}
+
+\noindent Pour vous connecter à la machine et envoyer votre site, vous devrez installer un client SCP/SFTP.
+Sur Windows, vous pouvez utiliser \href{https://winscp.net}{WinSCP}.
+Sur macOS vous pouvez utiliser \href{https://cyberduck.io}{CyberDuck}.
+
+\bigskip
+
+\noindent Une fois installé, vous pourrez lancer l'application et celle-ci vous proposera de vous connecter à un serveur.
+Sur CyberDuck, cliquez sur \textit{Open Connection}.
+Sur WinSCP, la fenêtre de connexion s'ouvre automatiquement.
+Dans le menu suivant, vous devrez indiquer ces informations :
+
+\bigskip
+
+\begin{itemize}
+\item Protocole : SFTP (ou SCP) - \textit{(n'utilisez pas FTP)}
+\item Serveur : p1web2021.metalman.eu
+\item Port : 22
+\item Login : (celui indiqué dans le mail)
+\item Password : (celui indiqué dans le mail)
+\end{itemize}
+
+\bigskip
+
+\noindent Une fois les informations validées, à la première connexion vous aurez une alerte vous demandant si vous souhaitez enregistrer la clé, répondez \textit{oui} (la clé SSH ne devrait pas changer d'ici la fin de l'année universitaire).
+
+\bigskip
+
+\noindent Vous arriverez sur votre dossier personnel, entrez dans le dossier \textit{public\_html} dans lequel vous pourrez déposer votre site.
+Ne supprimez jamais ce dossier.
+Tout site web démarre par un fichier \textit{index.php} ou \textit{index.htm} : assurez-vous d'en mettre un.
+Vous pourrer accéder à votre site en vous connectant à l'url suivante (remplacez la lettre A par celle(s) de votre groupe) : \url{http://p1web2021.metalman.eu/~groupeA/}
+
+\bigskip
+
+\subsection{Accès à la base de données}
+
+\noindent Pour accéder à PhpMyAdmin, vous n'aurez qu'à vous rendre sur : \url{http://p1web2021.metalman.eu/phpmyadmin/}.
+Pour vous y connecter, utilisez le login et le mot de passe indiqués dans le mail.
+Il n'y a pas de connexion sécurisée vers PhpMyAdmin pour cette machine.
+
+\bigskip
+
+\noindent Afin de transférer sans difficulté votre base de données depuis votre machine, vous devrez faire un \textit{export} depuis votre PhpMyAdmin local, puis un \textit{import} sur le PhpMyAdmin distant.
+N'oubliez pas de modifier dans le code de votre site les accès au système de gestion de base de données !
+Cela sera toujours sur localhost, avec le port par défaut, mais la base de données, les login, et le mot de passe sont ceux fournis dans le mail.
+
+\bigskip
+
+\noindent Pour exporter une base de données depuis PhpMyAdmin : cliquez sur le nom de la base de données dans le menu de gauche, puis dans le menu en haut à droite, cliquez sur \textit{Export}.
+Sélectionnez \textit{Custom} pour personnaliser l'export.
+Choisissez le format \textit{SQL}.
+Dans la partie \textit{Output}, cliquez sur \textit{Rename exported databases/tables/columns}, et indiquez le nom de la nouvelle base de données donnée dans le mail.
+Puis cliquez sur \textit{Save output to a file}, et sélectionnez dans \textit{Compression} : \textit{gzipped}.
+Puis cliquez tout en bas sur \textit{Go}.
+
+\bigskip
+
+\noindent Une fois l'archive récupérée, pour l'importer sur une autre machine, cliquez sur \textit{Import}, et envoyez simplement l'archive que vous venez de créer.

@@ -1,0 +1,231 @@
+%% Exercice 3
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{queue\_array.c}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}, \TTBF{memcpy(3)}, \TTBF{printf(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'implémenter une file en C utilisant un tableau de taille fixe.}
+
+\bigskip
+
+\noindent Les fonctions demandées dans cet exercice devront également se trouver dans la bibliothèque nommée \TTBF{libmyqueue}.
+
+\bigskip
+
+\noindent Vous devez écrire plusieurs fonctions permettant de créer, utiliser, vider, et libérer une file.
+Un fichier \TTBF{queue\_array.h} contenant toutes les fonctions exportables à implémenter vous est fourni en annexe.
+Vous devez déclarer une structure \TTBF{queue\_array} et l'ajouter dans \TTBF{queue\_array.h}.
+Pour les premières étapes, vous devrez implémenter une version simplifiée de la file qui ne prend en charge que des entiers positifs.
+
+\bigskip
+
+\noindent Conceptuellement, les fonctions manipulant des files de type \TTBF{queue\_array*} devront pouvoir gérer ces 3 cas :
+
+\bigskip
+
+\begin{center}
+\includegraphics[scale=0.85]{Cours/Files_Implementation_ARRAY.png}
+\end{center}
+
+\bigskip
+
+%\noindent Vous devez implémenter les 11 fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{queue\_array *queue\_array\_create(int max\_length)}
+%\item \TTBF{void queue\_array\_delete(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_length(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_max\_length(queue\_array *queue)
+%\item \TTBF{int queue\_array\_enqueue(int elt, queue\_array *queue)}
+%\item \TTBF{int queue\_array\_dequeue(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_head(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_tail(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_clear(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_is\_empty(queue\_array *queue)}
+%\item \TTBF{int queue\_array\_insert(int elt, int pos, queue\_array *queue)}
+%\item \TTBF{int queue\_array\_replace(int elt, int pos, queue\_array *queue)}
+%\item \TTBF{int queue\_array\_search(int elt, queue\_array *queue)}
+%\item \TTBF{queue\_array *queue\_array\_reverse(queue\_array *queue)}
+%\item \TTBF{void queue\_array\_print(queue\_array *queue)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Liste des fonctions pour une file avec liste chaînée}]
+queue_array *queue_array_create(int max_length);
+void queue_array_delete(queue_array *queue);
+
+int queue_array_length(queue_array *queue);
+int queue_array_max_length(queue_array *queue);
+
+int queue_array_enqueue(int elt, queue_array *queue);
+int queue_array_dequeue(queue_array *queue);
+int queue_array_head(queue_array *queue);
+int queue_array_tail(queue_array *queue);
+
+int queue_array_clear(queue_array *queue);
+int queue_array_is_empty(queue_array *queue);
+
+int queue_array_insert(int elt, int pos, queue_array *queue);
+int queue_array_replace(int elt, int pos, queue_array *queue);
+
+int queue_array_search(int elt, queue_array *queue);
+queue_array *queue_array_reverse(queue_array *queue);
+void queue_array_print(queue_array *queue);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{queue\_array *queue\_array\_create(int max\_length)}}
+
+\noindent Cette fonction crée une file vide.
+\'Etant donné qu'il s'agit d'une implémentation à base de tableau de taille fixe, la taille maximale du tableau est donnée en paramètre.
+En cas d'erreur (pas assez de mémoire), elle renvoie un pointeur \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{void queue\_array\_delete(queue\_array *queue)}}
+
+\noindent Cette fonction vide une file de l'ensemble de ses éléments, et détruit la structure restante.
+Si le paramètre donné est \TTBF{NULL}, la fonction ne fait rien.
+
+
+\subsubsection*{\TTBF{int queue\_array\_max\_length(queue\_array *queue)}}
+
+\noindent Cette fonction renvoie la longueur du tableau contenant la file.
+Si le paramètre donné est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_length(queue\_array *queue)}}
+
+\noindent Cette fonction renvoie la longueur de la file (c'est-à-dire le nombre d'éléments actuellement dans la file).
+Si le paramètre donné est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_enqueue(int elt, queue\_array *queue)}}
+
+\noindent Cette fonction enfile un élément dans une file, c'est-à-dire qu'elle ajoute un élément en queue.
+En cas de succès, la fonction renvoie $ 0 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+Si le tableau est déjà plein, la fonction renvoie $ -3 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_dequeue(queue\_array *queue)}}
+
+\noindent Cette fonction défile un élément d'une file, c'est-à-dire qu'elle supprime l'élément en tête.
+En cas de succès, la fonction renvoie $ 0 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la file donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_head(queue\_array *queue)}}
+
+\noindent Cette fonction renvoie l'élément en tête de file.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la file donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_tail(queue\_array *queue)}}
+
+\noindent Cette fonction renvoie l'élément en queue de file.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la file donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_clear(queue\_array *queue)}}
+
+\noindent Cette fonction vide une file de l'ensemble de ses éléments, sans détruire la structure de la file.
+La fonction renvoie le nombre d'éléments supprimés de la mémoire.
+Si le paramètre donné est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la file donnée en paramètre est vide, la fonction renvoie $ 0 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_is\_empty(queue\_array *queue)}}
+
+\noindent Cette fonction teste si une file est vide ou non.
+Si la file est vide, la fonction renvoie $ 1 $.
+Si la file n'est pas vide, la fonction renvoie $ 0 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_insert(int elt, int pos, queue\_array *queue)}}
+
+\noindent Cette fonction ajoute un élément dans la file à l'emplacement \textit{pos}.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la file), cette position sera numérotée $ 0 $.
+L'ancien élément qui était présent à cette position est décalé d'un cran en arrière (vers la queue).
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+Si l'emplacement n'existe pas et est positif, on ajoute l'élément en queue.
+Si l'emplacement n'existe pas et est négatif, on ajoute l'élément en tête.
+En cas de succès, la fonction renvoie $ 0 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+%Si la file donnée en paramètre est vide, la fonction renvoie $ -2 $.
+Si le tableau est déjà plein, la fonction renvoie $ -3 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_replace(int elt, int pos, queue\_array *queue)}}
+
+\noindent Cette fonction remplace un élément dans la file à l'emplacement \textit{pos}, et renvoie l'élément qui était présent à cet endroit.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la file), cette position sera numérotée $ 0 $.
+Si le nombre donné en paramètre est inférieur à $ 0 $, la fonction renvoie $ -4 $.
+Si l'emplacement n'existe pas et est positif, on remplace l'élément en queue.
+Si l'emplacement n'existe pas et est négatif, on remplace l'élément en tête.
+%En cas de succès, la fonction renvoie $ 0 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+Si la file donnée en paramètre est vide, la fonction renvoie $ -2 $.
+
+
+\subsubsection*{\TTBF{int queue\_array\_search(int elt, queue\_array *queue)}}
+
+\noindent Cette fonction recherche un élément dans la file et renvoie sa position dans le tableau.
+La première position est celle où l'élément le plus ancien a été placé (c'est-à-dire la tête de la file), cette position sera numérotée $ 0 $.
+Si l'élément n'est pas trouvé, la fonction renvoie $ -4 $.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie $ -1 $.
+
+
+\subsubsection*{\TTBF{queue\_array *queue\_array\_reverse(queue\_array *queue)}}
+
+\noindent Cette fonction inverse la position de tous les éléments de la file.
+Le premier élément devient le dernier, l'avant dernier devient le deuxième, etc.
+En cas de succès, la fonction renvoie le pointeur vers l'éventuelle nouvelle adresse en mémoire de la structure de la file inversée.
+En cas de problème mémoire, on renvoie \TTBF{NULL}, et l'ancienne file doit rester à son ancienne adresse mémoire sans subir la moindre modification.
+Si la file donnée en paramètre est \TTBF{NULL}, la fonction renvoie \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{void queue\_array\_print(queue\_array *queue)}}
+
+\noindent Cette fonction affiche le contenu de la file.
+Le format d'affichage attendu implique d'afficher un seul élément par ligne, suivi d'un retour à la ligne.
+L'élément en tête de file sera affiché en premier.
+Si la file donnée en paramètre est vide, seul un retour à la ligne est affiché.
+Si la file donnée en paramètre est \TTBF{NULL}, rien n'est affiché.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage du cas normal : file contenant 42, 5, 13}]
+$ ./my_queue_array
+42
+5
+13
+
+$
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage d'une file vide}]
+$ ./my_queue_array
+
+$
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple d'affichage d'un pointeur NULL}]
+$ ./my_queue_array
+$
+\end{lstlisting}

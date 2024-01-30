@@ -1,0 +1,15 @@
+MultiplicationEgyptienne(a, b)
+Entrée : a et b entiers
+Sortie : entier
+
+x ← a
+y ← b
+z ← 0
+TANT QUE (y >= 0) FAIRE
+  SI (y EST IMPAIRE) ALORS
+     z ← z + x
+  FIN SI
+  x ← 2 × x
+  y ← y div 2
+FIN FAIRE
+retourne (z)

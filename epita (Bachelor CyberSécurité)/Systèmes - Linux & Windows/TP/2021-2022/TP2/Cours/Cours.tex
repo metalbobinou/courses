@@ -1,0 +1,424 @@
+\newcommand{\defaultparindent}{\parindent}
+\setlength{\parindent}{0pt}				% \noindent partout
+% \parindent in one-column documents is :
+% 15pt when the default text size is 10pt,
+% 17pt for 11pt,
+% and 1.5em for 12pt.
+% In two-column documents it is 1em
+
+\begin{center}
+\begin{tabular}{p{5cm} p{11cm}}
+\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{basename}, \texttt{dirname}, \texttt{ln}, \texttt{file}, \texttt{locate}, \texttt{find}, \texttt{date}, \texttt{cal}, \texttt{time}, \texttt{sleep}, \texttt{du}, \texttt{df}, \texttt{dd}, \texttt{mkfs}, \texttt{mount}, \texttt{umount}\\
+
+\textbf{Builtins étudiées :} & \\
+
+\textbf{Notions étudiées :} & Shell, Liens, Recherche de Fichiers, Dates, Disques \& Partitions, Systèmes de Fichiers\\
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\subsection{Noms, liens, type}
+
+\subsubsection{Nom et chemin - basename \& dirname}
+
+\bigskip
+
+Pour obtenir le nom de la ressource/cible pointée par un chemin, il faut utiliser la commande \texttt{basename}.\\
+
+\TTBF{basename /usr/bin/ls}\\
+\TTBF{basename /home}\\
+\TTBF{basename ..}\\
+\TTBF{basename \textasciitilde }\\
+\TTBF{basename ../../home/}\\
+
+L'inverse, pour afficher le chemin vers la ressource/cible pointée, se fait avec la commande \texttt{dirname}.\\
+
+\TTBF{dirname /usr/bin/ls}\\
+\TTBF{dirname /home}\\
+\TTBF{dirname ..}\\
+\TTBF{dirname \textasciitilde }\\
+\TTBF{dirname ../../home/}\\
+
+\bigskip
+
+\subsubsection{Liens - ln}
+
+\bigskip
+
+Il est possible de référencer plusieurs fois un même fichier, pour cela, sur UNIX, on crée des \textit{liens}.
+Il existe des liens \textit{physiques} (\textit{hard link}) et des liens \textit{symboliques} (\textit{symlink}).\\
+
+Les \textbf{liens physiques} sont des références vers l'i-node du fichier visé :
+On crée dans le dossier une référence vers l'i-node du fichier visé (il n'y a qu'un seul i-node au total).
+Quand le compteur de références atteint 0 après des \texttt{rm}, on supprime l'i-node.\\
+Les \textbf{liens symboliques} sont des i-nodes supplémentaires créés qui pointent vers un chemin précis (l'i-node pointera vers des blocs de données contenant le chemin).
+Si on déplace (ou supprime) la cible d'un lien symbolique, le lien sera encore là, mais renverra une erreur.
+Inversement, si on supprime le lien, le fichier pointé n'est pas impacté.\\
+
+Voici comment créer des liens physiques (\texttt{ln}) : \\
+
+\TTBF{cd MonDossier}\\
+\TTBF{touch TestLink}\\
+\TTBF{echo "Pouet" > TestLink}\\
+\TTBF{ln TestLink liendur1}\\
+\TTBF{ln TestLink liendur2}\\
+\TTBF{echo "Glop" > liendur1}\\
+\TTBF{cat liendur2}\\
+\TTBF{rm TestLink}\\
+\TTBF{rm liendur1}\\
+\TTBF{cat liendur2}\\
+\TTBF{mv liendur2 TestLink}\\
+
+Voici comment créer des liens symboliques (\texttt{ln -s}) : \\
+
+\TTBF{ln -s TestLink liensym1}\\
+\TTBF{ln -s TestLink liensym2}\\
+\TTBF{cat TestLink}\\
+\TTBF{echo "Toto" > liensym1}\\
+\TTBF{cat TestLink}\\
+\TTBF{cat liensym2}\\
+\TTBF{rm liensym1}\\
+\TTBF{cat TestLink}\\
+\TTBF{cat liensym2}\\
+\TTBF{rm TestLink}\\
+\TTBF{cat liensym2}\\
+\TTBF{rm liensym2}\\
+
+Il est bien évidemment possible de créer des liens sur des dossiers :\\
+
+\TTBF{ls /usr/bin}\\
+\TTBF{ln -s /usr/bin lienusrbin}\\
+\TTBF{pwd}\\
+\TTBF{cd lienusrbin}\\
+\TTBF{pwd}\\
+\TTBF{ls}\\
+\TTBF{cd ..}\\
+\TTBF{pwd}\\
+\TTBF{rm lienusrbin}\\
+
+Le lien créé donne accès au dossier ciblé, tout en laissant l'accès "dossier parent" au dossier précédent (et non pas celui de l'arborescence réelle).
+Attention à ne pas faire de \texttt{rm -rf} sur des liens !
+Mais bien \textit{uniquement} sur le lien.\\
+
+\bigskip
+
+\subsubsection{Type - file}
+
+\bigskip
+
+Il est possible de tenter de déterminer le type de fichier grâce à la commande \texttt{file}.
+Celle-ci recherche plusieurs indices dans un certain ordre (par exemple, l'extension du nom de fichier, puis les premiers octets du fichier, et éventuellement d'autres octets) afin de déterminer le format des données contenues dans le fichier.
+\textit{(dans l'exemple qui suit, nous allons générer des images JPEG, PNG, et bitmap avec ImageMagick que vous pouvez installer avec cette commande : \TTBF{apt-get install imagemagick})}\\
+
+\TTBF{file /etc/passwd}\\
+\TTBF{convert -size 100x200 xc:gray +noise gaussian image.jpg}\\
+\TTBF{file image.jpg}\\
+\TTBF{convert -size 100x200 xc:gray +noise gaussian image.png}\\
+\TTBF{file image.png}\\
+\TTBF{convert -size 100x200 xc:gray +noise gaussian image.bmp}\\
+\TTBF{file image.bmp}\\
+
+%\bigskip
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Recherche de fichiers}
+
+\subsubsection{Locate}
+
+\bigskip
+
+La commande \texttt{locate} permet de retrouver des fichiers, en utilisant par défaut le mode globbing.
+Cette commande utilise une base de données à construire/mettre à jour régulièrement (voir les \texttt{updatedb} et autres scripts similaires décrits dans le manuel de \texttt{locate} en section \textit{See Also}), elle ne reflète donc pas en temps réel le contenu du système de fichier.\\
+
+\TTBF{locate ls}\\
+\TTBF{locate /usr/bi}\\
+\TTBF{locate passwd}\\
+\TTBF{locate pass}\\
+
+\bigskip
+
+\subsubsection{Find : Recherche}
+
+\bigskip
+
+Une autre commande (\texttt{find}) permet d'énumérer tous les fichiers de l'arborescence (ou une partie), et filtrer les résultats ou exécuter d'autres commandes à partir des résultats.\\
+
+\TTBF{find .}\\
+\TTBF{find . -name \textquotesingle f* \textquotesingle }\\
+\TTBF{find /usr}\\
+
+Les options \texttt{-atime} et \texttt{-amin} recherchent les fichiers \textit{accédés} durant les N dernières 24h ou minutes.\\
+Les options \texttt{-mtime} et \texttt{-mmin} recherchent les fichiers \textit{modifiés} durant les N dernières 24h ou minutes.\\
+Les options \texttt{-ctime} et \texttt{-cmin} recherchent les fichiers dont les statuts ont été \textit{modifiés} durant les N dernières 24h ou minutes.\\
+Les nombres après correspondent à la durée : -60 signifie \textit{durant les 60 dernières 24h ou minutes}, +15 signifie \textit{depuis au moins les 15 dernières 24h ou minutes}.\\
+
+\TTBF{touch file}\\
+\TTBF{find . -atime +1}\\
+\TTBF{find . -mmin -60}\\
+\TTBF{chmod 755 file}\\
+\TTBF{find . -cmin -1}\\
+
+D'autres options permettent : \texttt{-uid} chercher les fichiers à l'UID en question, \texttt{-user} chercher les fichiers de l'utilisateur en question, \texttt{-nouser} chercher les fichiers dont l'UID n'existe pas.\\
+De façon similaire : \texttt{-gid} chercher les fichiers au GID en question, \texttt{-group} chercher les fichiers du groupe en question, \texttt{-nogroup} chercher les fichiers dont l'UID n'existe pas.\\
+
+\TTBF{find . -uid 1042}\\
+\TTBF{find . -user metalman}\\
+\TTBF{find . -gid 1000}\\
+\TTBF{find . -group users}\\
+
+Il est aussi possible de filtrer par type avec l'option \texttt{-type} et les arguments \textbf{f} (fichiers), \textbf{d} (répertoires), \textbf{l} (liens symboliques), \textbf{s} (sockets), \textbf{p} (tubes nommés), \textbf{b} (spéciaux mode blocs), \textbf{c} (spéciaux mode caractères).\\
+
+\TTBF{find . -type d}\\
+\TTBF{find . -type l}\\
+
+La profondeur dans l'arborescence peut aussi être limitée avec \texttt{-maxdepth} (profondeur maximale recherchée) et \texttt{-mindepth} (profondeur minimale recherchée).\\
+
+\TTBF{find / -maxdepth 1}\\
+\TTBF{find /var -mindepth 2}\\
+
+\'Evidemment, le but de \texttt{find} est de mélanger toutes ses options simultanément :\\
+
+\TTBF{find .. -maxdepth 4 -type d -uid 1003 -atime -1 -name \textquotesingle M* \textquotesingle }\\
+
+\bigskip
+
+\subsubsection{Find : Exécution}
+
+\bigskip
+
+La commande \texttt{find} permet également d'appeler des programmes externes sur chacun des arguments listés.\\
+
+\TTBF{find . –exec ls \{\} \textbackslash ;}\\
+
+Ici, le paramètre \texttt{-exec} permet d'appeler la commande \texttt{ls}.
+Il existe deux façons d'utiliser \texttt{-exec}, avec un \texttt{;} (point virgule) ou avec un \texttt{+} (plus).
+Dans les deux cas, on peut rappeler chaque résultat à l'aide des caractères \texttt{\{\}}.\\
+Le \texttt{;} permet d'appeler une fois la commande pour chaque résultat.\\
+Le \texttt{+} permet de créer une chaîne de caractères contenant tous les résultats en une seule ligne.\\
+
+\TTBF{find . –exec echo \{\} \textbackslash ;}\\
+\TTBF{find . –exec echo \{\} +}\\
+
+Ainsi, il est possible de mixer de nombreuses options pour faire des commandes complexes :\\
+
+\TTBF{find -atime -1 -exec echo -e \{\} \{\} \textbackslash \textbackslash n \textbackslash ;}\\
+\TTBF{find . -name "*\textasciitilde" -exec ls \{\} \textbackslash ;}\\
+\TTBF{find . -name "*\textasciitilde" -exec rm -f \{\} \textbackslash ;}\\
+\TTBF{find . -name ".svn*" -exec rm -rf \{\} \textbackslash ;}\\
+
+%\bigskip
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Date, Mesure de temps, Repos}
+
+\subsubsection{Date et heure - time, cal}
+
+\bigskip
+
+Récupérer l'heure dans un format précis est parfois très important pour pouvoir nommer ses fichiers de logs et les faire tourner (ou les supprimer) s'ils sont trop anciens.
+La commande \texttt{date} permet d'afficher la date et l'heure dans votre langue, avec certaines options, il est possible d'indiquer le format souhaité (\texttt{\%Y} donne l'année, \texttt{\%m} donne le mois, \texttt{\%d} donne le jour du mois, \texttt{\%H} donne l'heure au format 24h, \texttt{\%M} donne la minute de l'heure courante, \texttt{\%S} donne la seconde de la minute courante).
+L'option \texttt{-u} donne l'heure universelle (UTC).\\
+
+\TTBF{date}\\
+\TTBF{date -u}\\
+\TTBF{date \textquotesingle +\%Y-\%m-\%d--\%H:\%M:\%S\textquotesingle }\\
+
+
+\bigskip
+
+\subsubsection{Mesure du temps d'exécution - time}
+
+\bigskip
+
+Il est possible de mesurer le temps d'exécution d'un programme avec la commande \texttt{time}.
+On obtient également le temps processeur passé en \textit{userland} (mode normal du processeur) et le temps processeur passé en \textit{kerneland} (mode superviseur du processeur).\\
+
+\TTBF{time ls}\\
+\TTBF{time pwd}\\
+
+
+\bigskip
+
+\subsubsection{Mise en attente - sleep}
+
+\bigskip
+
+La commande \texttt{sleep} permet de lancer un programme qui ne fait... rien, hormis attendre.
+Le paramètre donné est le nombre de secondes où le programme ne fait rien/le processus se met en attente.\\
+
+\TTBF{sleep 1}\\
+\TTBF{sleep 5}\\
+
+%\bigskip
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partitions et disques}
+
+\subsubsection{Disk Usage - du}
+
+\bigskip
+
+Pour connaitre l'espace consommé par un dossier, la commande \texttt{du} est très utile.
+Plusieurs arguments utiles : \texttt{-a} détaille les fichiers, \texttt{h} résultat affiché dans un format humainement compréhensible (approximativement...), \texttt{-{}-block-size=N} affiche le résultat sous forme de multiple de la taille N, \texttt{-s} affiche un total pour chaque argument.\\
+
+\TTBF{mkdir DossierVide}\\
+\TTBF{du DossierVide}\\
+\TTBF{du -h .}\\
+\TTBF{du -ah .}\\
+\TTBF{mkdir DossierPlein}\\
+\TTBF{echo "AAAAAAAAAAAAAH" > DossierPlein/BigFile}\\
+\TTBF{i=0}\\
+\TTBF{while [ \$i -ne 10000 ]; do}\\
+%\TTBF{echo "AAAAAAAAAAAAAH" >> DossierPlein/BigFile}\\ % $\llangle and \rrangle$   $\langle\langle$ $\rangle\rangle$ >{}>
+\TTBF{echo "AAAAAAAAAAAAAH" \rrangle DossierPlein/BigFile}\\
+\TTBF{i=\$(( \$i + 1 ))}\\
+\TTBF{done}\\
+\TTBF{du DossierPlein}\\
+\TTBF{du -h DossierPlein}\\
+\TTBF{du -ah -{}-block-size=32 DossierPlein}\\
+
+\bigskip
+
+\subsubsection{Disk Free - df}
+
+\bigskip
+
+Pour connaitre l'espace libre sur son/ses disques, il faut utiliser la commande \texttt{df}.
+L'option \texttt{-a} affiche l'espace sur tous les disques, l'option \texttt{-h} donne le résultat sous forme lisible, \texttt{-i} affiche le résultat en terme d'i-nodes, et \texttt{-l} (lettre L) permet de ne gérer que les disques locaux.\\
+
+\TTBF{df -h}\\
+\TTBF{df -ah}\\
+\TTBF{df -il}\\
+
+\bigskip
+
+\subsubsection{Copie de blocs/de contenu/d'octets - dd}
+
+\bigskip
+
+La commande \texttt{dd} permet de copier le contenu d'un fichier, voire d'une partition, vers un autre fichier (ou une autre partition).
+Ses paramètres principaux sont : \texttt{-if=}\textit{input\_file} (le fichier lu en entrée), \texttt{-of=}\textit{output\_file} (le fichier vers où écrire).
+Les fichiers mis en entrée et en sortie peuvent également être des périphériques tels que \texttt{/dev/sdX} (un disque) ou encore \texttt{/dev/zero} (un périphérique virtuel n'envoyant que des $ 0 $).
+\textit{Afin de copier des données vers une partition stockée sur un disque (donc un périphérique aux yeux d'UNIX), il est nécessaire d'être administrateur}.\\
+
+Concrètement, il est possible de copier un fichier vers un autre de deux façons :\\
+
+\TTBF{touch file\_in file\_out   \# Creation de l'exemple}\\
+\TTBF{cp -f file\_in file\_out}\\
+\TTBF{dd -if=file\_in -of=file\_out}\\
+
+On peut potentiellement extraire une image ISO depuis un CD ou un DVD ainsi :\\
+
+\TTBF{dd if=/dev/cdrom of=image-cd.iso}\\
+
+D'autres paramètres important permettent d'optimiser la lecture/écriture depuis/vers différents périphériques : \texttt{bs=}\textit{taille\_bloc} (taille des blocs lus/écrits en octets), \texttt{count=}\textit{nb\_blocs} (combien de blocs seront lus/écrits).
+Ces paramètres permettent de transférer des blocs de données (une suite d'octets) selon une taille définie par l'utilisateur.
+La taille des blocs peut être très importante selon l'usage (certains périphériques communiquent en lisant les données bloc par bloc, d'autres caractère par caractère).\\
+
+Pour remplir un fichier avec exactement 1024 octets de $ 0 $, il suffit par exemple d'envoyer 2 fois (\texttt{count=2}) un bloc de 512 octets (\texttt{bs=512}) ne contenant que des $ 0 $, c'est-à-dire dupliquer une source de $ 0 $ (\texttt{/dev/zero}) :\\
+
+\TTBF{dd if=/dev/zero of=fichier-vide.txt bs=512 count=2}\\
+
+On peut également extraire le MBR (Memory Boot record) de son disque, si l'ordinateur ne démarre pas avec un UEFI et GPT :\\
+
+\TTBF{dd if=/dev/sda of=mbr.bin bs=512 count=1}\\
+
+
+On peut également sauter les N premiers blocs du fichier d'entrée avec \texttt{skip=}\textit{nb\_blocs}, et démarrer l'écriture en sortie à partir d'un certain bloc avec \texttt{seek=}\textit{nb\_blocs}.\\
+
+Par exemple pour découper un fichier en tranches de 10 Ko, on peut répéter ces opérations :\\
+
+\TTBF{dd bs=10K count=10K if=big\_file of=big\_file-part1}\\
+\TTBF{dd bs=10K count=10K skip=10K if=big\_file of=big\_file-part2}\\
+\TTBF{dd bs=10K count=10K skip=20K if=big\_file of=big\_file-part3}\\
+\TTBF{dd bs=10K count=10K skip=30K if=big\_file of=big\_file-part4}\\
+
+\bigskip
+
+\begin{enumerate}
+\item Scriptez le découpage d'un fichier de n'importe quelle taille en 4 tranches égales (la dernière peut ne pas être égale aux 3 autres). Vous ajouterez le numéro de la partie en fin de nom tel que : "\texttt{-partX}" (où \texttt{X} correspond au numéro de la partie).
+\item Scriptez le découpage d'un fichier de n'importe quelle taille en autant de tranches de 10 Ko que nécessaire (la dernière peut ne pas faire 10 Ko).
+\end{enumerate}
+
+
+\bigskip
+
+\subsubsection{Formatage vers un système de fichiers - mkfs}
+
+\bigskip
+
+Afin qu'un support physique soit lisible et manipulable par un système d'exploitation, il faut que le support soit organisé d'une façon compréhensible par le système d'exploitation.
+En effet, il faut bien séparer l'organisation des données et des fichiers (la logique qui indique comment placer quoi/comment lire quoi), du support physique (un disque, une bande, une mémoire, ...), et des données en elles-mêmes (une liste de noms, une liste de notes, un ensemble d'images, un texte, ...).
+L'organisation des données sous forme de fichiers et dossiers (ou autre chose encore) est permise grâce au système de fichiers.
+De très nombreux systèmes de fichiers ont existé, dont certains sont encore en usage, et d'autres plus récents sont apparus pour des usages précis.\\
+Les plus connus actuellement traitant des disques durs sont \textit{FAT32}, \textit{exFAT}, \textit{NTFS}, \textit{ext4}, \textit{ext3}, \textit{Reiser4}, \textit{HFS+}.\\
+D'autres systèmes de fichiers plus spécialisés existent : \textit{NFS}, \textit{AFS}, \textit{ZFS}, ...\\
+
+Sur Linux, la commande \texttt{mkfs} permet de formater une partition (une partie d'un disque), pour préparer celle-ci à être manipulée par un système d'exploitation ou tout autre logiciel ou bibliothèque.
+Plusieurs extensions à \texttt{mkfs} existent et permettent de préparer une partition pour divers systèmes de fichiers.
+Il suffit littéralement de lire l'extension associée au programme \texttt{mkfs} : \texttt{mkfs.fat}, \texttt{mkfs.ext3}, \texttt{mkfs.ext4}, ...\\
+
+Il est possible de simuler une partition dans un fichier.
+Pour cela, il suffit de préparer un fichier vide de 4 Mo par exemple.
+\'Etant donné que les disques actuels et autres mémoires travaillent avec des blocs de taille 4096 octets, nous utiliserons cette valeur.
+Pour constituer un exemple lisible, nous ferons également une toute petite partition de 64 Ko.\\
+
+\TTBF{dd if=/dev/zero of=partition.img bs=4096 count=1000}\\
+\TTBF{dd if=/dev/zero of=partition-test.img bs=4096 count=16}\\
+
+Pour observer les différences qui apparaitront dans le fichier, on peut utiliser un éditeur hexadécimal.
+Sur Linux, n'hésitez pas à installer \texttt{xxd} (CLI), \texttt{hexedit} (CLI) , ou encore \texttt{ghex} (GNOME Hex Editor - GUI).
+\begin{itemize}
+\item \texttt{xxd} affiche un dump en hexadécimal
+\item \texttt{hexedit} est un éditeur intéractif dans un terminal (F1 pour l'aide, F2 pour sauvegarder, F3 pour charger, Ctrl-X pour sauvegarder et quitter, Ctrl-C pour quitter sans sauvegarder)
+\item \texttt{ghex} est un éditeur intéractif en mode graphique
+\end{itemize}
+Observer le contenu de votre fichier avec un de ces éditeurs : tous les octets sont à $ 0 $.\\
+
+Nous pouvons maintenant formater le fichier en FAT32 :\\
+
+\TTBF{mkfs.fat partition-test.img}\\
+
+Observez le résultat avec un éditeur hexadécimal, et vous verrez certaines modifications apportées au fichier.\\
+
+Il est évidemment possible de formater un périphérique en donnant un chemin tel que \texttt{/dev/sdX}.
+
+\bigskip
+
+\subsubsection{Point de montage - mount \& umount}
+
+\bigskip
+
+Afin d'utiliser le contenu d'une partition dans l'arborescence UNIX, il est nécessaire de la "monter" avec le programme \texttt{mount}.
+Ce programme prend au moins deux paramètres (et essaye d'en déterminer d'autres automatiquement) : le chemin vers la partition contenant le système de fichier à monter (potentiellement \texttt{/dev/sdX} ou encore un fichier image), et l'endroit dans l'arborescence UNIX où attacher le système de fichier contenu (généralement \texttt{/mnt}, ou \texttt{/media/sdX}).\\
+
+Essayez de monter la partition nouvellement créée.
+Si nécessaire, créez un dossier \texttt{/mnt} en tant qu'administrateur, et autorisez tous les utilisateurs à pouvoir y accéder au moins en lecture et exécution.
+Les opérations de montage/démontage demande souvent à être administrateur : passez en mode administrateur avant d'exécuter les lignes suivantes :\\
+
+\TTBF{mount partition-test.img /mnt}\\
+
+Vous pouvez maintenant modifier le contenu de la partition en vous y déplaçant.\\
+
+\TTBF{cd /mnt}\\
+\TTBF{touch fichier1}\\
+\TTBF{echo "ABCD" > fichier1}\\
+\TTBF{cat fichier1}\\
+
+Afin de démonter la partition, et libérer l'accès à notre fichier "\textit{partition-test.img}", utilisez la commande \texttt{umount} en administrateur également.
+Attention, si vous avez encore un programme ouvert utilisant un fichier sur la partition, ou simplement que votre shell est positionné dedans, le démontage sera refusé.\\
+
+\TTBF{cd}\\
+\TTBF{umount /mnt}\\
+
+Vous pouvez maintenant quitter le mode administrateur, et observer le résultat dans le fichier "\textit{partition-test.img}" avec un éditeur hexadécimal.
+Vous trouverez une en-tête (un \textit{header}) décrivant la partition, puis beaucoup plus loin, la description du fichier "\textit{fichier1}", et enfin, dans une troisième zone de la partition, le contenu "\textit{ABCD}" du "\textit{fichier1}".
+
+%\bigskip
+
+
+\setlength{\parindent}{\defaultparindent}	

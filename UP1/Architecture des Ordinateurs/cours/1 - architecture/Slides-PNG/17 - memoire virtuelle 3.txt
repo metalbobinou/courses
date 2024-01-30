@@ -1,0 +1,6 @@
+Il arrive que les pages ne soient pas retrouvées dans la mémoire physique : soit la table des pages indique que la page voulue est stockée sur un disque dur (le "swap", et c'est à l'OS d'aller la récupérer), soit la page est invalide, et une erreur sera renvoyée (sur Linux, le célèbre "Segmentation Fault").
+
+Ce mécanisme peut être utilisé pour permettre à plusieurs programmes d'utiliser l'intégralité de l'espace d'adressage, sans s'écraser mutuellement : leurs pages seront stockées sur le disque dur.
+
+Seul l'OS dispose des droits pour écrire dans la table des pages.
+Pour protéger les pages, des "flags" sont ajoutés dans la table.

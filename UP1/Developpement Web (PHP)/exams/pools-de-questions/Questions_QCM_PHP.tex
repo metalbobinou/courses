@@ -1,0 +1,544 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER - Ali JAFFAL}
+\newcommand{\TitreMatiere}{Développement Web - PHP}
+\newcommand{\NomUniv}{Paris 1 - Panthéon Sorbonne}
+\newcommand{\NiveauUniv}{}
+\newcommand{\NumGroupe}{Groupe 2}
+\newcommand{\AnneeUniv}{}
+\newcommand{\DateExam}{4 avril 2019}
+\newcommand{\TypeExam}{Devoir sur Table}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{2018-2019} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+
+%%%%%
+
+\usepackage{tabularx}
+
+\begin{document}
+
+% \MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+% Questions cours Apache/HTTP
+\section{PHP et HTML}
+
+\medskip
+
+Réponse juste = 0,5 point ; Pas de réponse = 0 point ; Mauvaise réponse = -0,5 point
+
+\medskip
+
+\subsection{Comment rendre un champ de formulaire inaccessible ?}
+
+\begin{itemize}
+\item[\CaseCoche] disabled="disabled" ou seulement disabled \\
+\item[\CaseCoche] readonly="readonly" \\
+\item[\CaseCoche] type="disabled" \\
+\item[\CaseCoche] type="readonly" \\
+\end{itemize}
+
+
+\subsection{PHP est un langage...}
+
+\begin{itemize}
+\item[\CaseCoche] Fortement typé\\
+\item[\CaseCoche] Faiblement typé\\  % OK
+\item[\CaseCoche] Fonctionnel\\
+\item[\CaseCoche] Orienté Objet\\  % OK
+\end{itemize}
+
+
+\subsection{Quels opérateurs/fonctions vérifient les types ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{==} \\
+\item[\CaseCoche] \TTBF{gettype()} \\  % OK
+\item[\CaseCoche] \TTBF{get\_type()} \\
+\item[\CaseCoche] \TTBF{is\_int()} \\  % OK
+\end{itemize}
+
+
+\subsection{Comment afficher la valeur du cookie \TTBF{ck1} ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{echo(\$COOKIE["ck1"]) ;} \\
+\item[\CaseCoche] \TTBF{print(\$COOKIE["ck1"]) ;} \\
+\item[\CaseCoche] \TTBF{echo COOKIE["ck1"] ;} \\
+\item[\CaseCoche] \TTBF{echo \$\_COOKIE["ck1"] ;} \\  % OK
+
+\end{itemize}
+
+
+\subsection{Cocher l'affirmation vraie à propos de l'instruction suivante :}
+
+\TTBF{<?php \$moisFrancais = array(1=>"Janvier", "Fevrier", "Mars") ?>}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Le programme retourne un message d'erreur \\
+\item[\CaseCoche] \`A la clé "3" va correspondre la donnée "Mars" \\   % OK
+\item[\CaseCoche] \`A la clé "Mars" va correspondre la donnée "3" \\
+\end{itemize}
+
+
+\subsection{Comment écrit-on \TTBF{Hello World} en PHP ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{<p> Hello World </p>} \\  % OK
+\item[\CaseCoche] \TTBF{<?php Document.Write('Hello World'); ?>} \\
+\item[\CaseCoche] \TTBF{<?php echo 'Hello World' ; ?>} \\  % OK
+\item[\CaseCoche] \TTBF{<?php println('Hello World'); ?>} \\
+\end{itemize}
+
+
+\subsection{Quelle est la (ou les) façon(s) correcte(s) pour déclarer une fonction \TTBF{myFunction} en PHP ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{myFunction()} \\
+\item[\CaseCoche] \TTBF{function myFunction()} \\  % OK
+\item[\CaseCoche] \TTBF{new function myFunction()} \\
+\item[\CaseCoche] \TTBF{create myFunction()} \\
+\end{itemize}
+
+
+\subsection{En PHP, la seule fonction pemettant d'afficher du texte est \TTBF{echo} :}
+
+\begin{itemize}
+\item[\CaseCoche] Vrai \\
+\item[\CaseCoche] Faux \\  % OK
+\end{itemize}
+
+
+\subsection{Les balises d'ouverture et de fermeture qui délimitent un script PHP sont :}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{<php> ... </php>} \\
+\item[\CaseCoche] \TTBF{<?php> ... </?>} \\
+\item[\CaseCoche] \TTBF{<\& ... /\&>} \\
+\item[\CaseCoche] \TTBF{<?php ... ?>} \\  % OK
+\end{itemize}
+
+
+\subsection{\TTBF{include("rep2/fich4.php")};}
+
+\begin{itemize}
+\item[\CaseCoche] Inclut \TTBF{fich4.php} situé dans le sous-répertoire \TTBF{rep2} de la racine du site \\
+\item[\CaseCoche] Provoque une erreur PHP \\
+\item[\CaseCoche] Crée une inclusion dans le fichier \TTBF{fich4.php} du répertoire \TTBF{rep4} \\
+\item[\CaseCoche] Inclut le \TTBF{fich4.php}, situé dans le sous-répertoire \TTBF{rep2}, dans le script en cours \\  % OK
+\end{itemize}
+
+
+\subsection{En PHP, la fonction \TTBF{require} :}
+
+\begin{itemize}
+\item[\CaseCoche] Affiche un avertissement sans stopper le script si elle ne parvient pas à inclure le fichier \\
+\item[\CaseCoche] Arrête le script si elle ne parvient pas à inclure le fichier \\   % OK
+\item[\CaseCoche] N'existe pas en PHP \\
+\item[\CaseCoche] Retourne \TTBF{False} si elle ne parvient pas à inclure le fichier \\
+\end{itemize}
+
+
+\subsection{Comment créer une session pour utiliser des variables de session ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{start\_session();} \\
+\item[\CaseCoche] \TTBF{session\_start();} \\  % OK
+\item[\CaseCoche] \TTBF{session\_begin();} \\
+\item[\CaseCoche] \TTBF{begin\_session();} \\
+\end{itemize}
+
+
+\subsection{Qu'affiche l'instruction suivante ?}
+
+\TTBF{echo 'Voici un \textbackslash "test\textbackslash " php';}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{Voici un "test" php} \\
+\item[\CaseCoche] \TTBF{Voici un test php} \\
+\item[\CaseCoche] \TTBF{Voici un \textbackslash "test\textbackslash " php} \\  % OK
+\item[\CaseCoche] Rien car cela provoquerait une erreur \\
+\end{itemize}
+
+
+\subsection{Comment supprimer l'ensemble des variables d'une session ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{unset(\$\_SESSION[]);} \\
+\item[\CaseCoche] \TTBF{session\_destroy();} \\  % OK
+\item[\CaseCoche] \TTBF{session\_stop();} \\
+\item[\CaseCoche] \TTBF{session\_unset();} \\
+\end{itemize}
+
+
+\subsection{Quelle est la syntaxe correcte pour tester la valeur de la variable \TTBF{\$a} ?}
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{if (\$a = 5) \{\$b = 4;\} else \{b = 2;\}} \\
+\item[\CaseCoche] \TTBF{if \{\$a = 5\} then \{\$b = 4;\} else \{\$b = 2;\}} \\
+\item[\CaseCoche] \TTBF{if (\$a == 5) \{\$b = 4;\} else \{\$b = 2;\}} \\  % OK
+\end{itemize}
+
+
+\subsection{Que provoque l'exécution du script suivant ?}
+
+\TTBF{<?php \$a=7 ; do\{\$a++ ;echo \$a;\} while(0); ?>}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Une boucle infinie \\
+\item[\CaseCoche] L'affichage du chiffre 7 \\
+\item[\CaseCoche] L'affichage du chiffre 8 \\  % OK
+\item[\CaseCoche] Rien car cela provoquerait une erreur \\
+\end{itemize}
+
+
+\subsection{Comment modifier les en-têtes http avec PHP ?}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] On ne peut pas : PHP ne gère que la couche présentation \\
+\item[\CaseCoche] Avec la fonction session\_start() \\  % OK
+\item[\CaseCoche] Avec la fonction header()\\  % OK
+\item[\CaseCoche] Avec la fonction htmlspecialchars()\\
+\end{itemize}
+
+
+
+\section{Apache, http, URL, web}
+
+
+\subsection{Cocher deux caractéristiques d'un cookie}
+
+\begin{itemize}
+\item[\CaseCoche] Il peut être refusé ou effacé par l'internaute \\  % OK
+\item[\CaseCoche] Sa taille est fixe \\
+\item[\CaseCoche] Sa durée de vie est variable \\  % OK
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 200 du protocole http ?} % 301 ou 308
+
+\begin{itemize}
+\item[\CaseCoche] OK\\  % OK
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 301 du protocole http ?} % 301 ou 308
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\  % OK
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 308 du protocole http ?} % 301 ou 308
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\  % OK
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+\subsection{\`A quoi correspond le code de statut 302 du protocole http ?} % 302 ou 307
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\  % OK
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 307 du protocole http ?} % 302 ou 307
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\  % OK
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 403 du protocole http ?}
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\  % OK
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 404 du protocole http ?}
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\  % OK
+\item[\CaseCoche] Internal Server Error\\
+\end{itemize}
+
+
+\subsection{\`A quoi correspond le code de statut 500 du protocole http ?}
+
+\begin{itemize}
+\item[\CaseCoche] OK\\
+\item[\CaseCoche] Temporary Redirect\\
+\item[\CaseCoche] Permanent Redirect\\
+\item[\CaseCoche] Forbidden\\
+\item[\CaseCoche] Not Found\\
+\item[\CaseCoche] Internal Server Error\\  % OK
+\end{itemize}
+
+
+\subsection{Quelle est la (ou les) cause(s) du code de statut 301 du protocole http ?} % 301, 302, 307, 308
+
+\begin{itemize}
+\item[\CaseCoche] Le.a développeur.euse du site web a codé ce comportement\\  % OK
+\item[\CaseCoche] L'authentification au niveau du serveur web a échoué\\
+\item[\CaseCoche] La ressource visée n'existe pas\\
+\item[\CaseCoche] L'authentification au niveau de l'application/du site web a échoué\\
+\item[\CaseCoche] Le serveur web n'a pas les droits pour accéder à la ressource demandée\\
+\item[\CaseCoche] Le certificat du serveur web n'est pas/plus valide\\
+\end{itemize}
+
+
+\subsection{Quelle est la (ou les) cause(s) du code de statut 403 du protocole http ?}
+
+\begin{itemize}
+\item[\CaseCoche] Le.a développeur.euse du site web a codé ce comportement\\  % OK
+\item[\CaseCoche] L'authentification au niveau du serveur web a échoué\\  % OK
+\item[\CaseCoche] La ressource visée n'existe pas\\
+\item[\CaseCoche] L'authentification au niveau de l'application/du site web a échoué\\
+\item[\CaseCoche] Le serveur web n'a pas les droits pour accéder à la ressource demandée\\  % OK
+\item[\CaseCoche] Le certificat du serveur web n'est pas/plus valide\\
+\end{itemize}
+
+
+\subsection{Quelle est la (ou les) cause(s) du code de statut 404 du protocole http ?}
+
+\begin{itemize}
+\item[\CaseCoche] Le.a développeur.euse du site web a codé ce comportement\\  % OK
+\item[\CaseCoche] L'authentification au niveau du serveur web a échoué\\
+\item[\CaseCoche] La ressource visée n'existe pas\\  % OK
+\item[\CaseCoche] L'authentification au niveau de l'application/du site web a échoué\\
+\item[\CaseCoche] Le serveur web n'a pas les droits pour accéder à la ressource demandée\\
+\item[\CaseCoche] Le certificat du serveur web n'est pas/plus valide\\
+\end{itemize}
+
+
+\subsection{Quels sont les séparateurs utilisés par GET pour transmettre des données par URL ?}
+
+\begin{itemize}
+\item[\CaseCoche] "?" Pour séparer l'adresse et "\%" pour les données \\
+\item[\CaseCoche] "\%" Pour séparer l'adresse et "\&" pour les données \\
+\item[\CaseCoche] "?" Pour séparer l'adresse et "\&" pour les données \\  % OK
+\item[\CaseCoche] "\%" Pour séparer l'adresse et ";" pour les données \\
+\end{itemize}
+
+
+\subsection{Quel est le bon séparateur utilisé par GET pour transmettre des données par URL ?}
+
+\begin{itemize}
+\item[\CaseCoche] "?" Pour séparer l'adresse des données \\  % OK
+\item[\CaseCoche] "\%" Pour séparer l'adresse des données \\
+\item[\CaseCoche] "\&" Pour séparer l'adresse des données \\
+\item[\CaseCoche] "!" Pour séparer l'adresse des données \\
+\end{itemize}
+
+
+\subsection{Quel est le bon séparateur utilisé par GET pour transmettre des données par URL ?}
+
+\begin{itemize}
+\item[\CaseCoche] "?" Pour séparer les différentes variables entre elles \\
+\item[\CaseCoche] "\%" Pour séparer les différentes variables entre elles \\
+\item[\CaseCoche] "\&" Pour séparer les différentes variables entre elles \\  % OK
+\item[\CaseCoche] "!" Pour séparer les différentes variables entre elles \\
+\end{itemize}
+
+
+\subsection{Cocher la ou les affirmations vraies concernant cette URL :}
+
+\TTBF{http://www2.example.com:3280/custompages/alex/cosplays.php}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Domaine : \TTBF{http://www2.example.com:3280} \\
+\item[\CaseCoche] Domaine : \TTBF{example.com:3280} \\
+\item[\CaseCoche] Protocole : Web \\  % OK
+\item[\CaseCoche] Ressource : \TTBF{alex/cosplays.php} \\
+\end{itemize}
+
+
+\subsection{Cocher la ou les affirmations vraies concernant cette URL :}
+
+\TTBF{http://www.journal.co.uk/paper:4364}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Ressource : \TTBF{/paper:4364} \\  % OK
+\item[\CaseCoche] Domaine : \TTBF{www.journal.co.uk} \\  % OK
+\item[\CaseCoche] Port : \TTBF{4364} \\
+\item[\CaseCoche] Ressource : \TTBF{/paper} \\
+\end{itemize}
+
+
+\subsection{Cocher la ou les affirmations vraies concernant cette URL :}
+
+\TTBF{https://machine01.site.org}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Ressource : \TTBF{site.org} \\
+\item[\CaseCoche] Domaine : \TTBF{machine01.site.org} \\  % OK
+\item[\CaseCoche] Port : \TTBF{4443} \\
+\item[\CaseCoche] Protocole : http over secure shell \\
+\end{itemize}
+
+
+\subsection{Cocher la ou les affirmations vraies concernant cette URL :}
+
+\TTBF{gopher://gopher.floodgap.com/443/gopher/wbgopher}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Ressource : \TTBF{/gopher/wbgopher} \\
+\item[\CaseCoche] Domaine : \TTBF{gopher.floodgap.com} \\  % OK
+\item[\CaseCoche] Port : \TTBF{443} \\
+\item[\CaseCoche] Protocole : http\\
+\end{itemize}
+
+
+\subsection{Cocher la ou les affirmations vraies concernant cette URL :}
+
+\TTBF{https://corporate.com.pany.iut/vendor.client.42/id.18?uid=1337\&gid=57}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] Ressource : \TTBF{/vendor.client.42/id.18} \\  % OK
+\item[\CaseCoche] Domaine : \TTBF{corporate.com.pany.iut/vendor.client.42} \\
+\item[\CaseCoche] Port : \TTBF{443} \\  % OK
+\item[\CaseCoche] Protocole : secure http\\  % OK
+\end{itemize}
+
+
+\section{SGBD, SQL, et PHP}
+
+\subsection{Quel est l'acronyme des propriétés qu'un SGBD relationnel doit respecter ?}
+\begin{itemize}
+\item[\CaseCoche] ROLL \\
+\item[\CaseCoche] CRUD \\
+\item[\CaseCoche] ACID \\  % OK
+\item[\CaseCoche] RWOC \\
+\end{itemize}
+
+
+\subsection{Comment récupérer les lignes du résultat sous forme de tableau ?}
+
+\TTBF{\$result = mysqli\_query(select * from USER);}
+
+\bigskip
+
+\begin{itemize}
+\item[\CaseCoche] \TTBF{mysqli\_fetch\_assoc(\$result) ;} \\
+\item[\CaseCoche] \TTBF{mysqli\_list\_fields(\$result) ;} \\
+\item[\CaseCoche] \TTBF{mysqli\_fetch\_array(\$result) ;} \\  % OK ???
+\end{itemize}
+
+
+\subsection{Quel est le premier mot-clé pour modifier la structure d'une table ?}
+
+\begin{itemize}
+\item[\CaseCoche] MODIFY TABLE nomDeTable... \\
+\item[\CaseCoche] INSERT INTO TABLE nomDeTable ... \\
+\item[\CaseCoche] ALTER TABLE nomDeTable ... \\  % OK
+\item[\CaseCoche] UPDATE TABLE nomDeTable ... \\
+\end{itemize}
+
+
+\subsection{Comment mettre à 1 le champ 'note' dans tous les enregistrements de la table 'etudiant' ?}
+
+\begin{itemize}
+\item[\CaseCoche] UPDATE TABLE etudiant SET note=1 \\
+\item[\CaseCoche] UPDATE etudiant SET note=1 \\  % OK
+\item[\CaseCoche] SELECT note FROM etudiant SET note=1 \\
+\item[\CaseCoche] SET note=1 FROM TABLE etudiant \\
+\end{itemize}
+
+
+\subsection{Quelle est la bonne instruction pour annuler une transaction ?}
+
+\begin{itemize}
+\item[\CaseCoche] ROLLBACK \\  % OK
+\item[\CaseCoche] STOP TRANSACTION \\
+\item[\CaseCoche] CANCEL TRANSACTION \\
+\item[\CaseCoche] COMMIT \\
+\end{itemize}
+
+
+\subsection{Quelles sont les instructions pouvant terminer une transaction ?}
+
+\begin{itemize}
+\item[\CaseCoche] ROLLBACK \\  % OK
+\item[\CaseCoche] STOP TRANSACTION \\
+\item[\CaseCoche] CANCEL TRANSACTION \\
+\item[\CaseCoche] COMMIT \\  % OK
+\end{itemize}
+
+\end{document}

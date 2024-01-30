@@ -1,0 +1,6 @@
+Aucune convention sur la représentation n'existe. Il s'agit juste d'un ensemble de "cases" qui se suivent. La taille des cases varie selon plusieurs paramètres que nous ne verrons pas.
+
+Chaque modèle de processeur dispose d'un bus d'adresse qui va définir les adresses minimales et maximales accessibles :
+de 0 à 2^(largeur du bus d'adresse) - 1
+Le processeur y lit et écrit des mots (taille du mot définie par le modèle).
+Selon les modèles, certaines adresses ne sont pas accessibles pour une question "d'alignement" : les adresses impaires ne sont pas accessibles sur certains processeurs, car elles contiennent la moitié d'un mot.

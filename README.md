@@ -9,23 +9,29 @@ Les cours sont données avec leurs sources et/ou les fichiers originaux ayant se
 Vous pouvez les réutiliser tant que vous citez leur provenance.
 
 
-# Contenus
+# Contents / Contenus
 
 ## EPITA (Bachelor CyberSécurité)
-- Algorithmique 1 [CYBER1]
-- Algorithmique et Structure de Données 2 [CYBER1]
-- Algorithmique Premiers Pas [CYBER1] *(fusion dans algorithmique 1)*
-- Algorithmique et Structure de Données 1 [CYBER1] *(fusion dans algorithmique 1)*
-- Architecture des Ordinateurs [CYBER1]
-- Systèmes - Linux & Windows [CYBER1]
-- C avancé [CYBER1]
+- Algorithmique 1 [CYBER1] (2023--...))
+- Algorithmique et Structure de Données 2 [CYBER1] (2022--...))
+- Algorithmique Premiers Pas [CYBER1] (2022-2023) *(fusion dans algorithmique 1)*
+- Algorithmique et Structure de Données 1 [CYBER1] (2022-2023) *(fusion dans algorithmique 1)*
+- Architecture des Ordinateurs [CYBER1] (2022-...)
+- Systèmes - Linux & Windows [CYBER1] (2021-2022)
+- C avancé [CYBER1] (2021-2022)
 
 ## EPITA (Apprentissage)
-- Python [AppIng1]
+- Python [AppIng1] (2022-...)
 
 ## EPITA
-- Systèmes d'Exploitation [Ing1]
+- Systèmes d'Exploitation [Ing1] (2021-2022)
 
 ## Université Paris 1 Panthéon - Sorbonne
-- Architecture des Ordinateurs [L2 - MIASHS]
-- Développement Web (PHP) [L2 - MIASHS]
+- Architecture des Ordinateurs [L2 - MIASHS] (2016-2018)
+- Développement Web (PHP) [L2 - MIASHS] (2018-2021)
+
+## Grades / Notes
+- Fichiers de notes classiques / Regualr grades
+- Fichier de revue de code / Code review
+- Feuille de calcul générale pour la moyenne / Means
+

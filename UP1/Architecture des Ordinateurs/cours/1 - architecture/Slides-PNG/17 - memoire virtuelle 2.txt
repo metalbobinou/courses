@@ -1,0 +1,6 @@
+Les adresses mémoires sont regroupées sous forme de "pages".
+En général une page contient 4Ko, par exemple de l'adresse 0 à 4095.
+
+Les adresses virtuelles encodent un numéro de page, et un décalage sur cette page.
+La MMU effectue le calcul et utilise la table de pages pour retrouver l'emplacement de la page.
+

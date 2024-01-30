@@ -1,0 +1,123 @@
+%% Format de Rendu
+
+%\ResponsablesProjet{Metal Man/metalman@example.org, Damdoshi/damdoshi@example.org, Tayst/tayst@tayst.org}
+%\begin{tabular}{p{7cm} p{10cm}}
+\begin{tabular}{p{7cm} p{8.5cm}}
+	%\ResponsablesProjetRow{Fabrice BOISSIER/fabrice.boissier@epita.fr, Mark ANGOUSTURES/mark.angoustures@epita.fr}
+	\ResponsablesProjetRow{Fabrice BOISSIER/fabrice.boissier@epita.fr}
+	& \\
+%	\RenduSpecsGenerales{[PHP][DM]}{2}{Envoi par mail}{\RenduDir}{\RenduTarball}{10/02/2020 23h42}{2 semaines}
+%	\RenduSpecsGenerales{[CAV][TP1]}{1}{Pas de rendu}{\RenduDir}{\RenduTarball}{Pas de rendu}{Pas de rendu}
+%	\RenduSpecsGenerales{[ALG][BT]}{1}{Devoir/Assignment sur Teams}{\RenduDir}{\RenduTarball}{02/05/2023 23h42}{1 mois}
+	\RenduSpecsGenerales{[ALG][BT]}{1}{Devoir sur Moodle}{\RenduDir}{\RenduTarball}{03/05/2023 23h42}{1 mois}
+	& \\
+%	\RenduSpecsTechniques{WAMP ou MAMP}{PHP}{Apache/PHP}{ }
+	\RenduSpecsTechniques{Linux - Ubuntu (x86\_64)}{C}{/usr/bin/gcc}{-W -Wall -Werror -std=c99 -pedantic}
+%	& \\
+%	Fonctions autorisées : & malloc(3), free(3), printf(3)
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent Les fichiers suivants sont requis :
+
+\medskip
+
+\begin{tabular}{l p{12cm}}
+\texttt{AUTHORS} & contient le(s) nom(s) et prénom(s) de(s) auteur(s).\\
+\texttt{Makefile} & le Makefile principal.\\
+\texttt{README} & contient la description du projet et des exercices, ainsi que la fa\c con d'utiliser le projet.\\
+\texttt{configure} & le script shell de configuration pour l'environnement de compilation.\\
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent Un fichier \TTBF{Makefile} doit être présent à la racine du dossier, et doit obligatoirement proposer ces règles :
+
+\medskip
+
+\begin{tabular}{l p{13cm}}
+\texttt{all} & \textit{[Première règle]} lance la règle \texttt{libmybintree}.\\
+\texttt{clean} & supprime tous les fichiers temporaires et ceux créés par le compilateur.\\
+\texttt{dist} & crée une archive propre, valide, et répondant aux exigences de rendu.\\
+\texttt{distclean} & lance la règle \texttt{clean}, puis supprime les binaires et bibliothèques.\\
+\texttt{check} & lance le(s) script(s) de test.\\
+\texttt{libmybintree} & lance les règles \texttt{shared} et \texttt{static} \\
+\texttt{shared} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque dynamique.\\
+\texttt{static} & compile l'ensemble du projet avec les options de compilations exigées et génère une bibliothèque statique.\\
+\end{tabular}
+
+
+\vspace*{1cm}
+\newpage
+
+\noindent Votre code sera testé automatiquement, vous devez donc scrupuleusement respecter les spécifications pour pouvoir obtenir des points en validant les exercices.
+%
+%Votre code sera testé en l'intégrant à une série de tests automatisés qui seront fournis un peu plus tard.
+%N'attendez SURTOUT PAS que ces tests soient envoyés pour commencer à produire vos fonctions et vos propres tests.
+%
+Votre code sera testé en générant un exécutable ou des bibliothèques avec les commandes suivantes :
+
+\medskip
+
+\begin{tabular}{l}
+\texttt{./configure}\\
+\texttt{make}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Suite à cette étape de génération, les exécutables ou bibliothèques doivent être placés à ces endroits :
+
+\medskip
+
+\begin{tabular}{l}
+\TTBF{\RenduDir/libmybintree.a}\\
+\TTBF{\RenduDir/libmybintree.so}\\
+\end{tabular}
+
+\bigskip
+
+\noindent L'arborescence attendue pour le projet est la suivante :
+
+\medskip
+
+\begin{tabular}{l}
+\TTBF{\RenduDir/}\\
+\TTBF{\RenduDir/AUTHORS}\\
+\TTBF{\RenduDir/README}\\
+\TTBF{\RenduDir/Makefile}\\
+\TTBF{\RenduDir/configure}\\
+\TTBF{\RenduDir/check/}\\
+\TTBF{\RenduDir/check/check.sh}\\
+\TTBF{\RenduDir/src/}\\
+\TTBF{\RenduDir/src/bt\_basics.c}\\
+\TTBF{\RenduDir/src/bt\_basics.h}\\
+\TTBF{\RenduDir/src/bt\_bst.c}\\
+\TTBF{\RenduDir/src/bt\_bst.h}\\
+\end{tabular}
+
+
+\vspace*{1cm}
+
+
+\noindent \textit{Vous ne serez jamais pénalisés pour la présence de makefiles ou de fichiers sources (code et/ou headers) dans les différents dossiers du projet tant que leur existence peut être justifiée (des makefiles vides ou jamais utilisés sont néanmoins pénalisés).}
+
+%\noindent \textit{Vous ne serez jamais pénalisés pour la présence de fichiers de différentes natures dans le dossier \texttt{check} tant que leur existence peut être justifiée (des fichiers de test jamais utilisés sont pénalisés).}
+
+\vspace*{1cm}
+
+Les points de la notation sont distribués ainsi :
+
+\medskip
+
+\begin{itemize}
+\item Exercice 1 - Arbres Binaires : 5 points
+\item Exercice 2 - Bibliothèques statique et dynamique : 4 points
+\item Exercice 3 - Arbres Binaires de Recherche : 5 points
+\item Exercice 4 - Tests  : 6 points
+\end{itemize}

@@ -1,0 +1,315 @@
+TD :
+
+Exercice 1
+
+http://patisserie.xyz/gateaux/cake.php
+Protocole : web (http)
+Domaine (complet) : patisserie.xyz
+Ressource (chemin complet) : gateaux/cake.php
+
+https://abc.def/ghi/jkl.mno
+Protocole : web sécurisé (https)
+Domaine (complet) : abc.def
+Ressource (chemin complet) : /ghi/jkl.mno
+
+Protocole : web sécurisé
+Domaine : ChezMoi.fr
+Fichier : /Cours/DevWeb/Cours1.pdf
+https://chezmoi.fr/Cours/DevWeb/Cours1.pdf
+
+Fichier : file.htm
+Protocole : web
+Domaine : Service.Fichiers.International
+http://Service.Fichiers.International/file.htm
+
+
+
+
+Exemple sur les dates :
+
+// constructeur “DateTime” sans paramètre => on prend l’heure du moment
+$datetime = new DateTime();
+$date = date_format($datetime, "d-m-y ");
+echo "ceci est la date du jour " . $date ;
+
+// constructeur “DateTime” avec paramètre => on prend le paramètre
+$datetime = new DateTime(“2020-01-05”);
+$date = date_format($datetime, "d-m-y ");
+echo "ceci est la date du jour " . $date ;
+
+
+Si espace dans les noms de fichiers ou dossiers, les remplacer par “%20” dans la barre d’URL.
+Exemple dans explorer.exe (s’applique aussi au Finder des macs) :
+C:/wamp64/www/mon dossier/file.php
+URL :
+http://localhost/mon%20dossier/file.php
+
+
+$date = date("d/m/Y");
+$date = date("d/m/y");
+echo $date;
+
+
+# Exercice 2 : logique PHP
+
+echo("<tr>");
+for ($i = 1; $i <= 12; $i++)
+{
+    $date = new DateTime('2000-' . $i  . '-05');
+    $value1 = date_format($date, "m");
+    $value2 = date_format($date, "F");
+
+    if (($i % 3) == 1)
+    {
+        echo("</tr><tr>");
+    }
+
+    echo("<td>");
+    echo($value1);
+    echo("</td><td>");
+    echo($value2);
+    echo "</td>\n";
+}
+echo("</tr>");
+
+
+Exercice 3 [à faire] :
+https://www.php.net/manual/en/datetime.format.php
+
+
+Exercice 4 [à faire] :
+(si vous le réussissez, c’est le DM qui est quasiment fait ;) )
+
+
+
+# Exercice 3 :
+
+<?php
+
+for ($i = 1; $i <= 12; $i++)
+{
+
+    $datetime = new DateTime("2000-01-01");
+    $datetime = new DateTime("2000-" . $i . "-01");
+
+    $date = date_format($datetime, "d-m-Y");
+    $date = date_format($datetime, "F");
+
+    echo $i . " " . $date . " ";// . "<br>\n";
+
+    if (($i % 3) == 0)
+    {
+        echo "<br>\n";
+    }
+
+}
+?>
+
+
+
+
+# Exercice 4 :
+
+function nb_day_per_month($nb_month)
+{
+    if (($nb_month == 1) || ($nb_month == 3) || ($nb_month == 5) ||
+        ($nb_month == 7) || ($nb_month == 8) || ($nb_month == 10) ||
+        ($nb_month == 12))
+    {
+        return(31);
+    }
+
+    if (($nb_month == 4) || ($nb_month == 6) || ($nb_month == 9) ||
+        ($nb_month == 11))
+    {
+        return(30);
+    }
+
+    return(28);
+}
+
+for ($i = 1; $i <= 12; $i++)
+{
+
+    $datetime = new DateTime("2000-01-01");
+    $datetime = new DateTime("2000-" . $i . "-01");
+
+    $date = date_format($datetime, "d-m-Y");
+    $date = date_format($datetime, "F");
+
+    echo $i . " " . $date . " : " . nb_day_per_month($i) . "<br>\n";
+
+}
+
+
+
+# Exercice 5 :
+
+$nb = 4;
+
+for ($line = 1; $line <= $nb; $line++)
+{
+    // Si ligne est la 1ère OU la dernière
+    if (($line == 1) || ($line == $nb))
+    {
+        for ($i = 1; $i <= $nb; $i++)
+            echo("#");
+        echo("<br>\n");
+    }
+    else
+    {
+        // Si ligne n'est NI la 1ère NI la dernière
+
+        // Le 1er caractère et le dernier sont un "#"
+        echo("#");
+
+        // On affiche $nb / 2 fois le nombre d'espaces
+        for ($i = 1; $i <= ($nb / 2); $i++)
+            echo(" ");
+
+        echo("#");
+        echo("<br>\n");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+TD1, Exercice 3, base :
+
+<?php
+
+for ($i = 1; $i <= 12; $i++)
+{
+
+    $datetime = new DateTime("2000-01-01");
+    $datetime = new DateTime("2000-" . $i . "-01");
+
+    $date = date_format($datetime, "d-m-Y");
+    $date = date_format($datetime, "F");
+
+    echo $date . "<br>\n";
+
+}
+?>
+
+# Exercice 3
+
+<table>
+    <tr>
+    <td>
+<?php
+
+for ($i = 1; $i <= 12; $i++)
+{
+
+    $datetime = new DateTime("2000-01-01");
+    $datetime = new DateTime("2000-" . $i . "-01");
+
+    $date = date_format($datetime, "d-m-Y");
+    $date = date_format($datetime, "F");
+
+    echo($i . " " . $date);
+    if ((($i % 3)
+    }
+    else
+        echo("</td><td>");
+
+}
+
+
+?>
+</td>
+</tr>
+</table>
+
+
+
+
+
+# Exercice 4
+
+function nb_day_per_month($nb_month)
+{
+    if (($nb_month == 1) || ($nb_month == 3) || ($nb_month == 5) ||
+        ($nb_month == 7) || ($nb_month == 8) || ($nb_month == 10) ||
+        ($nb_month == 12))
+        return (31);
+
+    if (($nb_month == 4) || ($nb_month == 6) ||
+        ($nb_month == 9) || ($nb_month == 11))
+        return (30);
+
+    return (28);
+}
+
+for ($i = 1; $i <= 12; $i++)
+{
+
+    $datetime = new DateTime("2000-01-01");
+    $datetime = new DateTime("2000-" . $i . "-01");
+
+    $date = date_format($datetime, "d-m-Y");
+    $date = date_format($datetime, "F");
+
+    echo $i . " " . $date . " : " . nb_day_per_month($i) . "<br>\n";
+// echo $i . " " . $date . " : " . date_format($datetime, "t") . "<br>\n";
+
+}
+
+
+
+
+# Exercice 5
+
+function my_square($taille)
+{
+    if ($taille ==  1)
+    {
+         echo("#<br>\n");
+        return ;
+    }
+
+    # Ligne du haut
+    for ($i = 0; $i < $taille; $i++)
+        echo("#");
+    echo("<br>\n");
+
+    if ($taille != 2)
+    {
+         for ($line = 0; $line < ($taille - 2); $line++)
+            {
+                echo("#");
+                for ($i = 0; $i < ($taille - 2); $i++)
+                    echo(" ");
+                echo("#");
+            echo("<br>\n");
+            }
+
+    }
+
+
+    # Ligne du bas
+    for ($i = 0; $i < $taille; $i++)
+        echo("#");
+    echo("<br>\n");
+}
+
+my_square(1);
+echo("<br><br>\n");
+my_square(2);
+echo("<br><br>\n");
+my_square(3);
+echo("<br><br>\n");
+my_square(4);
+echo("<br><br>\n");
+
+
+
