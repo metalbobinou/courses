@@ -1,0 +1,11 @@
+# How to use the test suite
+
+1) copy libmylpf.a in this directory
+2) launch "configure" with or without "DEBUG" parameter
+3) launch "check.sh" or call "make" ("make" is better)
+3bis) "make list" or "make stack" or "make queue" will compile only one of the
+      test suite on one of the structure
+3ter) "make full" will compile the full tests, and "make" or "check.sh" will
+      compile every possible combination of tests
+4) launch "test" or "test-list" or "test-stack" or "test-queue" for testing
+   every structure or one of the structure

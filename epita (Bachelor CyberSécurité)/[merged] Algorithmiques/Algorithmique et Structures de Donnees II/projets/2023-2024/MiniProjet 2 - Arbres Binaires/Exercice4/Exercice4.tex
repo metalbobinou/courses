@@ -1,0 +1,34 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+%\ExoSpecsCustom{\TTBF{check.sh} \TTBF{tests.c} \textit{[\TTBF{test_XYZ.c}]}}{\TTBF{\RenduDir/check/}}{750}{640}{Fonctions autorisées}{\textit{(toutes)}}
+\ExoSpecsCustom{\TTBF{check.sh}, \TTBF{tests.c}, \textit{[\TTBF{test\_XYZ.c}]}}{\TTBF{\RenduDir/check/}}{750}{640}{Fonctions autorisées}{\textit{(toutes)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de fournir un programme et un script qui testeront votre bibliothèque d'arbres.}
+
+\bigskip
+
+\noindent Vous devez écrire une suite de tests vérifiant le bon fonctionnement de votre bibliothèque \TTBF{libmybintree}.
+L'appel à la commande \texttt{make} à la racine du projet avec la cible \textit{check} doit compiler un (ou des) fichiers C se trouvant dans le dossier \TTBF{check} afin qu'ils utilisent la bibliothèque que vous avez écrite préalablement, puis le script \TTBF{check.sh} doit lancer les tests.
+
+Attention : la cible \TTBF{check} doit avoir comme dépendance la cible \TTBF{libmybintree} afin que les bibliothèques soient générées \textit{avant} de compiler et lier les tests.
+Inclure les fichiers C des exercices précédents ne donnera pas tous les points/limitera la note de cet exercice : seuls les fichiers \TTBF{bt\_basics.h} et \TTBF{bt\_bst.h} doivent être utilisés dans un \TTBF{include} pour cet exercice, mais pas les \TTBF{.c} !
+
+\bigskip
+
+\noindent Vous devez donc écrire plusieurs scénarios de test qui construisent des arbres, les parcourent, et suppriment des nœuds (en re-faisant le parcours par la suite).
+Comme vous l'aurez constaté, le format de sortie texte est très précis pour justement permettre des comparaisons simples et aisées.
+
+\noindent Une façon de rédiger les tests consiste à préparer un scénario sur papier en amont, d'écrire le code C réalisant ce scénario et écrivant en sortie standard à chaque étape l'état de l'arbre, puis, d'écrire dans un script shell les sorties attendues et les comparer.
+
+\medskip
+
+\noindent Vous pouvez tout à fait écrire plusieurs scénarios dans plusieurs fichiers C et sh distincts.
+Il faut néanmoins que le script \TTBF{check.sh} existe et lance les tests.
+
+\bigskip
+
+\noindent Les points attribués dans cet exercice dépendront de l'exhaustivité des tests, mais également de la façon de tester : comme indiqué plus haut, si vous n'utilisez pas l'une des bibliothèques résultantes, mais directement les sources de votre projet (\TTBF{bt\_basics.c}, \TTBF{bt\_bst.c}, et vos éventuels autres fichiers sources, ou vous copiez/collez le code, ou d'autres techniques encore...), alors vous n'aurez pas le maximum de points.
+Les tests doivent être exhaustifs pour ne rater aucun cas parmi ceux spécificiés dans ce sujet.

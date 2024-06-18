@@ -1,0 +1,936 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2023-2024}
+\newcommand{\DateExam}{avril 2024}
+%\newcommand{\TypeExam}{Examen - SUJET 2}
+\newcommand{\TypeExam}{CORRECTION Examen}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{enumerate}[label=\Roman*)]
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{enumerate}
+
+%\bigskip
+
+\vfillFirst
+
+% Questions cours
+\section{Arbres Binaires (10 points)}
+
+\subsection{(3 points) Indiquez toutes les propriétés que possède cet arbre, puis écrivez les clés lors d'un parcours profondeur main gauche de l'arbre dans les 3 ordres ainsi que lors d'un parcours largeur : }
+
+\begin{center}
+\begin{tikzpicture}[sibling distance=1.5cm,
+  level/.style = {sibling distance = 55mm/#1},
+  level 1/.style = {sibling distance = 55mm},
+  level 2/.style = {sibling distance = 30mm},
+  level 3/.style = {sibling distance = 15mm},
+  level 4/.style = {sibling distance = 10mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n1A) {A}
+  child { node (n2R) {R}
+          child { node (n3V) {V}
+                  child { node (n4E) {E}
+                          child { node (n5N) {N} }
+                          child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                        }
+                  child { node (n6E) {E} }
+                }
+          child { node (n7N) {N}
+                  child { node (n8G) {G}
+                          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+                          child { node (n9O) {O} }
+                        }
+                  child { node (n10N) {N} }
+                }
+         }
+   child { node (n11O) {O}
+           child { node (n12E) {E}
+                  child { node (n13I) {I}
+                          child { node (n14G) {G} }
+                          child { node (n15V) {V} }
+                        }
+                   child { node (n16Y) {Y} }
+                 }
+           child { node (n17U) {U}
+                   child { node (n18U) {U} }
+                   child { node (n19P) {P} }
+                 }
+        };
+\end{tikzpicture}
+%  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+\end{center}
+
+\begin{tabular}{C{3cm} C{3cm} C{3cm} C{3cm}}
+Arité : 2 & Taille : 19 & Hauteur : 4 & Nb feuilles : 9 \\
+\end{tabular}
+
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+  \item[\CaseCoche] Arbre binaire strict / localement complet \phantom{()}
+  \item[\CaseCoche] Arbre binaire parfait \phantom{()}
+  \item[\CaseCoche] Peigne gauche \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+%  \item[\checkmark] Arbre binaire (presque) complet \phantom{()}
+  \item[\CaseCoche] Arbre binaire (presque) complet \phantom{()}
+  \item[\CaseCoche] Arbre filiforme \phantom{()}
+  \item[\CaseCoche] Peigne droit \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+\bigskip
+
+Parcours profondeur :
+
+\medskip
+
+\centerline{
+%\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+\begin{tabular}{L{2.5cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.3cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}}
+ordre préfixe : & A & R & V & E & N & E & N & G & O & N & O & E & I & G & V & Y & U & U & P \\
+ordre infixe :  & N & E & V & E & R & G & O & N & N & A & G & I & V & E & Y & O & U & U & P \\
+ordre suffixe : & N & E & E & V & O & G & N & N & R & G & V & I & Y & E & U & P & U & O & A \\
+\end{tabular}
+}
+
+\bigskip
+
+Parcours largeur :
+
+\medskip
+
+\centerline{
+%\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+\begin{tabular}{L{2.5cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.3cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}}
+ordre :  & A & R & O & V & N & E & U & E & E & G & N & I & Y & U & P & N & O & G & V \\
+\end{tabular}
+}
+
+
+\vfillLast
+
+\clearpage
+
+%\vfillFirst
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(5 points) Dessinez le résultat de l'insertion dans cet ordre précis des éléments suivants dans un ABR (insertion en feuille et en racine) et dans un AVL : }
+
+\begin{center}
+
+%\'Eléments insérés : 18 - 46 - 55 - 36 - 12 - 38 - 96 - 71
+%\'Eléments insérés : 46 - 18 - 55 - 36 - 12 - 38 - 96 - 71
+%\'Eléments insérés : 32 - 24 - 18 - 30 - 31 - 42 - 36 - 50
+\'Eléments insérés : 32 - 24 - 18 - 30 - 31 - 42 - 36
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.33\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 26mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle}
+  ]
+  \node (n32) {32}
+  child { node (n24) {24}
+          child { node (n18) {18}
+                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                }
+          child { node (n30) {30}
+                  child { node [draw=none] (nB) {\phantom{B}} edge from parent [draw=none] }
+                  child { node (n31) {31} }
+                }
+        }
+  child { node (n42) {42}
+          child { node (n36) {36}
+                  child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none] }
+                }
+          child { node [draw=none] (n50) {\phantom{50}} edge from parent [draw=none] }
+        };
+\end{tikzpicture}
+
+ABR
+
+\textit{insertion en feuille}
+
+(1 point)
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.33\textwidth}
+    \centering
+
+%\begin{tikzpicture}[
+%  level/.style = {sibling distance = 26mm/#1},
+%  every node/.style = {minimum width = 2em, draw, circle},
+%  level distance = 11mm
+%  ]
+%  \node (n50) {50}
+%  child { node (n36) {36}
+%          child { node (n31) {31}
+%                  child { node (n30) {30}
+%                          child { node (n18) {18}
+%                                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+%                                  child { node (n24) {24} }
+%                                }
+%                          child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+%                        }
+%                  child { node (n32) {32} }
+%                }
+%          child { node (n42) {42} }
+%        }
+%  child {
+%          node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none]
+%        };
+%\end{tikzpicture}
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 26mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  level distance = 11mm
+  ]
+  \node (n36) {36}
+  child { node (n31) {31}
+          child { node (n30) {30}
+                  child { node (n18) {18}
+                          child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                          child { node (n24) {24} }
+                        }
+                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                }
+          child { node (n32) {32} }
+        }
+  child { node (n42) {42}
+        };
+\end{tikzpicture}
+
+ABR
+
+\textit{insertion en racine}
+
+(2 points)
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.33\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 26mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle}
+  ]
+  \node (n31) {31}
+  child { node (n24) {24}
+          child { node (n18) {18}
+                  child { node [draw=none] (nA) {\phantom{A}} edge from parent [draw=none] }
+                }
+          child { node (n30) {30}
+                  child { node [draw=none] (nB) {\phantom{B}} edge from parent [draw=none] }
+                }
+        }
+  child { node (n36) {36}
+          child { node (n32) {32} }
+          child { node (n42) {42}
+                  child { node [draw=none] (nC) {\phantom{C}} edge from parent [draw=none] }
+                  child { node [draw=none] (n60) {\phantom{50}} edge from parent [draw=none] }
+                }
+        };
+\end{tikzpicture}
+
+AVL
+
+(2 points)
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+
+%Indiquez combien de rotations droite gauche et gauche droite ont été effectuées dans l'insertion en AVL des précédents éléments (1 point) :
+%
+%\begin{table}[ht!]
+%  \centering
+%  \begin{minipage}{0.50\textwidth}
+%
+%RDG :
+%
+%  \end{minipage}
+%  \hfillx
+%  \begin{minipage}{0.50\textwidth}
+%
+%RGD :
+%
+%  \end{minipage}
+%\end{table}
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2 points) \'Ecrivez une fonction récursive \og \textit{parc\_prof\_rec} \fg{} effectuant un parcours profondeur main gauche dans un arbre binaire, et affichant les nœuds dans chacun des ordres : }
+
+%\noindent Pour expliciter les ordres, vous devrez afficher au format : \og Ordre : nœud \fg{} (exemple : \og Préfixe : node \fg{})
+\noindent Il faut expliciter les éventuels ordres au format : \og Ordre : nœud \fg{} (exemple : \og Préfixe : 42 \fg{})
+
+\begin{center}
+\GrilleReponseN{12}
+\end{center}
+
+
+
+%\bigskip
+
+%\vfillLast
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Micro Projet (10 points)}
+
+\noindent Afin de tester l'ensemble des compétences acquises au cours de cette année, vous allez maintenant toutes les exploiter pour traiter un problème simple.
+La question s'intéresse au nombre et à la façon de construire les chemins entre deux nœuds d'un même arbre.
+Vous devez mobiliser absolument toutes les connaissances vues en cours pour pouvoir réussir cet exercice.
+La macro \textit{sizeof} est autorisée.
+
+\noindent Vous devez écrire les fonctions et procédures suivantes en C.
+Aucune fonction de la bibliothèque C ne pourra être utilisée exceptées \textit{malloc} et \textit{free} : vous devez réécrire toute fonction utile, sauf si une consigne précise le contraire.
+
+\medskip
+
+\noindent Un chemin est une liste de nœuds reliés les uns après les autres par des liens.
+Dans le cas des arbres, la racine est reliée à ses fils, et vice-versa.
+
+\smallskip
+
+\noindent Par exemple, dans le schéma suivant, il existe un chemin entre B et I constitué de : B - E - I
+
+\begin{center}
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 26mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle}
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node (nD) {D}
+                  child { node (nH) {H} }
+                  child { node [draw=none] (nZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (nE) {E}
+                  child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+                  child { node (nI) {I} }
+                }
+        }
+  child { node (nC) {C}
+          child { node (nF) {F} }
+          child { node (nG) {G} }
+        };
+\end{tikzpicture}
+\end{center}
+
+\subsection{Questions préalables [2 points]}
+
+\subsubsection{(1,5 point) Indiquez les chemins entre les nœuds suivants : }
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{B $ \rightarrow $ I}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ B}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{B $ \rightarrow $ A}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\end{tabular}
+%}
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{B $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ B}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{B $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\end{tabular}
+}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{D $ \rightarrow $ E}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ D}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{D $ \rightarrow $ A}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ E}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\end{tabular}
+%}
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{D $ \rightarrow $ E}  & \multirow[c]{2}{*}[0in]{D} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ D}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{D} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{D $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{D} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ E}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\end{tabular}
+}
+
+  \end{minipage}
+\end{table}
+
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{I $ \rightarrow $ F}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{I $ \rightarrow $ A}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ F}  & & & & & & \\
+%                                              & & & & & & \\
+%\hline
+%\end{tabular}
+%}
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{I $ \rightarrow $ F}  & \multirow[c]{2}{*}[0in]{I} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{C} & \multirow[c]{2}{*}[0in]{F} \\
+                                              & & & & & & \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{I $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{I} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ F}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{C} & \multirow[c]{2}{*}[0in]{F} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+\hline
+\end{tabular}
+}
+
+\subsubsection{(0,5 point) Combien existe-t-il de chemin(s) le(s) plus court(s) entre deux nœuds quelconques d'un arbre ?}
+
+1 : Il n'existe qu'un seul chemin entre deux nœuds quelconques d'un arbre.
+
+
+%\subsubsection{De quel algorithme récursif peut-on dériver la recherche d'un chemin dans un arbre entre la racine et un nœud ?}
+%
+%Calcul de la hauteur d'un arbre / Profondeur d'un nœud
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Résolution générale du problème [2 points]}
+
+\noindent Dans les exercices suivants, nous considèrerons les arbres binaires comme cette structure \TTBF{node} :
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C,commentstyle=\color{teal}\ttfamily,morekeywords={node}]
+typedef struct node
+{
+  int         key;
+  struct node *lc;  // Left child
+  struct node *rc;  // Right child
+} node;
+\end{lstlisting}
+\end{center}
+
+\noindent En admettant que vous disposez des fonctions suivantes exclusivement pour cette question, écrivez l'algorithme général de résolution du problème sous la forme d'une fonction C.
+(Les tableaux de node* sont tous \textit{NULL-terminated}).
+
+\medskip
+
+\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\medskip
+
+\setlength\fboxrule{0.2pt}
+\noindent Un tableau NULL-terminated contenant A, B, et C sera de la forme suivante : \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}}
+\setlength\fboxrule{0.4pt}
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C,commentstyle=\color{teal}\ttfamily,morekeywords={node}]
+// Longueur du chemin (nombre de noeuds) entre la racine et un noeud
+//      (si le chemin n'existe pas, la fonction renvoie -1)
+int count_path_root_to_node(node *root, node *end);
+
+// Generation du tableau (NULL-terminated) de node* contenant le
+//   chemin entre la racine et un noeud
+node **build_path_root_to_node(node *root, node *end);
+
+// Longueur d'un tableau de node*
+int array_length(node **in_array);
+
+// Inversion en place d'un tableau de node*
+//   (en place = sans le reallouer)
+void invert_array_in_place(node **in_array);
+
+// Longueur du prefixe commun entre 2 tableaux
+int common_prefix_length(node **tab1, node **tab2);
+
+// Fusion de 2 tableaux de node* vers un nouveau tableau
+node **merge_arrays_new(node **tab1, node **tab2);
+\end{lstlisting}
+\end{center}
+
+
+\noindent Vous pouvez également appeler les fonctions classiques des arbres : \textit{hauteur(arbre)}, \textit{profondeur(nœud)}, \textit{taille(arbre)}, \textit{parc\_prof(arbre)}, ... mais vous devrez les réimplémenter si nécessaire.
+
+
+%\bigskip
+\clearpage
+
+
+\subsubsection{(2 points) \'Ecrivez la fonction produisant un tableau \textit{NULL-terminated} du chemin entre deux nœuds quelconques d'un arbre binaire}
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C,morekeywords={node}]
+node **build_path(node *root, node *start, node *end)
+{
+  node **root_path1, **root_path2;
+  node **path1, **path2;
+  node **final_path;
+  int prefix_end;
+
+  root_path1 = build_path_root_to_node(root, start);
+  root_path2 = build_path_root_to_node(root, end);
+
+  prefix_end = common_prefix_next_index(root_path1, root_path2);
+  path1 = &root_path1[prefix_end];
+  path2 = &root_path2[prefix_end - 1];
+
+  path1 = invert_array_in_place(path1);
+
+  final_path = merge_arrays_copy(path1, path2);
+
+  free(root_path1)
+  free(root_path2);
+
+  return (final_path);
+}
+\end{lstlisting}
+\end{center}
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Génération des tableaux de chemins [2 points]}
+
+%\subsubsection{Fonction calculant la longueur du chemin de la racine vers un nœud d'un arbre binaire}
+%
+%\subsubsection{Fonction produisant un tableau \textit{NULL-terminated} du chemin de la racine vers un nœud d'un arbre binaire}
+
+
+\subsubsection{(2 points) \'Ecrivez une fonction comptant le nombre de nœuds sur le chemin entre la racine d'un arbre et un nœud. Si aucun chemin n'existe vers ce nœud, vous devez renvoyer -1 : }
+
+\noindent \textit{Exemple : entre le nœud B et I du schéma illustratif en page 3, il y a 3 nœuds : B - E - I.}
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C]
+int count_path_nodes_rec(node *root, node *end, int level)
+{
+  int left, right;
+
+  if (root == NULL)
+    return (-1);
+
+  if (root == end)
+    return (level);
+
+  left = count_path_nodes_rec(root->lc, end, level + 1);
+  right = count_path_nodes_rec(root->rc, end, level + 1);
+
+  if (left > right)
+    return (left);
+  else
+    return (right);
+}
+\end{lstlisting}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int count_path_nodes(node *root, node *end)
+{
+  return (count_path_nodes_rec(root, end, 1));
+}
+\end{lstlisting}
+\end{center}
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{(2 points) \'Ecrivez une fonction remplissant un tableau \textit{NULL-terminated} de node* avec l'adresse de chaque nœud d'un chemin entre une racine et un nœud parmi ses sous-arbres. Si aucun chemin n'existe, renvoyez simplement NULL. Considérez que le tableau est déjà alloué avec suffisament de place : }
+
+%%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL, '\textbackslash{}0', ou 0.}
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+%\begin{center}
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%int fill_path_nodes_rec(node *root, node *end, int level, node **tab)
+%{
+%  int left, right;
+%
+%  if (root == NULL)
+%    return (-1);
+%
+%  if (root == end)
+%    return (level);
+%
+%  left = fill_path_nodes_rec(root->lc, end, level + 1, tab);
+%  right = fill_path_nodes_rec(root->rc, end, level + 1, tab);
+%
+%  if ((left > 0) || (right > 0))
+%    tab[level - 1] = root;
+%
+%  if (left > right)
+%    return (left);
+%  else
+%    return (right);
+%}
+%\end{lstlisting}
+
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%node **fill_path_nodes(node *start, node *end, node **tab)
+%{
+%  int level;
+%
+%  level = fill_path_nodes_rec(start, end, 1, tab);
+%
+%  if (level == -1)
+%    return (NULL);
+%
+%  tab[level] = NULL;
+%  return (tab);
+%}
+%\end{lstlisting}
+%\end{center}
+
+
+%\bigskip
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gestion des tableaux [4 points]}
+
+%\subsubsection{Fonction calculant la taille des préfixes communs de deux tableaux \textit{NULL-terminated}}
+%
+%\subsubsection{Fonction inversant un tableau \textit{NULL-terminated} en place}
+%
+%\subsubsection{Fonction fusionnant deux tableaux \textit{NULL-terminated}}
+
+
+%\subsubsection{(1 point) \'Ecrivez une fonction calculant la taille du préfixe commun entre deux tableaux \textit{NULL-terminated}. Si les deux tableaux sont des pointeurs NULL, renvoyez -1 : }
+%
+%\setlength\fboxrule{0.2pt}
+%\noindent Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} et un tableau contenant \fbox{A}\fbox{B}\fbox{D}\fbox{\textit{NULL}} auront un préfixe commun de taille 2 (A et B).
+%\setlength\fboxrule{0.4pt}
+%
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+%
+%\begin{center}
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%int common_prefix_length(node **tab1, node **tab2)
+%{
+%  int index = 0;
+%
+%  if ((tab1 == NULL) && (tab2 == NULL))
+%    return (-1);
+%
+%  if ((tab1 == NULL) || (tab2 == NULL))
+%    return (0);
+%
+%  while (tab1[index] == tab2[index]) &&
+%        (tab1[index] != NULL) && (tab2[index] != NULL)
+%    index++;
+%
+%  return (index);
+%}
+%\end{lstlisting}
+%\end{center}
+
+
+%%\bigskip
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{(2 points) \'Ecrivez une fonction inversant l'ordre des éléments d'un tableau \textit{NULL-terminated} contenant des node*. Si le tableau est un pointeur NULL, renvoyez NULL. L'inversion doit se faire en place, c'est-à-dire qu'il ne faut pas allouer de nouveau tableau : }
+
+\setlength\fboxrule{0.2pt}
+\noindent Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} sera inversé en \fbox{C}\fbox{B}\fbox{A}\fbox{\textit{NULL}}.
+\setlength\fboxrule{0.4pt}
+
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C]
+void invert_array_in_place(node **in_tab)
+{
+  node *tmp;
+  int max = 0;
+  int i = 0;
+
+  if (in_tab != NULL)
+  {
+    while (in_tab[max] != NULL)
+      max++;
+
+    while (i < max)
+    {
+      tmp = in_tab[i];
+      in_tab[i] = in_tab[max];
+      in_tab[max] = tmp;
+      i++;
+      max--;
+    }
+  }
+}
+\end{lstlisting}
+\end{center}
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{(2 points) \'Ecrivez une fonction prenant en paramètres deux tableaux \textit{NULL-terminated} de node* et les fusionnant en un seul tableau \textit{NULL-terminated}. Le tableau de sortie doit être un nouveau tableau alloué. Si les tableaux sont des pointeurs NULL, renvoyez NULL : }
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C]
+int tab_len(node *tab)
+{
+  int i = 0;
+
+  if (tab == NULL)
+    return (0);
+
+  while (tab[i] != NULL)
+    i++;
+  return (i);
+}
+\end{lstlisting}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node **merge_arrays(node **tab1, node **tab2)
+{
+  node **out = NULL;
+  int len1, len2, i = 0;
+
+  if ((tab1 == NULL) && (tab2 == NULL))
+    return (NULL);
+
+  len1 = tab_len(tab1);
+  len2 = tab_len(tab2);
+  out = malloc((len1 + len2 + 1) * sizeof (node*));
+  while (i < len1)
+  {
+    out[i] = tab1[i];
+    i++;
+  }
+
+  i = 0;
+  while (i < len2)
+  {
+    out[len1 + i] = tab2[i];
+    i++;
+  }
+
+  out[len1 + len2] = NULL;
+
+  return (out);
+}
+\end{lstlisting}
+\end{center}
+
+
+\end{document}
