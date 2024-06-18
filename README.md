@@ -11,11 +11,13 @@ Vous pouvez les réutiliser tant que vous citez leur provenance.
 # Contents / Contenus
 
 ## EPITA (Bachelor CyberSécurité)
-- Algorithmique 1 [CYBER1] (2023--...))
-- Algorithmique et Structure de Données 2 [CYBER1] (2022--...))
-- Algorithmique Premiers Pas [CYBER1] (2022-2023) *(fusion dans algorithmique 1)*
+- Algorithmique 2 [CYBER1] (2024-...)
+- Algorithmique 1 [CYBER1] (2023-...)
+- Architecture des Ordinateurs 2 [CYBER1] (2024-...)
+- Architecture des Ordinateurs 1 [CYBER1] (2022-...)
+- Algorithmique et Structure de Données 2 [CYBER1] (2022-2024) *(fusion dans algorithmique 2)*
 - Algorithmique et Structure de Données 1 [CYBER1] (2022-2023) *(fusion dans algorithmique 1)*
-- Architecture des Ordinateurs [CYBER1] (2022-...)
+- Algorithmique Premiers Pas [CYBER1] (2022-2023) *(fusion dans algorithmique 1)*
 - Systèmes - Linux & Windows [CYBER1] (2021-2022)
 - C avancé [CYBER1] (2021-2022)
 
