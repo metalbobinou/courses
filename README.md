@@ -35,7 +35,7 @@ _[merged/obsolete]_
 - Développement Web (PHP) [L2 - MIASHS] (2018-2021)
 
 ## Grades / Notes
-- Fichiers de notes classiques / Regualr grades
+- Fichiers de notes classiques / Regular grades
 - Fichier de revue de code / Code review
 - Feuille de calcul générale pour la moyenne / Means
 
