@@ -1,0 +1,521 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2023-2024}
+\newcommand{\DateExam}{juillet 2024}
+%\newcommand{\TypeExam}{Rattrapage}
+\newcommand{\TypeExam}{CORRECTION Rattrap}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{enumerate}[label=\Roman*)]
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{enumerate}
+
+%\bigskip
+
+\vfillFirst
+
+% Questions cours
+\section{Questions (5 points)}
+
+%\subsection{(1 point) \'Ecrivez l'état d'une file après avoir effectué ces opérations (la file est considérée comme initialement vide) : }
+\subsection{(1 point) \'Ecrivez l'état d'une file après avoir effectué ces opérations (la file est considérée comme initialement vide), puis, indiquez quel élément sortira de la file lors du prochain \og dequeue \fg{}, ainsi que celui qui sortira en dernier : }
+
+\bigskip
+
+\begin{center}
+
+\begin{large}
+enfiler 2, enfiler 4, défiler, enfiler 3, enfiler 1, défiler, défiler, enfiler 7, enfiler 5, défiler, enfiler 6
+\end{large}
+
+\bigskip
+
+\begin{tabular}{ | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | }
+  \hline
+  \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \cellcolor{black!0} 7 & \cellcolor{black!0} 5 & \cellcolor{black!0} 6 & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \hline
+\end{tabular}
+
+\smallskip
+
+\begin{tabular}{   C{1cm}   C{1cm}   C{1cm}   C{1cm}   C{1cm}   C{1cm}   }
+  \tikzarrowup{middarkgreen}{middarkgreen}{\phantom{cf}} &  &  &  &  &  \\
+  Head &  &  &  &  &  \\
+\end{tabular}
+
+%\end{center}
+
+%\bigskip
+%\vspace*{-0.75cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{(1 point) Quel élément sortira de la file lors du prochain \og dequeue \fg{} ? Quel élément sortira en dernier de la file ? }
+
+%\bigskip
+%\bigskip
+
+%\begin{center}
+\begin{table}[ht!]
+%  \centering
+  \begin{minipage}{0.50\textwidth}
+
+Prochain élément qui sortira : 7
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+
+Dernier élément qui sortira : 6
+
+  \end{minipage}
+\end{table}
+\end{center}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{(1 point) \'Ecrivez l'état d'une pile après avoir effectué ces opérations (la pile est considérée comme initialement vide) : }
+\subsection{(1 point) \'Ecrivez l'état d'une pile après avoir effectué ces opérations (la pile est considérée comme initialement vide), puis, indiquez quel élément sortira de la pile lors du prochain \og pop \fg{}, ainsi que celui qui sortira en dernier : }
+
+\bigskip
+
+\begin{center}
+
+\begin{large}
+empiler 2, empiler 4, dépiler, empiler 3, empiler 1, dépiler, dépiler, empiler 7, empiler 5, dépiler, empiler 6
+\end{large}
+
+%\bigskip
+
+\bigskip
+
+\begin{tabular}{ | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | }
+  \hline
+  \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \cellcolor{black!0} 6 & \cellcolor{black!0} 7 & \cellcolor{black!0} 2 & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0}   & \cellcolor{black!0} & \cellcolor{black!0} & \cellcolor{black!0} \\
+  \hline
+\end{tabular}
+
+\smallskip
+
+\begin{tabular}{   C{1cm}   C{1cm}   C{1cm}   C{1cm}   C{1cm}   C{1cm}   }
+  \tikzarrowup{middarkgreen}{middarkgreen}{\phantom{cf}} &  &  &  &  &  \\
+  Head &  &  &  &  &  \\
+\end{tabular}
+
+%\end{center}
+
+%\bigskip
+%\vspace*{-0.75cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{(1 point) Quel élément sortira de la pile lors du prochain \og pop \fg{} ? Quel élément sortira en dernier de la pile ? }
+
+%\bigskip
+%\bigskip
+
+%\begin{center}
+\begin{table}[ht!]
+%  \centering
+  \begin{minipage}{0.50\textwidth}
+
+Prochain élément qui sortira : 6
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+
+Dernier élément qui sortira : 2
+
+  \end{minipage}
+\end{table}
+\end{center}
+
+\bigskip
+\bigskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfillLast
+
+\clearpage
+
+\subsection{(1,5 point) En admettant que l'on dispose d'une pile vide et que les éléments \og 1 2 3 4 5 6 \fg{} arrivent en entrée dans cet ordre exclusivement, décrivez les scénarios permettant d'obtenir les sorties suivantes : }
+
+%\vfillFirst
+
+%\bigskip
+\medskip
+
+\begin{center}
+\noindent \textit{exemple : pour \og A B C \fg{} en entrée, on peut obtenir \og B C A \fg{} en sortie en faisant : \linebreak
+\og push A \fg, \og push B \fg, \og pop \fg, \og push C \fg, \og pop \fg, \og pop \fg }
+
+\noindent \textit{On a bien inséré A, puis B, puis C, mais l'ordre de sortie est différent suivant les \og pop \fg}
+\end{center}
+
+\medskip
+
+%\vfillLast
+
+
+\begin{center}
+
+\begin{large}
+2, 1, 3, 6, 5, 4
+\end{large}
+
+\begin{center}
+%\GrilleReponseN{6}
+ push 1, push 2, pop, pop, push 3, pop, push 4, push 5, push 6, pop, pop, pop
+\end{center}
+
+
+\begin{large}
+4, 3, 5, 2, 1, 6
+\end{large}
+
+\begin{center}
+%\GrilleReponseN{6}
+ push 1, push 2, push 3, push 4, pop, pop, push 5, pop, pop, pop, push 6, pop
+\end{center}
+
+
+\begin{large}
+2, 4, 3, 5, 6, 1
+\end{large}
+
+\begin{center}
+%\GrilleReponseN{6}
+ push 1, push 2, pop, push 3, push 4, pop, pop, push 5, pop, push 6, pop, pop
+\end{center}
+
+\end{center}
+
+%\vfillLast
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(1,5 point) Exécutez l'algorithme suivant, et notez l'état d'avancement des variables (inscrivez l'état initial dans la ligne prévue à cet effet) : }
+
+\bigskip
+
+\begin{center}
+\textit{Vous exécuterez la fonction suivante avec comme paramètres a = 16435 et b = 4242 : }
+\end{center}
+
+
+\vfillFirst
+
+
+%int FunctionXYZ(int a, int b)
+%{
+%  if (a <= 0)
+%    return (b);
+%  return (FunctionXYZ(a / 10, b + 1);
+%}
+
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[language=C]
+int FunctionXYZ(int a, int b)
+{
+  int num = 0;
+
+  if (a <= 0)
+    return (-1);
+
+  while ((a > 0) && (b > 0))
+  {
+    num += 1;
+    a = a / 10;
+    b = b / 10;
+  }
+  return (num);
+}
+\end{lstlisting}
+%    \caption{Algorithme de la somme des N premiers entiers}
+%    \label{algo-somme-n-premiers-entiers}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+    \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |}
+        \hline
+          \cellcolor{black!45} tour  &  \cellcolor{black!15} a  &  \cellcolor{black!15} b  &  \cellcolor{black!15} num  \\
+        \hline
+        \multirow{2}{*}[0pt]{\textit{\'Etat}}  &       &      &   \\
+        \multirow{2}{*}[0pt]{\textit{initial}} & 16435 & 4242 & 0 \\
+             &     &     &       \\
+        \hline
+             &      &     &   \\
+         1   & 1643 & 424 & 1 \\
+             &      &     &   \\
+        \hline
+             &     &    &   \\
+         2   & 164 & 42 & 2 \\
+             &     &    &   \\
+        \hline
+             &    &   &   \\
+         3   & 16 & 4 & 3 \\
+             &    &   &   \\
+        \hline
+             &     &   &   \\
+         4   & 1   & 0 & 4 \\
+             &     &   &   \\
+        \hline
+        \cellcolor{black!5}                 & \cellcolor{black!5} & \cellcolor{black!5} & \cellcolor{black!5}   \\
+        \cellcolor{black!5} \textit{return} & \cellcolor{black!5} & \cellcolor{black!5} & \cellcolor{black!5} 4 \\
+        \cellcolor{black!5}                 & \cellcolor{black!5} & \cellcolor{black!5} & \cellcolor{black!5}   \\
+        \hline
+        \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+        \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+        \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+        \hline
+    \end{tabular}
+%    \caption{Tableau d'exécution pas à pas}
+%    \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+%  \caption{Algorithme de la somme des N premiers entiers}
+%  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\bigskip
+
+\vfillLast
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithmes (15 points)}
+
+\subsection{(2 points) \'Ecrivez une fonction récursive \og \textit{ProductNInt} \fg{} calculant le produit des N premiers entiers }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+
+\subsection{(2 points) \'Ecrivez une fonction itérative \og \textit{my\_strlen} \fg{} calculant la taille d'une chaîne de caractères }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{(0,5 point) \'Ecrivez une structure de données \og \textit{my\_stack} \fg{} pouvant servir de pile (à base de pointeurs ou de tableaux) }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+\bigskip
+
+
+\subsection{(0,5 point) \'Ecrivez une structure de données \og \textit{my\_queue} \fg{} pouvant servir de file (à base de pointeurs ou de tableaux) }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{10}
+\end{center}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2,5 points) \'Ecrivez une fonction \og \textit{push} \fg{} pouvant servir à empiler un élément dans votre précédente structure \og \textit{my\_stack} \fg{} }
+
+\bigskip
+
+\begin{center}
+%%\LigneReponseQuarante
+%\LigneReponseTrente
+%\LigneReponseCinq
+%\LigneReponseTrois
+
+\GrilleReponseN{24}
+\end{center}
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2,5 points) \'Ecrivez une fonction \og \textit{pop} \fg{} pouvant servir à dépiler un élément dans votre précédente structure \og \textit{my\_stack} \fg{} }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{24}
+\end{center}
+
+\bigskip
+
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2,5 points) \'Ecrivez une fonction \og \textit{enqueue} \fg{} pouvant servir à enfiler un élément dans votre précédente structure \og \textit{my\_queue} \fg{} }
+
+\bigskip
+
+\begin{center}
+
+\GrilleReponseN{24}
+\end{center}
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2,5 points) \'Ecrivez une fonction \og \textit{dequeue} \fg{} pouvant servir à défiler un élément dans votre précédente structure \og \textit{my\_queue} \fg{} }
+
+\bigskip
+
+\begin{center}
+\GrilleReponseN{24}
+\end{center}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+
+%\thispagestyle{empty}
+
+\vfillFirst
+
+\begin{center}
+
+\begin{LARGE}
+\textbf{\MakeUppercase{RATTRAPAGE \TitreMatiere}}
+\end{LARGE}
+
+\end{center}
+
+\vfillLast
+
+\end{document}

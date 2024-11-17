@@ -1,0 +1,249 @@
+%%% ARBRE VIDE
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] (none) {Ø}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(1) Insertion de 36
+% M
+
+\begin{table}[ht!]
+  \centering
+
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [draw=none] (none) {Ø}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}  
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nM) {36}
+  ;
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Insert 42 (N)
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.10\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{1}}] (nM) {36}
+  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+  child { node [label=below:{\footnotesize \textit{0}}] (nN) {42}
+        };
+\end{tikzpicture}
+
+  \end{minipage}
+\end{table}
+
+
+Insert 56 (O) (rotation gauche )
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+  child { node [label=below:{\footnotesize \textit{0}}] (nO) {56}
+        };
+\end{tikzpicture}
+
+
+
+Insert 32 (L)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nM) {36}
+          child { node [label=below:{\footnotesize \textit{0}}] (nL) {32} }
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nO) {56}
+        };
+\end{tikzpicture}
+
+
+
+Insert 28 (K)  (rotation droite)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (nL) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (nK) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nO) {56}
+        };
+\end{tikzpicture}
+
+
+
+Insert 72 (Q)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (nL) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (nK) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{1}}] (nO) {56}
+          child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+          child { node [label=below:{\footnotesize \textit{0}}] (nQ) {72} }
+        };
+\end{tikzpicture}
+
+
+
+Insert 64 (P) (rotation droite gauche)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{0}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (nL) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (nK) {28} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nP) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (nO) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nQ) {72} }
+        };
+\end{tikzpicture}
+
+
+
+Insert 16 (H)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nL) {32}
+          child { node [label=below:{\footnotesize \textit{-1}}] (nK) {28}
+                  child { node [label=below:{\footnotesize \textit{0}}] (nH) {16} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nP) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (nO) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nQ) {72} }
+        };
+\end{tikzpicture}
+
+
+
+Insert 21 (I)  (rotation gauche droite)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{-1}}] (nL) {32}
+          child { node [label=below:{\footnotesize \textit{0}}] (nI) {21}
+                  child { node [label=below:{\footnotesize \textit{0}}] (nH) {16} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (nK) {28} }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nP) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (nO) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nQ) {72} }
+        };
+\end{tikzpicture}
+
+
+
+Insert 8 (A) (rotation droite)
+
+
+
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 33mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node [label=below:{\footnotesize \textit{-1}}] (nN) {42}
+  child { node [label=below:{\footnotesize \textit{0}}] (nI) {21}
+          child { node [label=below:{\footnotesize \textit{-1}}] (nH) {16}
+                  child { node [label=below:{\footnotesize \textit{0}}] (nA) {8} }
+                  child { node [draw=none] (nZZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node [label=below:{\footnotesize \textit{0}}] (nL) {32}
+                  child { node [label=below:{\footnotesize \textit{0}}] (nK) {28} }
+                  child { node [label=below:{\footnotesize \textit{0}}] (nM) {36} }
+                }
+        }
+  child { node [label=below:{\footnotesize \textit{0}}] (nP) {64}
+          child { node [label=below:{\footnotesize \textit{0}}] (nO) {56} }
+          child { node [label=below:{\footnotesize \textit{0}}] (nQ) {72} }
+        };
+\end{tikzpicture}
+
+
+\end{center}
+
