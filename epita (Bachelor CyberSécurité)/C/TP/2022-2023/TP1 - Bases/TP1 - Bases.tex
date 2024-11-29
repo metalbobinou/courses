@@ -1,0 +1,126 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Langage C}
+\newcommand{\TitreSeance}{Bases de C}
+\newcommand{\NumeroTD}{TP 1 - Bases}
+\newcommand{\DateCours}{06 décembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{C, Langage}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce TP a pour objectif de vous faire découvrir le langage C et les outils nécessaires pour le faire fonctionner.
+Vous démarrerez depuis l'écriture de quelques lignes de code que vous compilerez, pour finalement réaliser un petit programme de statistiques.
+Durant tout l'exercice, vous utiliserez au fur et à mesure quelques notions essentielles du langage C.
+
+\bigskip
+
+\section{Programmes simples}
+
+\medskip
+
+\question{Écrivez un programme en C calculant le produit de deux nombres (positifs ou négatifs) en effectuant des additions. Vous afficherez l'état des deux paramètres au fur et à mesure ligne après ligne.}
+
+Pour vous aider, voici le prototype attendu pour la fonction :
+
+\begin{lstlisting}[language=C,morekeywords={floor,ceil}]
+int Multiplication(int x, int y) \end{lstlisting}
+
+
+\question{Écrivez un programme en C calculant la puissance de $ x^{n} $ (pour $ n $ positif ou nul) en effectuant des multiplications. Vous afficherez l'évolution des deux paramètres au fur et à mesure.}
+
+
+\question{Écrivez un programme en C testant la parité d'un nombre $ n $.}
+
+Essayez de renvoyer directement le test que vous feriez dans un \TTBF{if} afin de mieux comprendre ce que vérifie réellement une condition en C.
+Testez votre code avec plusieurs cas.
+
+\bigskip
+
+\question{Écrivez un programme en C calculant la factorielle d'un nombre, et affichant les valeurs successives.}
+
+\bigskip
+
+\question{Écrivez un programme en C affichant un carré de caractères $ \# $. La taille du carré sera donnée en paramètre. Le carré sera rempli de vide (seule la bordure sera constituée de caractères).}
+
+\bigskip
+
+\question{Écrivez une fonction transformant un format horaire en un format uniquement composé de secondes. Cette fonction prendra 3 entiers en paramètre (les heures, les minutes, et les secondes) et les convertira en secondes. Par exemple, 1h 23m 45s deviendra 5025 secondes.}
+
+\question{Écrivez une autre fonction de conversion horaire qui prend cette fois un unique entier qui respecte un format précis (hhmmss) pour le convertir en secondes. Par exemple le paramètre 153042 signifie 15h 30m 42s qu'il faut convertir en secondes.}
+
+\bigskip
+
+\question{Écrivez une fonction qui transforme un nombre en son miroir. Dans une première version, vous ferez une procédure qui affiche simplement les caractères au fur et à mesure, et dans une deuxième version, vous ferez une fonction qui construit un entier que vous retournerez. Par exemple, pour 12034, son miroir sera 43021. Autre exemple : 2000 aura comme miroir 0002, c'est-à-dire 2. Attention aux nombres composés d'un nombre pair/impair de chiffres.}
+
+\question{Écrivez une fonction détectant si un nombre est un palindrome. Un palindrome est simplement un mot ou un nombre composé des mêmes caractères ou chiffres sur sa première moitié par rapport à sa deuxième moitié. Par exemple, 27972 est un palindrome. 1331 est également un palindrome, mais 1664 n'en est pas un.}
+
+
+\newpage
+
+\section{Conversions et autres usages}
+
+\medskip
+
+\question{Écrivez une fonction convertissant les prix en euros en francs (rappel : le taux de conversion est de $ 1 $ \euro{} = $ 6,55957 $ F.}
+
+\question{Écrivez une fonction convertissant les prix en francs en euros.}
+
+\bigskip
+
+\question{Écrivez une fonction testant si un nombre est premier ou non.}
+
+\question{Écrivez une fonction affichant la table de multiplication d'un nombre donné en paramètre.}
+
+\bigskip
+
+\question{Écrivez une procédure affichant la table ASCII avec les équivalences décimales, héxadécimales, puis le caractère. (Vous pouvez vous contenter des valeurs entre 32 et 126)}
+
+\question{Écrivez une fonction qui transforme un entier en un tableau de 6 caractères interprétable comme une chaîne de caractères. (Vous pouvez faire une meilleure gestion de l'espace mémoire si vous vous en sentez le courage)}
+
+\bigskip
+
+\question{Écrivez une fonction demandant un code PIN à l'utilisateur (vous pourrez utiliser la fonction \TTBF{scanf(3)} pour cela). La fonction doit afficher "Déverrouillage" si le code est trouvé, sinon, la fonction doit re-demander à l'utilisateur d'entrer un code PIN.}
+
+\bigskip
+
+\question{Écrivez une procédure qui contient une variable de type \TTBF{char} que vous initialiserez. Affichez son contenu, sa taille, et son adresse en mémoire.}
+
+\question{Copiez la procédure précédente et cette fois, n'initialisez pas son contenu, mais affichez les mêmes informations que précédemment.}
+
+\question{Copiez la procédure précédente encore une fois, transformez la variable de type \TTBF{char} en \TTBF{char*}, puis allouez une seule case mémoire pouvant contenir un caractère avec \TTBF{malloc(3)}. Affichez d'abord le contenu de ce pointeur, puis, allouez une valeur dans la case mémoire, et re-affichez les informations concernant le caractère.}
+
+\end{document}

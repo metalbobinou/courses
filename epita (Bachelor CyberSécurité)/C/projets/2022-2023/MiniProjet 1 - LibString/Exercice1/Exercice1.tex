@@ -1,0 +1,64 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{StrBasics.c} \TTBF{StrBasics.h}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de recoder les fonctions essentielles permettant de manipuler des chaînes de caractères : \TTBF{my\_strlen}, \TTBF{my\_strdup}, et \TTBF{my\_strcmp} }
+
+\bigskip
+
+\noindent Vous devez implémenter ces fonctions en respectant strictement les spécifications suivantes.
+Vous ne devez ni rendre de fonction \TTBF{main} ni vos tests : vous ne devez rendre \textit{que} les fonctions demandées (et éventuellement celles vous permettant de les faire fonctionner) dans le fichier \texttt{StrBasics.c}, ainsi que leurs prototypes dans le fichier \texttt{StrBasics.h}.
+
+\bigskip
+
+%\noindent Vous devez implémenter les X fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{int my\_strlen(char *str)}
+%\item \TTBF{char *my\_strdup(char *str)}
+%\item \TTBF{int my\_strcmp(char *s1, char *s2)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={Liste des fonctions pour l'exercice 1}]
+\begin{lstlisting}[frame=single]
+int my_strlen(char *str);
+char *my_strdup(char *str);
+int my_strcmp(char *s1, char *s2);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{int my\_strlen(char *str)}}
+
+\noindent Cette fonction calcule la taille d'une chaîne de caractères.
+La fonction doit renvoyer un entier qui correspond au nombre de caractères dans la chaîne (sans compter le '\TTBF{\textbackslash{}0}' final).
+Si la chaîne de caractère est vide (elle ne contient qu'un seul caractère : '\TTBF{\textbackslash{}0}'), alors la fonction doit renvoyer $ 0 $.
+Si le paramètre donné est \TTBF{NULL}, alors la fonction renverra $ -1 $.
+
+
+\subsubsection*{\TTBF{char *my\_strdup(char *str)}}
+
+\noindent Cette fonction duplique la chaîne de caractère donnée en paramètre.
+La fonction doit renvoyer l'adresse d'un espace mémoire distinct contenant une copie de la chaîne donnée en paramètre.
+Cet espace mémoire doit avour été alloué avec \TTBF{malloc(3)} (afin que l'utilisateur de votre fonction puisse le libérer avec \TTBF{free(3)}).
+Si la chaîne de caractères donnée en paramètre est vide (le premier caractère est un '\TTBF{\textbackslash{}0}'), alors la fonction doit renvoyer \TTBF{NULL}.
+Si \TTBF{malloc(3)} n'arrive pas à allouer assez de mémoire pour stocker la nouvelle chaîne, alors la fonction doit renvoyer \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{int my\_strcmp(char *s1, char *s2)}}
+
+\noindent Cette fonction compare deux chaînes de caractères entre elles, caractère par caractère.
+La fonction retourne $ 0 $ si les deux chaînes de caractères sont égales.
+En cas d'inégalité, il s'agit de calculer la différence lexicographique entre \TTBF{s1} et \TTBF{s2}.
+
+\noindent Ainsi, \TTBF{strcmp("ABCDE", "ABCDG")} renverra $ -2 $, car '\TTBF{E}' est deux crans avant '\TTBF{G}', mais,  \TTBF{strcmp("ABCDG", "ABCDE")} renverra $ 2 $, car '\TTBF{G}' est deux crans après '\TTBF{E}'.
+
+\noindent \textit{N'oubliez pas que les caractères sont déjà considérés comme des nombres.}
+
+% AJOUTER LES TESTS ET PRECISIONS SI CHAINE 1 EST PLUS PETITE QUE CHAINE 2

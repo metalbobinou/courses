@@ -1,0 +1,195 @@
+%% Exercice 2
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+%\ExoSpecsCustom{\TTBF{my\_calc}}{\TTBF{\RenduDir/src/my\_calc.c}}{750}{640}{Commandes autorisées}{\TTBF{sh}, \TTBF{echo}, \TTBF{exit}}
+\ExoSpecsSimple{\TTBF{my\_calc.c}}{\TTBF{\RenduDir/src/my\_calc.c}}{750}{640}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de créer une mini calculatrice en C.}
+
+\bigskip
+
+\noindent Vous devez écrire un programme qui prendra trois paramètres (deux nombres, puis l'opérateur), et affichera le résultat de l'opération désignée.
+
+\noindent Vous devez implémenter les 5 opérations suivantes : l'addition (symbole \TTBF{+}), la soustraction (symbole \TTBF{-}), la multiplication (lettre \TTBF{x}), la division entière (symbole \TTBF{/}), et le reste de la division euclidienne (symbole \TTBF{\%}).
+
+\noindent \`A la fin du calcul, votre programme doit renvoyer 0.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ ./my_calc 1 3 +
+4
+$ echo $?
+0
+$ ./my_calc 144 362 -
+-218
+$ echo $?
+0
+$ ./my_calc 6 7 x
+42
+$ echo $?
+0
+$ ./my_calc 13 3 /
+4
+$ echo $?
+0
+$ ./my_calc 69 2 %
+1
+$ echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si des paramètres manquent, vous devez écrire le message suivant, et renvoyer 1.
+
+\bigskip
+
+\noindent \TTBF{Not\textvisiblespace enough\textvisiblespace parameters.}
+
+\noindent \TTBF{Usage:\textvisiblespace ./my\_calc\textvisiblespace number\textvisiblespace number\textvisiblespace operator}
+
+\noindent \TTBF{Operator\textvisiblespace might\textvisiblespace be\textvisiblespace :\textvisiblespace +\textvisiblespace -\textvisiblespace x\textvisiblespace /\textvisiblespace \%}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 : pas assez de paramètres}]
+$ ./my_calc
+Not enough parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+1
+$ ./my_calc 0 4
+Not enough parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+1
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si des paramètres sont en trop, vous devez écrire le message suivant, et renvoyer 2.
+
+\bigskip
+
+\noindent \TTBF{Too\textvisiblespace much\textvisiblespace parameters.}
+
+\noindent \TTBF{Usage:\textvisiblespace ./my\_calc\textvisiblespace number\textvisiblespace number\textvisiblespace operator}
+
+\noindent \TTBF{Operator\textvisiblespace might\textvisiblespace be\textvisiblespace :\textvisiblespace +\textvisiblespace -\textvisiblespace x\textvisiblespace /\textvisiblespace \%}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 : trop de paramètres}]
+$ ./my_calc 0 4 x 45
+Too much parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+2
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si l'opérateur n'est pas placé après les nombres/en dernier/à la troisième position, vous devez indiquer le message suivant, et renvoyer 3.
+
+\bigskip
+
+\noindent \TTBF{Wrong\textvisiblespace parameters.}
+
+\noindent \TTBF{Usage:\textvisiblespace ./my\_calc\textvisiblespace number\textvisiblespace number\textvisiblespace operator}
+
+\noindent \TTBF{Operator\textvisiblespace might\textvisiblespace be\textvisiblespace :\textvisiblespace +\textvisiblespace -\textvisiblespace x\textvisiblespace /\textvisiblespace \%}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 3 : pas les bons paramètres}]
+$ ./my_calc x x x
+Wrong parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+3
+$ ./my_calc 1 2 3
+Wrong parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+3
+$ ./my_calc 1 + 2
+Wrong parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+3
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si le deuxième paramètre donné à la division est 0, vous devez renvoyer 4 et écrire le message d'erreur suivant.
+
+\bigskip
+
+\noindent \TTBF{Division\textvisiblespace by\textvisiblespace 0\textvisiblespace is\textvisiblespace forbidden.}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 4 : division par 0}]
+$ ./my_calc 1 0 /
+Division by 0 is forbidden.
+$ echo $?
+4
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si plusieurs des problèmes précédents sont rencontrés simultanément, vous devez les gérer dans cet ordre de priorité : le manque de paramètres est affiché en priorité, l'excès de paramètres est affiché en seconde priorité, le mauvais ordre/mauvaise nature de paramètres en troisième, et la division par 0 en dernier.
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreurs : ordre des erreurs}]
+$ ./my_calc 1 0
+Not enough parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+1
+$ ./my_calc 1 0 0 /
+Too much parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+2
+$ ./my_calc 1 / 0
+Wrong parameters.
+Usage: ./my_calc number number operator
+Operator might be : + - x / %
+$ echo $?
+3
+$ ./my_calc 1 0 /
+Division by 0 is forbidden.
+$ echo $?
+4
+\end{lstlisting}
+
+\bigskip
+
+\noindent Les paramètres donnés lors des tests/de la correction seront toujours des nombres ou des opérateurs.
+Vous n'avez pas à gérer les cas où des caractères sont donnés en paramètres.
+
+\bigskip
+
+\begin{RedBoxTitle}{ATTENTION}
+    Il est formellement interdit d'utiliser le programme \TTBF{bc} ou tout autre programme ou bibliothèque de calcul.
+%    (se référer à la section "commandes autorisées")
+\end{RedBoxTitle}

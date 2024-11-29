@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Langage C}
+\newcommand{\TitreSeance}{Bases de C}
+\newcommand{\NumeroTD}{TP 2 - Tableaux et Chaînes}
+\newcommand{\DateCours}{08 décembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{C, Langage}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce TP a pour objectif de vous faire manipuler les tableaux et chaînes de caractères (appelées \textit{strings} en anglais).
+
+\bigskip
+
+\section{Programmes sur tableaux}
+
+\medskip
+
+\question{Écrivez une fonction comparant deux tableaux d'entiers.}
+
+Pour vous aider, voici le prototype attendu pour la fonction :
+
+\begin{lstlisting}[language=C,morekeywords={floor,ceil}]
+int CompareTab(int tab1[], int tab2[], int len1, int len2) \end{lstlisting}
+
+
+\question{Écrivez maintenant une fonction palindrome fonctionnant sur un tableau dont la longueur est donnée en paramètre.}
+
+Pour vous aider, voici le prototype attendu pour la fonction :
+
+\begin{lstlisting}[language=C,morekeywords={floor,ceil}]
+int PalindromeTab(int tab[], int len) \end{lstlisting}
+
+
+\question{Écrivez une fonction qui renvoie la valeur la plus grande/petite d'un tableau.}
+
+\question{Écrivez une fonction qui calcule la somme de tous les éléments d'un tableau.}
+
+\question{Écrivez une fonction qui recherche un élément dans un tableau. Si l'élément est trouvé, la fonction doit renvoyer l'index de la case où l'élément se trouve. Si l'élément n'est pas trouvé, la fonction doit renvoyer $ -1 $.}
+
+\question{Écrivez une fonction qui teste si les éléments d'un tableau sont dans l'ordre croissant/décroissant.}
+
+\bigskip
+
+\question{Écrivez une fonction qui insère un élément dans un tableau à une position précise, et renvoie l'élément s'y trouvant. Si la position est plus grande que la taille du tableau, alors vous effectuerez le modulo.}
+
+\question{Écrivez une fonction qui insère un élément dans un tableau à une position précise tout en poussant tous les éléments du tableaux vers la fin, et qui renvoie l'élément qui sera hors du tableau. Si la position est plus grande que la taille du tableau, alors vous effectuerez le modulo.}
+
+\medskip
+
+\question{Écrivez une fonction qui supprime un élément dans un tableau à une position précise, puis qui décale tous les éléments suivants d'un cran en arrière (pour boucher le trou). Si la position est plus grande que la taille du tableau, alors vous effectuerez le modulo.}
+
+\question{Écrivez une fonction qui supprime un élément dans un tableau à une position précise, puis qui décale tous les éléments suivants d'un cran en arrière (pour boucher le trou). Enfin, la fonction prendra un paramètre supplémentaire qui sera l'élément ajouté en fin de tableau. Si la position est plus grande que la taille du tableau, alors vous effectuerez le modulo.}
+
+\newpage
+
+
+\section{Programmes sur chaînes de caractères}
+
+\medskip
+
+\question{Écrivez une fonction palindrome fonctionnant sur une chaîne de caractères (le '\textbackslash 0' final ne sera bien entendu pas pris en compte dans le palindrome).}
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie si une chaîne est le préfixe d'une autre chaîne, et renvoie la position du début de la sous-chaîne, ou $ -1 $ si elle n'est pas trouvée.}
+
+\question{Écrivez une fonction qui vérifie si une chaîne est le suffixe d'une autre chaîne, et renvoie la position du début de la sous-chaîne, ou $ -1 $ si elle n'est pas trouvée.}
+
+\question{Écrivez une fonction qui remplace un préfixe de chaîne par un autre préfixe. Si le préfixe n'est pas trouvé, vous retournerez $ -1 $, sinon vous renverrez le nombre de caractères modifiés.}
+
+\question{Écrivez une fonction qui remplace un suffixe de chaîne par un autre suffixe. Si le suffixe n'est pas trouvé, vous retournerez $ -1 $, sinon vous renverrez le nombre de caractères modifiés.}
+
+\bigskip
+
+\question{Écrivez une fonction qui remplace tous les caractères minuscules en majuscules d'une chaîne de caractères.}
+
+\question{Écrivez une fonction qui remplace tous les caractères majuscules en minuscules d'une chaîne de caractères.}
+
+\bigskip
+
+\question{Écrivez une fonction qui standardise tous les noms de fichiers d'une liste en renvoyant un pointeur vers une nouvelle liste.}
+
+Pour cet exercice, considérons les noms standards comme étant : \TTBF{IMG\_XXXX.jpg} (où \TTBF{XXXX} sont des chiffres de $ 0 $ à $ 9 $).
+
+\medskip
+
+Les noms donnés seront contenus dans un tableau (il s'agira donc d'un tableau contenant des \TTBF{char*}).
+Les noms de la liste peuvent contenir des majuscules ou minuscules n'importe où, et ne pas avoir suffisamment de chiffres.
+Vous devez tous les mettre au format standard en les recopiant dans une liste de sortie.
+
+Si des éléments sont déjà au bon format, vous devez les recopier vers la nouvelle liste quoiqu'il advienne (ceci permettra de libérer l'ancienne liste de noms sans perdre les nouveaux noms).
+
+\medskip
+
+Pour réaliser cet exercice, vous devrez à la fois lire les noms, les mettre au bon format en ajoutant éventuellement des $ 0 $, et construire un tableau de pointeurs.
+Les noms non standards démarreront toujours par un \TTBF{img} dans n'importe quelle casse, suivi d'un underscore ( \TTBF{\_} ), suivi d'\textit{au moins} un chiffre et \textit{au plus} quatre chiffres, et enfin, terminé par une extension \TTBF{jpg} dans n'importe quelle casse.
+
+\medskip
+
+Exemples de noms standards :
+
+\begin{itemize}
+\item \TTBF{IMG\_0000.jpg}
+\item \TTBF{IMG\_0042.jpg}
+\item \TTBF{IMG\_1234.jpg}
+\item \TTBF{IMG\_9000.jpg}
+\end{itemize}
+
+\medskip
+
+Exemples de noms non standards :
+\begin{itemize}
+\item \TTBF{IMG\_0.jpg}
+\item \TTBF{ImG\_042.JPG}
+\item \TTBF{img\_1234.JpG}
+\item \TTBF{iMg\_9.jPg}
+\end{itemize}
+
+\end{document}

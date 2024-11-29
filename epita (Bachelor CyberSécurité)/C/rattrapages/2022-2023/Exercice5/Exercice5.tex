@@ -1,0 +1,174 @@
+%% Exercice 5
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo3/}}{750}{640}{\TTBF{write}}
+\ExoSpecsSimple{\TTBF{my\_factures.c}}{\TTBF{\RenduDir/src/my\_factures.c}}{750}{640}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'implémenter une facturation par listes chaînées.}
+
+\bigskip
+
+\noindent Vous devez écrire une structure \TTBF{facture} contenant une chaîne de caractères qui servira de nom, une chaîne de caractères qui servira de prénom, une chaîne de caractères qui servira d'adresse, un pointeur vers une liste chaînée, et un entier représentant le total.
+
+\bigskip
+
+\noindent Vous devez également écrire une structure \TTBF{facture\_liste} qui représentera chaque élément de la facture, donc qui contiendra un pointeur vers l'élément suivant, une chaîne de caractère représentant le nom de l'élément, un entier représentant la quantité achetée, et un entier représentant le prix unitaire.
+Les prix seront tous des entiers.
+
+\bigskip
+
+\noindent Enfin, vous devez implémenter quelques fonctions permettant de manipuler ces factures.
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Prototype des fonctions}]
+facture *create_facture(char *nom, char *prenom, char *adr);
+int empty_facture(facture *facture);
+void delete_facture(facture *facture);
+
+void modify_name(facture *facture, char *nom);
+void modify_surname(facture *facture, char *prenom);
+void modify_adress(facture *facture, char *adresse);
+
+void add_article(facture *facture, char *nom_art, int prix);
+void remove_article(facture *facture, char *nom_art);
+
+void print_facture(facture *facture);
+\end{lstlisting}
+
+\bigskip
+
+\subsubsection*{\TTBF{facture *create\_facture(char *nom, char *prenom, char *adr)}}
+
+\noindent Cette fonction crée une nouvelle facture vide en lui assignant un nom, un prénom, et une adresse.
+La facture étant vide, il faut mettre le total à $ 0 $.
+La fonction renvoie un pointeur vers la structure allouée en mémoire.
+S'il y a un problème de mémoire, il faut renvoyer un pointeur \TTBF{NULL}.
+Si le nom, le prénom, ou l'adresse est \TTBF{NULL}, il faut également renvoyer un pointeur \TTBF{NULL}.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{int empty\_facture(facture *facture)}}
+
+\noindent Cette fonction supprime les éléments contenus dans la facture (mais pas la facture elle-même).
+Elle libère donc la mémoire allouée par les éléments contenus, puis remet le total à $ 0 $.
+La fonction doit renvoyer le nombre d'éléments supprimés.
+Si la factue existe mais ne contient aucun élément, alors il faut renvoyer $ 0 $.
+Si le paramètre donné est \TTBF{NULL}, alors il ne faut rien faire et retourner $ -1 $.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void delete\_facture(facture *facture)}}
+
+\noindent Cette fonction supprime la facture, elle libère donc la mémoire allouée par la structure de la facture, mais également de chacun des éléments contenus.
+Si le paramètre donné est \TTBF{NULL}, alors il ne faut rien faire.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void modify\_name(facture *facture, char *nom)}}
+
+\noindent Cette fonction modifie le nom associé à la facture.
+Attention aux problèmes de mémoire : il faut copier les caractères contenus dans le nom donné en paramètre, et éventuellement libérer puis allouer de nouveau un espace mémoie pour le nom dans la facture.
+Si l'un ou l'autre des paramètres donnés est \TTBF{NULL}, alors il ne faut rien faire.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void modify\_surname(facture *facture, char *prenom)}}
+
+\noindent Cette fonction modifie le prénom associé à la facture.
+Attention aux problèmes de mémoire : il faut copier les caractères contenus dans le prénom donné en paramètre, et éventuellement libérer puis allouer de nouveau un espace mémoie pour le prénom dans la facture.
+Si l'un ou l'autre des paramètres donnés est \TTBF{NULL}, alors il ne faut rien faire.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void modify\_adress(facture *facture, char *adresse)}}
+
+\noindent Cette fonction modifie l'adresse associée à la facture.
+Attention aux problèmes de mémoire : il faut copier les caractères contenus dans l'adresse donnée en paramètre, et éventuellement libérer puis allouer de nouveau un espace mémoie pour l'adresse dans la facture.
+Si l'un ou l'autre des paramètres donnés est \TTBF{NULL}, alors il ne faut rien faire.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void add\_article(facture *facture, char *nom\_art, int prix)}}
+
+\noindent Cette fonction ajoute un article à la facture donnée en paramètre, puis recalcule le nouveau total.
+Si la facture ou le nom de l'article sont \TTBF{NULL}, alors il ne faut rien faire.
+
+\noindent L'ajout de l'article implique d'ajouter un \TTBF{facture\_liste} en plus dans la facture.
+Si un élément \TTBF{facture\_liste} contient déjà le même nom d'article et le même prix, alors il suffit d'augmenter sa quantité.
+Si aucun élément dans la liste n'a le même nom et le même prix, alors il faut ajouter un nouvel élément dans cette liste et lui mettre sa quantité à $ 1 $.
+
+\bigskip
+
+
+\subsubsection*{\TTBF{void remove\_article(facture *facture, char *nom\_art)}}
+
+\noindent Cette fonction supprime un article à la facture donnée en paramètre, puis recalcule le nouveau total.
+Si la facture ou le nom de l'article sont \TTBF{NULL}, alors il ne faut rien faire.
+
+\noindent La suppression d'un article implique soit de réduire la quantité de $ 1 $ à un élément existant, soit de le supprimer de la liste s'il est à $ 1 $.
+Comme les prix pour un élément peuvent varier, vous supprimerez n'importe quel article ayant le même nom de la liste.
+
+
+\bigskip
+
+\subsubsection*{\TTBF{void print\_facture(facture *facture)}}
+
+\noindent Cette fonction écrit sur la sortie standard la facture en imprimant le nom, prénom, et adresse de la personne, puis chacun des articles avec sa quantité et son prix, puis, le total de la facture.
+
+\bigskip
+
+\noindent Le format attendu est le suivant :
+
+\bigskip
+
+\noindent \TTBF{\textit{-{}-Facture-{}-}\textbackslash{}n}
+
+\noindent \TTBF{\textit{Nom}\textvisiblespace\textit{:}\textvisiblespace[nom de la personne]\textbackslash{}n}
+
+\noindent \TTBF{\textit{Prenom}\textvisiblespace\textit{:}\textvisiblespace[prénom de la personne]\textbackslash{}n}
+
+\noindent \TTBF{\textit{Adresse}\textvisiblespace\textit{:}\textvisiblespace[adresse de la personne]\textbackslash{}n}
+
+\noindent \TTBF{\textit{-{}-}\textbackslash{}n}
+
+\noindent \TTBF{\textit{Articles}\textbackslash{}n}
+
+\noindent \TTBF{[quantité]\textvisiblespace *\textvisiblespace[nom de l'article]\textvisiblespace @\textvisiblespace[prix unitaire]\textbackslash{}n}
+
+\noindent \TTBF{\textit{-{}-}\textbackslash{}n}
+
+\noindent \TTBF{\textit{Total}\textvisiblespace\textit{:}\textvisiblespace[total de la facture]\textbackslash{}n}
+
+\noindent \TTBF{\textit{-{}-{}-{}-}\textbackslash{}n}
+
+
+\bigskip
+
+\noindent Ce qui donnerait par exemple pour une facture concernant \textit{Fabrice BOISSIER} à l'adresse \textit{42 rue Voltaire}, ayant acheté $ 3 $ pommes à 1€ chacune et $ 4 $ bananes à 2€ chacune :
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemple}]
+$ ./facture
+--Facture--
+Nom : BOISSIER
+Prenom : Fabrice
+Adresse : 42 rue Voltaire
+--
+Articles
+3 * pommes @ 1
+4 * bananes @ 2
+--
+Total : 7
+----
+\end{lstlisting}

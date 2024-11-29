@@ -1,0 +1,117 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsSimple{\TTBF{my\_transpose.c}}{\TTBF{\RenduDir/src/my\_transpose.c}}{750}{640}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de transposer une matrice.}
+
+\bigskip
+
+%\noindent Une matrice est donnée dans un fichier en paramètre, il faut simplement l'affichée dans sa version transposée.
+
+\noindent Vous devez écrire un programme nommé \TTBF{my\_transpose} qui prendra en paramètre un fichier contenant une matrice, et affichera dans le terminal la version transposée.
+
+%\bigskip
+
+%\vfill
+%\hspace{0pt}
+
+\smallskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Exemples de fichiers d'entrée}]
+$ cat file1.txt
+123
+456
+789
+$ cat file2.txt
+0123
+4567
+$ cat file3.txt
+01
+23
+45
+67
+$ cat empty.txt
+$ cat file0.txt
+0
+\end{lstlisting}
+
+%\hspace{0pt}
+%\vfill
+
+%\bigskip
+
+\smallskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ ./my_transpose file1.txt
+147
+258
+369
+$ ./my_transpose file2.txt
+04
+15
+26
+37
+$ ./my_transpose file3.txt
+0246
+1357
+$ ./my_transpose file0.txt
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Deux cas d'erreur doivent être gérés avant tout affichage : si la matrice est vide (ou n'existe pas), et si la matrice contient autre chose que des nombres.
+
+\noindent Si la matrice est vide ou que le fichier n'existe pas, il faut indiquer le message suivant et retourner 1.
+
+\bigskip
+
+\noindent \TTBF{Empty\textvisiblespace matrix}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1}]
+$ ./my_transpose empty.txt
+Empty matrix
+$ echo $?
+1
+$ rm -f non-existent
+$ ./my_transpose non-existent
+Empty matrix
+$ echo $?
+1
+\end{lstlisting}
+
+\noindent Si la matrice contient des caractères autres que des nombres, il faut indiquer le message suivant et renvoyer 2.
+
+\bigskip
+
+\noindent \TTBF{Incorrect\textvisiblespace matrix}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2}]
+$ cat file_error.txt
+123
+abc
+789
+$ ./my_transpose file_error.txt
+Incorrect matrix
+$ echo $?
+2
+\end{lstlisting}
+
+%\bigskip
+%
+%\begin{RedBoxTitle}{ATTENTION}
+%    Les retours à la ligne ne doivent pas être faits avec la balise \TTBF{"<br />"}, mais avec \TTBF{"\textbackslash n"}.
+%    (se référer à la section \hyperref[sec:AideMemoire]{Aide Mémoire})
+%\end{RedBoxTitle}

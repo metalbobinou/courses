@@ -1,0 +1,155 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Langage C}
+\newcommand{\TitreSeance}{Bases de C}
+\newcommand{\NumeroTD}{TP 0 - Préparatifs}
+\newcommand{\DateCours}{23 novembre 2022}
+\newcommand{\AnneeScolaire}{2022-2023}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{C, Langage}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce TP a pour objectif de vous faire découvrir le langage C et les outils nécessaires pour le faire fonctionner.
+Vous démarrerez depuis l'écriture de quelques lignes de code que vous compilerez, pour finalement réaliser un petit programme de statistiques.
+Durant tout l'exercice, vous utiliserez au fur et à mesure quelques notions essentielles du langage C.
+
+\bigskip
+
+\section{Prise en main de C}
+
+\bigskip
+
+Avant de pouvoir utiliser C, vous aurez besoin d'installer l'environnement de développement : le compilateur C, et plusieurs outils pour débugger et automatiser une partie de la chaîne de compilation.
+De plus, vous devez choisir un éditeur texte qui vous permettra de développer facilement (grâce à la coloration syntaxique, notamment).
+
+Selon votre système d'exploitation, vous pouvez trouver quelques éditeurs texte comme : \textit{notepad++}, \textit{sublimtext}, \textit{vim}, \textit{emacs}, ...
+
+\bigskip
+
+Pour pouvoir \textit{compiler} du code (c'est-à-dire transformer un code écrit dans un langage haut niveau en un code bas niveau/compréhensible par votre processeur), il vous faut disposer d'un programme faisant ce travail : le compilateur.
+
+Plusieurs compilateurs pour le C existent : \textit{visual studio}, \textit{icc}, \textit{gcc}, \textit{clang}, ...
+
+Nous utiliserons dans ce cours \textit{gcc} et \textit{clang} indifférement.
+
+\bigskip
+
+Si vous êtes sur linux, sur des distributions dérivées de Debian (comme Ubuntu), vous devrez installer tous ces programmes :
+
+\begin{itemize}
+\item gcc
+\item g++
+\item make
+\item gdb
+\item valgrind
+\item m4
+\item bash
+\item tar
+\item openssl
+\end{itemize}
+
+Certains sont déjà inclus dans un pack de programmes extrêmement utile : \textit{build-essential}
+
+\bigskip
+
+Pour installer ces programmes sur un linux dérivé de Debian, vous devez entrer dans le terminal :
+
+\medskip
+
+\TTBF{apt-get update}
+
+\TTBF{apt-get install build-essential}
+
+\TTBF{apt-get install gcc g++ make gdb valgrind m4 bash}
+
+\medskip
+
+En cas d'échec pour manque de permissions, vous devrez précéder chacune de vos commandes par un \TTBF{sudo}, ce qui donnera par exemple :
+
+\medskip
+
+\TTBF{sudo apt-get update}
+
+\medskip
+
+Si vous avez installé un autre linux, ou un autre dérivé d'UNIX, vous devrez trouver vous-même comment installer ces programmes (et éventuellement leurs dépendances).
+
+Si vous êtes sur macOS, vous devrez probablement installer une VM (comme pour Windows), ou alors utiliser un gestionnaire de paquets externe (comme \textit{MacPorts}, ou \textit{HomeBrew}) et \textit{Xcode} que vous trouverez dans l'app store officiel d'Apple.
+
+\medskip
+
+Une fois installés, vous pouvez fermer votre terminal, et en rouvrir un nouveau dans lequel vous pourrez taper la commande suivante :
+
+\medskip
+
+\TTBF{gcc}
+
+\medskip
+
+Si tout est correctement installé, vous devriez obtenir comme réponse dans le terminal :
+
+\medskip
+
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+gcc: fatal error: no input files
+compilation terminated. \end{lstlisting}
+
+
+Si vous utilisez \TTBF{clang} malgré vous (par exemple sur macOS), vous devriez obtenir ce message :
+
+\medskip
+
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+clang: error: no input files \end{lstlisting}
+
+\bigskip
+
+Pour accéder à la documentation des fonctions et appels systèmes, vous pouvez la commande \TTBF{man}.
+La section numéro 2 sert aux appels système (\TTBF{open}, \TTBF{read}, \TTBF{write}, \TTBF{close}, ...), et la section numéro 3 sert aux fonctions des bibliothèques (\TTBF{printf}, \TTBF{malloc}, \TTBF{memset}, \TTBF{fopen}, \TTBF{fread}, ...).
+
+\medskip
+
+Pour lire la documentation de la fonction \TTBF{malloc(3)}, il suffit donc de taper dans le shell :
+
+\medskip
+
+\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+man 3 malloc\end{lstlisting}
+
+Pour avancer dans le manuel, vous pouvez utiliser les flèches et la touche espace.
+Pour quitter le manuel, il suffit d'appuyer sur la touche \TTBF{q} (\TTBF{Q} minuscule).
+
+\end{document}

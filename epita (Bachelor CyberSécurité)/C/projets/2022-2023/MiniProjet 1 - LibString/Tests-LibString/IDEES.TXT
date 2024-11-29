@@ -1,0 +1,14 @@
+
+
+char  tab[60] = { 0, 0, ...}
+
+  strpcy(&tab[10], "BLABLA")
+
+vérifier avant et après &tab[10] que rien n'a été ajouté
+
+
+
+- faire un include de stddef.h dans chaque .c
+- faire un include de StrBasics.h dans chaque .c, et probablement un include de StrPart1.h dans StrPart2.c
+- ne PAS redéfinir de fonction déjà déclarée ailleurs ! my_strlen ne doit être codée QUE dans StrBasics.c (pareil pour my_strdup et my_strcat)
+

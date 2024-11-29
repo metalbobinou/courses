@@ -1,0 +1,115 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo3/}}{750}{640}{\TTBF{write}}
+\ExoSpecsSimple{\TTBF{my\_pintree.c}}{\TTBF{\RenduDir/src/my\_pintree.c}}{750}{640}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'afficher un sapin en ASCII art, dont la taille varie selon le paramètre donné.}
+
+\bigskip
+
+\noindent Vous devez écrire une fonction qui prendra un paramètre, et affichera selon ce paramètre un sapin.
+\noindent Dans le cas général, affichez le sapin, et renvoyez 0.
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Prototype de la fonction}]
+int my_pintree(int number)
+\end{lstlisting}
+
+%\bigskip
+
+\vfillFirst
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ ./my_pintree 4
+    /\
+   /  \
+  /    \
+ /      \
+/        \
+__________
+    ||
+$ echo $?
+0
+$ ./my_pintree 5
+     /\
+    /  \
+   /    \
+  /      \
+ /        \
+/          \
+____________
+     ||
+$ echo $?
+0
+\end{lstlisting}
+
+%\bigskip
+
+\vfillLast
+
+\clearpage
+
+
+\noindent De façon précise, voici les spécifications pour les cas 1, 4, et 5 :
+
+\bigskip
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 1}]
+ /\     1 espace / 0 espace  \
+/  \    0 espace / 2 espaces \
+____    4 _
+ ||     1 espace 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 4}]
+    /\          4 espaces / 0 espace  \
+   /  \         3 espaces / 2 espaces \
+  /    \        2 espaces / 4 espaces \
+ /      \       1 espace  / 6 espaces \
+/        \      0 espace  / 8 espaces \
+__________      10 _
+    ||          4 espaces 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\hspace*{-\parindent} %% BIDOUILLE
+\begin{minipage}{15.85cm} %% BIDOUILLE
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général 5}]
+     /\         5 espaces / 0 espace   \
+    /  \        4 espaces / 2 espaces  \
+   /    \       3 espaces / 4 espaces  \
+  /      \      2 espaces / 6 espaces  \
+ /        \     1 espace  / 8 espaces  \
+/          \    0 espace  / 10 espaces \
+____________    12 _
+     ||         5 espaces 2 |
+\end{lstlisting}
+\end{minipage} %% FIN BIDOUILLE
+
+\bigskip
+
+\noindent Dans le cas où le paramètre 0 est donné, vous retournerez 0 et afficherez :
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas 0}]
+$ ./my_pintree 0
+/\
+||
+$ echo $?
+0
+\end{lstlisting}

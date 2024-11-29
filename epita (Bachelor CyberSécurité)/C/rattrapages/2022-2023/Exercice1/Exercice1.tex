@@ -1,0 +1,48 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+%\ExoSpecsCustom{\TTBF{is\_even}}{\TTBF{\RenduDir/src/is\_even.c}}{750}{640}{Commandes autorisées}{\TTBF{sh}, \TTBF{echo}, \TTBF{exit}}
+\ExoSpecsSimple{\TTBF{is\_even.c}}{\TTBF{\RenduDir/src/is\_even.c}}{750}{640}
+
+%\vspace*{0.5cm}
+%
+%\noindent \textbf{(2 points)}
+%
+%\vspace*{0.2cm}
+
+\vspace{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est d'afficher si un nombre est pair ou impair.}
+
+\bigskip
+
+\noindent Vous devez écrire une fonction qui prendra un paramètre, et affichera selon ce paramètre s'il est pair ou impair.
+
+\noindent Si le nombre est pair, vous devez écrire le mot \TTBF{even} dans le terminal et renvoyer 0.
+
+\noindent Si le nombre est impair, vous devez écrire le mot \TTBF{odd} dans le terminal et renvoyer 1.
+
+\bigskip
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single,title={Prototype de la fonction}]
+int is_even(int number)
+\end{lstlisting}
+
+\bigskip
+
+\lstset{language=sh}
+\begin{lstlisting}[frame=single,title={Cas général}]
+$ ./is_even 3
+odd
+$ echo $?
+1
+$ ./is_even 6
+even
+$ echo $?
+0
+$ ./is_even 0
+even
+$ echo $?
+0
+\end{lstlisting}

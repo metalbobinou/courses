@@ -1,0 +1,306 @@
+\newcommand{\defaultparindent}{\parindent}
+\setlength{\parindent}{0pt}				% \noindent partout
+% \parindent in one-column documents is :
+% 15pt when the default text size is 10pt,
+% 17pt for 11pt,
+% and 1.5em for 12pt.
+% In two-column documents it is 1em
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{whereis}, \texttt{which}\\
+
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+
+%\textbf{Notions étudiées :} & Tableaux, Pointeurs, Piles\\
+%\end{tabular}
+%\end{center}
+
+\textbf{Notions étudiées :} Tableaux, Pointeurs, Piles\\
+
+%\bigskip
+
+\subsection{Rappel sur les piles}
+
+\bigskip
+
+Les \textbf{piles}, ou \textbf{stacks} en anglais, sont des structures visant à stocker les données dans l'ordre d'arrivée, mais ne permettant leur récupération uniquement dans l'ordre inverse.
+Dans une pile, on ne peut accéder qu'à la dernière donnée stockée, celle se situant au \textit{sommet} de la pile.
+Ces structures sont aussi appelées \textbf{LIFO} (\textit{Last In First Out}).\\
+
+\begin{center}
+\includegraphics[scale=0.75]{Cours/Piles_1_Structure_Generale_centered.png}
+\end{center}
+
+\smallskip
+
+Deux opérations permettent d'utiliser une pile :
+\begin{itemize}
+\item \TTBF{PUSH} : permettant d'\textit{empiler} une donnée supplémentaire dans la pile
+\item \TTBF{POP} : permettant de \textit{dépiler} une donnée depuis la pile
+\end{itemize}
+On ajoute donc une donnée en l'empilant avec un \TTBF{PUSH}, et il est possible de directement y accéder, car elle est au sommet de la pile.
+À l'inverse, pour accéder à une donnée tout au fond de la pile, il est nécessaire de dépiler autant d'éléments que nécessaire avec un \TTBF{POP}.\\
+
+Voici un exemple où l'on crée une pile, puis on empile successivement $ 42 $, $ 5 $, et $ 13 $, puis, on dépile une fois (pour récupérer $ 13 $), et enfin, on empile successivement $ 37 $, $ 10 $, $ 24 $.\\
+
+\begin{center}
+\includegraphics[scale=0.5]{Cours/Piles_2_Structure_Generale_Usage_pack_1.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{Cours/Piles_2_Structure_Generale_Usage_pack_2.png}
+\end{center}
+
+\smallskip
+
+Les piles, et surtout la contrainte d'accès aux objets, sont couramment utilisées : un camion de livraison sera d'abord rempli avec les paquets à livrer en dernier/le camion sera rempli dans l'ordre inverse de livraison (on accède d'abord aux derniers éléments chargés).
+
+En informatique, on utilisera les piles dans certains \textit{parsers} (analyse grammaticale) pour connaître en premier l'opérateur à exécuter (opérateur binaire ? unaire ?) et dépiler par la suite le nombre exact de paramètres.
+La \textit{pile d'appels} est également une convention fondamentale partagée par les processeurs et les systèmes d'exploitation permettant de passer des paramètres (et d'autres informations de contexte) aux fonctions appelées par les programmes, ou en cas d'interruption pour sauvegarder l'adresse de l'instruction qui était en cours d'exécution.\\
+
+Afin d'implémenter une pile, il est donc nécessaire d'avoir un espace de stockage ordonné (un tableau numéroté ou une liste chaînée), et un indicateur de l'élément en haut de la pile.
+Nous allons maintenant voir comment implémenter une pile avec des listes chaînées et un tableau de taille fixe.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Piles : implémentation avec un tableau de taille fixe}
+
+\bigskip
+
+Une implémentation avec un tableau de taille fixe impose cette fois une limitation : la pile aura une taille maximale, et on peut refuser l'ajout d'un élément si la pile est déjà pleine.
+La structure diffère également du fait que le tableau est alloué une seule fois lors de sa création (voire même lors de la compilation dans le cas statique).
+
+Le schéma suivant présente la structure générale :\\
+
+\begin{center}
+\includegraphics[scale=1]{Cours/Piles_5_Tableau_Statique_Structure.png}
+\end{center}
+
+\smallskip
+
+On notera cette fois que plusieurs informations distinctes doivent être conservées : l'adresse du tableau, le numéro de case correspondant au sommet de la pile (\textit{head} dans notre cas), la taille du tableau (le nombre maximum d'objets pouvant être stockés), le nombre d'éléments dans le tableau.
+
+Le schéma suivant détaille certaines informations de façon plus explicite :\\
+
+\begin{center}
+\includegraphics[scale=1]{Cours/Piles_5_Tableau_Statique_Structure_Detaillee.png}
+\end{center}
+
+\smallskip
+
+Dans le cas d'un tableau de taille fixe, le pointeur de sommet ne peut pas utiliser la valeur \TTBF{NULL} comme indicateur de tableau vide, car cette valeur est égale à $ 0 $ (ce qui laisserait à penser que le sommet est effectivement à la case 0).
+Plusieurs solutions sont possibles pour indiquer le sommet de la pile et le cas vide :
+
+\begin{itemize}
+\item On enregistre dans la structure de la pile une variable servant à compter le nombre d'éléments présents (le sommet peut donc prendre n'importe quelle valeur tant que la pile est vide).
+\item On utilise un entier relatif pour indiquer le sommet, et $ -1 $ indique que la pile est vide (l'ajout d'un élément décalera le sommet à $ 0 $, c'est-à-dire la case où sera l'élément).
+\item On place le sommet de la pile sur la première case non utilisée, et l'accès au premier élément se fait donc en retirant $ 1 $ au pointeur de sommet (ainsi, un sommet à la case $ 0 $ indique que la pile est vide).
+Attention : dans ce cas précis, un tableau plein aura un sommet hors des cases du tableau (il ne faudra donc \textit{jamais} le déréférencer s'il atteinte une telle valeur).
+\end{itemize}
+
+\smallskip
+
+L'exemple suivant montre l'évolution d'une pile implémentée avec un tableau fixe au fur et à mesure des ajouts (empiler / \TTBF{PUSH}) et suppressions (dépiler / \TTBF{POP}).\\
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Piles_6_Tableau_Statique_Usage_pack_1.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Piles_6_Tableau_Statique_Usage_pack_2.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Piles_6_Tableau_Statique_Usage_pack_3.png}
+\end{center}
+
+\smallskip
+
+Les principales opérations se résument ainsi :
+\begin{itemize}
+\item Création : on alloue en mémoire le tableau (sauf s'il est statique), et on fixe le sommet de la pile à la valeur prévue pour démarrer ($ -1 $, $ 0 $, ou toute autre valeur choisie) [éventuellement, on met à jour le nombre d'objets dans le tableau en le fixant à $ 0 $].
+\item Empiler : si le tableau est plein, on retourne une erreur, sinon, on ajoute un élément, et on décale le sommet de la pile [éventuellement, on met à jour le nombre d'objets dans le tableau].
+\item Dépiler : si la pile est vide, on retourne une erreur, sinon, on réduit la valeur du sommet de la pile [éventuellement, on met à jour le nombre d'objets dans le tableau].
+\item Vider : on fixe le sommet de la pile à la valeur prévue pour démarrer ($ -1 $, $ 0 $, ou toute autre valeur choisie) [éventuellement, on met à jour le nombre d'objets dans le tableau en le fixant à $ 0 $].
+\item Sommet : on renvoie le dernier élément ajouté (cela dépend de comment le sommet a été implémenté !).
+\end{itemize}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Rappel sur les files}
+
+\bigskip
+
+Les \textbf{files}, ou \textbf{queues} en anglais, sont des structures visant à stocker et rendre les données dans l'ordre d'arrivée.
+Une file dispose donc d'une \textit{tête} contenant l'élément le plus ancien (inséré avant tous les autres), et une \textit{queue} contenant l'élément inséré le plus récemment.
+Ces structures sont aussi appelées \textbf{FIFO} (\textit{First In First Out}).\\
+
+\begin{center}
+\includegraphics[scale=0.75]{Cours/Files_1_Structure_Generale.png}
+\end{center}
+
+\smallskip
+
+Deux opérations permettent d'utiliser une file :
+\begin{itemize}
+\item \TTBF{ENQUEUE} : permettant d'\textit{enfiler} une donnée supplémentaire dans la file
+\item \TTBF{DEQUEUE} : permettant de \textit{défiler} une donnée depuis la file
+\end{itemize}
+On ajoute donc une donnée en l'enfilant avec un \TTBF{ENQUEUE}, celle-ci se retrouve en \textit{queue} de file, c'est-à-dire au fond de la file.
+On récupère une donnée en défilant avec un \TTBF{DEQUEUE}, celle-ci se trouvait en \textit{tête} de file, c'est-à-dire qu'elle attendait son tour depuis son insertion.
+On accède donc aux éléments dans l'ordre d'arrivée.\\
+
+Voici un exemple où l'on crée une file, puis on enfile successivement $ 42 $, $ 5 $, et $ 13 $, puis, on défile une fois (pour récupérer $ 42 $), et enfin, on enfile successivement $ 37 $, $ 10 $, $ 24 $, et $ 8 $.\\
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_2_Structure_Generale_Usage_pack_1.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_2_Structure_Generale_Usage_pack_2.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_2_Structure_Generale_Usage_pack_3.png}
+\end{center}
+
+\smallskip
+
+Les files, et surtout le respect de l'ordre d'arrivée des objets, sont couramment utilisés : mise en attente de personnes face à des guichets (voitures à un péage, clients face à une caisse, etc).
+
+En informatique, on utilisera les files pour stocker temporairement et traiter les requêtes dans leur ordre d'arrivée.
+Dans le cas des \textit{schedulers} (ordonnanceurs) visant à déterminer quel processus exécuter sur le c\oe{}ur d'un processus, on ajoute parfois une priorité à chaque objet de la file.
+Ceci implique de mettre à jour l'ordre des objets dans la file lors de certains évènements (par exemple lorsque l'on enfile ou défile un élément, ou après un certain temps).\\
+
+Afin d'implémenter une file, il est donc nécessaire d'avoir un espace de stockage ordonné (un tableau numéroté ou une liste chaînée), et deux indicateurs pour l'élément tête de file et l'élément en queue de file.
+Nous allons maintenant voir comment implémenter une file avec des listes chaînées et un tableau de taille fixe.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Files : implémentation avec un tableau de taille fixe}
+
+\bigskip
+
+Une implémentation avec un tableau de taille fixe impose cette fois une limitation : la file aura une taille maximale, et on peut refuser l'ajout d'un élément si la file est déjà pleine.
+La structure diffère également du fait que le tableau est alloué une seule fois lors de sa création (voire même lors de la compilation dans le cas statique).
+
+Le schéma suivant présente la structure générale :\\
+
+\begin{center}
+\includegraphics[scale=1]{Cours/Files_5_Tableau_Statique_Structure.png}
+\end{center}
+
+\smallskip
+
+On notera cette fois que plusieurs informations distinctes doivent être conservées : l'adresse du tableau, le numéro de case correspondant à la tête de la file (\textit{head}), le numéro de case correspondant à la queue de la file (\textit{tail}), la taille du tableau (le nombre maximum d'objets pouvant être stockés), le nombre d'éléments dans le tableau.
+
+Le schéma suivant détaille certaines informations de façon plus explicite :\\
+
+\begin{center}
+\includegraphics[scale=1]{Cours/Files_5_Tableau_Statique_Structure_Detaillee_1.png}
+\end{center}
+
+\smallskip
+
+Une façon d'implémenter le tableau permet de supposer que la case $ 0 $ contiendra toujours l'élément de tête.
+Dans ce cas très précis, on peut donc se passer de la variable de tête, et au contraire, s'appuyer sur la variable donnant le nombre d'éléments dans le tableau pour savoir si la file est vide ou non.
+Cette implémentation ressemble donc à cela :\\
+
+\begin{center}
+\includegraphics[scale=1]{Cours/Files_5_Tableau_Statique_Structure_Detaillee_2.png}
+\end{center}
+
+\smallskip
+
+Dans le cas d'un tableau de taille fixe, les pointeurs de tête et de queue ne peuvent pas utiliser la valeur \TTBF{NULL} comme indicateur de tableau vide, car cette valeur est égale à $ 0 $ (ce qui laisserait à penser que la queue est effectivement à la case 0).
+Plusieurs solutions sont possibles pour indiquer les cases où se trouvent la tête et la queue de la file, ainsi que le cas vide :
+
+\begin{itemize}
+\item On enregistre dans la structure de la file une variable servant à compter le nombre d'éléments présents (la queue peut donc prendre n'importe quelle valeur tant que la file est vide).
+\item On utilise un entier relatif pour indiquer la position, et $ -1 $ indique que la file est vide (l'ajout d'un élément décalera la tête et la queue à $ 0 $, c'est-à-dire la case où sera l'élément).
+\item On place la queue de la file sur la première case non utilisée, et l'accès au dernier élément se fait donc en retirant $ 1 $ au pointeur de sommet (ainsi, une queue à la case $ 0 $ indique que la file est vide).
+Attention : dans ce cas précis, un tableau plein aura un sommet hors des cases du tableau (il ne faudra donc \textit{jamais} le déréférencer s'il atteinte une telle valeur).
+\item On représente complètement différemment la file : on décale les pointeurs de tête et de queue au fur et à mesure des insertions et suppressions ($ +1 $ / $ -1 $). Le pointeur de queue peut passer de la dernière case à la première, car les éléments actuellement dans la file se trouvent uniquement entre la tête et la queue.
+Vider ce tableau revient uniquement à passer les pointeurs à la valeur $ -1 $.
+Attention : dans ce cas précis, il est nécessaire de faire très attention à l'ordre de lecture des éléments entre la tête et la queue.
+\end{itemize}
+
+\smallskip
+
+L'exemple suivant montre l'évolution d'une file implémentée avec un tableau fixe au fur et à mesure des ajouts (enfiler / \TTBF{ENQUEUE}) et suppressions (défiler / \TTBF{DEQUEUE}).\\
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_1.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_2.png}
+\end{center}
+
+\smallskip
+
+Dans les schémas suivants, deux versions sont présentées :
+\begin{itemize}
+\item celui de gauche présente la version standard où la tête ne bouge pas (il est nécessaire de décaler l'ensemble des éléments du tableau dès que l'on défile),
+\item celui de droite présente la version où seuls les pointeurs de tête et de queue sont décalés (il faut faire attention à l'ordre de lecture entre la tête et la file, et s'appuyer sur les modulos).
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_2_double.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_3.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_4.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{Cours/Files_6_Tableau_Statique_Usage_pack_5.png}
+\end{center}
+
+\smallskip
+
+Dans ce dernier cas, lorsque le tableau de gauche était complètement rempli, on a décalé le pointeur de queue au début du tableau, simplement en utilisant un modulo de la taille du tableau.
+Il est important de respecter l'ordre de lecture : on lit bel et bien depuis le pointeur de tête, en effectuant un $ +1 $ (lecture vers la gauche) tout en appliquant un modulo de la taille du tableau au résultat, jusqu'à atteindre le pointeur de queue.
+
+On peut également comprendre qu'il y a eu un dépassement en comparant la position du pointeur de tête et de queue : la différence entre leurs positions est négative ! \linebreak
+($ pos. tail - pos. head = 0 - 1 = -1$)
+
+\bigskip
+
+Cette autre façon de gérer la file est un tout petit peu plus complexe dans l'écriture des algorithmes de gestion, mais elle évite énormément de réécritures dans le tableau/en mémoire (inutile de lire une case, l'écrire ailleurs, et recommencer ainsi de suite lors de chaque \textit{dequeue}).
+Pour ce TP, vous êtes libres de choisir l'implémentation que vous souhaitez réaliser.
+
+\bigskip
+
+Les principales opérations se résument ainsi :
+\begin{itemize}
+\item Création : on alloue en mémoire le tableau (sauf s'il est statique), et on fixe la tête et la queue de la file à la valeur prévue pour démarrer ($ -1 $, $ 0 $, ou toute autre valeur choisie) [éventuellement, on met à jour le nombre d'objets dans le tableau en le fixant à $ 0 $].
+\item Enfiler : si le tableau est plein, on retourne une erreur, sinon, on ajoute le nouvel élément à gauche de la position du pointeur de queue, et on décale la queue de la file d'un cran à gauche [éventuellement, on met à jour le nombre d'objets dans le tableau].
+Autre version : on ajoute le nouvel élément dans la case à gauche de la position du pointeur de queue modulo la taille du tableau, et on décale la queue de la file.
+\item Défiler : si la file est vide, on retourne une erreur, sinon, on décale l'ensemble des éléments vers la droite [éventuellement, on met à jour le nombre d'objets dans le tableau].
+Autre version : on décale la tête de la file d'un cran à gauche.
+\item Vider : on fixe les pointeurs de tête et de queue à la valeur prévue pour démarrer ($ -1 $, $ 0 $, ou toute autre valeur choisie) [éventuellement, on met à jour le nombre d'objets dans le tableau en le fixant à $ 0 $].
+\item Tête : on renvoie le contenu de la case du pointeur de tête de file (le prochain élément qui sera défilé).
+\item Queue : on renvoie le contenu de la case du pointeur de queue de file (le dernier élément qui sera défilé).
+\end{itemize}
+
+
+\setlength{\parindent}{\defaultparindent}

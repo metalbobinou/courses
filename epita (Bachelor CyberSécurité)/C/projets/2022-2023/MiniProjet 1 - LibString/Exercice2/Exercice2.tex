@@ -1,0 +1,59 @@
+%% Exercice 2
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{StrPart1.c} \TTBF{StrPart1.h}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de recoder les fonctions essentielles permettant de manipuler des chaînes de caractères : \TTBF{my\_strchr}, \TTBF{my\_strrchr}, et \TTBF{my\_strcpy} }
+
+\bigskip
+
+%\noindent Vous devez implémenter ces fonctions en respectant strictement les spécifications suivantes.
+%Vous ne devez ni rendre de fonction \TTBF{main} ni vos tests : vous ne devez rendre \textit{que} les fonctions demandées (et éventuellement celles vous permettant de les faire fonctionner) dans le fichier \texttt{StrPart1.c}, ainsi que leurs prototypes dans le fichier \texttt{StrPart1.h}.
+
+\bigskip
+
+%\noindent Vous devez implémenter les X fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{char *my\_strchr(char *s, int c)}
+%\item \TTBF{char *my\_strrchr(char *s, int c)}
+%\item \TTBF{char *my\_strcpy(char *dest, char *src)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={Liste des fonctions pour l'exercice 1}]
+\begin{lstlisting}[frame=single]
+char *my_strchr(char *s, int c);
+char *my_strrchr(char *s, int c);
+char *my_strcpy(char *dest, char *src);
+\end{lstlisting}
+
+
+\subsubsection*{\TTBF{char *my\_strchr(char *s, int c)}}
+
+\noindent Cette fonction renvoie un pointeur vers la première occurrence d'un caractère dans une chaîne.
+La fonction doit renvoyer un pointeur vers le premier caractère retrouvé dans la chaîne \TTBF{s}.
+Le caractère recherché est donné en paramètre en tant que \TTBF{c}.
+Si le caractère n'est pas trouvé, la fonction doit renvoyer \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{char *my\_strrchr(char *s, int c)}}
+
+\noindent Cette fonction renvoie un pointeur vers la dernière occurrence d'un caractère dans une chaîne.
+La fonction doit renvoyer un pointeur vers le dernier caractère retrouvé dans la chaîne \TTBF{s}.
+Le caractère recherché est donné en paramètre en tant que \TTBF{c}.
+Si le caractère n'est pas trouvé, la fonction doit renvoyer \TTBF{NULL}.
+
+
+\subsubsection*{\TTBF{char *my\_strcpy(char *dest, char *src)}}
+
+\noindent Cette fonction copie une chaîne de caractères vers un espace de taille suffisant déjà alloué.
+La fonction lit les caractères de la chaîne \TTBF{src} pour les copier dans l'espace mémoire pointé par \TTBF{dest}.
+L'espace mémoire au bout de \TTBF{dest} doit avoir été préalablement réservé par l'utilisateur appelant, afin de pouvoir y mettre tous les caractères de la chaîne contenue dans \TTBF{src} ainsi que le '\TTBF{\textbackslash{}0}' final.
+La fonction doit renvoyer un pointeur vers la chaîne \TTBF{dest}.
+\textit{Si l'espace mémoire dans \TTBF{dest} n'est pas assez grand, vous ne pouvez pas le savoir à l'avance, donc, vous devez essayer de copier normalement les caractères dedans. Si l'utilisateur ne respecte l'exigence de taille, ce n'est pas votre faute en tant que développeur : votre fonction peut échouer dans ce cas.}

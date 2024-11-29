@@ -1,0 +1,48 @@
+%% Exercice 4
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+\ExoSpecsCustom{\TTBF{StrBonus.c} \TTBF{StrBonus.h}}{\TTBF{\RenduDir/src/}}{750}{640}{Fonctions autorisées}{\TTBF{malloc(3)}, \TTBF{free(3)}}
+
+\vspace*{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de recoder les fonctions vues jusqu'à maintenant dans leurs versions \textit{n} (\TTBF{strnlen}, \TTBF{strndup}, \TTBF{strncpy}, ...) en respectant cette fois les spécifications du manuel officiel, mais vous devez également implémenter les véritables spécifications de \TTBF{strstr} et \TTBF{strtok}.}
+
+\bigskip
+
+%\noindent Vous devez implémenter ces fonctions en respectant strictement les spécifications suivantes.
+%Vous ne devez ni rendre de fonction \TTBF{main} ni vos tests : vous ne devez rendre \textit{que} les fonctions demandées (et éventuellement celles vous permettant de les faire fonctionner) dans le fichier \texttt{StrBasics.c}, ainsi que leurs prototypes dans le fichier \texttt{StrBasics.h}.
+
+\bigskip
+
+%\noindent Vous devez implémenter les X fonctions suivantes :
+%\begin{itemize}
+%\item \TTBF{int my\_strlen(char *str)}
+%\item \TTBF{char *my\_strdup(char *str)}
+%\item \TTBF{char *my\_strcpy(char *dest, char *src)}
+%\end{itemize}
+
+\noindent Vous devez implémenter les fonctions suivantes :
+
+\bigskip
+
+\lstset{language=C}
+%\begin{lstlisting}[frame=single,title={Liste des fonctions pour l'exercice 1}]
+\begin{lstlisting}[frame=single]
+int my_strnlen(char *str, int n);
+char *my_strndup(char *str, int n);
+int my_strncmp(char *s1, char *s2, int n);
+char *my_strncpy(char *dest, char *src, int n);
+char *my_strncat(char *dest, char *src, int n);
+
+char *my_strtok(char *str, char *delim);
+char *my_strstr(char *haystack, char *needle);
+\end{lstlisting}
+
+
+\subsubsection*{Accès aux exigences}
+
+\noindent Les exigences des fonctions se trouvent dans les \textit{manuels} de documentation.
+Différentes sections existent dans les manuels, vous devrez utiliser la section $ 3 $ qui sert à décrire les bibliothèques.
+Ainsi, pour obtenir des informations sur \TTBF{strnlen}, vous devrez entrer dans votre terminal la commande suivante : \TTBF{man 3 strnlen}
+
+\noindent Pour quitter un manuel, il suffit d'appuyer sur la touche \TTBF{q} .
