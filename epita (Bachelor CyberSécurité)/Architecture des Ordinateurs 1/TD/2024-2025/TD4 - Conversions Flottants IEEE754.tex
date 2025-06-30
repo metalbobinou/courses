@@ -1,0 +1,148 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{TD4 - Conversions Flottants}
+\newcommand{\SousTitreSeance}{IEEE 754}
+\newcommand{\DateCours}{Novembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture ; Binaire ; Hexadécimal ; Conversion Flottants ; Flottants ; IEEE754 ; IEEE 754 ; Virgule Flottante}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les conversions entre plusieurs bases pour les flottants en respectant la norme IEEE 754.
+
+\bigskip
+
+Pour rappel, les flottants IEEE 754 peuvent être convertis depuis la base 10 vers du binaire sur 32 bits, 64 bits, ou quelques autres formats.
+Dans ce document, nous nous concentrerons sur les formats 32 bits et 64 bits.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Standards IEEE 754}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Rappelez la taille de chacune des parties représentant un flottant IEEE 754 :
+
+\medskip
+
+\begin{center}
+
+Test.
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions flottants IEEE 754 vers la base 10}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Convertissez ces nombres depuis le format IEEE 754 vers la base 10.
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | C{3.5cm} | C{3.5cm} | }
+\hline
+IEEE 754 & Base 10 \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{0101} \, \text{1101} } $} & \\
+ & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions base 10 vers flottants IEEE 754}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Convertissez ces nombres depuis le format IEEE 754 vers la base 10.
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | C{3.5cm} | C{3.5cm} | }
+\hline
+Base 10 & IEEE 754 \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 42,42 } $} & \\
+ & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2024}
+
+%\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}

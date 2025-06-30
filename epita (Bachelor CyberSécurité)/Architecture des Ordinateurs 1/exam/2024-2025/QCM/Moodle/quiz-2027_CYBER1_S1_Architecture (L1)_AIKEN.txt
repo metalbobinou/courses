@@ -1,0 +1,271 @@
+Convertissez 115 en base 2
+A) % 0111 0011
+B) % 0110 1111
+C) % 1000 1101
+ANSWER: A
+Convertissez 133 en base 2
+A) % 1000 0101
+B) % 0111 1101
+C) % 1000 1001
+D) % 1000 1101
+ANSWER: A
+Convertissez 142 en base 2
+A) % 1000 1110
+B) % 1001 0010
+C) % 1001 1000
+D) % 1001 1100
+ANSWER: A
+Convertissez 172 en base 2
+A) % 1010 1100
+B) % 1100 0010
+C) % 1011 0100
+D) % 1010 1110
+ANSWER: A
+Convertissez 234 en base 2
+A) % 1110 1010
+B) % 1110 1011
+C) % 0111 0101
+D) % 0111 1010
+ANSWER: A
+Convertissez 42 en base 2
+A) % 0010 1010
+B) % 1010 1010
+C) % 0000 1010
+D) % 1010 1000
+ANSWER: A
+Convertissez % 0010 1010 en base 10
+A) 42
+B) 38
+C) 30
+D) 210
+ANSWER: A
+Convertissez % 0110 1101 en base 10
+A) 109
+B) 613
+C) 119
+D) 103
+ANSWER: A
+Convertissez % 0111 1100 en base 10
+A) 124
+B) 248
+C) 126
+D) 250
+ANSWER: A
+Convertissez % 1011 1011 en base 10
+A) 187
+B) 251
+C) 123
+D) 191
+ANSWER: A
+Convertissez % 1100 1011 en base 10
+A) 203
+B) 184
+C) 183
+D) 1211
+ANSWER: A
+Convertissez % 1101 0111 en base 10
+A) 215
+B) 231
+C) 183
+D) 240
+ANSWER: A
+Convertissez 238 en base 16
+A) $ EE
+B) $ 1414
+C) $ E4
+D) $ 4E
+E) $ DD
+F) $ CC
+ANSWER: A
+Convertissez 42 en base 16
+A) $ 2A
+B) $ A2
+C) $ 42
+D) $ 24
+E) $ 28
+F) $ 82
+ANSWER: A
+Convertissez 56 en base 16
+A) $ 38
+B) $ 83
+C) $ 3A
+D) $ A3
+E) $ 42
+F) $ 24
+ANSWER: A
+Convertissez $34 en base 10
+A) 52
+B) 484
+C) 34
+D) 48
+ANSWER: A
+Convertissez $5E en base 10
+A) 94
+B) 64
+C) 90
+D) 74
+ANSWER: A
+Convertissez $AB en base 10
+A) 171
+B) 1011
+C) 170
+D) 172
+ANSWER: A
+Convertissez % 0101 1001 du BCD vers la base 10
+A) 59
+B) 89
+C) 105
+D) Ce n'est pas un nombre correct en BCD
+ANSWER: A
+Convertissez % 0110 0111 du BCD vers la base 10
+A) 67
+B) 103
+C) 107
+D) 83
+ANSWER: A
+Convertissez % 1100 1001 du BCD vers la base 10
+A) Ce n'est pas un nombre correct en BCD
+B) 129
+C) 21
+D) 1209
+ANSWER: A
+Convertissez 42 en BCD
+A) % 0100 0010
+B) % 0010 1010
+C) % 1010 1010
+D) % 0101 0101
+ANSWER: A
+Convertissez 72 en BCD
+A) % 0111 0010
+B) % 0100 1000
+C) % 0101 0010
+D) % 0100 0110
+ANSWER: A
+Convertissez 96 en BCD
+A) % 1001 0110
+B) % 0110 0000
+C) % 0101 1110
+D) % 0110 0100
+ANSWER: A
+Convertissez -108 en binaire signé sur 8 bits
+A) % 1001 0100
+B) % 1001 0011
+C) % 1110 1100
+D) % 1110 1011
+ANSWER: A
+Convertissez -37 en binaire signé sur 8 bits
+A) % 1101 1011
+B) % 1101 1010
+C) % 1010 0101
+D) % 1010 0100
+ANSWER: A
+Convertissez -53 en binaire signé sur 8 bits
+A) % 1100 1011
+B) % 1100 1010
+C) % 1011 0101
+D) % 1011 0100
+ANSWER: A
+Convertissez $B4 comme un nombre signé en base 10
+A) -76
+B) -54
+C) -75
+D) -53
+ANSWER: A
+Convertissez $C4 comme un nombre signé en base 10
+A) -60
+B) -59
+C) -68
+D) -67
+ANSWER: A
+Convertissez $D8 comme un nombre signé en base 10
+A) -40
+B) -39
+C) -88
+D) -87
+ANSWER: A
+A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x44a72000
+A) 1337
+B) -1998,974
+C) 2^(-142)
+D) NaN
+ANSWER: A
+A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x42000000
+A) 32
+B) -2048
+C) 2^(-142)
+D) + l'infini
+ANSWER: A
+A quel nombre en base 10 correspond le flottant IEEE754 suivant : 0x42280000
+A) 42
+B) 0
+C) 2^(-135)
+D) -138,5
+ANSWER: A
+A quelle valeur base 10 correspond ce flottant IEEE 754 : 0x7F86AE00
+A) NaN
+B) 4242133700000
+C) -18,59
+D) 2(-138)
+ANSWER: A
+A quelle valeur IEEE 754 correspond le nombre décimal 0.5 ?
+A) 0x3F000000
+B) 0xBF000000
+C) 0x3F11A2F3
+D) 0xBF11A2F3
+ANSWER: A
+A quelle valeur IEEE 754 correspond le nombre décimal 123 ?
+A) 0x42F60000
+B) 0xC2F60000
+C) 0x042F6000
+ANSWER: A
+A quelle valeur IEEE 754 correspond le nombre décimal 12.5475692749 ?
+A) 0x4148c2d8
+B) 0xC148c2d8
+C) 0x41800000
+D) 0xC148c2d8
+ANSWER: A
+A quelle valeur IEEE 754 correspond le nombre décimal 42 ?
+A) 0x42280000
+B) 0x7F80002A
+C) 0x42752A01
+D) 0x05A12892
+ANSWER: A
+Choisissez la formule logique à laquelle correspond ce schéma :[Schéma A]
+A) X = (A ET (A OU B)) OU ((A ET B) OU (B ET C))
+B) X = (A OU (A ET B)) ET ((A OU B) ET (B OU C))
+C) X = (A OU (A ET B)) NON-ET ((A OU B) ET (B OU C))
+D) X = (A XOR (A ET B)) ET ((A XOR B) ET (B XOR C))
+ANSWER: A
+Choisissez la formule logique à laquelle correspond ce schéma :[Schéma B]
+A) X = (A OU (A NON-OU B)) ET ((A NON-OU B) ET (B XOR C))
+B) X = (A ET (A NON-ET B)) OU ((A NON-ET B) OU (B XOR C))
+C) X = (A ET (A NON-ET B)) XOR ((A NON-ET B) XOR (B OU C))
+D) X = (A XOR (A XNOR B)) ET ((A XNOR B) ET (B OU C))
+ANSWER: A
+Choisissez la formule logique à laquelle correspond ce schéma :[Schéma C]
+A) X = (A OU (A NON-OU C)) ET ((B NON-OU C) ET (B XOR C))
+B) X = (A ET (A NON-ET C)) OU ((B NON-ET C) OU (B XOR C))
+C) X = (A XOR (A XNOR C)) ET ((B XNOR C) ET (B OU C))
+D) X = (A OU (A XOR C)) ET ((B XOR C) ET (B OU C))
+ANSWER: A
+Choisissez la formule logique à laquelle correspond ce schéma :[Schéma D]
+A) X = (A NON-ET (A ET C)) XOR ((B OU C) NON-ET (B OU C))
+B) X = (A NON-OU (A OU C)) NON-ET ((B ET C) NON-OU (B ET C))
+C) X = (A NON-ET (A ET C)) OU ((B XOR C) NON-ET (B XOR C))
+D) X = (A XNOR (A OU C)) ET ((B OU C) XNOR (B OU C))
+ANSWER: A
+Sélectionnez la formule équivalente à celle-ci :- ( ( (A et B) ou (C et A) ) et (B ou C) )
+A) ( (-A ou -B) et (-C ou -A) ) ou (-B et -C)
+B) ( (-A et -B) et (-C et -A) ) ou (-B ou -C)
+C) - ( (A et B) ou (C et A) ) et (- (B ou C) )
+ANSWER: A
+Sélectionnez la formule équivalente à celle-ci :- ( ( (A ou B) et (- (A et B) ) ) ou (-A et B) )
+A) ( (-A et -B) ou (A et B) ) et (A ou -B)
+B) ( (-A et -B) ou (-A ou -B) ) et (A ou -B)
+C) ( (-A et -B) ou (-A et -B) ) ou (A et -B) )
+ANSWER: A
+Sélectionnez la formule équivalente à celle-ci :( (A et C) ou (B et C) ) et (A et B)
+A) - ( ( (-A ou -C) et (-B ou -C) ) ou (-A ou -B) )
+B) - ( - ( (-A ou -C) et (-B ou -C) ) ou ( - (-A ou -B) ) )
+C) ( - (A et C) et (-B et -C) ) ou (-A ou -B)
+ANSWER: A

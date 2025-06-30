@@ -1,0 +1,1216 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Introduction à l'Algorithmique}
+\newcommand{\SousTitreSeance}{TD1}
+\newcommand{\DateCours}{Septembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Introduction}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+%\usepackage{MetalCourseBooklet}
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec l'algorithmique.
+Les tous premiers algorithmes que vous allez exécuter et écrire sont issus de connaissances communes vues lors de vos cours de l'enseignement primaire ou secondaire.
+
+Pour exécuter les algorithmes en mode dit \textit{pas à pas}, pensez à toujours avoir une feuille de brouillon et un stylo pour pouvoir noter le déroulé de l'algorithme à chaque instruction ou série d'instructions.
+
+\bigskip
+
+Définition informelle d'un algorithme~\footnote{Introduction à l'Algorithmique. 2001 ($2^{e}$ édition) T.Cormen et al.} : \og \textit{procédure de calcul bien définie qui prend en entrée une valeur, ou un ensemble de valeurs, et qui donne en sortie une valeur, ou un ensemble de valeurs. Un algorithme est donc une séquence d'étapes de calcul qui transforment l'entrée en sortie} \fg .
+
+\medskip
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problèmes, Solutions, et Types de données}
+
+\bigskip
+
+Les algorithmes sont donc des étapes successives permettant d'obtenir un résultat.
+Il s'agit littéralement de \textit{comment} traiter un problème pour pouvoir le résoudre.
+Néanmoins, cette séquence d'étapes seule ne permet pas de savoir quel problème on souhaite traiter, il faut donc bien indiquer le contexte et l'objectif de l'algorithme.
+Ainsi, le problème à traiter, le \textit{pourquoi}, est également extrêmement important.
+
+\medskip
+
+Chercher et comprendre les problèmes rencontrés est donc très important pour pouvoir écrire les algorithmes les plus efficaces.
+Par exemple, si l'on cherche à trier des pierres selon leur taille à partir de gravas, on utilisera des tamis de plus en plus petits successivement pour récupérer tout d'abord les pierres, puis les cailloux, et en dernier les grains de sable.
+Dans cet exemple, il était nécessaire de constater que :
+\begin{enumerate}
+\item la taille des pierres était très importante,
+\item des outils permettant de laisser passer ou non des pierres d'une certaine taille sont disponibles,
+\item on ne s'intéressait finalement pas à d'immenses rochers.
+\end{enumerate}
+Pour reprendre la comparaison avec les questions : les pierres et leurs tailles correspondent aux réponses du \textit{quoi}.
+Ainsi :
+\begin{itemize}
+\item Pourquoi / Quel est l'objectif ? [verbe] \textbf{Trier} des pierres par taille
+\item Quoi / Que manipule-t-on ? [noms] Des \textit{pierres} de différentes \textit{tailles}
+\item Comment ? En utilisant successivement des \textit{tamis} avec des \textit{trous de plus en plus petits}
+\end{itemize}
+
+\medskip
+
+Ces spécifications seront très importantes lorsque vous serez amenés à écrire des algorithmes : pensez toujours à bien vérifier les \textit{spécifications} du problème avant d'essayer de répondre au problème (il peut arriver qu'en fait il n'y ait aucun problème).
+
+\bigskip
+
+En algorithmique, il existe quelques types fondamentaux permettant de représenter la plupart des informations du monde physique.
+En combinant ces types, on peut donc représenter quasiment n'importe quel objet existant ou phénomène mesurable (la taille d'une pierre, sa composition chimique, sa dureté, sa brillance et sa forme une fois taillée, etc).
+
+\begin{itemize}
+\item entier (\textit{integer} en anglais) : il s'agit des entiers relatifs (positifs et négatifs)
+\item flottant (\textit{float} ou \textit{double} en anglais) : il s'agit des nombres à virgule (attention, ce type a des problèmes de \textit{précision} : on ne peut pas toujours comparer correctement des flottants)
+\item caractère (\textit{character} en anglais) : il s'agit des lettres ou caractères (à noter que ce type manipule une seule et unique lettre à la fois)
+\item chaîne de caractères (\textit{string} en anglais) : il s'agit d'une suite de caractères
+\end{itemize}
+
+\bigskip
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Types de données}
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{ | c | c | l | c | }
+\hline
+\textbf{entier}                    & \textbf{integer} & Entiers relatifs (+ et -) & \TTBF{42} \\
+\hline
+\multirow{2}{*}{\textbf{flottant}} & \textbf{float}   & Nombres à virgule             & \multirow{2}{*}{\TTBF{13.37}} \\
+                                   & \textbf{double}  & (attention aux comparaisons)  & \\
+\hline
+\textbf{caractère}                 & \textbf{char}    & Lettres / Caractères (un seul à la fois) & \TTBF{'b'} \\
+\hline
+\textbf{chaîne de caractères}      & \textbf{string}  & \multirow{1}{*}{Suite de caractères} & \TTBF{"lol"} \\
+\hline
+\textbf{booléen}                   & \textbf{bool}    & \multirow{1}{*}{Valeur booléenne (Vrai/Faux)} & \TTBF{True} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vfillFirst
+
+En vous aidant du tableau de types, retrouvez les types de données des valeurs suivantes et corrigez éventuellement les erreurs :
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+
+\begin{tabular}{ | C{2cm} | C{5cm} | }
+\hline
+\multirow{2}{*}{\TTBF{1512}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{16.64}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"4chan"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"/b/"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{xyz}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{'P0K3M0N'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"80,86"}} & \\ & \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+    \centering
+
+\begin{tabular}{ | C{2cm} | C{5cm} | }
+\hline
+\multirow{2}{*}{\TTBF{'M'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"4242"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{'5'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{3}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"9"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{3.}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"D"}} & \\ & \\
+\hline
+\end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+\bigskip
+
+Indiquez le type de chaque valeur.
+Si une valeur ne correspond à aucun type, indiquez simplement \textit{incorrect} dans la case à droite.
+
+\begin{center}
+\begin{tabular}{ | C{2cm} | C{5cm} | }
+\hline
+\multirow{2}{*}{\TTBF{"3 + 4"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{'3 + 4'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{'"'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"'"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"'ABCD'"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{'"ABCD"'}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"'AB'CD"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{"12.21"}} & \\ & \\
+\hline
+\multirow{2}{*}{\TTBF{13.37}} & \\ & \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\vfillLast
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exécution pas à pas}
+
+\subsection{Somme des N premiers entiers}
+
+\bigskip
+
+\question{Afin de bien comprendre comment fonctionne un algorithme, comment l'exécuter, et potentiellement comment le corriger, utilisez cet algorithme calculant la somme des $ n $ premiers entiers en l'exécutant à la main et en remplissant le tableau suivant pour $ n = 5 $.}
+
+\begin{center}
+\begin{equation*}
+\sum^{n}_{i = 1} i = 1 + 2 + 3 + \ldots + n
+\end{equation*}
+\end{center}
+
+
+\vfillFirst
+
+
+%\begin{center}
+%\begin{lstlisting}[style=sh,morekeywords={floor,ceil}]
+%python
+%\end{lstlisting}
+%\end{center}
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction Somme : entier
+  parametres locaux
+    entier    n
+  variables
+    entier    i, sum
+
+debut
+i %*$\leftarrow$*) 1
+sum %*$\leftarrow$*) 0
+tant que (i <= n) faire
+  sum %*$\leftarrow$*) sum + i
+  i %*$\leftarrow$*) i + 1
+fin tant que
+retourne sum
+fin algorithme fonction Somme \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &  sum  \\
+%        \hline
+%        0    &  1 &  0  \\
+%        1    &  2 &  1  \\
+%        2    &  3 &  3  \\
+%        3    &  4 &  6  \\
+%        4    &  5 & 10  \\
+%        5    &  6 & 15  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  i &  sum  \\
+        \hline
+ \multirow{3}{*}{\begin{minipage}{1.1cm}\centering \'Etat Initial\end{minipage}} &    &       \\
+             &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        1    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        2    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        3    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        4    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        5    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        6    &    &       \\
+             &    &       \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-somme-n-premiers-entiers-execution}
+  \end{minipage}
+  \caption{Algorithme de la somme des N premiers entiers}
+  \label{somme-n-premiers-entiers}
+\end{table}
+
+
+\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Multiplication égyptienne}
+
+\bigskip
+
+Reprenez maintenant l'exemple de la multiplication égyptienne en l'exécutant cette fois-ci à la main en remplissant le tableau suivant.
+
+\question{Vous prendrez comme premières valeurs de test : $ a = 4 $ et $ b = 5 $.}
+
+\question{Remplissez un tableau similaire sur un brouillon pour les valeurs $ a = 3 $ et $ b = 13 $.}
+
+%\bigskip
+\vfillFirst
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction MultEgpytienne : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    x, y, z
+
+debut
+x %*$\leftarrow$*) a
+y %*$\leftarrow$*) b
+z %*$\leftarrow$*) 0
+tant que (y > 0) faire
+  si (y EST IMPAIRE) alors
+     z %*$\leftarrow$*) z + x
+  fin si
+  x %*$\leftarrow$*) 2 %*×*) x
+  y %*$\leftarrow$*) y %*÷*) 2
+fin tant que
+retourne z
+fin algorithme fonction MultEgpytienne \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la multiplication égyptienne}
+    % \label{algo-multiplication-egyptienne}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y &  z  \\
+%        \hline
+%        0    &  4 &  5 &  0  \\
+%        1    &  8 &  2 &  4  \\
+%        2    & 16 &  1 &  4  \\
+%        3    & 32 &  0 & 20  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  x &  y &  z  \\
+        \hline
+ \multirow{3}{*}{\begin{minipage}{1.1cm}\centering \'Etat Initial\end{minipage}} &    &    &   \\
+             &    &    &   \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        1    &    &    &     \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        2    &    &    &     \\
+             &    &    &   \\
+        \hline
+             &    &    &   \\
+        3    &    &    &     \\
+             &    &    &   \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-multiplication-egyptienne-execution}
+  \end{minipage}
+  \caption{Algorithme de la multiplication égyptienne}
+  \label{multiplication-egyptienne}
+\end{table}
+
+%\bigskip
+%
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y &  z  \\
+%        \hline
+%        0    &  3 & 13 &  0  \\
+%        1    &  6 &  6 &  3  \\
+%        2    & 12 &  3 &  3  \\
+%        3    & 24 &  1 & 15  \\
+%        3    & 48 &  0 & 39  \\
+%        \hline
+%    \end{tabular}
+
+\bigskip
+
+
+\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Division euclidienne}
+
+\bigskip
+
+Effectuez maintenant l'algorithme de la division euclidienne.
+L'algorithme renverra le quotient.
+
+\question{Vous prendrez comme premières valeurs de test : $ a = 19 $ et $ b = 3 $.}
+
+%\bigskip
+\vfillFirst
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction DivEuclideQuotient : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    x, y
+
+debut
+x %*$\leftarrow$*) a
+y %*$\leftarrow$*) 0
+tant que (x > 0) faire
+  x %*$\leftarrow$*) x - b
+  y %*$\leftarrow$*) y + 1
+fin tant que
+retourne y
+fin algorithme fonction DivEuclideQuotient \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme du quotient de la division euclidienne}
+    % \label{algo-division-euclidienne-quotient}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  x &  y  \\
+%        \hline
+%        0    &  19 & 0  \\
+%        1    &  16 & 1  \\
+%        2    &  13 & 2  \\
+%        3    &  10 & 3  \\
+%        4    &   7 & 4  \\
+%        5    &   4 & 5  \\
+%        6    &   1 & 6  \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+        tour &  x &   y   \\
+        \hline
+ \multirow{3}{*}{\begin{minipage}{1.1cm}\centering \'Etat Initial\end{minipage}} &    &       \\
+             &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        1    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        2    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        3    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        4    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        5    &    &       \\
+             &    &       \\
+        \hline
+             &    &       \\
+        6    &    &       \\
+             &    &       \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'exécution pas à pas}
+    % \label{table-division-euclidienne-quotient-execution}
+  \end{minipage}
+  \caption{Algorithme du quotient de la division euclidienne}
+  \label{division-euclidienne-quotient}
+\end{table}
+
+\bigskip
+
+\question{L'algorithme fonctionne-t-il tel quel ? Si non, quelle modification faut-il apporter pour obtenir le bon quotient ?}
+
+\bigskip
+
+\question{Quelle variable faut-il renvoyer pour obtenir le reste ?}
+
+\bigskip
+
+\question{Si le test dans le \textit{tant que} était un $ >= $ plutôt qu'un $ > $ : quels changements à l'exécution cela produirait-il ?}
+
+%\question{Quelles modifications faudrait-il apporter pour obtenir le bon quotient ? le bon reste ?}
+
+\bigskip
+
+\question{Cet algorithme est incapable de gérer le cas où $ 0 $ est fourni en tant que diviseur.
+Comment pourrait-on corriger cela afin de protéger l'algorithme d'une boucle infinie ?}
+
+\bigskip
+
+Dans la plupart des langages de programmation, vous verrez qu'un opérateur \TTBF{mod} ou \TTBF{\%} existe et est assez fréquemment utilisée.
+Il s'agit simplement de l'opérateur calculant le reste de la division euclidienne.
+
+$ 42 \; \% \; 10 = 2 $ (lorsque l'on divise $ 42 $ par $ 10 $, le reste est $ 2 $)
+
+$ 40 \; \% \; 10 = 0 $ (lorsque l'on divise $ 40 $ par $ 10 $, le reste est $ 0 $)
+
+$ 42 \; \% \; 2 = 0 $ (lorsque l'on divise $ 42 $ par $ 2 $, le reste est $ 0 $)
+
+$ 9 \; \% \; 10 = 9 $ (lorsque l'on divise $ 9 $ par $ 10 $, le reste est $ 9 $)
+
+
+\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\'Ecriture d'algorithmes simples}
+
+\bigskip
+
+Plusieurs opérations qui nous semblent évidentes sont en réalité bien plus complexes à réaliser dans la pratique.
+
+La multiplication égyptienne est un exemple très concret de cela : nous savons multiplier car nous avons appris et compris ce qu'il se passait lors de cette opération, mais sans l'apprentissage, il est difficile de connaitre le résultat d'une multiplication.
+Tout comme il est difficile de multiplier de tête des nombres à virgules entre eux.
+
+Les opérations simples sont cependant essentielles à l'écriture de programmes et d'algorithmes plus complexes.
+
+\bigskip
+
+\vspace*{3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Multiplication classique}
+
+\bigskip
+
+\question{Maintenant que vous savez lire, exécuter (y compris en mode pas à pas), et corriger un algorithme, écrivez l'algorithme de la multiplication classique à base d'additions ($ N \text{×} M = $ N additions de la valeur M) dans le cas de nombres positifs uniquement.}
+
+\bigskip
+
+\vspace*{0.5cm}
+
+\bigskip
+
+N'hésitez pas à utiliser un exemple général simple pour bien déterminer la boucle à écrire :
+\begin{center}
+
+$ 5 \text{×} 3 = 5 + 5 + 5 = 15 $
+
+\end{center}
+
+\bigskip
+
+On peut donc s'attendre à avoir une accumulation dans une variable pour le résultat :
+\begin{center}
+
+$ 0, 5, 10, 15 $
+
+\bigskip
+
+$ 0 (+ 5) $
+
+$ 5 (+ 5) $
+
+$ 10 (+ 5) $
+
+$ 15 $
+\end{center}
+
+\bigskip
+
+Mais, on doit également connaître le cas d'arrêt : lorsque le multiplicateur est à $ 0 $.
+
+
+\begin{center}
+\begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|}
+ \hline
+ val1 & val2 & sum \\
+ \hline
+  5 & 3 &  0 \\
+  5 & 2 &  5 \\
+  5 & 1 & 10 \\
+  5 & 0 & 15 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+%\bigskip
+\clearpage
+
+\vfillFirst
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+
+algorithme fonction MultClassique : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier
+
+debut
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction MultClassique
+ \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &   j &  k  \\
+%        \hline
+%        0    &  1 &   1 &   0 \\
+%        1    &  2 &   1 &   1 \\
+%        2    &  3 &   2 &   3 \\
+%        3    &  4 &   6 &   9 \\
+%        4    &  5 &  24 &  33 \\
+%        5    &  6 & 120 & 153 \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+             &     &     &     \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+%  \caption{Multiplication classique}
+%  \label{multiplication-classique}
+\end{table}
+
+\bigskip
+
+\question{Comment peut-on traiter les nombres négatifs ? Écrivez maintenant une fonction \textit{MultRelatifs} permettant de multiplier des nombres entiers négatifs (n'hésitez pas à appeler la fonction de multiplication que vous avez précédemment écrite).}
+
+
+\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Puissance}
+
+\vfillFirst
+
+
+\question{Écrivez l'algorithme calculant la puissance de $ x^{n} $ (pour $ n $ positif ou nul).}
+
+Au lieu d'utiliser les symbole × ou * pour multiplier, vous ferez un appel à votre dernière fonction \textit{MultRelatifs} en lui donnant deux paramètres et en récupérant le résultat.
+
+\bigskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.59\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+
+algorithme fonction Puissance : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier
+
+debut
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction Puissance
+ \end{lstlisting}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+%    \begin{tabular}{|c|c|c|c|}
+%        \hline
+%        tour &  i &   j &  k  \\
+%        \hline
+%        0    &  1 &   1 &   0 \\
+%        1    &  2 &   1 &   1 \\
+%        2    &  3 &   2 &   3 \\
+%        3    &  4 &   6 &   9 \\
+%        4    &  5 &  24 &  33 \\
+%        5    &  6 & 120 & 153 \\
+%        \hline
+%    \end{tabular}
+    \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \hline
+             &     &     &     \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+             &     &     &   \\
+             &     &     &     \\
+             &     &     &   \\
+        \hline
+    \end{tabular}
+  \end{minipage}
+%  \caption{Puissance}
+%  \label{puissance}
+\end{table}
+
+\vfillLast
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parité}
+
+\vfillFirst
+
+\question{Écrivez l'algorithme testant la parité d'un nombre $ n $.}
+
+La parité est simplement la qualité d'un nombre d'être pair ou impair.
+Vous renverrez $ 0 $ en cas de nombre pair, et $ 1 $ en cas de nombre impair.
+
+\bigskip
+
+
+\begin{center}
+
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+
+algorithme fonction Parite : entier
+  parametres locaux
+    entier    n
+  variables
+    entier
+
+debut
+
+
+
+
+
+
+
+
+
+
+fin algorithme fonction Parite
+\end{lstlisting}
+
+\end{center}
+
+\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Réécriture de boucles}
+
+\bigskip
+
+Les boucles \textit{For} et \textit{While} permettent de répéter des opérations un certain nombre de fois.
+
+\vspace*{1cm}
+
+\subsection{Boucle For}
+
+La boucle \textit{For} est la plus simple à utiliser : on fixe le nombre de fois que les instructions doivent être réalisées, puis elles sont exécutées.
+Cette boucle permet, dans certains cas, au \textit{compilateur} d'optimiser l'exécution en recopiant N fois les instructions à exécuter sans tester l'état de l'\textit{itérateur}, ou encore en parallélisant l'exécution des instructions.
+
+\medskip
+
+Néanmoins, la boucle \textit{For} ne permet pas de tester des conditions spécifiques, mais seulement de répéter des instructions un nombre précis de fois.
+
+\medskip
+
+Attention, dans certains langages comme le C, la boucle \textit{For} est en réalité une boucle \textit{While} dont l'itérateur est testé à chaque tour de boucle : lorsque vous écrivez une boucle \textit{For}, faites très attention à ne \textbf{jamais} modifier l'itérateur dans la boucle au risque de faire une boucle infinie, ou à l'inverse que votre modification ne soit pas prise en compte.
+
+\bigskip
+
+\subsection{Boucle While}
+
+La boucle \textit{While} teste une condition (ou un ensemble de conditions) et, si la condition est vérifiée, les instructions sont exécutées une fois de plus.
+Par définition, on ne peut donc pas facilement paralléliser ou optimiser ce genre de boucles : on doit tester à chaque fois si l'on peut continuer l'exécution.
+
+\medskip
+
+Le but de la boucle \textit{While} est bien évidemment de tester des valeurs modifiées par les instructions contenues dans la boucle elle-même.
+
+\vfillFirst
+
+\vfillLast
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Réécriture de boucles}
+
+Transformez les boucles \textit{For} suivantes en boucles \textit{While}.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction LoopF1 : entier
+  parametres locaux
+    entier    a
+  variables
+    entier    iter, cpt
+
+debut
+cpt %*$\leftarrow$*) 0
+pour iter %*\TTBF{de}*) 0 %*\TTBF{à}*) 5 faire
+  a %*$\leftarrow$*) a / 10
+  si (a >= 0) alors
+    cpt %*$\leftarrow$*) cpt + 1
+fin pour
+retourner cpt
+fin algorithme fonction LoopF1 \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction LoopF2 : entier
+  parametres locaux
+    entier    a
+  variables
+    entier    iter, res
+
+debut
+res %*$\leftarrow$*) 0
+pour iter %*\TTBF{de}*) 1 %*\TTBF{à}*) a faire
+  res %*$\leftarrow$*) res %*$\times$*) a
+fin pour
+retourner res
+fin algorithme fonction LoopF2 \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+Transformez les boucles \textit{While} suivantes en boucles \textit{For} si cela est possible, sinon, indiquez \textit{impossible}.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction LoopW1 : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    res
+
+debut
+res %*$\leftarrow$*) a
+tant que (res %*$\neq$*) 10) faire
+  res %*$\leftarrow$*) res + 1
+  a %*$\leftarrow$*) a + b
+fin pour
+retourner a
+fin algorithme fonction LoopW1 \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.5\textwidth}
+    \centering
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction LoopW2 : entier
+  parametres locaux
+    entier    a
+    entier    b
+  variables
+    entier    res
+
+debut
+res %*$\leftarrow$*) a
+tant que (res %*$\neq$*) 10) faire
+  res %*$\leftarrow$*) res + 1
+  a %*$\leftarrow$*) a + b
+fin pour
+retourner a
+fin algorithme fonction LoopW2 \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.5\textwidth}
+
+  \end{minipage}
+\end{table}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fonctions, Procédures, et Effets de bord}
+
+\bigskip
+
+La programmation, par rapport à l'algorithmique, est l'implémentation concrète des algorithmes dans des ordinateurs.
+C'est-à-dire que la logique de l'algorithme est développée pour qu'un ordinateur puisse l'exécuter avec son (ou ses processeurs) et périphériques.
+
+\medskip
+
+\subsection{Portée des Variables}
+
+Dans les algorithmes que vous écrivez, et leur version implémentée dans un programme, vous avez utilisé des \textit{variables}.
+Ces variables ne peuvent pas être utilisées avant d'avoir été déclarées.
+Ainsi, une variable dont on ne connait pas l'existence ne peut pas être utilisée (ni en écriture ni en lecture).
+
+\medskip
+
+Dans certains langages (comme le PHP ou le Python), on peut déclarer des variables à la volée.
+Néanmoins, la plupart des langages de programmation exigent que le développeur déclare chaque variable utilisée, et parfois avec le type de données qu'elles contiendront (comme en C).
+Ceci permet en réalité au compilateur de réserver suffisament d'espace pour la variable avant d'exécuter le programme.
+
+\medskip
+
+Au cours de l'histoire, il était initialement nécessaire de déclarer les variables utilisées dans l'ensemble d'un programme, puis, il est devenu possible (et plus optimal) de ne déclarer les variables que dans les \textit{scopes} où celles-ci sont utilisées.
+Ainsi, aujourd'hui, vous pouvez définir des variables dont la durée de vie ne sera limitée qu'à un scope encore plus réduit que celui d'une fonction (par exemple uniquement dans une boucle).
+
+\medskip
+
+Les paramètres sont des cas spéciaux de variables dont la valeur est fixée lors de l'appel de la fonction, mais les modifier ne changera pas leur état en dehors de la fonction appelée, sauf dans certains cas spéciaux que vous verrez beaucoup plus tard.
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int mul_two(int a, int b)
+{
+  int res = 0;
+  int iter = 0;
+
+  while (iter != b)
+  {
+    int tmp;
+    tmp = res + a;
+    res = tmp;
+
+    iter = iter + 1;
+  }
+  return (res);
+} \end{lstlisting}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.55\textwidth}
+Dans cet exemple, les variables \textit{res} et \textit{iter} peuvent être utilisées n'importe où dans la fonction.
+Mais, la variable \textit{tmp} n'existe que dans la boucle.
+
+\medskip
+
+Ainsi, \textit{tmp} ne peut ni être retournée, ni même lue en dehors de la boucle.
+\'Etant donné que la boucle est répétée plusieurs fois, la variable \textit{tmp} est même supprimée et redéclarée à chaque tour : vous ne devez jamais partir du principe qu'elle contiendra la précédente valeur allouée.
+  \end{minipage}
+\end{table}
+
+
+%\medskip
+%\bigskip
+
+\subsection{Fonctions et Procédures}
+
+Jusqu'à maintenant, les algorithmes que vous avez écrit prenaient des valeurs en paramètres, et retournaient chacun une valeur : il s'agit en programmation de \textit{fonctions}.
+Mais il existe également ce que l'on appelle des \textit{procédures}.
+
+\bigskip
+
+\begin{itemize}
+\item Une \textit{fonction} retourne une valeur
+\item Une \textit{procédure} ne retourne aucune valeur
+\end{itemize}
+
+\bigskip
+
+\subsection{Effets de bord}
+
+L'existence des procédures est justifiée par le fait que celles-ci modifient des valeurs en dehors du corps de la procédure : ce ne sont pas juste les variables de la proécdure ou ses paramètres d'entrée qui sont modifiés, mais bien les variables externes à la procédure.
+
+\medskip
+
+Par exemple, jusqu'à maintenant, on vous demandait de retourner une valeur à la fin d'une fonction (par exemple : calculer la somme des N premiers entiers, et retourner le résultat).
+Or, vous avez probablement trouvé beaucoup de tutoriaux en ligne vous indiquant comment écrire à l'écran des valeurs (souvent avec une fonction ou procédure appelée \textit{print()}).
+\'Ecrire à l'écran n'est pas du tout une fonctionnalité triviale : on doit prendre la valeur donnée, la transformer en caractères affichables, placer ces caractères dans une section de la mémoire accessible par la sortie graphique, lire les caractères pour décider quels pixels allumer ou éteindre à l'écran, et surtout, où écrire ces caractères à l'écran.
+
+\medskip
+
+Tout cela n'implique aucun retour vers l'utilisateur (qui a simplement demandé à afficher quelque chose à l'écran), mais modifie énormément de valeurs dans le système d'exploitation et dans l'ordinateur, c'est-à-dire en dehors du programme initialement écrit.
+
+\bigskip
+
+La modification de valeurs en dehors de la fonction/procédure s'appelle des \textit{effets de bord}.
+
+\medskip
+
+Un \textit{effet de bord} est donc simplement une modification dans une variable en dehors du scope actuel (en général dans un scope de plus haut niveau).
+
+\bigskip
+
+Les procédures ont comme unique objectif d'effectuer des effets de bords, et donc, de ne rien avoir à retourner comme valeurs.
+\`A l'inverse, des fonctions peuvent appliquer des effets de bord \textit{et} retourner une valeur (par exemple pour indiquer combien de caractères ont réussi à être affichés ou transmis), mais ce n'est pas leur unique objectif.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Propriétés des fonctions}
+
+L'art de la programmation réside en partie dans l'écriture de fonctions possédant certaines propriétés :
+
+\begin{itemize}
+\item \textit{Déterminisme} : une fonction est dite déterministe si elle renvoie toujours le même résultat lorsqu'on lui donne les mêmes paramètres
+
+\item \textit{Pure} : une fonction est dite pure si elle est déterministe \textit{ET} ne produit aucun effet de bord
+\end{itemize}
+
+De nombreuses autres propriétés existent (les fonctions réentrantes, idempotentes, ...) et vous les découvrirez plus tard.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en septembre 2024}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}

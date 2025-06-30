@@ -1,0 +1,210 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{TD3 - Conversions Autres Codages}
+\newcommand{\SousTitreSeance}{Code Gray \& BCD}
+\newcommand{\DateCours}{Octobre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture ; Conversion Entiers ; Binaire ; Gray ; Code Gray ; BCD ; 8421 ; 2421}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les conversions en code Gray et en BCD.
+
+\bigskip
+
+Les conversions ne s'intéresseront qu'à des entiers non signés.
+
+Pour rappel, le BCD est par défaut en mode 8421, mais les consignes de ce document vous demanderont aussi de réaliser du 2421.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversion vers le Code Gray \& le BCD}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Convertissez ces nombres vers du code Gray, du BCD (8421), puis du BCD (2421).
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | c | C{3.5cm} | C{3.5cm} | C{3.5cm} | }
+\hline
+Nombre & Code Gray & BCD (8421) & BCD (2421) \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 42 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 151 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 234 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 747 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 1337 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 2934 } $} & & & \\
+ & & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ 3421 } $} & & & \\
+ & & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions depuis le Code Gray}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Convertissez ces nombres depuis le code Gray vers du binaire classique puis vers la base 10.
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | c | C{3.5cm} | C{3.5cm} | }
+\hline
+Code Gray & Binaire & Base 10 \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0101 \, 1101 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1001 \, 0111 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1101 \, 1011 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1010 \, 0101 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1011 \, 1011 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0111 \, 0111 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1111 \, 1111 } $} & & \\
+ & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions depuis les BCD}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Convertissez ces nombres depuis les BCD vers la base 10.
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | c | C{3.5cm} | C{3.5cm} | }
+\hline
+BCD & (8421) $ \rightarrow $ Base 10 & (2421) $ \rightarrow $ Base 10 \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0101 \, 1101 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1001 \, 0111 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1101 \, 1011 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1010 \, 0101 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1011 \, 1011 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0111 \, 0111 } $} & & \\
+ & & \\
+\hline
+ \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1111 \, 1111 } $} & & \\
+ & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2024}
+
+%\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}

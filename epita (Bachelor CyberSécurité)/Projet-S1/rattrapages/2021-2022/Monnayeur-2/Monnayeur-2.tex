@@ -1,0 +1,370 @@
+%% Exercice 1
+
+%\ExoSpecs{\TTBF{CalculTVA.sh}}{\TTBF{\RenduDir/src/exo1/}}{750}{640}{\TTBF{write}}
+%\ExoSpecsCustom{\TTBF{is\_even}}{\TTBF{\RenduDir/src/is\_even.c}}{750}{640}{Commandes autorisées}{\TTBF{sh}, \TTBF{echo}, \TTBF{exit}}
+\ExoSpecsSimple{\TTBF{monnayeur}}{\TTBF{\RenduDir/src/monnayeur.[c|py]}}{750}{640}
+
+%\vspace*{0.5cm}
+%
+%\noindent \textbf{(2 points)}
+%
+%\vspace*{0.2cm}
+
+\vspace{0.7cm}
+
+\noindent \ExoObjectif{Le but de l'exercice est de reproduire un monnayeur pouvant rendre la monnaie d'un distributeur automatique.
+Pour cela le programme prendra plusieurs paramètres, dont la somme totale insérée et le prix du produit demandé, et retournera le nombre de pièces rendues pour chaque valeur faciale.}
+
+\bigskip
+
+\noindent Vous devez écrire un programme en C \underline{\textbf{et}} un programme en Python dont les sources seront dans le même dossier.
+%
+\noindent Vous pouvez bien évidemment séparer votre code en plusieurs fichiers (et cela est conseillé), mais votre fonction \textit{main} doit se trouver dans le fichier indiqué dans la spécification en introduction de l'exercice.
+
+\bigskip
+
+\noindent Le programme doit tout d'abord prendre 10 paramètres dans cet ordre précis : la somme insérée, le prix visé, le nombre de pièces de chaque valeur faciale présentes dans les cylindres du monnayeur (soit huit types de pièces : $ 2 \EUR $, $ 1 \EUR $, $ 0.50 \EUR $, $ 0.20 \EUR $, $ 0.10 \EUR $, $ 0.05 \EUR $, $ 0.02 \EUR $, $ 0.01 \EUR $).
+
+\medskip
+
+%\noindent Comme dans le format anglais :
+%\begin{itemize}
+%\item les centimes sont séparés des unités par un point " \TTBF{.} ", et non par une virgule (exemple : \textit{six euros et quinze centimes} s'écrit $ 6.15 \EUR $).
+%\item les milliers sont séparés par des virgules " \TTBF{,} ", et non par des points (exemple : \textit{deux mille six euros et quinze centimes} s'écrit $ 2,006.15 \EUR $).
+%\end{itemize}
+\noindent Un format partiellement anglais sera adopté dans ce projet : les centimes seront séparés des unités par un point " \TTBF{.} ", et non par une virgule, mais les milliers ne seront pas séparés (exemple : \textit{mille six cent quarante sept euros et vingt cinq centimes} s'écrit $ 1647.25 \EUR $).
+
+\medskip
+
+\noindent Seuls les nombres composés au maximum de deux chiffres après la virgule seront gérés.
+
+\medskip
+
+\noindent Les zéros en trop devant ou derrière les nombres peuvent être omis : $ 002.1 \EUR $ doit être compris comme $ 2.10 \EUR $, c'est-à-dire  $ 2 $ euros et $ 10 $ centimes.
+
+\medskip
+
+\noindent Le programme retournera $ 0 $ après avoir écrit l'état des cylindres du monnayeur contenant chacune des 8 valeurs faciales des pièces dans cet ordre et ce format suivi d'un retour à la ligne :
+
+\medskip
+
+\noindent \TTBF{2$\EUR$\textvisiblespace 1$\EUR$\textvisiblespace 0.50$\EUR$\textvisiblespace 0.20$\EUR$\textvisiblespace 0.10$\EUR$\textvisiblespace 0.05$\EUR$\textvisiblespace 0.02$\EUR$\textvisiblespace 0.01$\EUR$}
+
+\bigskip
+
+%\lstset{language=sh}
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas général : insertion de 5.30€ pour un produit à 10€, en rendant 4.70€}]
+%*\LSTPrompt*) #            sum  cost 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) ./monnayeur  5.30  10  50 50 50 50 50 50 50 50
+48 50 49 49 50 50 50 50
+%*\LSTPrompt*) echo $?
+0
+%*\LSTPrompt*)
+%*\LSTPrompt*) # 4.70 rendus = 2 * 2E + 1 * 50c + 1 * 20c
+%*\LSTPrompt*) # Etat des cylindres du monnayeur ecrit par le programme :
+%*\LSTPrompt*) # 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) # 48 50 49 49 50 50 50 50
+\end{lstlisting}
+
+
+%\bigskip
+
+\newpage
+
+\noindent Si vous avez assez de pièces à valeur faciale suffisament élevée, vous devez les préférer sur la petite monnaie (vous devez donc implémenter un algorithme dit \textit{glouton} : l'algorithme préfère consommer les grosses valeurs en premier).
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas général : insertion de 10€ pour un produit à 1€, en rendant 9€}]
+%*\LSTPrompt*) #            sum  cost 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) ./monnayeur  10    1   50 50 50 50 50 50 50 50
+46 49 50 50 50 50 50 50
+%*\LSTPrompt*) echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si le monnayeur a assez d'argent en petites pièces, vous devez rendre la monnaie avec celles-ci.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas général : insertion de 10€ pour un produit à 1€, en rendant 9€ en petites pièces}]
+%*\LSTPrompt*) #            sum  cost 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) ./monnayeur  10    1    0  3 10  0 10  0  0  0
+0 0 0 0 0 0 0 0
+%*\LSTPrompt*) echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent L'utilisateur peut indiquer des valeurs entières avec des zéros devant ou une virgule vide, mais vous devez absolument supprimer les zéros inutiles en sortie.
+Si un cylindre est vide lorsqu'il n'a plus aucune pièce, vous l'indiquerez avec un unique zéro.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas général : écriture des résultats en sortie avec simplification}]
+%*\LSTPrompt*) #            sum  cost 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) ./monnayeur   1.   1    0 001 1 00 00 00 00 00
+0 1 1 0 0 0 0 0
+%*\LSTPrompt*) echo $?
+0
+\end{lstlisting}
+
+\bigskip
+
+\noindent Si l'utilisateur insère $ 0 \EUR $ et demande un produit à $ 0 \EUR $, vous effectuerez la transaction en renvoyant $ 0 $ et en décrivant l'état du monnayeur en supprimant les zéros inutiles.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas 0}]
+%*\LSTPrompt*) #            sum  cost 2E 1E 50 20 10  5  2  1
+%*\LSTPrompt*) ./monnayeur   0    0    0 001 1 42 01 00 00 00000
+0 1 1 42 1 0 0 0
+%*\LSTPrompt*) echo $?
+0
+\end{lstlisting}
+
+
+
+\newpage
+
+\subsection{Cas d'erreur 1}
+
+\bigskip
+
+%\noindent Si plusieurs ou aucun paramètre ne sont donnés, vous devez afficher le message d'erreur suivant, et renvoyer 255.
+\noindent S'il y a trop ou pas assez de paramètres, vous devez afficher le message d'erreur suivant pour le programme C, et renvoyer 255.
+
+\bigskip
+
+\noindent \TTBF{Usage:\textvisiblespace ./monnayeur\textvisiblespace sum\textvisiblespace cost\textvisiblespace 2E\textvisiblespace 1E\textvisiblespace 50\textvisiblespace 20\textvisiblespace 10\textvisiblespace 5\textvisiblespace 2\textvisiblespace 1}
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 (C)}]
+%*\LSTPrompt*) ./monnayeur
+Usage: ./monnayeur sum cost 2E 1E 50 20 10 5 2 1
+%*\LSTPrompt*) echo $?
+255
+%*\LSTPrompt*) ./monnayeur 42
+Usage: ./monnayeur sum cost 2E 1E 50 20 10 5 2 1
+%*\LSTPrompt*) echo $?
+255
+%*\LSTPrompt*) ./monnayeur 1 2 3 4 5 6 7 8 9 10 11
+Usage: ./monnayeur sum cost 2E 1E 50 20 10 5 2 1
+%*\LSTPrompt*) echo $?
+255
+\end{lstlisting}
+
+\bigskip
+
+\noindent En Python, vous devrez avoir le même comportement, mais écrire le message d'erreur suivant :
+
+\bigskip
+
+\noindent \TTBF{Usage:\textvisiblespace monnayeur.py\textvisiblespace sum\textvisiblespace cost\textvisiblespace 2E\textvisiblespace 1E\textvisiblespace 50\textvisiblespace 20\textvisiblespace 10\textvisiblespace 5\textvisiblespace 2\textvisiblespace 1}
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 (Python)}]
+%*\LSTPrompt*) python3.8 monnayeur.py
+Usage: monnayeur.py sum cost 2E 1E 50 20 10 5 2 1
+%*\LSTPrompt*) echo $?
+255
+\end{lstlisting}
+
+
+%\bigskip
+
+
+\newpage
+
+\subsection{Cas d'erreur 2}
+
+\bigskip
+
+%\noindent Si les paramètres ne respectent pas la syntaxe décrite plus haut (les deux premiers paramètres doivent être des nombres au format anglais, et les paramètres suivants doivent être des entiers), alors il faut écrire le message d'erreur suivant, et renvoyer 254.
+%
+%\bigskip
+%
+%\noindent \TTBF{Syntax\textvisiblespace error\textvisiblespace in\textvisiblespace parameters.}
+%\TTBF{(two\textvisiblespace first\textvisiblespace parameters\textvisiblespace must\textvisiblespace be\textvisiblespace english\textvisiblespace numeric\textvisiblespace values,\textvisiblespace and\textvisiblespace next\textvisiblespace parameters\textvisiblespace must\textvisiblespace be\textvisiblespace integers).}
+
+\noindent Si les paramètres ne respectent pas la syntaxe décrite plus haut (les deux premiers paramètres doivent être des nombres composés de chiffres éventuellement séparés par une virgule suivie de deux chiffres au plus pour les centimes, et les paramètres suivants doivent être des entiers), alors il faut écrire le message d'erreur suivant, et renvoyer 254.
+
+\bigskip
+
+\noindent \TTBF{Syntax\textvisiblespace error\textvisiblespace in\textvisiblespace parameters.}
+
+\noindent \TTBF{-\textvisiblespace Two\textvisiblespace first\textvisiblespace parameters\textvisiblespace must\textvisiblespace be\textvisiblespace numbers\textvisiblespace separated\textvisiblespace by\textvisiblespace a\textvisiblespace dot}
+
+\noindent \TTBF{-\textvisiblespace Significant\textvisiblespace digits:\textvisiblespace 2}
+
+\noindent \TTBF{-\textvisiblespace Eight\textvisiblespace next\textvisiblespace parameters\textvisiblespace must\textvisiblespace be\textvisiblespace integers}
+
+\bigskip
+
+% Syntax error in parameters.
+% (two first parameters must be english numeric values, and next parameters must be integers)
+% (two first parameters must be numbers eventually separated by a dot, and next parameters must be integers)
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 (C et Python)}]
+%*\LSTPrompt*) ./monnayeur 42,1 10  50 50 50 50 50 50 50 50
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+%*\LSTPrompt*) ./monnayeur 42 10.150  50 50 50 50 50 50 50 50
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+%*\LSTPrompt*) ./monnayeur 42 10  50.5 50 50 50 50 50 50 50.32
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+\end{lstlisting}
+
+\bigskip
+
+\noindent L'erreur sur le nombre de paramètres prime sur l'erreur de syntaxe.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 1 et 2}]
+%*\LSTPrompt*) ./monnayeur 42,1
+Usage: ./monnayeur sum cost 2E 1E 50 20 10 5 2 1
+%*\LSTPrompt*) echo $?
+255
+\end{lstlisting}
+
+
+%\bigskip
+
+
+\newpage
+
+\subsection{Cas d'erreur 3}
+
+\bigskip
+
+\noindent Si la valeur insérée est trop faible, vous devez afficher le message d'erreur suivant, et renvoyer 253.
+
+\bigskip
+
+\noindent \TTBF{Not\textvisiblespace enough\textvisiblespace money.}
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 3 (C et Python)}]
+%*\LSTPrompt*) ./monnayeur 2 10  50 50 50 50 50 50 50 50
+Not enough money.
+%*\LSTPrompt*) echo $?
+253
+%*\LSTPrompt*) ./monnayeur 0 1  50 50 50 50 50 50 50 50
+Not enough money.
+%*\LSTPrompt*) echo $?
+253
+\end{lstlisting}
+
+\bigskip
+
+\noindent L'erreur de syntaxe prime sur le montant trop faible.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 et 3 (C et Python)}]
+%*\LSTPrompt*) ./monnayeur 2,10 10  50 50 50 50 50 50 50 50
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+%*\LSTPrompt*) ./monnayeur 2 10,1  50 50 50 50 50 50 50 50
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+%*\LSTPrompt*) ./monnayeur 2 10  50 50 50 50 50 50 50 50,
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+\end{lstlisting}
+
+
+%\bigskip
+
+
+\newpage
+
+\subsection{Cas d'erreur 4}
+
+\bigskip
+
+\noindent Si le monnayeur n'a pas assez de pièces en réserve pour rendre la monnaie, vous devez afficher le message d'erreur suivant, et renvoyer 252.
+
+\bigskip
+
+\noindent \TTBF{Not\textvisiblespace enough\textvisiblespace money\textvisiblespace to\textvisiblespace give\textvisiblespace back\textvisiblespace change.}
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 4 (C et Python)}]
+%*\LSTPrompt*) ./monnayeur 8.10 10  0 1 0 0 0 0 0 0
+Not enough money to give back change.
+%*\LSTPrompt*) echo $?
+252
+\end{lstlisting}
+
+\bigskip
+
+\noindent L'erreur de syntaxe prime sur la monnaie manquante.
+
+\bigskip
+
+\lstset{style=sh, deletekeywords={in}}  % Apply "sh" style + delete "in" coloration for these examples
+\begin{lstlisting}[frame=single,title={Cas d'erreur 2 et 4 (C et Python)}]
+%*\LSTPrompt*) ./monnayeur 8,10 10  0 1 0 0 0 0 0 0
+Syntax error in parameters.
+- Two first parameters must be numbers separated by a dot
+- Significant digits: 2
+- Eight next parameters must be integers
+%*\LSTPrompt*) echo $?
+254
+\end{lstlisting}
+
+
+
+%\bigskip
+\vspace*{2cm}
+
+
+\begin{YellowBox}
+Afin de ne pas vous perdre lors de la gestion des nombres à virgules, vous pouvez tout à fait choisir de considérer que les centimes sont les plus petites unités (ainsi, $ 1 $ centime sera comptabilisé comme $ 1 $, et $ 1 \EUR $ sera comptabilisé comme $ 100 $).
+\end{YellowBox}

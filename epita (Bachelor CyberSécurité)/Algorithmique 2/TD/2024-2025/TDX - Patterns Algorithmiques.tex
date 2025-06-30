@@ -1,0 +1,687 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\TitreSeance}{Patterns Algorithmiques}
+\newcommand{\SousTitreSeance}{TD * - Motifs récurrents}
+\newcommand{\DateCours}{Mai 2025}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Motifs ; Patrons ; Patterns}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous rappeler les motifs récurrents nécessaires à quasiment n'importe quel algorithme.
+Vous devez connaître, reconnaître, et savoir utiliser l'ensemble de ces motifs (appelés \og \textit{patterns} \fg{} en anglais).
+Les patterns étant relativement courts, ils ne sont que la combinaison de quelques mots clés afin d'effectuer une micro-tâche extrêmement simple (\TTBF{if}, \TTBF{while}, ...).
+
+\bigskip
+
+Le document est divisé en deux parties : la première présente d'abord en langage humain chaque pattern ainsi que le code associé, puis, dans la deuxième partie, des problèmes avec leurs méthodes de résolution sont présentés.
+
+\medskip
+
+\textit{Il est \textbf{nécessaire} de maîtriser l'ensemble de ces patterns à l'issue de la première année de n'importe quelle formation en informatique.}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Pattern -> Code}
+
+\subsection{Prototypes}
+
+\subsubsection{Tableaux en paramètres}
+
+Un \textit{tableau} doit toujours être accompagné de sa \textit{taille}, sauf, si le langage de programmation cible a des dispositifs embarquant la taille avec le tableau (ce qui n'est pas le cas du C en l'absence de structure).
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction1(int tab[], int size);
+void ma_fonction2(int *tab,  int size); \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+Une \textit{chaîne de caractères} (ou \textit{string} en anglais) est un tableau contenant des caractères se terminant par un \og \TTBF{\textbackslash{}0} \fg{}.
+Selon les besoins : si le développeur doit \textit{renvoyer} une chaîne de caractères, c'est à lui d'allouer suffisamment d'espace en mémoire \textbf{et} d'ajouter le \og \TTBF{\textbackslash{}0} \fg{} final.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction(char *str); \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+\`A l'inverse, un \textit{tableau de caractères} n'est pas nécessairement terminé par un \og \TTBF{\textbackslash{}0} \fg{}, donc sa taille \textit{doit} être indiquée en paramètre.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction1(char tab[], int size);
+void ma_fonction2(char *tab,  int size); \end{lstlisting}
+
+\vspace*{-0.5cm}
+%\medskip
+
+\subsubsection{Types de retour}
+
+Concernant les types de retour : réfléchissez à l'énoncé des questions/du problème.
+Si vous devez renvoyer une \textit{taille}, il s'agit d'une \textit{quantité}, donc d'un \textit{entier} ou d'un \textit{flottant}.
+Pour déterminer parmi les deux, c'est à vous de lire le problème en détails pour comprendre s'il s'agit d'un cas discret (entiers) ou continu (flottants).
+
+\medskip
+
+La taille d'une chaîne de caractères implique de compter le nombre de lettres : cas discret, donc on renvoie un entier.
+Le nombre de chiffres constituant un nombre, même chose : cas discret, donc on renvoie un entier.
+Par contre, la taille d'un individu, un premier cas implique la valeur continue sous forme de flottant ($1,72$ m), un second cas peut être un entier (entre 0 et 3 mètres) et un autre entier (entre 0 et 99 décimètres) formant une combinaison (1m72).
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\subsection{Patterns de tableaux}
+
+Un tableau n'étant qu'un vecteur à une dimension, les principaux besoins consistent à :
+
+\begin{enumerate}
+\item itérer jusqu'à la fin ou jusqu'à un critère
+\item décaler chaque élément du tableau un cran à gauche/droite
+\item faire de la reprise d'itération à partir d'un contexte existant
+\end{enumerate}
+
+\medskip
+
+\subsubsection{Itérer jusqu'à la fin/un critère}
+
+\textbf{Objectif} : avancer de case en case pour effectuer un traitement
+
+\bigskip
+
+Le tableau n'étant qu'un vecteur, et connaissant sa taille, il suffit juste d'effectuer une boucle pour atteindre la fin :
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction(char tab[], int size)
+{
+  int i;
+  for (i = 0; i < size; i++)
+  {
+    printf("Valeur : %d\n", tab[i]); // traitement
+  }
+} \end{lstlisting}
+
+%\vspace*{-0.5cm}
+
+
+On peut égalementer itérer selon un critère d'arrêt (les 10 premières cases) :
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction(char tab[], int size)
+{
+  int i = 0;
+  while (i < 10)
+  {
+    printf("Valeur : %d\n", tab[i]); // traitement
+    i += 1;
+  }
+} \end{lstlisting}
+
+%\vspace*{-0.5cm}
+
+
+Attention ! Si le tableau ne contient pas le critère, vous \textbf{devez} vous arrêter avant la fin ! (donc ajouter un deuxième critère : celui d'arrêt).
+L'ordre des tests est important : on teste \textit{d'abord} si l'on est encore dans le tableau, et si oui, on peut regarder si le critère est vérifié ou non :
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void ma_fonction(char tab[], int size)
+{
+  int i = 0;
+  while ((i < size) && (i < 10))
+  {
+    printf("Valeur : %d\n", tab[i]); // traitement
+    i += 1;
+  }
+} \end{lstlisting}
+
+
+%%%%%%%
+\bigskip
+%%%%%%%
+
+\subsubsection{Décaler chaque élément du tableau un cran à gauche/droite}
+
+\textbf{Objectif} : décaler chaque élément de la case $n$ vers la case $n \pm 1$
+
+\bigskip
+
+Pour décaler chaque élément, il faut réfléchir au sens : si l'on veut tout décaler vers la droite, on démarrer de la fin du tableau vers le débutet ramener chaque élément (sinon la même valeur est écrite partout).
+De plus, il faut faire attention aux extrêmités du tableau : si on décale vers la droite et que l'on démarre par la dernière case, on doit s'arrêter \textit{avant} la case 0 (car la case 1 va copier le contenu de la case 0, mais la case 0 ne peut pas copier la case \og -1 \fg{} qui n'existe pas).
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void decale_a_droite(char tab[], int size)
+{
+  int i;
+  for (i = (size - 1); i > 0; i--)
+  {
+    tab[i] = tab[i - 1];
+  }
+} \end{lstlisting}
+
+\vspace*{-0.6cm}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void decale_a_gauche(char tab[], int size)
+{
+  int i;
+  for (i = 0; i < size; i++)
+  {
+    tab[i] = tab[i + 1];
+  }
+} \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+%%%%%%%
+%\bigskip
+%%%%%%%
+
+\subsubsection{Reprise d'itération à partir d'un contexte}
+
+\textbf{Objectif} : itérer, retourner une valeur, redémarrer à partir de la dernière itération réalisée
+
+\bigskip
+
+La reprise d'itération est plutôt rare, mais elle est relativement importante.
+Pour être réalisée, il faut utiliser un paramètre qui servira de contexte (ce paramètre peut être modifié par la fonction, ou, être directement la valeur retournée).
+Le cas d'arrêt reste d'avoir atteint la fin du tableau (ou même de l'avoir dépassé si un contexte incorrect est donné en paramètre).
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void reprise(char tab[], int size, int last)
+{
+  if (last >= size)
+    return (size);
+
+  int i;
+  for (i = last; i < size; i++)
+  {
+    if (tab[i] % 2 == 0)
+      return (i);
+  }
+  return (size);
+} \end{lstlisting}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\subsection{Patterns de code}
+
+Plusieurs problèmes récurrents arrivent dans quasiment tous les algorithmes :
+
+\begin{enumerate}
+\item Détecter ou filtrer des valeurs spéciales
+\item Ordonner les tests (y compris en récursif)
+\end{enumerate}
+
+\medskip
+
+\subsubsection{Détecter/Filtrer des valeurs spéciales}
+
+\textbf{Objectif} : retirer ou transformer des valeurs pouvant entraîner des problèmes
+
+\bigskip
+
+Détecter des valeurs est l'opération élémentaire de \textit{test d'une condition} (donc un \TTBF{if}).
+Une fois la valeur détectée, plusieurs actions sont possibles : arrêter le programme en renvoyant une erreur ou en déclenchant une exception, transformer la valeur problématique en une valeur par défaut, ou, dans le cas des boucles, ignorer la valeur/passer à l'itération suivante (avec le mot clé \TTBF{continue}).
+
+%\medskip
+\bigskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int fonction(int value)
+{
+  if (value == -42)
+    printf("! ERREUR ! [value=%d]\n", value);
+    return (-1);
+
+  printf("Valeur : %d\n", value);
+  return (0);
+} \end{lstlisting}
+
+\vfillFirst
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void fonction(int value)
+{
+  if (value < 1)
+    value = 0;
+  if (value > 99)
+    value = 100;
+
+  printf("Valeur [0-100] : %d\n", value);
+} \end{lstlisting}
+
+%\medskip
+\vfillLast
+
+% %*   *)
+\begin{lstlisting}[language=C]
+void fonction(int tab[], int size)
+{
+  for (int i = 0; i < size; i++)
+  {
+    if (tab[i] < 0)
+      continue ;
+
+    printf("Valeur : %d\n", tab[i]);
+  }
+} \end{lstlisting}
+
+
+%%%%%%%
+%\bigskip
+%%%%%%%
+\clearpage
+
+\subsubsection{Ordonner les tests (récursif ou non)}
+
+\textbf{Objectif} : ne pas faire planter la récursion ni rater de test conditionnel
+
+\bigskip
+
+L'ordre des tests est relativement important : certains tests peuvent ne jamais être effectués s'ils sont mal imbriqués/mal placés dans le code.
+Par exemple : on ne doit pas tester une valeur spécifique positive dans un test d'une valeur négative (jamais une valeur positive ne pourra arriver là).
+Dans le cas des appels récursifs, il est nécessaire de distinguer les cas d'erreurs/pouvant entraîner des plantages \textit{avant} de tester les valeurs recherchées, et seulement après ces deux tests on peut tester des cas plus génériques.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int fonction(int value)
+{
+  if (value > 0)
+  {  // Positif
+    if (value == 42)
+      printf("Quarante Deux !!!\n");
+    return (1);
+  }
+  else
+  {  // Negatif
+    if (value == -42)
+      printf("Moins Quarante Deux !!!\n");
+    return (-1);
+  }
+} \end{lstlisting}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int fonction(int tab[], int size, int value)
+{
+  // Cas d'erreur
+  if ((size < 1) || (value < 1))
+    return (-1);
+
+  // Cas d'arret
+  if (value < 10)
+    return (1);
+
+  // Cas general
+  return (1 + fonction(tab, size, (value / 10)));
+} \end{lstlisting}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\subsection{Patterns dans des structures de données}
+
+Les structures de données possèdent également des cas récurrents :
+
+\begin{enumerate}
+\item Listes : atteindre la fin d'une liste
+\item Listes : rechercher une valeur/s'arrêter au milieu
+
+\end{enumerate}
+
+\medskip
+
+\subsubsection{Listes : atteindre la fin d'une liste}
+
+\textbf{Objectif} : s'arrêter sur le dernier élément d'une liste
+
+\bigskip
+
+Accéder au dernier élément d'une liste est une opération relativement simple mais nécessaire dans certains cas.
+Il faut surtout faire attention à vérifier que la liste n'est pas vide.
+Selon le format de la liste, ainsi que le langage de programmation employé, plusieurs algorithmes sont possibles.
+
+\medskip
+
+\vfillFirst
+
+\paragraph{Liste à tableau}
+
+Dans le format tableau, il suffit simplement d'utiliser l'index de fin de liste (s'il existe), ou d'aller à la dernière case utilisée.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+struct liste_t
+{
+  int *array;
+  int size;
+  int last_index;
+};
+
+int get_last_elt(struct liste_t *list)
+{
+  int value;
+
+  if (list->size == 0)
+    return (-1);
+
+  value = list->array[list->last_index];
+  return (value);
+} \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+
+\vfillLast
+
+\clearpage
+
+\vfillFirst
+
+\paragraph{Liste chaînée}
+
+Dans le format liste chaînée (à pointeurs), il est nécessaire de dérouler la liste jusqu'au bout.
+Il faut néanmoins s'arrêter juste avant l'éventuel pointeur de fin.
+Attention au cas où la liste est déjà vide.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+struct liste_p
+{
+  int value;
+  struct liste_p *next;
+};
+
+struct liste_p *get_last_elt(struct liste_p *list)
+{
+  struct liste_p *tmp;
+
+  if (list == NULL)
+    return (NULL);
+
+  tmp = list;
+  while (tmp->next != NULL)
+    tmp = tmp->next;
+
+  return (tmp);
+} \end{lstlisting}
+
+%\vspace*{-0.5cm}
+\bigskip
+
+
+\paragraph{Liste circulaire}
+
+Si la liste est circulaire, il faut également s'intéresser au format sous-jacent : en tableau, il faut simplement regarder le pointeur de fin, en pointeur, il suffit de revenir un cran en arrière.
+Dans tous les cas, il faut tester auparavant que la liste n'est pas vide.
+
+\vfillLast
+
+%%%%%%%
+%\bigskip
+%%%%%%%
+\clearpage
+
+\subsubsection{Listes : rechercher une valeur/s'arrêter au milieu}
+
+\textbf{Objectif} : s'arrêter sur un élément précis (désigné soit par sa valeur, soit par son index)
+
+\bigskip
+
+Accéder à un élément précis d'une liste est une opération simple.
+Il faut non seulement s'assurer que la liste n'est pas vide, mais également rechercher l'élément.
+Selon le format de la liste, ainsi que le langage de programmation employé, plusieurs algorithmes sont possibles.
+
+%\medskip
+\vfillFirst
+
+\paragraph{Liste à tableau}
+
+Dans le format tableau, on réutilise directement le pattern d'itération jusqu'à un critère précis : l'égalité entre l'élément recherché et celui contenu OU le numéro d'index.
+On n'oubliera pas de tester d'abord si l'on a atteint la fin de la liste ou pas.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+struct liste_t
+{
+  int *array;
+  int size;
+  int last_index;
+};
+
+int get_elt_by_value(struct liste_t *list, int value)
+{
+  if (list->size == 0)
+    return (-1);
+
+  int i = 0;
+  while ((i < list->last_index) && (list->tab[i] != value))
+    i++;
+
+  if (list->tab[i] == value)
+    return (i);
+  else
+    return (-1);
+} \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int get_elt_by_index(struct liste_t *list, int index)
+{
+  if ((list->size == 0) || (index > list->last_used))
+    return (-1);
+
+  int value;
+  value = list->tab[index];
+  return (value);
+} \end{lstlisting}
+
+\vfillLast
+
+%%%%%%%
+\clearpage
+
+\paragraph{Liste chaînée}
+
+Dans le format liste chaînée (à pointeurs), il est nécessaire de dérouler la liste jusqu'à l'élément souhaité.
+La longueur de la liste n'étant pas connue à l'avance (sauf si la structure l'embarque), il est nécessaire de s'assurer que l'on n'a pas dépassé la fin.
+Attention au cas où la liste est déjà vide.
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C]
+struct liste_p
+{
+  int value;
+  struct liste_p *next;
+};
+
+struct liste_p *get_elt_by_value(struct liste_p *list, int value)
+{
+  struct liste_p *tmp;
+
+  if (list == NULL)
+    return (-1);
+
+  int i = 0;
+  tmp = list;
+  while ((tmp != NULL) && (tmp->value != value))
+  {
+    i += 1;
+    tmp = tmp->next;
+  }
+
+  if (temp == NULL)
+    return (-1):
+  return (i);
+} \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+struct liste_p *get_elt_by_index(struct liste_p *list, int index)
+{
+  struct liste_p *tmp;
+
+  if (list == NULL)
+    return (-1);
+
+  int i = 0;
+  tmp = list;
+  while ((tmp != NULL) && (i != index))
+  {
+    i += 1;
+    tmp = tmp->next;
+  }
+
+  if (temp == NULL)
+    return (-1):
+  return (tmp->value);
+} \end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Problèmes et patterns}
+
+%\bigskip
+
+Pour chaque problème listé, vous devez indiquer le ou les patterns nécessaires pour les traiter.
+Indiquer également le prototype \textit{complet} de chaque fonction permettant de traiter le problème (c'est-à-dire le type de retour, ainsi que les paramètres et leurs types) lorsqu'elle est indiquée.
+Lorsque deux implémentations ou plus peuvent exister (par exemple en tableau et en maillons/pointeurs), indiquer les patterns pour chaque version.
+
+\bigskip
+
+\begin{enumerate}
+\item nombre de chiffres dans un nombre
+\item nombre de chiffres dans un nombre dans une base quelconque
+\item \TTBF{is\_mirroir} : test si un nombre est un miroir
+\item \TTBF{miroir} : construire le miroir d'un nombre
+\item \TTBF{strlen} : atteindre la fin d'une chaîne de caractères
+\item \TTBF{is\_palindrome} : test si une chaîne est un palindrome
+\item \TTBF{itoa} : transformation d'un entier en chaîne de caractères
+\item \TTBF{atoi} : transformation d'une chaîne de caractères en un entier
+\item \TTBF{min/max\_tab} : valeur minimale/maximale d'un tableau
+\item \TTBF{sum\_tab} : somme des éléments d'un tableau
+\item \TTBF{croissant\_tab} : vérification qu'un tableau est trié dans l'ordre croissant
+\item \TTBF{compare\_tabs} : comparer deux tableaux
+\item \TTBF{inverse\_tab} : inverser la position de tous les éléments d'un tableau
+\item \TTBF{substr} : recherche d'une sous-chaîne dans une chaîne de caractères
+\item \TTBF{bubble\_sort} : algorithme de tri à bulles
+\item \TTBF{remove\_elt\_in\_list} : suppression d'un élément dans une liste
+\item \TTBF{revert\_list} : inversion de la position de tous les éléments d'une liste
+\item \TTBF{clear\_list} : suppression de tous les éléments d'une liste
+\end{enumerate}
+
+
+\vspace*{-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2025.
+Certains exercices sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

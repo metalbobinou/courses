@@ -1,0 +1,107 @@
+Dans certains langages, les booléens sont représentés par des entiers
+A) Vrai
+B) Faux
+ANSWER: A
+Le code suivant est-il simplement récursif ou récursif terminal ?int fun1(int a, int b)  if (a >= 42)    return (b);  return (fun1(a + 2, b + 2) + 1)
+A) Récursif
+B) Récursif terminal
+ANSWER: A
+Le code suivant est-il simplement récursif ou récursif terminal ?int fun1(int a, int b)  if (a >= 42)    return (b);  return (fun1(a + 2, b + 2))
+A) Récursif terminal
+B) Récursif
+ANSWER: A
+Qu'affichera le code suivant ?int fun2(int c)a = 3b = 5while (a != b)  a = a + 1  b = b - 1return (a)
+A) Rien
+B) 3
+C) 5
+D) 4
+ANSWER: A
+Que retournera le code suivant ?int fun1(int c)a = 5b = 6while (a != b)  a += 2  b = b + 1return (b + a)
+A) 14
+B) 12
+C) 7
+D) 11
+ANSWER: A
+Qu'affichera le code suivant ?int fun1(int c)a = 5b = 5while (a == b)  print(c)  a += 1return (b)
+A) La valeur contenue dans le paramètre c
+B) 'c'
+C) 6
+D) 5
+ANSWER: A
+ tab		42		55		66		77		88Pour accéder à l'élément 66 avec les langages classiques de programmation, il faut utiliser l'instruction :
+A) tab[2]
+B) tab(2)
+C) tab[3]
+D) tab(3)
+ANSWER: A
+ tab		42		55		66		77		88Le tableau tab...
+A) Est de taille 5
+B) Est de taille 4
+C) Est de taille 6
+ANSWER: A
+ tab		42		55		66		77		88Dans le code suivant, à quelle itération accèdera-t-on à l'élément 55 ?for (int i = 1; i < 5; i++)  var = tab[i]
+A) 2
+B) 1
+C) 3
+D) 4
+ANSWER: B
+ tab 4		8		2		5 6En exécutant le code suivant, quelle valeur s'affichera à l'écran ?i = 1while (tab[i] != 5)  i += 1print(i)
+A) 3
+B) 4
+C) 5
+D) 6
+ANSWER: A
+Quelle ligne de code C permet de copier le champs "etat" de la structure suivante dans la variable "var" ?struct test1 {int len;int max;char *etat;};struct test1 essai;
+A) char *var = essai.etat;
+B) char *var = essai->etat;
+C) char *var = (*essai).etat;
+D) char *var = (*(essai.etat));
+ANSWER: A
+Quelle ligne de code C permet de copier le champs "etat" de la structure suivante dans la variable "var" ?struct test1 {int len;int max;char *etat;};struct test1 *essai;
+A) char *var = essai->etat;
+B) char *var = essai.etat;
+C) char *var = essai.(*etat);
+D) char *var = (*(essai.etat));
+ANSWER: A
+Quelle ligne de code C permet d'incrémenter le champs "len" de la structure suivante ?struct test1 {int len;int max;char *etat;};struct test1 essai;
+A) essai.len += 1;
+B) essai->len += 1;
+C) essai++->len;
+D) essai->len++;
+ANSWER: A
+Quelle ligne de code C permet d'incrémenter le champs "len" de la structure suivante ?struct test1 {int len;int max;char *etat;};struct test1 *essai;
+A) essai->len += 1;
+B) essai.len += 1;
+C) essai++->len;
+D) essai++.len;
+ANSWER: A
+Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 42 dans la variable "var" ?int tab[] = { 18 , 55 , 42 , 67 , 21 };
+A) var = &tab[2];
+B) var = &tab[3];
+C) var = tab[2];
+D) var = tab[3];
+ANSWER: A
+Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 18 dans la variable "var" ?int tab[] = { 18 , 55 , 42 , 67 , 21 };
+A) var = tab;
+B) var = &tab[1];
+C) var = tab[1];
+D) var = tab[0];
+ANSWER: A
+Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 55 dans la variable "var" ?int tab[] = { 18 , 55 , 42 , 67 , 21 };
+A) var = &tab[1];
+B) var = &tab[2];
+C) var = tab[1];
+D) var = tab[2];
+ANSWER: A
+Quelle ligne de code C permet d'accéder à la valeur 42 du tableau "tab" et mettre cette valeur dans la variable "var" ?int tab[] = { 16 , 28 , 42 , 66 , 75 };
+A) var = tab[2];
+B) var = tab[3];
+C) var = &tab[2];
+D) var = &tab[3];
+ANSWER: A
+Quelle ligne de code C permet d'accéder à la valeur 75 du tableau "tab" et mettre cette valeur dans la variable "var" ?int tab[] = { 16 , 28 , 42 , 66 , 75 };
+A) var = tab[4];
+B) var = tab[5];
+C) var = &tab[4];
+D) var = &tab[5];
+ANSWER: A

@@ -1,0 +1,148 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{TD0 - Puissances de 10}
+\newcommand{\SousTitreSeance}{Rappels}
+\newcommand{\DateCours}{Septembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{Rodrigue MALEOMBHO}
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture ; Puissances 10}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous rappeler le fonctionnement des puissances, et en particulier des puissances de 10.
+
+%\bigskip
+%
+%Pour rappel, on peut additioner/soustraire les exposants lorsqu'ils sont appliqués au même nombre :
+%
+%\smallskip
+%
+%$ 10^{3} \times 10^{2} = (10 \times 10 \times 10) \times (10 \times 10) = 10^{3 + 2} = 10^{5} $
+%
+%\smallskip
+%
+%$ \frac{10^{3}}{10^{2}} = 10^{3} \div 10^{2} = 10^{3} \times 10^{-2} = 10^{3 - 2} = 10^{1} $
+%
+%\smallskip
+%
+%$ (10^{3})^{2} = 10^{3} \times 10^{3} = 10^{3 \times 2} = 10^{6} $
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Puissances de 10}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Rappels multiplications}
+
+\medskip
+
+Réécrivez les formules suivantes sous la forme d'une puissance de 10.
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{1.75cm}  l l  C{1.75cm}  l l }
+1. & $ \Scale[1.5]{ \frac{10^{-2}}{10^{-5}} = } $ & &  9. & $ \Scale[1.25]{ 10^{4} \times 10^{0} = } $  & & 17. & $ \Scale[1.5]{ \frac{10^{-3}}{10^{-1}} = } $ \\
+ & & & & & & & \\
+2. & $ \Scale[1.25]{ 10^{-6} \times 10^{-4} = } $ & & 10. & $ \Scale[1.25]{ 10^{-1} \times 10^{2} = } $ & & 18. & $ \Scale[1.25]{ (10^{0})^{-4} = } $ \\
+ & & & & & & & \\
+3. & $ \Scale[1.5]{ \frac{10^{-3}}{10^{-4}} = } $ & & 11. & $ \Scale[1.25]{ (10^{-2})^{3} = } $         & & 19. & $ \Scale[1.25]{ 10^{-4} \times 10^{5} = } $ \\
+ & & & & & & & \\
+4. & $ \Scale[1.25]{ 10^{-6} \times 10^{4} = } $  & & 12. & $ \Scale[1.25]{ (10^{1})^{1} = } $          & & 20. & $ \Scale[1.5]{ \frac{10^{-6}}{10^{4}} = } $ \\
+ & & & & & & & \\
+5. & $ \Scale[1.5]{ \frac{10^{5}}{10^{-2}} = } $  & & 13. & $ \Scale[1.25]{ 10^{1} \times 10^{-4} = } $ & & 21. & $ \Scale[1.25]{ (10^{-1})^{3} = } $ \\
+ & & & & & & & \\
+6. & $ \Scale[1.25]{ (10^{0})^{-2} = } $          & & 14. & $ \Scale[1.5]{ \frac{10^{-3}}{10^{3}} = } $ & & 22. & $ \Scale[1.5]{ \frac{10^{4}}{10^{-6}} = } $ \\
+ & & & & & & & \\
+7. & $ \Scale[1.25]{ (10^{1})^{3} = } $           & & 15. & $ \Scale[1.25]{ (10^{0})^{5} = } $          & & 23. & $ \Scale[1.25]{ 10^{4} \times 10^{-1} = } $ \\
+ & & & & & & & \\
+8. & $ \Scale[1.5]{ \frac{10^{-4}}{10^{5}} = } $  & & 16. & $ \Scale[1.25]{ 10^{0} \times 10^{2} = } $  & & 24. & $ \Scale[1.25]{ (10^{-2})^{5} = } $ \\
+\end{tabular}
+%}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Rappels additions}
+
+\medskip
+
+Réécrivez les formules suivantes sous la forme d'une puissance de 10 si c'est possible, sinon sous forme décimale.
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{3cm}  l l }
+1. & $ \Scale[1.25]{ 10^{2} + 10^{2} = } $                   & &  6. & $ \Scale[1.25]{ 5 \times 10^{1} + 3 \times 10^{2} + 5 \times 10^{1} = } $ \\
+ & & & & \\
+2. & $ \Scale[1.25]{ 10^{3} + 10^{2} = } $                   & &  7. & $ \Scale[1.25]{ 10^{3} + 10^{2} + 10^{1} = } $ \\
+ & & & & \\
+3. & $ \Scale[1.25]{ 2 \times 10^{3} + 8 \times 10^{3} = } $ & &  8. & $ \Scale[1.25]{ 4 \times 10^{1} + 6 \times 10^{2} = } $ \\
+ & & & & \\
+4. & $ \Scale[1.25]{ 4 \times 10^{2} + 6 \times 10^{3} = } $ & &  9. & $ \Scale[1.25]{ (2 \times 10^{1})^{3} = } $ \\
+ & & & & \\
+5. & $ \Scale[1.25]{ 2 \times 10^{0} + 4 \times 10^{3} = } $ & & 10. & $ \Scale[1.25]{ 10^{3} + 10^{2} + 10^{0} = } $ \\
+\end{tabular}
+%}
+
+
+%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en septembre 2024}
+
+\textit{Les exercices proviennent en partie de Rodrigue MALEOMBHO}
+\end{center}
+
+\end{document}

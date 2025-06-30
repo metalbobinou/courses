@@ -1,0 +1,334 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{TD2 - Opérations Binaires}
+\newcommand{\SousTitreSeance}{$ + $ $ - $ $ \times $ $ \div $ binaires}
+\newcommand{\DateCours}{Septembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture ; Entiers Non-Signés ; Binaire ; Hexadécimal ; Opérations ; Addition ; Soustraction ; Multiplication ; Division}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les opérations effectuées sur des nombres représentés au format binaire.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Additions}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Effectuez les additions suivantes :
+
+\bigskip
+
+\vfillFirst
+
+\centerline{
+\begin{tabular}{ | c c c | C{6cm} |}
+\hline
+ \multicolumn{3}{| c |}{\multirow{2}{*}{Opération}} & \multirow{2}{*}{Résultat} \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0010 \, 1111 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0100 \, 0110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 \, 1001 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1001 \, 0101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0011 \, 0110 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 \, 1010 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0100 \, 0011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1011 \, 1100 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0111 \, 1011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1101 \, 1110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1101 \, 0111 } $} & \\
+ & & & \\
+\hline
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1289} \, \text{FABB} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1A32} \, \text{14F8} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1418} \, \text{3945} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{B0B0} \, \text{ABCD} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1A2B} \, \text{C8D9} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{4273} \, \text{AE10} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{42FE} \, \text{BA17} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{89CD} \, \text{67E3} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{BABA} \, \text{2A2A} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{3264} \, \text{2A2A} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1789} \, \text{1871} } $} & \multirow{2}{*}{$ \Scale[1.2]{ + } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{ABCD} \, \text{EF68} } $} & \\
+ & & & \\
+\hline
+\end{tabular}
+}
+
+\vfillLast
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Multiplications}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Effectuez les multiplications suivantes :
+
+\bigskip
+
+\vfillFirst
+
+\centerline{
+\begin{tabular}{ | c c c | C{6cm} |}
+\hline
+ \multicolumn{3}{| c |}{\multirow{2}{*}{Opération}} & \multirow{2}{*}{Résultat} \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0001 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0010 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0001 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0010 \, 0101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 \, 1010 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0011 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0101 \, 1110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0111 } $} & \\
+ & & & \\
+\hline
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{FABB} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{000F} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{3945} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{0023} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{4EDF} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{01AE} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{BA13} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{00D2} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{2A2A} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{A2A2} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{FEFE} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \times } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{00C4} } $} & \\
+ & & & \\
+\hline
+\end{tabular}
+}
+
+\vfillLast
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soustractions}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Effectuez les soustractions suivantes :
+
+\bigskip
+
+\vfillFirst
+
+\centerline{
+\begin{tabular}{ | c c c | C{6cm} |}
+\hline
+ \multicolumn{3}{| c |}{\multirow{2}{*}{Opération}} & \multirow{2}{*}{Résultat} \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0010 \, 1111 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1100 \, 0110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 \, 1001 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1001 \, 0101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0011 \, 0110 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 \, 1010 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0100 \, 0011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1011 \, 1100 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0111 \, 1011 } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1101 \, 1110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1101 \, 0111 } $} & \\
+ & & & \\
+\hline
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1A2B} \, \text{3C4D} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1234} \, \text{DCBA} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{BABA} \, \text{B0B0} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{ADAD} \, \text{1337} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{B1B1} \, \text{1E48} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{4273} \, \text{AE10} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{AE86} \, \text{3008} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{A380} \, \text{B747} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{18E9} \, \text{2A2A} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{07DE} \, \text{A2A2} } $} & \\
+ & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{FFFF} \, \text{EEEE} } $} & \multirow{2}{*}{$ \Scale[1.2]{ - } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{ABCD} \, \text{EF68} } $} & \\
+ & & & \\
+\hline
+\end{tabular}
+}
+
+\vfillLast
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Divisions}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Effectuez les divisions suivantes :
+
+\bigskip
+
+\vfillFirst
+
+\centerline{
+\begin{tabular}{ | c c c | C{4cm} | C{2cm} | }
+\hline
+ \multicolumn{3}{| c |}{\multirow{2}{*}{Opération}} & \multirow{2}{*}{Dividende} & \multirow{2}{*}{Reste} \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0010 } $} & & \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 \, 1101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0011 } $} & & \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1001 \, 0101 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0110 } $} & & \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 \, 1010 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1010 } $} & & \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1011 \, 1100 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 1011 } $} & & \\
+ & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.2]{ \% \, 1101 \, 1110 } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \% \, 0111 } $} & & \\
+ & & & & \\
+\hline
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1289} \, \text{FABB} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{002A} } $} & & \\
+% & & & & \\
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1418} \, \text{3945} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{00AD} } $} & & \\
+% & & & & \\
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1A2B} \, \text{C8D9} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{0234} } $} & & \\
+% & & & & \\
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{42FE} \, \text{BA17} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{12DE} } $} & & \\
+% & & & & \\
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{BABA} \, \text{2A2A} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{AEF4} } $} & & \\
+% & & & & \\
+%\hline
+%\multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{1789} \, \text{1871} } $} & \multirow{2}{*}{$ \Scale[1.2]{ \div } $} & \multirow{2}{*}{$ \Scale[1.2]{ \$ \, \text{ABCD} } $} & & \\
+% & & & & \\
+%\hline
+\end{tabular}
+}
+
+\vfillLast
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bigskip
+%
+%\vfillFirst
+%
+%\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2024}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}

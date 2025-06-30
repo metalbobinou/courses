@@ -1,0 +1,890 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Logique et Récursivité}
+\newcommand{\SousTitreSeance}{TD2}
+\newcommand{\DateCours}{Octobre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Logique ; Récursivité ; Récursif ; Récurrence}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec l'algorithmique et l'écriture d'algorithmes, en particulier les algorithmes récursifs.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Logique}
+
+\bigskip
+
+En mathématiques, un domaine étudie en particulier la \textit{logique} de façon formelle (logique de premier ordre, ...).
+Ce domaine est directement appliqué en électronique numérique avec les portes logiques (\textit{logic gates} en anglais) et les bascules (\textit{flip-flops} en anglais).
+
+\medskip
+
+La logique s'appuie sur deux valeurs qui s'opposent : \TTBF{vrai} (1) et \TTBF{faux} (0).
+Il est possible d'exprimer des assertions avec des \textit{formules logiques} afin de vérifier si celles-ci sont vraies ou fausses dans certains cas selon des paramètres.
+Pour cela, plusieurs opérateurs logiques existent.
+Les trois opérateurs fondamentaux (faisant découler toute une série d'autres opérateurs utiles) existent : \TTBF{NOT} (non), \TTBF{AND} (et), \TTBF{OR} (ou).
+
+\medskip
+
+\TTBF{NOT} est un opérateur unaire, il ne s'applique qu'à un seul paramètre : \og - A \fg{}.
+
+\TTBF{AND} et \TTBF{OR} sont des opérateurs binaires, ils s'appliquent à deux paramètres : \og A et B \fg{}, \og A ou B \fg{}.
+
+Nous représentons dans les tableaux suivants ce qui s'appelle des \textit{tables de vérités} : les résultats des assertions logiques.
+
+\bigskip
+
+\begin{table}[ht!]
+    \centering
+    \hfill
+    \begin{tabular}{|c|c|}
+        \hline
+        A & \TTBF{NOT} \tabularnewline
+        \hline
+        0 & 1 \tabularnewline
+        \hline
+        1 & 0 \tabularnewline
+        \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & \TTBF{AND} \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+        0 & 1 & 0 \\
+        \hline
+        1 & 0 & 0 \\
+        \hline
+        1 & 1 & 1 \\
+        \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & \TTBF{OR} \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+        0 & 1 & 1 \\
+        \hline
+        1 & 0 & 1 \\
+        \hline
+        1 & 1 & 1 \\
+        \hline
+    \end{tabular}
+    \hfill\null
+\end{table}
+
+\bigskip
+
+Ces trois opérateurs sont très souvent utilisés pour tester des conditions.
+Si le résultat est vrai ($ 1 $), alors la condition est validée.
+On peut combiner ces opérateurs pour tester des assertions logiques.
+
+\bigskip
+
+Cependant, ces opérateurs sont également appliqués dans le cadre de langages de programmation pour modifier des valeurs au niveau des bits les constituant (comme nous le verrons plus tard).
+En plus de \TTBF{NOT}, \TTBF{OR}, \TTBF{AND}, vous pourrez rencontrer les opérateurs \TTBF{NAND} (non et), \TTBF{NOR} (non ou), et le très important \TTBF{XOR} (ou exclusif) qui est extrêmement utilisé en cryptographie.
+Ces opérateurs sont simplement des combinaisons des trois opérateurs fondamentaux : \TTBF{NAND} applique simplement un \TTBF{NOT} au résultat du \TTBF{AND}, et \TTBF{NOR} applique simplement un \TTBF{NOT} au résultat du \TTBF{OR}.
+
+\TTBF{XOR} est légèrement plus complexe dans sa construction, mais sa logique est simple : il faut que les deux entrées soient dans des état différents pour que le résultat soit vrai ($ 1 $).
+Vous pouvez néanmoins constater qu'en appliquant un \TTBF{AND} aux sorties de \TTBF{OR} et \TTBF{NAND}, on obtient la même table de vérité.
+
+\bigskip
+
+\begin{table}[ht!]
+    \centering
+    \hfill
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & \TTBF{NAND} \\
+        \hline
+        0 & 0 & 1 \\
+        \hline
+        0 & 1 & 1 \\
+        \hline
+        1 & 0 & 1 \\
+        \hline
+        1 & 1 & 0 \\
+        \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & \TTBF{NOR} \\
+        \hline
+        0 & 0 & 1 \\
+        \hline
+        0 & 1 & 0 \\
+        \hline
+        1 & 0 & 0 \\
+        \hline
+        1 & 1 & 0 \\
+        \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & \TTBF{XOR} \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+        0 & 1 & 1 \\
+        \hline
+        1 & 0 & 1 \\
+        \hline
+        1 & 1 & 0 \\
+        \hline
+    \end{tabular}
+    \hfill\null
+\end{table}
+
+%\bigskip
+\clearpage
+
+%Dans les programmes que vous développez, vous utiliserez régulièrement des conditions pour vérifier des assertions.
+%Cependant, il existe un autre usage que la vérification de condition pour les opérateurs booléens précédemment présentés.
+%Lorsque l'on représente des valeurs numériques dans un ordinateur avec des bits, on peut appliquer les opérateurs booléens dessus et modifier la valeur représentée.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+La formalisation de la logique en mathématiques exploite une notation particulière pour représenter les trois opérateurs principaux :
+
+\begin{itemize}
+\item \TTBF{NON} (négation) : $ \neg $      \hspace*{2cm}  (autre notation : $ \overline{\text{A}} $ )
+\item \TTBF{ET} (conjonction) : $ \wedge $  \hspace*{2cm}  (autre notation : $ \text{A} \cdot \text{B} $ )
+\item \TTBF{OU} (disjonction) : $ \vee $    \hspace*{2cm}  (autre notation : $ \text{A} + \text{B} $ )
+\end{itemize}
+
+Ainsi, pour exprimer formellement \og \textit{A et non B} \fg{}, on écrira la formule suivante :
+
+\begin{equation*}
+\text{A} \wedge ( \neg \text{B} )    \hspace*{2cm}    \text{(autre notation :} \;   \text{A} \cdot \overline{\text{B}}   \; \text{)}
+\end{equation*}
+
+D'autres opérateurs existent en logique (comme \textit{l'implication}, ...), mais nous ne les verrons pas dans le cadre de ce cours car les trois opérateurs de base sont les seuls réellement exploités tels quels dans les conditions des principaux langages de programmation.
+
+\medskip
+
+Il est important de savoir que ces opérateurs peuvent être vus comme d'autres opérateurs mathématiques que vous avez déjà vus :
+
+\begin{itemize}
+\item \TTBF{ET} ($ \wedge $) est parfois aussi symbolisé comme une multiplication
+\item \TTBF{OU} ($ \vee $) est parfois aussi symbolisé comme une addition
+\end{itemize}
+
+En effet, lorsque l'on cherche à tester plusieurs cas, si des \TTBF{OU} logiques s'enchaînent, alors il faut juste s'assurer qu'au moins l'un d'eux soit \textit{vrai}.
+Si aucun cas n'est vrai, la somme serait $ 0 $, à l'inverse, si au moins un cas est vrai, alors la somme serait supérieure ou égale à $ 1 $ :
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\TTBF{A : True}  (1)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\TTBF{B : False}  (0)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\TTBF{C : False}  (0)
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.25\textwidth}
+    \centering
+
+\TTBF{D : False}  (0)
+
+  \end{minipage}
+\end{table}
+
+%\begin{itemize}[label=]
+%\item \TTBF{A : True}  (1)
+%\item \TTBF{B : False}  (0)
+%\item \TTBF{C : False}  (0)
+%\item \TTBF{D : False}  (0)
+%\end{itemize}
+%
+%\vspace*{-0.5cm}
+
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+\text{A} \vee ( \neg \text{B} ) \vee \text{C} \vee \text{D}
+\end{equation*}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+\text{A} + ( \neg \text{B} ) + \text{C} + \text{D}
+\end{equation*}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+1 + 1 + 0 + 0  \; \; \; = \; 2
+\end{equation*}
+
+  \end{minipage}
+\end{table}
+
+
+Comme vu précédemment, si le résultat est à $ 0 $, il est considéré comme \textit{faux}, or, au moins deux cas permettent d'obtenir un résultat \textit{vrai}, donc la disjonction de cas renvoie $ 2 $ si elle est vue comme une somme.
+
+\`A l'inverse, si l'on observe la même chose sous forme de conjonction de cas (donc avec des \TTBF{ET}), comme au moins un cas est \textit{faux}, le résultat total est également \textit{faux} et peut être vu comme un $ 0 $ :
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+\text{A} \wedge ( \neg \text{B} ) \wedge \text{C} \wedge \text{D}
+\end{equation*}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+\text{A} \times ( \neg \text{B} ) \times \text{C} \times \text{D}
+\end{equation*}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.3\textwidth}
+    \centering
+
+\begin{equation*}
+1 \times 1 \times 0 \times 0  \; \; \; = \; 0
+\end{equation*}
+
+  \end{minipage}
+\end{table}
+
+
+Il est important également de noter que lorsque vous écrirez des conditions complexes (c'est-à-dire constituées de plusieurs comparaisons), vous vous rendrez compte que vous pourrez rédiger ces conditions sous forme de \textit{conjonctions de cas} (c'est-à-dire un enchaînement principal de \TTBF{ET}) ou sous forme de \textit{disjonctions de cas} (c'est-à-dire un enchaînement principal de \TTBF{OU}), et surtout, qu'il est possible de passer de l'un à l'autre par des négations.
+Ceci est l'effet du théorème de De Morgan qui indique que la distribution de la négation ne se fait pas de façon triviale :
+
+\begin{itemize}[label=$\bullet$]
+\item $ \; \; \; $  $ \neg \, ( \text{A} \wedge \text{B} ) \; \; = \; \;  ( \neg \text{A} ) \vee ( \neg \text{B} ) $  \hspace*{2cm}  (autre notation : $ \overline{\text{A} \cdot \text{B}} \; \; = \; \; \overline{\text{A}} + \overline{\text{B}} $ )
+\item $ \; \; \; $  $ \neg \, ( \text{A} \vee \text{B} ) \; \; = \; \;  ( \neg \text{A} ) \wedge ( \neg \text{B} ) $  \hspace*{2cm}  (autre notation : $ \overline{\text{A} + \text{B}} \; \; = \; \; \overline{\text{A}} \cdot \overline{\text{B}} $ )
+\end{itemize}
+
+Distribuer la négation implique que les \TTBF{ET} deviennent des \TTBF{OU} (et inversement), puis que chaque membre subisse une négation.
+%Vous vous rendrez compte que vos conditions peuvent s'écrire de la même façon : choisissez celle que vous préférez ou celle qui serait plus optimale.
+Lorsque vous écrirez des conditions complexes, choisissez la méthode que vous préférez ou celle qui est plus adaptée.
+
+\medskip
+
+N'oubliez pas qu'une conjonction permet de très vite savoir si une condition est fausse (le premier cas faux annule l'ensemble), et une disjonction permet de très vite savoir si une condition vraie (le premier cas vrai valide l'ensemble).
+
+\medskip
+
+D'un autre point de vue : une conjonction permet de s'assurer facilement que tous les cas sont vrais pour passer, et une disjonction n'échouera que si tous les cas sont faux.
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Exercices de logique}
+
+\subsubsection{Exercices sur les conditions}
+
+\question{Transformez les conditions suivantes en distribuant la négation :}
+
+\medskip
+
+\TTBF{int A, B, C, D;}
+
+\begin{enumerate}[label=\alph*.]
+\item \TTBF{ if (! (A > 2) ) }
+\item \TTBF{ if (! \textcolor{darkorange}{(}(A >= 2) AND (B < 3)\textcolor{darkorange}{)} ) }
+\item \TTBF{ if (! \textcolor{gray}{(} \textcolor{red}{(}(A != B) OR (B == C)\textcolor{red}{)} AND \textcolor{blue}{(}! \textcolor{darkorange}{(}(A == C) OR (B != D)\textcolor{darkorange}{)}\textcolor{blue}{)} \textcolor{gray}{)} ) }
+\end{enumerate}
+
+\medskip
+
+%\question{Écrivez une condition (juste le \textit{if}) prenant 2 éléments et testant l'effet du \textit{XOR} sur eux (exemple : recoder \textit{NAND} sous forme de condition implique simplement de faire la négation du \textit{AND} de 2 éléments)}
+\question{Écrivez une condition à base de \textit{AND}, \textit{OR}, \textit{NOT} reproduisant l'effet du \textit{XOR} sur deux valeurs A et B}
+
+
+\subsubsection{Algorithmes}
+
+\question{Écrivez une fonction prenant 3 entiers différents en paramètre, et indiquant lequel est le plus petit/grand. $ \; \; $ \textit{min(a, b, c) $ \; \; $ max(a, b, c)} }
+
+\question{Écrivez une fonction prenant 3 entiers différents en paramètre, et renvoyant l'élément intermédiaire. $ \; \; $ \textit{middle(a, b, c)} }
+
+\question{Améliorez ces fonctions pour qu'elles prennent en chargent les cas où des valeurs égalent sont données en paramètres : (3, 2, 2), (3, 4, 3), (7, 7, 7), ...}
+
+\question{Écrivez une fonction effectuant la somme des carrés des 2 plus grands/petits nombres parmi 3. \textit{SumSquare(a, b, c)} }
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Récursivité}
+
+\bigskip
+
+La récursivité est un principe très simple où une fonction se rappelle elle-même. %, comme lorsque l'on effectue une boucle et qu'une variable évolue petit à petit.
+
+\smallskip
+
+L'écriture d'algorithmes récursifs implique au moins deux choses dans cet ordre très précis : une condition d'arrêt où l'on retourne le résultat, puis, un appel récursif avec un paramètre modifié (si on ne modifie aucun paramètre, alors la récursion serait infinie : on rappellerait la fonction dans les mêmes conditions qu'actuellement, donc elle se rappellerait encore une fois avec strictement les mêmes paramètres).
+
+\smallskip
+
+Il est nécessaire d'écrire les conditions d'arrêts en premier, car il s'agit des cas exceptionnels où l'on doit arrêter la récursion.
+De même, il est hautement conseillé d'écrire les cas les plus génériques en dernier, car des cas partiellement exceptionnels pourraient être absorbés plus tôt par le cas général.
+Par exemple, si l'on souhaite dénombrer les N premiers entiers, et afficher à chaque dizaine un message particulier, on déclarera en premier la condition d'arrêt où un paramètre est à $ 0 $ ou $ 1 $, puis, on écrira la condition testant les valeurs notables particulières (ici si le paramètre est une dizaine), et en tout dernier on écrira le cas général qui concerne n'importe quelle valeur.
+
+\bigskip
+
+
+\subsection{Exercices récursifs}
+
+Maintenant que vous avez écrit quelques algorithmes simples avec des boucles, nous allons passer à leurs versions récursives.
+
+\bigskip
+
+\question{Commencez par exécuter l'algorithme de la somme des N premiers entiers en remplissant le tableau avec l'évolution des paramètres donnés dans un premier temps, puis des résultats. Vous effectuerez cette exécution avec $ 5 $ comme paramètre.}
+
+\bigskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction SommeRec : entier
+  parametres locaux
+    entier    n
+
+debut
+si (n == 1) alors
+  retourne (1)
+sinon
+  retourne (n + SommeRec(n - 1))
+fin si
+fin algorithme fonction SommeRec \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers-recursif}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.19\textwidth}
+    \centering
+    \begin{tabular}{|C{1.1cm}|C{1.1cm}|}
+        \hline
+        appel &  n  \\
+        \hline
+              &     \\
+        0     &     \\
+              &     \\
+        \hline
+              &     \\
+        1     &     \\
+              &     \\
+        \hline
+              &     \\
+        2     &     \\
+              &     \\
+        \hline
+              &     \\
+        3     &     \\
+              &     \\
+        \hline
+              &     \\
+        4     &     \\
+              &     \\
+        \hline
+              &     \\
+        5     &     \\
+              &     \\
+        \hline
+              &     \\
+        6     &     \\
+              &     \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau d'appels}
+    % \label{table-somme-n-premiers-entiers-appels}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.28\textwidth}
+    \centering
+    \begin{tabular}{|C{1.1cm}|C{1.1cm}|C{1.1cm}|}
+        \hline
+        appel & retour & total \\
+        \hline
+              &        & \\
+        6     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        5     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        4     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        3     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        2     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        1     &        & \\
+              &        & \\
+        \hline
+              &        & \\
+        0     &        & \\
+              &        & \\
+        \hline
+    \end{tabular}
+    % \caption{Tableau de retours}
+    % \label{table-somme-n-premiers-entiers-retours}
+  \end{minipage}
+  \caption{Somme des N premiers entiers (récursif)}
+  \label{somme-n-premiers-entiers-recursif}
+\end{table}
+
+
+\bigskip
+
+Vous remarquerez que l'algorithme est beaucoup plus court en quantité d'instructions.
+Ceci est principalement dû au fait que le calcul que nous exécutons est déjà dans une forme adaptée (souvenez-vous du principe de récurrence, ou encore des suites) : la même opération est répétée avec un paramètre réduit ou augmenté de $ 1 $ (ou d'un pas bien défini).
+
+\bigskip
+
+\question{Écrivez maintenant l'algorithme de la factorielle, mais de façon récursive. N'oubliez pas : on écrit d'abord la ou les conditions d'arrêt, et ensuite seulement on effectue l'opération avec l'appel récursif.}
+
+\begin{equation*}
+  \begin{aligned}
+& n! = 1 \times 2 \times 3 \times \ldots \times n
+  \end{aligned}
+\end{equation*}
+
+\bigskip
+
+\question{Écrivez l'algorithme récursif calculant la somme des N premiers entiers.}
+
+\begin{equation*}
+  \begin{aligned}
+& \sum^{n}_{i = 1} i = 1 + 2 + 3 + \ldots + n
+  \end{aligned}
+\end{equation*}
+
+\bigskip
+
+\question{Écrivez l'algorithme récursif calculant la multiplication de deux entiers positifs, en n'utilisant que des additions et des soustractions.}
+
+\question{Améliorez l'algorithme de la multiplication pour qu'elle gère maintenant les nombres négatifs. Vous pouvez pour cela vous aider d'une fonction chapeau, c'est-à-dire une fonction qui prend les deux paramètres attendus (les deux nombres à multiplier) et fait différents tests avant d'appeler une autre fonction qui elle sera récursive.}
+
+\bigskip
+
+\question{Écrivez l'algorithme récursif calculant le Nième terme d'une suite géométrique. Vous devriez avoir en paramètres : le terme $ u_{0} $ désignant le premier terme de la suite, la raison $ q $, et le numéro $ n $ du terme recherché.}
+
+\begin{equation*}
+  \begin{aligned}
+& u_{n} = u_{0} \times q^{n}
+  \end{aligned}
+\end{equation*}
+
+\bigskip
+
+\question{Écrivez une fonction récursive calculant le $ n^{\text{ème}} $ terme de la suite de Fibonacci.}
+
+\begin{equation*}
+  \begin{aligned}
+& fibo(0) = 0\\
+& fibo(1) = 1 \; \; \; \; \; \; \text{(pour simplifier, on considérera que : } fibo(0) = fibo(1) = 1 \text{)}\\
+& fibo(n) = fibo(n - 1) + fibo(n - 2)
+  \end{aligned}
+\end{equation*}
+
+\question{Écrivez maintenant la version itérative de la suite de Fibonacci. [Astuce : on dispose de deux cas à valeurs fixes, et à chaque étape on doit se rappeler du résultat précédent.] }
+
+\bigskip
+
+\question{Écrivez une fonction récursive calculant le $ n^{\text{ème}} $ terme de la suite d'Ackermann.}
+
+\begin{equation*}
+  \begin{aligned}
+& A(0, n) = n + 1                 &  [n >= 0] & \\
+& A(m, 0) = A(m - 1, 1)           &  [m > 0]  & \\
+& A(m, n) = A(m - 1, A(m, n - 1)) &  [m > 0 \; \& \; n > 0] &
+  \end{aligned}
+\end{equation*}
+
+\bigskip
+
+\question{Écrivez l'algorithme récursif calculant le nombre de combinaisons de $ p $ dans $ n $ ($ C^{p}_{n} $ ou CPN), c'est-à-dire le nombre de parties à $ p $ éléments dans un ensemble $ E $ contenant $ n $ éléments.}
+
+\bigskip
+
+Par exemple : pour $ p = 2 $, on recherche tous les \textbf{couples} possibles de différents éléments.
+Pour $ p = 3 $, on recherche tous les \textbf{triplets} possibles de différents éléments.
+En indiquant $ n = 3 $, on vise un ensemble composé de trois éléments distincts (par exemple : $ E = \{ 1, 2, 3 \} $, ou $ E = \{ A, B, C \} $, ou $ E = \{ \spadesuit, \heartsuit, \clubsuit \} $, il s'agit juste de trois éléments distincts).
+
+%\bigskip
+\newpage
+
+Ainsi, pour $ p = 2 $ et $ n = 3 $, on recherche tous les couples possibles de trois éléments :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l l}
+(A,B) & (A,C) \\
+      & (B,C)
+  \end{tabular}
+\end{table}
+
+\hspace*{3cm} $\Rightarrow$ $ C^{2}_{3} = 3 $ \hspace*{1cm} (3 couples possibles)
+
+\bigskip
+
+Pour $ p = 2 $ et $ n = 4 $, on recherche tous les couples possibles de quatre éléments :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l l l}
+(A,B) & (A,C) & (A,D) \\
+      & (B,C) & (B,D) \\
+      &       & (C,D)
+  \end{tabular}
+\end{table}
+
+\hspace*{3cm} $\Rightarrow$ $ C^{2}_{4} = 6 $ \hspace*{1cm} (6 couples possibles)
+
+\bigskip
+
+Pour $ p = 3 $ et $ n = 3 $, on recherche tous les triplets possibles de trois éléments :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l}
+(A,B,C) \\
+  \end{tabular}
+\end{table}
+
+\hspace*{3cm} $\Rightarrow$ $ C^{3}_{3} = 1 $ \hspace*{1cm} (1 triplet possible)
+
+\bigskip
+
+Pour $ p = 3 $ et $ n = 4 $, on recherche tous les triplets possibles de quatre éléments :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l l l}
+(A,B,C) & (A,B,D) & (A,C,D) \\
+        &         & (B,C,D) \\
+  \end{tabular}
+\end{table}
+
+\hspace*{3cm} $\Rightarrow$ $ C^{3}_{4} = 4 $ \hspace*{1cm} (4 triplets possibles)
+
+\bigskip
+
+Voici les axiomes pour votre implémentation :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l l}
+$ C(0,n) = 1 $                             & \\
+$ C(n,n) = 1 $                             & $ [n \neq 0] $ \\
+$ C(p,n) = C(p, n - 1) + C(p - 1, n - 1) $ & $ [n \neq p] $ \\
+  \end{tabular}
+\end{table}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Exercices variés (récursif \& itératif)}
+
+\bigskip
+
+Les exercices dans cette section doivent plutôt être réalisés en itératif.
+Il est précisé lesquels peuvent aisément être réalisés en récursif.
+Il est interdit d'utiliser les tableaux ou pointeurs pour réaliser ces exercices.
+
+\bigskip
+
+%\question{Écrivez une fonction prenant 3 entiers en paramètre, et indiquant lequel est le plus petit/grand. \textit{min(a, b, c) max(a, b, c)} }
+
+%\bigskip
+
+\question{Écrivez une fonction transformant un format horaire en un format uniquement composé de secondes. Cette fonction prendra 3 entiers en paramètre (les heures, les minutes, et les secondes) et les convertira en secondes. Par exemple, 1h 23m 45s deviendra 5025 secondes. \textit{ConversionHoraire1(hh, mm, ss)} }
+
+\bigskip
+
+\question{Écrivez une autre fonction de conversion horaire qui prend cette fois un unique entier qui respecte un format précis (hhmmss) pour le convertir en secondes. Par exemple le paramètre 153042 signifie 15h 30m 42s qu'il faut convertir en secondes. \textit{ConversionHoraire2(hhmmss)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui transforme un nombre en son miroir. Cette fonction prend un entier en paramètre, et construit un autre entier qui est son miroir. Par exemple, pour 12034, son miroir sera 43021. Autre exemple : 2000 aura comme miroir 0002, c'est-à-dire 2. Attention aux nombres composés d'un nombre pair/impair de chiffres. Commencez par réaliser une fonction itérative. \textit{MiroirIter(n)} }
+
+\bigskip
+
+\question{Écrivez maintenant la version récursive du nombre miroir. Pour cette première version récursive, vous appelerez une fonction \textit{écrire(x)} ou \textit{print(x)} qui affiche un caractère ou un chiffre à la fois. \textit{MiroirRec1(n)} }
+
+\bigskip
+
+\question{Écrivez maintenant la version récursive du nombre miroir. Pour cette deuxième version récursive, vous devrez renvoyer le nombre miroir et non pas juste l'afficher. \textit{MiroirRec2(n)}}
+
+Astuce : vous pouvez utiliser un \textit{accumulateur} comme deuxième paramètre, donc, écrire une fonction chapeau qui prendra un seul paramètre et préparera l'appel à la fonction récursive.
+
+\bigskip
+
+\question{Écrivez une fonction récursive qui affiche les éléments successifs de la conjecture de Syracuse, mais qui renvoie également le nombre d'éléments produits avant d'atteindre $ 1 $. Utilisez les fonctions \textit{écrire(x)} ou \textit{print(x)} et une fonction chapeau si nécessaire. \textit{Syracuse(n)} }
+
+Voici les axiomes pour votre implémentation :
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{l l}
+$ Syracuse(0) = 1 $       & \\
+$ Syracuse(1) = 1 $       & \\
+$ Syracuse(n) = n / 2 $   & si $ n $ est paire \\
+$ Syracuse(n) = 3n + 1 $  & si $ n $ est impaire \\
+  \end{tabular}
+\end{table}
+
+\question{Écrivez une fonction détectant si un nombre est un palindrome. La fonction renvoie \textit{vrai} si c'est un palindrome, sinon elle renvoie \textit{faux}. Un palindrome est simplement un mot ou un nombre composé des mêmes caractères ou chiffres sur sa première moitié par rapport à sa deuxième moitié. Par exemple, 27972 est un palindrome. 1331 est également un palindrome, mais 1664 n'en est pas un. Faites d'abord une version itérative, puis faites une version récursive. \textit{PalindromeIter(n)} \textit{PalindromeRec(n)} }
+
+
+%\bigskip
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Récursivité terminale}
+
+\bigskip
+
+Lors de l'exécution de certains algorithmes récursifs, vous avez du vous rendre compte qu'avec certains paramètres trop grands, l'ordinateur refuse d'exécuter le code (typiquement \TTBF{Ackermann(5, 5)}).
+Selon le langage employé, vous tomberez probablement sur des messages parlant d'une \textit{pile d'appels} (\textit{call stack} en anglais) trop remplie, ou d'un nombre trop important d'\textit{appels} de fonctions, voire d'un problème de \textit{stack frame}.
+
+Lorsque l'on appelle une fonction ou une procédure, il est nécessaire pour l'ordinateur d'enregistrer le contexte dans lequel il était, et surtout, de préparer de l'espace pour l'exécution de la fonction/procédure (pour les variables, par exemple).
+Dans le cas d'une fonction récursive, à chaque appel récursif, il faut donc sauvegarder l'état des paramètres et variables, et rappeler la fonction avec de nouveaux paramètres et variables.
+
+Lorsque ces appels successifs consomment trop de mémoire, le système d'exploitation peut refuser d'appeler des fonctions supplémentaires, et il déclenche donc un \textit{dépassement de pile} (en anglais \textit{stack overflow}).
+
+\medskip
+
+Pour calculer la factorielle en récursif, le \TTBF{retourne} du cas général contient une multiplication entre une valeur et un appel récursif.
+Il est donc nécessaire d'effectuer une multiplication avant de retourner la valeur finale.
+Afin de limiter la consommation mémoire, on peut effectuer de la \textit{récursion terminale} en n'effectuant aucune opération dans le \TTBF{retourne} qui effectue l'appel récursif.
+
+La valeur finale n'est plus calculée au fur et à mesure des retours d'appels récursifs, mais directement lors de l'appel récursif le plus profond.
+Ainsi, chaque \TTBF{retourne} ne sert qu'à renvoyer une valeur sans faire le moindre calcul.
+
+\medskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.475\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction FactR : entier
+  parametres locaux
+    entier    n
+
+debut
+si (n == 0) OU (n == 1) alors
+  retourne (1)
+sinon
+  retourne (n * FactR(n - 1))
+fin si
+fin algorithme fonction FactR \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers-recursif}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.48\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction FactRT : entier
+  parametres locaux
+    entier    n, acc
+
+debut
+si (n == 0) OU (n == 1) alors
+  retourne (acc)
+sinon
+  retourne (FactRT(n - 1, n * acc))
+fin si
+fin algorithme fonction FactRT \end{lstlisting}
+  \end{minipage}
+\end{table}
+
+Dans la version récursive terminale, on utilise un \textit{accumulateur} qui stocke la valeur calculée.
+Ainsi, l'accumulateur est initialisée à une valeur neutre, et il est mis à jour au fur et à mesure des appels (et non pas des retours d'appels).
+Dès que le cas spécifique est rencontré, on renvoie directement cet accumulateur.
+
+\medskip
+
+\'Etant donné que la fonction \textit{factorielle} n'est censée prendre qu'un seul paramètre, il est nécessaire de fournir une fonction initialisant l'accumulateur et permettant de respecter le format attendu/
+Pour cela, on écrit une \textit{fonction chapeau}.
+Dans le cas de la factorielle, la valeur neutre à la multiplication est $ 1 $ (si on écrivait l'algorithme de la somme récursive, le neutre de l'addition est $ 0 $).
+
+Celle-ci peut également servir à capturer les cas spécifiques et limiter les appels.
+Par exemple, dans les appels récursifs, on n'arrivera jamais au cas où N est égal à $ 0 $.
+Ainsi, on va immédiatement ce cas spécial dans la fonction chapeau, et limiter le nombre de tests dans la fonction récursive terminale.
+
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.478\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction FChapo : entier
+  parametres locaux
+    entier    n
+
+debut
+si (n == 0) OU (n == 1) alors
+  retourne (1)
+sinon
+  retourne (FactRT(n, 1))
+fin si
+fin algorithme fonction FChapo \end{lstlisting}
+%    \end{verbatim}
+    % \caption{Algorithme de la somme des N premiers entiers}
+    % \label{algo-somme-n-premiers-entiers-recursif}
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.48\textwidth}
+    \centering
+%    \begin{verbatim}
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction FactRT : entier
+  parametres locaux
+    entier    n, acc
+
+debut
+si (n == 1) alors
+  retourne (acc)
+sinon
+  retourne (FactRT(n - 1, n * acc))
+fin si
+fin algorithme fonction FactRT \end{lstlisting}
+  \end{minipage}
+\end{table}
+
+On notera qu'un algorithme écrit en récursif terminal est facilement transformable en algorithme itératif : l'accumulateur devenant la variable évoluant au fur et à mesure des tours de boucle.
+La principale difficulté réside dans la transformation d'un algorithme récursif en récursif terminal.
+
+\bigskip
+
+\question{Réécrivez les algorithmes récursifs en récursifs terminaux. Attention, certains sont beaucoup plus complexes que d'autres. (N'essayez pas de convertir l'algorithme d'Ackermann en récursif terminal tant que vous débutez)}
+
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2022.\\
+La plupart des exercices sont inspirés du cahier d'algo de Nathalie "Junior" BOUQUET et Christophe "Krisboul" BOULLAY.}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+
+
+\end{document}

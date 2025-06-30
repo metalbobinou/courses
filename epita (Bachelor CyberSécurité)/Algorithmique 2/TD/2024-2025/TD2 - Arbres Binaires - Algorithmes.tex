@@ -1,0 +1,243 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\TitreSeance}{Arbres Binaires}
+\newcommand{\SousTitreSeance}{Algorithmes}
+\newcommand{\DateCours}{Mars 2025}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Arbres ; Arbres Binaires ; Propriétés Arbres ; Typologie Arbres Binaires ; Parcours Profondeur ; Parcours Largeur ; Trees ; Binary Trees ; Trees Properties ; Binary Trees Typology ; Depth-First Search ; DFS ; Breadth-First Search ; BFS}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les arbres binaires.
+Vous devrez y utiliser une pile et une file à un moment donné pour les algorithmes itératifs appliqués aux arbres.
+
+\bigskip
+
+Pour rappel, les arbres binaires sont constitués de \textit{nœuds} stockant une \textit{clé} (l'élément ou l'identifiant de l'élément), et chaque nœud dispose de liens vers un \textit{fils gauche} et un \textit{fils droit}.
+
+\medskip
+
+\textit{Dans l'ensemble des exercices, toutes les clés qui seront stockées seront strictement supérieures à 0.}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Algorithmes Récursifs - Propriétés simples}
+
+\bigskip
+
+Vous allez maintenant implémenter les fonctions de base analysant et parcourant des arbres.
+Ces fonctions fonctionnent en autonomie (elles n'ont pas besoin de pile ou de file externes), mais certaines peuvent être des fonctions chapeau (donc ayant besoin de sous fonctions).
+
+\bigskip
+
+\question{Implémentez les fonctions récursives suivantes calculant la taille et la hauteur de l'arbre. (Pour rappel : la \textit{taille} est le nombre de nœuds contenus dans l'arbre, et la \textit{hauteur} est le niveau du nœud le plus profond de l'arbre, sachant que la racine est à la hauteur 0)}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int size_btp_r(node *T);
+int height_btp_r(node *T); \end{lstlisting}
+
+
+\question{Implémentez maintenant les mêmes fonctions pour un arbre stocké sous forme de tableau (la récursion n'est pas obligatoire).}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int size_btt(bin_tree_t *T);
+int height_btt(bin_tree_t *T); \end{lstlisting}
+
+
+\question{Implémentez trois fonctions récursives effectuant un parcours profondeur main gauche, et affichant les clés des nœuds dans l'ordre préfixe, infixe, ou suffixe.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_dfs_preorder_btp_r(node *T);
+int print_dfs_inorder_btp_r(node *T);
+int print_dfs_postorder_btp_r(node *T);
+int print_dfs_btp_r(node *T);            // Affiche les 3 ordres \end{lstlisting}
+
+
+\question{Implémentez maintenant une fonction écrivant le numéro d'ordre hiérarchique de chaque nœud suivi de la clé contenue.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_hierarchical_btp_r(node *T); \end{lstlisting}
+
+
+\question{Implémentez maintenant une fonction renvoyant le numéro d'ordre hiérarchique du nœud contenant la clé données en paramètre. Si la clé n'est pas trouvée, alors on renverra $ -1 $.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int hierarchical_number_btp_r(node *T, int key); \end{lstlisting}
+
+
+\question{Implémentez une fonction construisant un arbre binaire sous forme de tableau à partir d'un arbre binaire sous forme de pointeurs.}
+
+Pour limiter les réallocations, vous avez le droit d'appeler une fois au tout début la fonction \textit{size} que vous avez précédemment réalisée.
+
+% %*   *)
+\begin{lstlisting}[language=C]
+bin_tree_t *btp_r_to_btt(node *T); \end{lstlisting}
+
+
+\question{Implémentez une fonction transformant un arbre binaire sous forme de pointeurs en un arbre binaire sous forme de pointeurs \textit{avec} un champs supplémentaire dans la structure des nœuds : la taille du sous-arbre démarrant au nœud courant.}
+
+Il est nécessaire de définir une nouvelle structure \TTBF{node\_ext} dans laquelle vous ajouterez un champs supplémentaire.
+
+% %*   *)
+\begin{lstlisting}[language=C]
+node_ext *extend_btp_r(node *T); \end{lstlisting}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Algorithmes itératifs}
+
+\bigskip
+
+Pour cette seconde partie, il est nécessaire de disposer d'une file et d'une pile fonctionnelles.
+C'est-à-dire qu'elles doivent implémenter au \textit{minimum absolu} ces fonctions (pour permettre une correction automatique, vous devez strictement respecter ces prototypes) :
+
+\bigskip
+
+% /* La creation peut eventuellement prendre une taille max */
+% my_stack *create_stack(int sizeof_elt);
+% // my_stack *create_stack(int sizeof_elt, int max_size);
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/* Selon l'implementation, max_size peut ne pas etre pris en compte */
+my_stack *create_stack(int sizeof_elt, int max_size);
+
+void *head_stack(my_stack *s);
+my_stack *push(my_stack *s, void *elt);
+my_stack *pop(my_stack *s);
+int is_empty_stack(my_stack *s);
+
+void delete_stack(my_stack *s); \end{lstlisting}
+
+
+\vspace*{-0.5cm}
+%\clearpage
+
+
+% /* La creation peut eventuellement prendre une taille max */
+% my_queue *create_queue(int sizeof_elt);
+% // my_queue *create_queue(int sizeof_elt, int max_size);
+
+
+% %*   *)
+\begin{lstlisting}[language=C]
+/* Selon l'implementation, max_size peut ne pas etre pris en compte */
+my_queue *create_queue(int sizeof_elt, int max_size);
+
+void *head_queue(my_queue *q);
+my_queue *enqueue(my_queue *q, void *elt);
+my_queue *dequeue(my_queue *q);
+int is_empty_queue(my_queue *s);
+
+void delete_queue(my_queue *q); \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+Comme vous l'aurez remarqué, au lieu de prendre un élément sous forme d'entier, ces structures prendront des pointeurs vers ces éléments.
+La taille de chaque élément est indiqué lors de la création de la structure par le paramètre \textit{sizeof\_elt} (la structure contiendra donc N éléments de taille \textit{sizeof\_elt}).
+La suppression d'un élément (avec \textit{dequeue} ou \textit{pop}) ne doit pas libérer de la mémoire ces éléments.
+
+Le paramètre \textit{max\_size} donné à la fonction \textit{create\_stack} doit absolument exister, mais peut ne pas être utilisé si vous implémentez les piles/files avec des pointeurs (le code doit néanmoins compiler avec tous les flags de compilation : vous devez utiliser l'astuce pour forcer les variables à exister).
+
+
+\bigskip
+
+\question{Implémentez une fonction itérative effectuant un parcours largeur dans l'ordre hiérarchique et affichant la clé de chaque nœud.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_bfs_btp_i(node *T); \end{lstlisting}
+
+
+%\bigskip
+\vspace*{-0.5cm}
+
+
+\question{Implémentez une fonction itérative effectuant un parcours profondeur main gauche et affichant la clé de chaque nœud.}
+
+% %*   *)
+\begin{lstlisting}[language=C]
+int print_dfs_btp_i(node *T); \end{lstlisting}
+
+%\question{Implémentez trois fonctions itératives effectuant un parcours profondeur main gauche, et affichant les clés des nœuds dans l'ordre préfixe, infixe, ou suffixe.}
+%
+% %*   *)
+%\begin{lstlisting}[language=C]
+%int print_dfs_preorder_btp_i(node *T);
+%int print_dfs_inorder_btp_i(node *T);
+%int print_dfs_postorder_btp_i(node *T); \end{lstlisting}
+
+\vspace*{-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2025.
+Certains exercices sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

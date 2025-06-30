@@ -1,0 +1,674 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\TitreSeance}{Arbres Binaires}
+\newcommand{\SousTitreSeance}{Problèmes}
+\newcommand{\DateCours}{Mai 2025}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Arbres ; Arbres Binaires ; Conversion ; Chemin ; Path}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous confronter à des problèmes impliquant des arbres binaires.
+Vous devrez avoir compris tous les concepts basiques de l'algorithmique pour les résoudre : la récursivité, les tableaux, les pointeurs, ainsi que les structures de données précédentes (listes, piles, files, arbres binaires).
+
+\bigskip
+
+Pour rappel, les arbres binaires sont constitués de \textit{nœuds} stockant une \textit{clé} (l'élément ou l'identifiant de l'élément), et chaque nœud dispose de liens vers un \textit{fils gauche} et un \textit{fils droit}.
+
+\medskip
+
+\textit{Dans l'ensemble des exercices, toutes les clés qui seront stockées seront strictement supérieures à 0.}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Algorithmes}
+\addcontentsline{toc}{section}{\protect\numberline{}Algorithmes}
+
+\subsection*{Conversion Arbre Binaire -> Tableau}
+\addcontentsline{toc}{subsection}{\protect\numberline{}Conversion Arbre Binaire -> Tableau}
+
+\bigskip
+
+Le but de l'exercice est de convertir un arbre binaire au format \TTBF{node*} vers un tableau contenant les clés.
+Pour chaque nœud vide, la case associée doit être remplie d'un \TTBF{-1}.
+Voici un exemple d'arbre, ainsi que le tableau de sortie associé :
+
+\bigskip
+
+
+\begin{center}
+%\centering{
+
+%  leaf/.style = {circle, white, draw=green, fill=green},
+%  root/.style = {circle, white, draw=red, fill=red},
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8}
+                  child { node {2} }
+                  child [missing] {}
+                }
+          child { node {32}
+                  child { node {28} }
+                  child { node {36} }
+                }
+        }
+  child { node {64}
+          child [missing] {}
+          child { node {84}
+                  child { node {72} }
+                  child { node {96} }
+                }
+        };
+\end{tikzpicture}
+
+\bigskip
+\bigskip
+
+%\begin{tabular}{|c|c|c|c|c| c|c|c|c|c| c|c|c|c|c|}
+\begin{tabular}{ C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm}  C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm}  C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} }
+%\hline
+\textbf{0}  & \textbf{1}  & \textbf{2}  & \textbf{3}  & \textbf{4}  &
+\textbf{5}  & \textbf{6}  & \textbf{7}  & \textbf{8}  & \textbf{9}  &
+\textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} \\
+\end{tabular}
+%
+%\begin{tabular}{|c|c|c|c|c| c|c|c|c|c| c|c|c|c|c|}
+\begin{tabular}{|C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}| C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}| C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}|C{0.5cm}|}
+\hline
+42 & 21 & 64 & 8 & 32 & \textit{-1} & 84 & 2 & \textit{-1} & 28 & 36 & \textit{-1} & \textit{-1} & 72 & 96 \\
+\hline
+\end{tabular}
+%
+%\begin{tabular}{|c|c|c|c|c| c|c|c|c|c| c|c|c|c|c|}
+\begin{tabular}{ C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm}  C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm}  C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} C{0.5cm} }
+\textit{1}  & \textit{2}  & \textit{3}  & \textit{4}  & \textit{5}  &
+\textit{6}  & \textit{7}  & \textit{8}  & \textit{9}  & \textit{10} &
+\textit{11} & \textit{12} & \textit{13} & \textit{14} & \textit{15} \\
+\end{tabular}
+
+%}
+\end{center}
+
+\bigskip
+\bigskip
+
+Pour effectuer cet algorithme, plusieurs solutions sont possibles, mais toutes s'appuient sur le numéro hiérarchique.
+La plus simple consiste à effectuer un parcours profondeur, mais il est envisageable de faire un parcours largeur à la place.
+N'oubliez pas que \textit{toutes} les cases équivalentes à un nœud vide doivent contenir \TTBF{-1}.
+
+\bigskip
+
+\question{Implémentez une fonction \textit{node\_to\_tab} prenant en paramètre la racine d'une arbre binaire au format \TTBF{node*}, ainsi qu'un tableau de \TTBF{node*} déjà alloué avec suffisamment d'espace (et sa taille) :}
+
+\medskip
+
+% %*   *)
+\begin{lstlisting}[language=C,morekeywords=node]
+void %*\texttt{node}*)_to_tab(node *root, node **tab, int size); \end{lstlisting}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%\bigskip
+
+\section{Problème A}
+
+Dans ce problème, vous allez devoir construire le \textit{plus court chemin} entre 2 nœuds quelconques d'un arbre.
+%La notions de chemin entre deux nœuds A et B est simplement la succession de nœuds permettant de joindre A et B.
+Un \textit{chemin} est simplement une liste de nœuds reliés les uns après les autres par des liens.
+Dans le cas des arbres, la racine est reliée à ses fils, et vice-versa.
+%Dans l'exemple si dessous, il existe une infinité de chemins entre A et B, mais un seul plus court chemin :
+Il existe par exemple une infinité de chemins entre D et C dans l'arbre suivant, mais un seul plus court chemin :
+
+\begin{itemize}
+\item Plus court chemin : D - B - A - C
+\item Exemple 1 de chemin : D - B - E - B - A - C
+\item Exemple 2 de chemin : D - B - D - B - A - C - F - C
+\end{itemize}
+
+\medskip
+
+Pour résoudre ce problème, vous devrez écrire des fonctions et procédures en C.
+Aucune fonction de la bibliothèque C ne pourra être utilisée exceptées \textit{malloc}, \textit{free}, et \textit{printf} : vous devez réécrire toute fonction utile, sauf si une consigne précise le contraire.
+La macro \textit{sizeof} est autorisée.
+
+\medskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Questions préalables}
+
+\subsubsection{Indiquez le plus court chemin entre les nœuds suivants : }
+
+\begin{center}
+\begin{tikzpicture}[
+  level/.style = {sibling distance = 26mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle}
+  ]
+  \node (nA) {A}
+  child { node (nB) {B}
+          child { node (nD) {D}
+                  child { node (nH) {H} }
+                  child { node [draw=none] (nZ) {\phantom{Z}} edge from parent [draw=none] }
+                }
+          child { node (nE) {E}
+                  child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+                  child { node (nI) {I} }
+                }
+        }
+  child { node (nC) {C}
+          child { node (nF) {F} }
+          child { node (nG) {G} }
+        };
+\end{tikzpicture}
+\end{center}
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{B $ \rightarrow $ I}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ B}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{B $ \rightarrow $ A}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\end{tabular}
+}
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{B $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ B}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{B $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\end{tabular}
+%}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{D $ \rightarrow $ E}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ D}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{D $ \rightarrow $ A}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ E}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\end{tabular}
+}
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{D $ \rightarrow $ E}  & \multirow[c]{2}{*}[0in]{D} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ D}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{D} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{D $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{D} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ E}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\end{tabular}
+%}
+
+  \end{minipage}
+\end{table}
+
+
+\centerline{
+\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+\hline
+\multirow[c]{2}{*}[0in]{I $ \rightarrow $ F}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{I $ \rightarrow $ A}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\multirow[c]{2}{*}[0in]{A $ \rightarrow $ F}  & & & & & & \\
+                                              & & & & & & \\
+\hline
+\end{tabular}
+}
+
+%\centerline{
+%\begin{tabular}{ | c || C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}|C{0.33cm}| }
+%\hline
+%\multirow[c]{2}{*}[0in]{I $ \rightarrow $ F}  & \multirow[c]{2}{*}[0in]{I} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{C} & \multirow[c]{2}{*}[0in]{F} \\
+%                                              & & & & & & \\
+%\hline
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ I}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{I} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{I $ \rightarrow $ A}  & \multirow[c]{2}{*}[0in]{I} & \multirow[c]{2}{*}[0in]{E} & \multirow[c]{2}{*}[0in]{B} & \multirow[c]{2}{*}[0in]{A} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\multirow[c]{2}{*}[0in]{A $ \rightarrow $ F}  & \multirow[c]{2}{*}[0in]{A} & \multirow[c]{2}{*}[0in]{C} & \multirow[c]{2}{*}[0in]{F} & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%                                              & & & & \cellcolor{black!15} & \cellcolor{black!15} & \cellcolor{black!15} \\
+%\hline
+%\end{tabular}
+%}
+
+
+%\subsubsection{Combien existe-t-il de chemin(s) le(s) plus court(s) entre deux nœuds quelconques d'un arbre ?}
+%
+% 1 : Il n'existe qu'un seul chemin entre deux nœuds quelconques d'un arbre.
+
+
+\subsubsection{De quel algorithme récursif peut-on dériver la recherche d'un chemin dans un arbre entre la racine et un nœud ?}
+
+%Calcul de la hauteur d'un arbre / Profondeur d'un nœud
+
+\bigskip
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Résolution générale du problème}
+
+Dans les exercices suivants, nous considèrerons les arbres binaires comme cette structure \TTBF{node} :
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C,commentstyle=\color{teal}\ttfamily,morekeywords={node}]
+typedef struct node
+{
+  int         key;
+  struct node *lc;  // Left child
+  struct node *rc;  // Right child
+} node;
+\end{lstlisting}
+\end{center}
+
+\vspace*{-0.5cm}
+
+En admettant que vous disposez des fonctions suivantes exclusivement pour cette question, écrivez l'algorithme général de résolution du problème sous la forme d'une fonction C.
+(Les tableaux de node* sont tous \textit{NULL-terminated}).
+
+\medskip
+
+\textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\medskip
+
+\setlength\fboxrule{0.2pt}
+Un tableau NULL-terminated contenant A, B, et C sera de la forme suivante : \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}}
+\setlength\fboxrule{0.4pt}
+
+\begin{center}
+% %*   *)
+\begin{lstlisting}[language=C,commentstyle=\color{teal}\ttfamily,morekeywords={node}]
+// Longueur du chemin (nombre de noeuds) entre la racine et un noeud
+//      (si le chemin n'existe pas, la fonction renvoie -1)
+int count_path_root_to_node(node *root, node *end);
+
+// Generation du tableau (NULL-terminated) de node* contenant le
+//   chemin entre la racine et un noeud
+node **build_path_root_to_node(node *root, node *end);
+
+// Longueur d'un tableau de node*
+int array_length(node **in_array);
+
+// Inversion en place d'un tableau de node*
+//   (en place = sans le reallouer)
+void invert_array_in_place(node **in_array);
+
+// Longueur du prefixe commun entre 2 tableaux
+int common_prefix_length(node **tab1, node **tab2);
+
+// Fusion de 2 tableaux de node* vers un nouveau tableau
+node **merge_arrays_new(node **tab1, node **tab2);
+\end{lstlisting}
+\end{center}
+
+\vspace*{-0.5cm}
+
+Vous pouvez également appeler les fonctions classiques des arbres : \textit{hauteur(arbre)}, \textit{profondeur(nœud)}, \textit{taille(arbre)}, \textit{parc\_prof(arbre)}, ... mais vous devrez les réimplémenter si nécessaire dans les questions suivantes.
+
+
+\bigskip
+%\clearpage
+
+
+\subsubsection{\'Ecrivez la fonction produisant un tableau \textit{NULL-terminated} du plus court chemin entre deux nœuds quelconques d'un arbre binaire}
+
+% node **build_path(node *root, node *start, node *end)
+
+\TTBF{\textcolor{blue}{node} **build\_path(\textcolor{blue}{node} *root, \textcolor{blue}{node} *start, \textcolor{blue}{node} *end)}
+
+
+%\bigskip
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Génération des tableaux de chemins}
+
+%\subsubsection{Fonction calculant la longueur du chemin de la racine vers un nœud d'un arbre binaire}
+%
+%\subsubsection{Fonction produisant un tableau \textit{NULL-terminated} du chemin de la racine vers un nœud d'un arbre binaire}
+
+
+\subsubsection{\'Ecrivez une fonction comptant le nombre de nœuds sur le chemin entre la racine d'un arbre et un nœud. Si aucun chemin n'existe vers ce nœud, vous devez renvoyer -1 : }
+
+\textit{Exemple : entre le nœud B et I du schéma illustratif en page 3, il y a 3 nœuds : B - E - I}
+
+\medskip
+
+% int count_path_root_to_nodes(node *start, node *end)
+
+\TTBF{\textcolor{blue}{int} count\_path\_root\_to\_nodes(\textcolor{blue}{node} *root, \textcolor{blue}{node} *end)}
+
+
+%%%%%%%%%%%%%%%%
+\bigskip
+
+\subsubsection{\'Ecrivez une fonction générant un tableau \textit{NULL-terminated} de nœuds allant de la racine d'un arbre à un nœud : }
+
+\medskip
+
+% int count_path_nodes(node *start, node *end)
+
+\TTBF{\textcolor{blue}{node} **build\_path\_root\_to\_node(\textcolor{blue}{node} *root, \textcolor{blue}{node} *end)}
+
+
+\bigskip
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{(2 points) \'Ecrivez une fonction remplissant un tableau \textit{NULL-terminated} de node* avec l'adresse de chaque nœud d'un chemin entre une racine et un nœud parmi ses sous-arbres. Si aucun chemin n'existe, renvoyez simplement NULL. Considérez que le tableau est déjà alloué avec suffisament de place : }
+
+%%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL, '\textbackslash{}0', ou 0.}
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+%\begin{center}
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%int fill_path_nodes_rec(node *root, node *end, int level, node **tab)
+%{
+%  int left, right;
+%
+%  if (root == NULL)
+%    return (-1);
+%
+%  if (root == end)
+%    return (level);
+%
+%  left = fill_path_nodes_rec(root->lc, end, level + 1, tab);
+%  right = fill_path_nodes_rec(root->rc, end, level + 1, tab);
+%
+%  if ((left > 0) || (right > 0))
+%    tab[level - 1] = root;
+%
+%  if (left > right)
+%    return (left);
+%  else
+%    return (right);
+%}
+%\end{lstlisting}
+
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%node **fill_path_nodes(node *start, node *end, node **tab)
+%{
+%  int level;
+%
+%  level = fill_path_nodes_rec(start, end, 1, tab);
+%
+%  if (level == -1)
+%    return (NULL);
+%
+%  tab[level] = NULL;
+%  return (tab);
+%}
+%\end{lstlisting}
+%\end{center}
+
+
+\bigskip
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gestion des tableaux}
+
+%\subsubsection{Fonction calculant la taille des préfixes communs de deux tableaux \textit{NULL-terminated}}
+%
+%\subsubsection{Fonction inversant un tableau \textit{NULL-terminated} en place}
+%
+%\subsubsection{Fonction fusionnant deux tableaux \textit{NULL-terminated}}
+
+
+%\subsubsection{(1 point) \'Ecrivez une fonction calculant la taille du préfixe commun entre deux tableaux \textit{NULL-terminated}. Si les deux tableaux sont des pointeurs NULL, renvoyez -1 : }
+%
+%\setlength\fboxrule{0.2pt}
+%\noindent Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} et un tableau contenant \fbox{A}\fbox{B}\fbox{D}\fbox{\textit{NULL}} auront un préfixe commun de taille 2 (A et B).
+%\setlength\fboxrule{0.4pt}
+%
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+%
+%\begin{center}
+%% %*   *)
+%\begin{lstlisting}[language=C]
+%int common_prefix_length(node **tab1, node **tab2)
+%{
+%  int index = 0;
+%
+%  if ((tab1 == NULL) && (tab2 == NULL))
+%    return (-1);
+%
+%  if ((tab1 == NULL) || (tab2 == NULL))
+%    return (0);
+%
+%  while (tab1[index] == tab2[index]) &&
+%        (tab1[index] != NULL) && (tab2[index] != NULL)
+%    index++;
+%
+%  return (index);
+%}
+%\end{lstlisting}
+%\end{center}
+
+
+%%\bigskip
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{\'Ecrivez une fonction calculant la taille d'un tableau \textit{NULL-terminated} de nœuds : }
+
+\setlength\fboxrule{0.2pt}
+Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} sera considéré comme de taille 3
+\setlength\fboxrule{0.4pt}
+
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+% int array_length(node **in_array)
+
+\medskip
+
+\TTBF{\textcolor{blue}{int} array\_length(\textcolor{blue}{node} **in\_array)}
+
+
+%%%%%%%%%%%%%%%%
+\bigskip
+
+\subsubsection{\'Ecrivez une procédure inversant l'ordre des éléments d'un tableau \textit{NULL-termin\-ated} contenant des node*. Si le tableau est un pointeur NULL, renvoyez NULL. L'inversion doit se faire en place, c'est-à-dire qu'il ne faut pas allouer de nouveau tableau.: }
+
+\setlength\fboxrule{0.2pt}
+Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} sera inversé en \fbox{C}\fbox{B}\fbox{A}\fbox{\textit{NULL}}
+\setlength\fboxrule{0.4pt}
+
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\medskip
+
+% node **invert_array_in_place(node **in_tab)
+
+\TTBF{\textcolor{blue}{void} invert\_array\_in\_place(\textcolor{blue}{node} **in\_array)}
+
+
+%%%%%%%%%%%%%%%%
+\bigskip
+
+\subsubsection{\'Ecrivez une fonction calculant la longueur du préfixe commun de deux tableaux \textit{NULL-terminated} : }
+
+\setlength\fboxrule{0.2pt}
+Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{C}\fbox{\textit{NULL}} et un contenant \fbox{A}\fbox{B}\fbox{F}\fbox{\textit{NULL}} ont un préfixe commun de longueur 2
+\setlength\fboxrule{0.4pt}
+
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\medskip
+
+% int common_prefix_length(node **tab1, node **tab2)
+
+\TTBF{\textcolor{blue}{int} common\_prefix\_length(\textcolor{blue}{node} **tab1, \textcolor{blue}{node} **tab2)}
+
+
+%%%%%%%%%%%%%%%%
+\bigskip
+
+\subsubsection{\'Ecrivez une fonction fusionnant deux tableaux \textit{NULL-terminated} en produisant un nouveau tableau : }
+
+\setlength\fboxrule{0.2pt}
+Exemple : Un tableau contenant \fbox{A}\fbox{B}\fbox{\textit{NULL}} et un contenant \fbox{D}\fbox{E}\fbox{\textit{NULL}} produiront en sortie le tableau \fbox{A}\fbox{B}\fbox{D}\fbox{E}\fbox{\textit{NULL}}
+\setlength\fboxrule{0.4pt}
+
+%\smallskip
+%
+%\noindent \textit{Rappel : un tableau NULL-terminated est un tableau dont la dernière case contient la valeur NULL.}
+
+\medskip
+
+% node **merge_arrays_new(node **tab1, node **tab2)
+
+\TTBF{\textcolor{blue}{node} **merge\_arras\_new(\textcolor{blue}{node} **tab1, \textcolor{blue}{node} **tab2)}
+
+
+
+\vspace*{-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mai 2025.
+Certains exercices sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

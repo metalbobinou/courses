@@ -1,0 +1,205 @@
+#! /bin/sh
+
+echo "######################"
+echo "# PROJET S1 (Python) #"
+echo "######################"
+
+MAIN_PROGRAM=monnayeur
+
+if [ ! -f "${MAIN_PROGRAM}" ]; then
+    	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "!!!!! NO PROGRAM FOUND! !!!!!"
+	echo "! PROJET S1 (Python) FAILED !"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	exit 254
+fi
+
+CALL_PROGRAM="/usr/bin/python3.8 ${MAIN_PROGRAM}"
+
+# Mute tests (test if write on STDOUT exclusively)
+
+
+# Normal run tests
+
+# 0 cases
+#              sum cost  2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM} 0   0     0  0  0  0  0  0  0  0
+
+${CALL_PROGRAM} 000 000  00 00 00 00 00 00 00 00
+
+${CALL_PROGRAM} 000 000  00 00 00 00 00 00 00 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+${CALL_PROGRAM} 00.0 00.0  00 00 00 00 00 00 00 00
+
+${CALL_PROGRAM} 000000000000000000 00000000000000000  01 02 03 04 05 06 07 08
+
+${CALL_PROGRAM} 000000000000000.00 00000000000000.00  01 02 03 04 05 06 07 08
+
+# Integers
+#              sum cost  2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM} 20  10   50 50 50 50 50 50 50 50
+
+${CALL_PROGRAM} 20  10    1 50 50 50 50 50 50 50
+
+${CALL_PROGRAM} 00020 010 00001 00050 050 50 0000050 0050 000050 00000050
+
+${CALL_PROGRAM} 20  10    0  0  0  0  0  0  0 10000
+
+${CALL_PROGRAM} 20  10    0  0  0  0  0  0  0 1000
+
+${CALL_PROGRAM} 500 10  200 50 100 10 10 10 10 1000
+
+${CALL_PROGRAM} 500 10  200 50 50 20 10 100 200 101
+
+${CALL_PROGRAM} 500 10  200 50 50 20 10 100 200 100
+
+# Cents values
+#              sum cost   2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM} 1  1.01    1  1  1  1  1  1  1  1
+
+${CALL_PROGRAM} 1.01 1     1  1  5  5  5  5  5  5
+
+${CALL_PROGRAM} 10. 10     1  1  1  1  1  1  1  1
+
+${CALL_PROGRAM} 10.0 10    1  1  1  1  1  1  1  1
+
+${CALL_PROGRAM} 10.00 10   1  1  1  1  1  1  1  1
+
+${CALL_PROGRAM} 13.88 10   1  1  1  1  1  1  1  1
+
+${CALL_PROGRAM} 14.27 10  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 14.3  10  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 14.30 10  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 14.30 10.  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 14.30 10.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 00014.3  00010.00  10 10 10 10 10 10 10 10
+
+
+# Error run tests
+
+# Error case 1: Number of parameters
+${CALL_PROGRAM}
+
+${CALL_PROGRAM} 10
+
+${CALL_PROGRAM} 10 11
+
+${CALL_PROGRAM} 10 11  2
+
+${CALL_PROGRAM} 10 11  2 1
+
+${CALL_PROGRAM} 10 11  2 1 50
+
+${CALL_PROGRAM} 10 11  2 1 50 20
+
+${CALL_PROGRAM} 10 11  2 1 50 20 10
+
+${CALL_PROGRAM} 10 11  2 1 50 20 10 5
+
+${CALL_PROGRAM} 10 11  2 1 50 20 10 5 2
+
+${CALL_PROGRAM} 10 11  2 1 50 20 10 5 2 1 666
+
+${CALL_PROGRAM} 10 11  2 1 50 20 10 5 2 1 666 1337
+
+
+# Error case 2: Type of parameters
+#               sum cost  2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM} BBB  AAA  CC DD EE FF GG HH II JJ
+
+${CALL_PROGRAM} 5B5  5A5  5C5 5D5 5E5 5F5 5G5 5H5 5I5 5J5
+
+${CALL_PROGRAM} 66  5A5  5C5 5D5 5E5 5F5 5G5 5H5 5I5 5J5
+
+${CALL_PROGRAM} 66  55  5C5 5D5 5E5 5F5 5G5 5H5 5I5 5J5
+
+${CALL_PROGRAM} 66  55  55 55 55 55 55 55 55 5J5
+
+${CALL_PROGRAM} 66,6  55  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 66.6  55,1  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 66  55  10.12 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 66  55  10 10 10 10 10 10 10 10.5
+
+${CALL_PROGRAM} 66  55  10 10 10 10 10 10 10 010.1
+
+# Combination cases 1 & 2
+${CALL_PROGRAM} gagagaga
+
+${CALL_PROGRAM} 1337b 666a
+
+${CALL_PROGRAM} 13.37 66.6
+
+${CALL_PROGRAM} 13.37 66.6 056
+
+${CALL_PROGRAM} 66  55  10 10 10 10 10 10 10 010. 42
+
+# Error case 3: Not enough money
+#               sum cost  2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM}  55  66   10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.99  66  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55  66.00  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.98  55.99  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.8  55.9  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.  56.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.00  56.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.00  56.  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 0.  1.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 0.0  1.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 0.00  1.0  10 10 10 10 10 10 10 10
+
+# Combination cases 2 & 3
+${CALL_PROGRAM} 55,00  56.0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.00  56,0  10 10 10 10 10 10 10 10
+
+${CALL_PROGRAM} 55.00  56.0  10, 10 10 10 10 10 10 10
+
+# Error case 4: Not enough change
+#               sum cost  2E 1E 50 20 10  5  2  1
+${CALL_PROGRAM}  50  10    0  0  0  0  0  0  0  0
+
+${CALL_PROGRAM}  12  10    0  1  1  1  2  1  1  2
+
+${CALL_PROGRAM}  12  10.01 0  1  1  1  2  1  1  1
+
+${CALL_PROGRAM}  12.98  10.99 0  1  1  1  2  1  1  1
+
+# Combination cases 2 & 4
+${CALL_PROGRAM}  50  10    0  0  0  0  0  0  0,  0
+
+${CALL_PROGRAM}  12  10    0  1  1  1  2  1  1,  2
+
+${CALL_PROGRAM}  12  10.01 0  1  1  1  2  1  1,  1
+
+${CALL_PROGRAM}  12.98  10.99 0  1  1  1  2  1  1,  1
+
+
+${CALL_PROGRAM}  50,  10    0  0  0  0  0  0  0  0
+
+${CALL_PROGRAM}  12  10,    0  1  1  1  2  1  1  2
+
+${CALL_PROGRAM}  12  10,01 0  1  1  1  2  1  1  1
+
+${CALL_PROGRAM}  12,98  10.99 0  1  1  1  2  1  1  1
+
+echo "#############################"
+echo "# ENDING PROJET S1 (Python) #"
+echo "#############################"

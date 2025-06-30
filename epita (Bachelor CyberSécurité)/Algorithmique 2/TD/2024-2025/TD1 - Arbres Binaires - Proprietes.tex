@@ -1,0 +1,945 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\TitreSeance}{Arbres Binaires}
+\newcommand{\SousTitreSeance}{Propriétés, Typologies, Parcours}
+\newcommand{\DateCours}{Mars 2025}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Arbres ; Arbres Binaires ; Propriétés Arbres ; Typologie Arbres Binaires ; Parcours Profondeur ; Parcours Largeur ; Trees ; Binary Trees ; Trees Properties ; Binary Trees Typology ; Depth-First Search ; DFS ; Breadth-First Search ; BFS}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les arbres binaires.
+Vous devrez y utiliser une pile et une file à un moment donné pour les algorithmes itératifs appliqués aux arbres.
+
+\bigskip
+
+Pour rappel, les arbres binaires sont constitués de \textit{nœuds} stockant une \textit{clé} (l'élément ou l'identifiant de l'élément), et chaque nœud dispose de liens vers un \textit{fils gauche} et un \textit{fils droit}.
+
+\medskip
+
+\textit{Dans l'ensemble des exercices, toutes les clés qui seront stockées seront strictement supérieures à 0.}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Propriétés, Typologie, Parcours}
+
+\bigskip
+
+
+\question{Donnez les propriétés des arbres suivants, à quelle(s) éventuelle(s) typologie(s) ceux-ci correspondent, et enfin, indiquez les parcours largeur et profondeur dans les 3 ordres.}
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8} }
+          child { node {24} }
+         }
+  child { node {64}
+          child { node {48} }
+          child [missing] { }
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 1
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child { node {8} }
+          child { node {24} }
+         }
+  child { node {64}
+          child { node {48} }
+          child { node {96} }
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 2
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\centerline{ \rule{1.0\linewidth}{0.50pt} }
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\smallskip
+%\vfillFirst
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {A}
+  child {node {B}
+         child {node {J} }
+        }
+  child {node {C}
+         child [missing] {}
+        }
+  child {node {D}
+         child {node {E}
+                child {node {F}
+                       child {node {G} }
+                       child {node {H} }
+                      }
+               }
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 3
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child {node {8}
+                child {node {2}}
+                child {node {16}}
+               }
+         child {node {24}}
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 4
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child [missing] {}
+         child {node {24}
+                child {node {22}}
+                child {node {32}}
+               }
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 5
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%\vfillLast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\centerline{ \rule{1.0\linewidth}{0.50pt} }
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21}
+          child [missing] {}
+          child { node {24}
+                  child { node {22} }
+                  child [missing] {}
+                }
+         }
+  child [missing] {};
+\end{tikzpicture}
+
+Arbre 6
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child [missing] {}
+  child { node {64}
+          child [missing] {}
+          child { node {96}
+                  child [missing] {}
+                  child { node {98} }
+                }
+        };
+\end{tikzpicture}
+
+Arbre 7
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+
+%% Peigne gauche
+%\begin{tikzpicture}[
+%  every node/.style = {minimum width = 2em, draw, circle},
+%  ]
+%  \node {42}
+%  child { node {21}
+%		  child { node {8}
+%                  child { node {2}
+%                          child { node {1} }
+%                          child { node {3} }
+%                        }
+%                  child { node {16} }
+%                }
+%          child { node {24} }
+%        }
+%  child { node {64} }
+%  ;
+%\end{tikzpicture}
+
+%% Peigne droit
+\begin{tikzpicture}[
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {42}
+  child { node {21} }
+  child { node {64}
+          child { node {48} }
+          child { node {96}
+                  child { node {72} }
+                  child { node {98}
+                          child { node {97} }
+                          child { node {99} }
+                        }
+                }
+        };
+\end{tikzpicture}
+
+Arbre 8
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\centerline{ \rule{1.0\linewidth}{0.50pt} }
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\smallskip
+%\vfillLast
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+% sibling distance=0cm, level distance=15mm,
+\begin{tikzpicture}[sibling distance=0cm, level distance=12mm,
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 35mm/#1},
+  level 3/.style={sibling distance = 8mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node {24}
+  child { node {32}
+          child { node {17} }
+          child { node {23}
+                  child { node {15} }
+                  child [missing] {}
+                }
+        }
+  child { node {48}
+          child [missing] {}
+          child { node {36}
+                  child { node {19} }
+                  child { node {20}
+                          child [missing] {}
+                          child { node {42} }
+                        }
+                }
+        };
+\end{tikzpicture}
+
+Arbre 9
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child {node {8}
+                child {node {2}}
+                child {node {16}}
+               }
+         child {node {24}}
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 10
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\smallskip
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+
+\begin{tikzpicture}[
+  leaf/.style = {circle, forestgreen(traditional), draw=green(htmlcssgreen), very thick},
+  root/.style = {circle, harvardcrimson, draw=red, very thick},
+  internal/.style = {circle, auburn, draw=auburn, very thick},
+  level/.style = {sibling distance = 30mm/#1},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+
+  \node {42}
+  child {node {21}
+         child [missing] {}
+         child {node {24}
+                child {node {22}}
+                child {node {32}}
+               }
+        }
+  child {node {64}
+         child {node {48}
+                child [missing] {}
+                child {node {56}}
+               }
+         child {node {96}}
+        };
+\end{tikzpicture}
+
+\medskip
+
+Arbre 11
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}[t]{0.50\textwidth}
+    %\centering
+    \raggedright
+
+    \begin{tabular}{l p{0.5cm} l p{1.00cm} l p{1.00cm}}
+    Arité : & & Hauteur : & & Taille : \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Largeur :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre préfixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre infixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Parcours Profondeur (ordre suffixe) :} \\
+     & & & & \\
+     & & & & \\
+    \multicolumn{6}{ l }{Typologie(s) :} \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+
+%\vfillLast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\centerline{ \rule{1.0\linewidth}{0.50pt} }
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Numéros hiérarchiques et représentation tableaux}
+
+\subsection{Numéros hiérarchiques 1}
+
+Indiquez le numéro hiérarchique et la profondeur des nœuds suivants parmi les précédents arbres.
+
+\begin{itemize}
+\item \textbf{Arbre 1 : } 42, 24
+\item \textbf{Arbre 2 : } 8, 48
+\item \textbf{Arbre 4 : } 16, 56
+\item \textbf{Arbre 5 : } 32, 96
+\item \textbf{Arbre 6 : } 22
+\item \textbf{Arbre 8 : } 72, 97
+\item \textbf{Arbre 9 : } 19, 23, 42
+\end{itemize}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Numéros hiérarchiques 2}
+
+Indiquez maintenant le nœud et le niveau associés à chaque numéro hiérarchique parmi les précédents arbres.
+Indiquez \textit{NULL} si le nœud n'existe pas, mais indiquez le niveau où il devrait se trouver
+
+\begin{itemize}
+\item \textbf{Arbre 1 : } 3
+\item \textbf{Arbre 2 : } 4
+\item \textbf{Arbre 4 : } 7, 12, 14, 13
+\item \textbf{Arbre 5 : } 5, 6, 12, 13, 11
+\item \textbf{Arbre 6 : } [Citez plutôt les numéros hiérarchiques qui existent]
+\item \textbf{Arbre 7 : } [Citez plutôt les numéros hiérarchiques qui existent]
+\item \textbf{Arbre 8 : } 6, 13, 15, 30
+\item \textbf{Arbre 9 : } 31, 10, 5, 13
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\subsection{Représentation tableaux}
+
+Représentez les précédents arbres sous forme de tableaux, indiquez \og \textit{Impossible} \fg{} lorsqu'il n'est pas possible de remplir le tableau à cause de son arité/degré.
+Concernant les arbres trop grands, commencez à remplir les premiers niveaux, puis, indiquez à quels numéros hiérarchiques placer les nœuds les plus profonds.
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm} C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm} C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}  C{0.51cm} }
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & ... \\
+\end{tabular}
+}
+
+\centerline{
+\begin{tabular}{ |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm} |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm} |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|  C{0.50cm} }
+\hline
+& & & & &   & & & & &    & & & & &     \\
+& & & & &   & & & & &    & & & & & ... \\
+\hline
+\end{tabular}
+}
+
+
+\bigskip
+
+
+\centerline{
+\begin{tabular}{ C{0.51cm}  C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm} C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm} C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm}C{0.51cm} C{0.51cm} }
+... & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 \\
+\end{tabular}
+}
+
+\centerline{
+\begin{tabular}{ C{0.50cm} |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm} |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm} |C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}|C{0.50cm}| C{0.50cm}| }
+\hline
+    &  & & & & &   & & & & &    & & & & & \\
+... &  & & & & &   & & & & &    & & & & & \\
+\hline
+\end{tabular}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en mars 2025.
+Certains exercices sont inspirés des supports de cours de Nathalie "Junior" BOUQUET, et Christophe "Krisboul" BOULLAY.}
+\end{center}
+
+\end{document}

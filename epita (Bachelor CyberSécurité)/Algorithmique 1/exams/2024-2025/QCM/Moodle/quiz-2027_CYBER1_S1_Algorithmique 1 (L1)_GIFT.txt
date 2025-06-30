@@ -1,0 +1,390 @@
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Questions de Base
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Questions de Base
+
+
+// question: 173330  name: Types 1
+::Types 1::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez les types algorithmiques de base \:<br></p>{
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Caractère<br></p>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Nombres Entiers<br></p>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Nombres à Virgule Flottante<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Nombres Complexes<br></p>
+}
+
+
+// question: 173331  name: Types 2
+::Types 2::[html]<p>De quel(s) type(s) est la variable suivante \:</p><p><br></p><p>var \= 42,42<br></p>{
+	~%100%<p dir\="ltr" style\="text-align\: left;">Float<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Int<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Value<br></p>
+	~%-100%Str
+}
+
+
+// question: 173332  name: Types 3
+::Types 3::[html]<p>De quel(s) type(s) est la variable suivante \:</p><p><br></p><p>var \= "42,42"</p>{
+	~%100%<p dir\="ltr" style\="text-align\: left;">Str<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Char<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Int<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Float<br></p>
+}
+
+
+// question: 173333  name: Types 4
+::Types 4::[html]<p dir\="ltr" style\="text-align\: left;">Dans certains langages, les booléens sont représentés par des entiers<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Vrai<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Faux<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Récursivité
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Récursivité
+
+
+// question: 173334  name: Récursivité 1
+::Récursivité 1::[html]<p dir\="ltr" style\="text-align\: left;">Le code suivant est-il simplement récursif ou récursif terminal ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int fun1(int a, int b)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; if (a &gt;\= 42)</p><p dir\="ltr" style\="text-align\: left;">&nbsp;&nbsp;&nbsp; return (b);</p><p dir\="ltr" style\="text-align\: left;">&nbsp; return (fun1(a + 2, b + 2) + 1)</p><p dir\="ltr" style\="text-align\: left;"><br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Récursif<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Récursif terminal<br></p>
+}
+
+
+// question: 173335  name: Récursivité 2
+::Récursivité 2::[html]<p dir\="ltr" style\="text-align\: left;">Le code suivant est-il simplement récursif ou récursif terminal ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int fun1(int a, int b)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; if (a &gt;\= 42)</p><p dir\="ltr" style\="text-align\: left;">&nbsp;&nbsp;&nbsp; return (b);</p><p dir\="ltr" style\="text-align\: left;">&nbsp; return (fun1(a + 2, b + 2))<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Récursif terminal<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Récursif<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Procédures & Fonctions
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Procédures & Fonctions
+
+
+// question: 173336  name: Fonctions 1
+::Fonctions 1::[html]<p dir\="ltr" style\="text-align\: left;">Une fonction...<br></p>{
+	~%33.33333%Renvoie une valeur<br>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Peut provoquer des effets de bord<br></p>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Peut appeler une procédure<br></p>
+	~%-100%Doit être récursive terminale<br>
+}
+
+
+// question: 173337  name: Fonctions 2
+::Fonctions 2::[html]<p dir\="ltr" style\="text-align\: left;">Une fonction...<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">Peut être récursive<br></p>
+	~%50%Peut être récursive terminale<br>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Ne renvoie jamais de valeur<br></p>
+	~%-100%Doit absolument prendre au moins un paramètre<br>
+}
+
+
+// question: 173338  name: Procédures 1
+::Procédures 1::[html]Une procédure...<br>{
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Ne renvoie aucune valeur<br></p>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Peut provoquer des effets de bord<br></p>
+	~%33.33333%<p dir\="ltr" style\="text-align\: left;">Peut être récursive<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Peut renvoyer une valeur<br></p>
+}
+
+
+// question: 173339  name: Procédures 2
+::Procédures 2::[html]<p dir\="ltr" style\="text-align\: left;">Une procédure...<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">Peut appeler une fonction<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">Peut appeler une procédure<br></p>
+	~%-100%Ne doit jamais provoquer d'effet de bord<br>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">Doit être récursive terminale<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Exécution Manuelle
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Exécution Manuelle
+
+
+// question: 173340  name: Code 1
+::Code 1::[html]<p dir\="ltr" style\="text-align\: left;">Qu'affichera le code suivant ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int fun2(int c)<br></p><p dir\="ltr" style\="text-align\: left;">a \= 3</p><p dir\="ltr" style\="text-align\: left;">b \= 5</p><p dir\="ltr" style\="text-align\: left;">while (a !\= b)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; a \= a + 1</p><p dir\="ltr" style\="text-align\: left;">&nbsp; b \= b - 1</p><p dir\="ltr" style\="text-align\: left;">return (a)<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Rien<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">5<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">4<br></p>
+}
+
+
+// question: 173341  name: Code 2
+::Code 2::[html]<p dir\="ltr" style\="text-align\: left;">Que retournera le code suivant ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int fun1(int c)</p><p dir\="ltr" style\="text-align\: left;">a \= 5</p><p dir\="ltr" style\="text-align\: left;">b \= 6</p><p dir\="ltr" style\="text-align\: left;">while (a !\= b)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; a +\= 2</p><p dir\="ltr" style\="text-align\: left;">&nbsp; b \= b + 1</p><p dir\="ltr" style\="text-align\: left;">return (b + a)<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">14<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">12<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">7<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">11<br></p>
+}
+
+
+// question: 173342  name: Code 3
+::Code 3::[html]<p dir\="ltr" style\="text-align\: left;">Qu'affichera le code suivant ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int fun1(int c)</p><p dir\="ltr" style\="text-align\: left;">a \= 5</p><p dir\="ltr" style\="text-align\: left;">b \= 5</p><p dir\="ltr" style\="text-align\: left;">while (a \=\= b)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; print(c)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; a +\= 1</p><p dir\="ltr" style\="text-align\: left;">return (b)<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">La valeur contenue dans le paramètre c<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">'c'<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">6<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">5<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Tableaux
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Tableaux
+
+
+// question: 173343  name: Tableaux 1
+::Tableaux 1::[html]<p dir\="ltr" style\="text-align\: left;"><br>\n<table>\n<caption style\="caption-side\: top;">tab</caption>\n<thead>\n<tr>\n<th scope\="col">42</th>\n<th scope\="col">55</th>\n<th scope\="col">66</th>\n<th scope\="col">77</th>\n<th scope\="col">88</th>\n</tr>\n</thead>\n<tbody>\n</tbody>\n</table>\n<br></p><p dir\="ltr" style\="text-align\: left;">Pour accéder à l'élément 66 avec les langages classiques de programmation, il faut utiliser l'instruction \:<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">tab[2]<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">tab(2)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">tab[3]<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">tab(3)<br></p>
+}
+
+
+// question: 173344  name: Tableaux 2
+::Tableaux 2::[html]<br>\n<table>\n<caption style\="caption-side\: top">tab</caption>\n<thead>\n<tr>\n<th scope\="col">42</th>\n<th scope\="col">55</th>\n<th scope\="col">66</th>\n<th scope\="col">77</th>\n<th scope\="col">88</th>\n</tr>\n</thead>\n<tbody>\n</tbody>\n</table>\n<br><p>Le tableau tab...<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Est de taille 5<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Est de taille 4<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Est de taille 6<br></p>
+}
+
+
+// question: 187429  name: Tableaux 3
+::Tableaux 3::[html]<p dir\="ltr" style\="text-align\: left;"><br>\n<table>\n<caption style\="caption-side\: top">tab</caption>\n<thead>\n<tr>\n<th scope\="col">42</th>\n<th scope\="col">55</th>\n<th scope\="col">66</th>\n<th scope\="col">77</th>\n<th scope\="col">88</th>\n</tr>\n</thead>\n<tbody>\n</tbody>\n</table>\n<br></p><p dir\="ltr" style\="text-align\: left;">Dans le code suivant, à quelle itération accèdera-t-on à l'élément 55 ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">for (int i \= 1; i &lt; 5; i++)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; var \= tab[i]</p><p dir\="ltr" style\="text-align\: left;"><br></p>{
+	~<p dir\="ltr" style\="text-align\: left;">2<br></p>
+	=<p dir\="ltr" style\="text-align\: left;">1<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">4<br></p>
+}
+
+
+// question: 173346  name: Tableaux 4
+::Tableaux 4::[html]<p dir\="ltr" style\="text-align\: left;"><br>\n<table>\n<caption style\="caption-side\: top">tab</caption>\n<thead>\n<tr>\n<th scope\="col">4<br></th>\n<th scope\="col">8</th>\n<th scope\="col">2</th>\n<th scope\="col">5</th>\n<th scope\="col">6<br></th>\n</tr>\n</thead>\n<tbody>\n</tbody>\n</table>\n<br></p><p dir\="ltr" style\="text-align\: left;">En exécutant le code suivant, quelle valeur s'affichera à l'écran ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">i \= 1<br></p><p dir\="ltr" style\="text-align\: left;">while (tab[i] !\= 5)</p><p dir\="ltr" style\="text-align\: left;">&nbsp; i +\= 1</p><p dir\="ltr" style\="text-align\: left;">print(i)<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">4<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">5<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">6<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Conditions & Logique
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Conditions & Logique
+
+
+// question: 173347  name: Conditions 1
+::Conditions 1::[html]<p dir\="ltr" style\="text-align\: left;">Cochez la/les expression(s) vraie(s) pour A \= 5 et B \= 3<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A &gt; B) et (B + 2 &gt;\= A)<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A &lt; B) ou (A &gt;\= B + 2)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A &gt; B) et (A &gt; B + 2)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A &lt; B) ou (A &lt; B + 2)<br></p>
+}
+
+
+// question: 173348  name: Conditions 2
+::Conditions 2::[html]<p dir\="ltr">Cochez la/les expression(s) vraie(s) pour A \= 4 et B \= 4<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A \=\= B) et (A + 1 &gt;\= B)<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A !\= B) ou (A &lt; B + 1)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A !\= B) et (A &lt;\= B + 1)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A \=\= B) et (A + 1 &gt; B + 2)<br></p>
+}
+
+
+// question: 173349  name: Conditions 3
+::Conditions 3::[html]<p dir\="ltr" style\="text-align\: left;">Cochez la/les expression(s) vraie(s) pour A \= 2 et B \= 4<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A + 2 \=\= B) ou (B - 4 \=\= A)<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">(A + 2 &gt;\= B) et (B &gt;\= A + 2)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A &gt;\= B) et (B &gt; A)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A + 2 \=\= B) et (B - 2 &gt; A)<br></p>
+}
+
+
+// question: 173350  name: Conditions 4
+::Conditions 4::[html]<p dir\="ltr" style\="text-align\: left;">Cochez la/les expression(s) vraie(s) pour A \= 3 et B \= 4<br></p>{
+	~%100%<p dir\="ltr" style\="text-align\: left;">(A + 1 &gt;\= B) ou (B &lt; A)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A + 1 &gt;\= B) et (B - 1 &gt; A)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A + 2 &gt; B) et (A \=\= B)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">(A !\= B) et (A + 2 &lt;\= B)<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Structures de Données
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Structures de Données
+
+
+// question: 187413  name: Contenu Champs (1)
+::Contenu Champs (1)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet de copier le champs "etat" de la structure suivante dans la variable "var" ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">struct test1 \{</p><p dir\="ltr" style\="text-align\: left;">int len;</p><p dir\="ltr" style\="text-align\: left;">int max;</p><p dir\="ltr" style\="text-align\: left;">char *etat;</p><p dir\="ltr" style\="text-align\: left;">\};</p><p dir\="ltr" style\="text-align\: left;"><br></p>struct test1 essai;<br>{
+	=<p dir\="ltr" style\="text-align\: left;">char *var \= essai.etat;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= essai-&gt;etat;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= (*essai).etat;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= (*(essai.etat));<br></p>
+}
+
+
+// question: 187414  name: Contenu Champs (2)
+::Contenu Champs (2)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet de copier le champs "etat" de la structure suivante dans la variable "var" ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">struct test1 \{</p><p dir\="ltr" style\="text-align\: left;">int len;</p><p dir\="ltr" style\="text-align\: left;">int max;</p><p dir\="ltr" style\="text-align\: left;">char *etat;</p><p dir\="ltr" style\="text-align\: left;">\};</p><p dir\="ltr" style\="text-align\: left;"><br></p>struct test1 *essai;<br>{
+	=<p dir\="ltr" style\="text-align\: left;">char *var \= essai-&gt;etat;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= essai.etat;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= essai.(*etat);<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">char *var \= (*(essai.etat));<br></p>
+}
+
+
+// question: 187428  name: Incrémentation Champs (1)
+::Incrémentation Champs (1)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet d'incrémenter le champs "len" de la structure suivante ?<br></p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">struct test1 \{</p><p dir\="ltr" style\="text-align\: left;">int len;</p><p dir\="ltr" style\="text-align\: left;">int max;</p><p dir\="ltr" style\="text-align\: left;">char *etat;</p><p dir\="ltr" style\="text-align\: left;">\};</p><p dir\="ltr" style\="text-align\: left;"><br></p>struct test1 essai;<br>{
+	=<p dir\="ltr" style\="text-align\: left;">essai.len +\= 1;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai-&gt;len +\= 1;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai++-&gt;len;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai-&gt;len++;<br></p>
+}
+
+
+// question: 187416  name: Incrémentation Champs (2)
+::Incrémentation Champs (2)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet d'incrémenter le champs "len" de la structure suivante ?<br></p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">struct test1 \{</p><p dir\="ltr" style\="text-align\: left;">int len;</p><p dir\="ltr" style\="text-align\: left;">int max;</p><p dir\="ltr" style\="text-align\: left;">char *etat;</p><p dir\="ltr" style\="text-align\: left;">\};</p><p dir\="ltr" style\="text-align\: left;"><br></p>struct test1 *essai;<br>{
+	=<p dir\="ltr" style\="text-align\: left;">essai-&gt;len +\= 1;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai.len +\= 1;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai++-&gt;len;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">essai++.len;<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Pointeurs
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Pointeurs
+
+
+// question: 187417  name: Adresse Case (1)
+::Adresse Case (1)::[html]<p>Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 42 dans la variable "var" ?</p><p><br></p><p>int tab[] \= \{ 18 , 55 , 42 , 67 , 21 \};<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[2];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[3];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[2];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[3];<br></p>
+}
+
+
+// question: 187418  name: Adresse Case (2)
+::Adresse Case (2)::[html]<p>Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 18 dans la variable "var" ?</p><p><br></p><p>int tab[] \= \{ 18 , 55 , 42 , 67 , 21 \};<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">var \= tab;<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[1];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[1];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[0];<br></p>
+}
+
+
+// question: 187419  name: Adresse Case (3)
+::Adresse Case (3)::[html]<p>Quelle ligne de code C permet de mettre l'adresse de la case contenant la valeur 55 dans la variable "var" ?</p><p><br></p><p>int tab[] \= \{ 18 , 55 , 42 , 67 , 21 \};<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[1];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[2];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[1];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[2];<br></p>
+}
+
+
+// question: 187420  name: Contenu Case (1)
+::Contenu Case (1)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet d'accéder à la valeur 42 du tableau "tab" et mettre cette valeur dans la variable "var" ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int tab[] \= \{ 16 , 28 , 42 , 66 , 75 \};<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">var \= tab[2];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[3];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[2];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[3];<br></p>
+}
+
+
+// question: 187421  name: Contenu Case (2)
+::Contenu Case (2)::[html]<p dir\="ltr" style\="text-align\: left;">Quelle ligne de code C permet d'accéder à la valeur 75 du tableau "tab" et mettre cette valeur dans la variable "var" ?</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">int tab[] \= \{ 16 , 28 , 42 , 66 , 75 \};<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">var \= tab[4];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= tab[5];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[4];<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">var \= &amp;tab[5];<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles/Ordre Sortie
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles/Ordre Sortie
+
+
+// question: 187422  name: Ordre (1)
+::Ordre (1)::[html]<p dir\="ltr" style\="text-align\: left;">On insère les éléments A, B, C, D, E, F dans cet ordre précis (B ne peut pas être inséré avant A ni après C), mais lors du dépilement, l'élément manipulé est affiché.</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">Choisissez le (ou les) scénario(s) réalisable(s) \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">A, B, D, E, C, F<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">D, C, E, B, F, A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">A, B, E, C, D, F<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">C, B, D, F, A, E<br></p>
+}
+
+
+// question: 187423  name: Ordre (2)
+::Ordre (2)::[html]<p dir\="ltr" style\="text-align\: left;">On insère les éléments A, B, C, D, E, F dans cet ordre précis (B ne peut pas être inséré avant A ni après C), mais lors du dépilement, l'élément manipulé est affiché.</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">Choisissez le (ou les) scénario(s) réalisable(s) \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">C, B, D, F, E, A<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">A, B, E, D, C, F<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">B, C, E, A, D, F<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">D, F, E, B, C, A<br></p>
+}
+
+
+// question: 187424  name: Ordre (3)
+::Ordre (3)::[html]<p dir\="ltr" style\="text-align\: left;">On insère les éléments A, B, C, D, E, F dans cet ordre précis (B ne peut pas être inséré avant A ni après C), mais lors du dépilement, l'élément manipulé est affiché.</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">Choisissez le (ou les) scénario(s) réalisable(s) \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">E, D, C, B, A, F<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">A, B, C, F, E, D<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">A, C, E, B, D, F<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">C, B, D, F, A, E<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles/API Piles
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Piles/API Piles
+
+
+// question: 187425  name: Propriétés Piles
+::Propriétés Piles::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez les propriétés vraies pour une pile.<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">Le dernier élément ajouté est le prochain à pouvoir sortir<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">La structure est dite LIFO<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">La structure est dite FIFO<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">On peut accéder directement à n'importe quel élément dans la pile<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">La suppression d'un élément dans la pile ne modifie pas sa taille<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Listes
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Listes
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Listes/API Listes
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Listes/API Listes
+
+
+// question: 187426  name: Usages Listes
+::Usages Listes::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez les affirmations vraies concernant les listes \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">Une file peut être facilement implémentée par dessus une liste<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">Une pile peut être facilement implémentée par dessus une liste<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Une liste peut être facilement implémentée par dessus une pile<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Une liste peut être facilement implémentée par dessus une file<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Files
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Files
+
+
+// question: 0  name: Switch category to $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Files/API Files
+$CATEGORY: $course$/top/Default for 23_CYB1_ALGO/Algorithmique 1 (L1)/Files/API Files
+
+
+// question: 187427  name: API de base
+::API de base::[html]<p dir\="ltr" style\="text-align\: left;">Indiquez à quelle fonctionnalité répond chaque fonction ou procédure de l'API d'une file<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Create<br></p> -> Allouer l'espace de la structure
+	=<p dir\="ltr" style\="text-align\: left;">Delete<br></p> -> Supprimer la structure et tous ses éléments
+	=<p dir\="ltr" style\="text-align\: left;">Clear<br></p> -> Vider la file de ses éléments
+	=<p dir\="ltr" style\="text-align\: left;">Enqueue<br></p> -> Enfiler un élément
+	=<p dir\="ltr" style\="text-align\: left;">Dequeue<br></p> -> Défiler un élément
+	=<p dir\="ltr" style\="text-align\: left;">Get_Head<br></p> -> Accéder à l'élément en tête de file
+	=<p dir\="ltr" style\="text-align\: left;">Get_Length<br></p> -> Nombre d'éléments présents dans la file
+	=<p dir\="ltr" style\="text-align\: left;">Add_Element<br></p> -> N'existe pas en file
+}
+
+

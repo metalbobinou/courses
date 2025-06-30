@@ -1,0 +1,506 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique 2}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2024-2025}
+\newcommand{\DateExam}{avril 2025}
+%\newcommand{\TypeExam}{Examen - SUJET 2}
+\newcommand{\TypeExam}{Examen (Sujet A)}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{2h00}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{table}[ht!]
+  \begin{minipage}{0.45\textwidth}
+
+\begin{enumerate}[label=\Roman*)]
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne trichez pas
+\item Ne détachez pas les agrafes du sujet
+\end{enumerate}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.55\textwidth}
+
+\begin{enumerate}[label=\Roman*),start=5]
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Vous devez écrire les algorithmes et structures en langage C (donc pas de Python ou autre)
+\end{enumerate}
+
+  \end{minipage}
+\end{table}
+
+%\begin{enumerate}[label=\Roman*)]
+%\item Lisez le sujet en entier avec attention
+%\item Répondez sur le sujet
+%\item Ne détachez pas les agrafes du sujet
+%\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+%\item Vous devez écrire les algorithmes et structures en langage C (donc pas de Python ou autre)
+%\item Ne trichez pas
+%\end{enumerate}
+
+%\bigskip
+
+%\vfillFirst
+
+%\vspace*{-0.5cm}
+\vspace*{-0.75cm}
+
+
+% Listes chainees
+\section{Listes chaînées (9 points)}
+
+%\noindent Dans ces exercices, vous devrez implémenter une liste chaînée ainsi qu'une pile s'appuyant sur cette même liste chaînée.
+%Vous serez évaluez autant sur l'implémentation que sur le prototype de chaque fonction (indiquer trop ou trop peu de paramètres ne donnera pas tous les points : limitez-vous aux seuls paramètres essentiels pour chaque fonction).
+
+%\bigskip
+%\vspace*{-0.25cm}
+\vspace*{-0.50cm}
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+    \subsection{\'Ecrivez la structure d'une liste chaînée d'entiers (0,5 point) }
+
+    \begin{center}
+    \GrilleReponseXY{8}{8}
+    \end{center}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+%    \subsection{\'Ecrivez la fonction \textit{is\_empty\_list} renvoyant \textit{vrai} si la liste est vide, et \textit{faux} dans le cas inverse (1 point)}
+    \subsection{\'Ecrivez la fonction \textit{IsEmpty} testant si une liste est vide (0,5 point) }
+
+    \begin{center}
+    \GrilleReponseXY{8}{8}
+    \end{center}
+
+  \end{minipage}
+\end{table}
+
+
+\vspace*{-0.5cm}
+
+\subsection{(1 point) \'Ecrivez la fonction \textit{LengthList} retournant la longueur d'une liste }
+
+\GrilleReponseN{8}
+
+
+%\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{\'Ecrivez la fonction \textit{length\_list} retournant la longueur d'une liste (1 point) }
+%
+%\GrilleReponseN{8}
+%
+%\bigskip
+
+
+\subsection{(5 points) \'Ecrivez une fonction \textit{insert\_list} insérant un élément \textit{elt} à la position \textit{pos} dans une liste chaînée \textit{L} et respectant les exigences suivantes }
+
+\begin{itemize}
+\item La fonction doit renvoyer la tête de la liste (éventuellement la nouvelle tête)
+\item Les entiers insérés doivent être positifs, sinon la fonction ne fait rien et retourne \textit{NULL}
+\item Le premier élément est considéré comme étant en position $ 1 $
+\item Si la liste est vide, l'élément sera inséré en première position
+\item Lors de l'ajout, si un élément est déjà présent à la position \textit{pos} donnée en paramètre, alors il faut pousser l'élément existant en position $ pos + 1 $
+\item Si la position \textit{pos} donnée en paramètre est supérieure à la longueur, alors on doit insérer l'élément en dernière position de la liste
+\item Si la position \textit{pos} donnée en paramètre est inférieure ou égale à 1, alors on doit insérer en première position et décaler l'élément déjà présent s'il y en a un
+\end{itemize}
+
+\GrilleReponseN{19}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\GrilleReponseN{9}
+
+\subsection{En réutilisant les fonctions précédentes, et en considérant que vous disposez de la fonction \textit{remove\_list} qui supprime l'élément à une position donnée d'une liste chaînée, réécrivez les fonctions \textit{push} et \textit{pop} d'une pile }
+
+\subsubsection{(1 point) Push }
+
+\GrilleReponseN{6}
+
+
+\subsubsection{(1 point) Pop }
+
+\GrilleReponseN{6}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Questions cours
+\section{Arbres Binaires (11 points)}
+
+\subsection{Répondez aux différentes questions concernant l'arbre suivant (4 points) }
+
+\bigskip
+
+\begin{center}
+\begin{tikzpicture}[sibling distance=1.5cm,
+  level/.style = {sibling distance = 55mm/#1},
+  level 1/.style = {sibling distance = 55mm},
+  level 2/.style = {sibling distance = 30mm},
+  level 3/.style = {sibling distance = 15mm},
+  level 4/.style = {sibling distance = 10mm},
+  every node/.style = {minimum width = 2em, draw, circle},
+  ]
+  \node (n1S) {S}
+  child { node (n2E) {E}
+          child { node (n3E) {E}
+                  child { node (n4O) {O}
+                          child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+                          child { node (n5P) {P} }
+                        }
+                  child { node (n6U) {U} }
+                }
+          child { node (n7U) {U}
+                  child { node (n8T) {T} }
+                  child { node (n9O) {O}
+                          child { node (n10P) {P} }
+                          child { node [draw=none] (nY) {\phantom{Y}} edge from parent [draw=none] }
+                        }
+                }
+         }
+   child { node (n11T) {T}
+           child { node (n12E) {E}
+                   child { node (n13T) {T} }
+                   child { node (n14M) {M}
+                           child { node (n15C) {C} }
+                           child { node (n16A) {A} }
+                         }
+                 }
+           child { node (n17R) {R}
+                   child { node (n18B) {B}
+                           child { node [draw=none] (nZ) {\phantom{Z}} edge from parent [draw=none] }
+                           child { node (n19M) {M} }
+                         }
+                   child { node (n20E) {E} }
+                 }
+        };
+\end{tikzpicture}
+%  child { node [draw=none] (nX) {\phantom{X}} edge from parent [draw=none] }
+\end{center}
+
+
+\subsubsection{(1,5 point) Indiquez toutes les propriétés que possède cet arbre : }
+
+\bigskip
+
+\begin{tabular}{L{2cm}C{1.5cm} L{2cm}C{1.5cm} L{2cm}C{1.5cm} L{2cm}C{1.5cm}}
+Arité : & & Taille : & & Hauteur : & & Nb feuilles : & \\
+\end{tabular}
+
+\medskip
+
+\begin{table}[ht!]
+  \centering
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+  \item[\CaseCoche] Arbre binaire strict / localement complet \phantom{()}
+  \item[\CaseCoche] Arbre binaire parfait \phantom{()}
+  \item[\CaseCoche] Peigne gauche \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.50\textwidth}
+    \centering
+
+\begin{itemize}
+%  \item[\checkmark] Arbre binaire (presque) complet \phantom{()}
+  \item[\CaseCoche] Arbre binaire (presque) complet \phantom{()}
+  \item[\CaseCoche] Arbre filiforme \phantom{()}
+  \item[\CaseCoche] Peigne droit \phantom{()}
+\end{itemize}
+
+  \end{minipage}
+%\stepcounter{figure}
+%\caption{Fig.\thefigure : Recherche de la clé 24 dans un ABR}
+%\label{fig:example2-BST-succeed-search}
+\end{table}
+
+
+%\bigskip
+
+\subsubsection{(2 points) \'Ecrivez les clés lors d'un parcours profondeur main gauche de l'arbre dans les 3 ordres ainsi que lors d'un parcours largeur : }
+
+%\medskip
+
+Parcours profondeur :
+
+\medskip
+
+\centerline{
+%\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+\begin{tabular}{L{2.5cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.3cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}}
+ & & & & & & & & & & & & & & & & & & & \\
+ordre préfixe : & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ \\
+ & & & & & & & & & & & & & & & & & & & \\
+ordre infixe :  & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ \\
+ & & & & & & & & & & & & & & & & & & & \\
+ordre suffixe : & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ \\
+\end{tabular}
+}
+
+%\bigskip
+\vspace*{0.75cm}
+
+Parcours largeur :
+
+\medskip
+
+\centerline{
+%\begin{tabular}{L{2.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm} C{0.5cm}C{0.5cm}C{0.5cm}}
+\begin{tabular}{L{2.5cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm}C{0.35cm} C{0.3cm}C{0.35cm}C{0.35cm} C{0.35cm}C{0.35cm}C{0.35cm} C{0.35cm}}
+ & & & & & & & & & & & & & & & & & & & \\
+ordre :  & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ & \_ \\
+\end{tabular}
+}
+
+\medskip
+
+%\subsubsection{(0,5 point) Indiquez la profondeur des nœuds suivants, ainsi que leur numéro hiérarchique : }
+\subsubsection{(0,5 point) Indiquez la profondeur et le numéro hiérarchique des nœuds suivants : }
+
+\medskip
+
+\centerline{
+\begin{tabular}{ | C{1cm}|C{1.75cm}|C{2.65cm} |   p{2.0cm}   | C{1cm}|C{1.75cm}|C{2.65cm} | }
+\cline{1-3}\cline{5-7}
+%\hline
+ & Profondeur & N\textsuperscript{o} hiérarchique &
+% & Profondeur & N\textsuperscript{o} hiérarchique &*
+ &
+ & Profondeur & N\textsuperscript{o} hiérarchique \\
+\cline{1-3}\cline{5-7}
+%\hline
+\multirow{3}{*}{B} & & &
+ &
+%\multirow{3}{*}{X} & & &
+\multirow{3}{*}{C} & & \\
+% & & & & & & & & \\
+% & & & & & & & & \\
+ & & & & & & \\
+ & & & & & & \\
+%\hline
+\cline{1-3}\cline{5-7}
+\end{tabular}
+}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Algorithmes (7 points) }
+
+%\begin{table}[ht!]
+%  \centering
+%  \begin{minipage}{0.50\textwidth}
+%    \centering
+%
+    \subsection{(0,5 point) \'Ecrivez la structure récursive \textit{node} permettant de représenter des arbres binaires contenant des nombres entiers : }
+
+    \begin{center}
+    %\GrilleReponseXY{8}{8}
+    \GrilleReponseN{8}
+    \end{center}
+
+%  \end{minipage}
+%  \hfillx
+%  \begin{minipage}{0.50\textwidth}
+%    \centering
+
+%    \subsection{(0,5 point) \'Ecrivez la fonction récursive \textit{Height} retournant la hauteur d'un arbre binaire (l'arbre est de type \textit{node*}) : }
+%
+%    \begin{center}
+%    %\GrilleReponseXY{8}{8}
+%    \GrilleReponseN{10}
+%    \end{center}
+%
+%  \end{minipage}
+%\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2 points) \'Ecrivez une fonction récursive \og \textit{parc\_prof\_rec} \fg{} effectuant un parcours profondeur main gauche dans un arbre binaire, et affichant les nœuds dans l'ordre \textit{suffixe} (l'arbre est de type \textit{node*}) : }
+
+\begin{center}
+\GrilleReponseN{13}
+\end{center}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2 points) \'Ecrivez une fonction itérative \og \textit{parc\_larg\_iter} \fg{} effectuant un parcours largeur dans un arbre binaire, et affichant les nœuds (l'arbre est de type \textit{node*}) : }
+
+\begin{center}
+
+Vous pouvez utiliser les conteneurs externes suivants avec leurs opérations :
+
+\medskip
+
+\begin{tabular}{ |c|c|c| }
+\hline
+\textbf{Liste}    & \textbf{File}     & \textbf{Pile} \\ \hline
+\textit{list\_p}  & \textit{queue\_p} & \textit{stack\_p} \\ \hline
+Create  & Create  & Create  \\ \hline
+Length  & Length  & Length  \\ \hline
+IsEmpty & IsEmpty & IsEmpty \\ \hline
+Insert  & Enqueue & Push    \\ \hline
+Remove  & Dequeue & Pop     \\ \hline
+Clear   & Clear   & Clear   \\ \hline
+Delete  & Delete  & Delete  \\ \hline
+\end{tabular}
+
+\medskip
+
+%\begin{center}
+\GrilleReponseN{18}
+\end{center}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(2,5 points) \'Ecrivez une fonction \og \textit{node\_to\_array} \fg{} transformant un arbre au format \textit{node*} vers le format tableau \textit{int*} : }
+
+\noindent Le tableau est donné en paramètre et est déjà alloué avec la bonne taille : votre fonction ne doit \textit{que} le remplir avec les bonnes valeurs.
+La taille du tableau est évidemment fournie en paramètre.
+Un nœud vide doit être représenté par \og $-1$ \fg.
+
+\begin{center}
+\GrilleReponseN{22}
+\end{center}
+
+
+%\bigskip
+
+%\vfillLast
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\thispagestyle{empty}
+
+\vfillFirst
+
+\begin{center}
+
+\begin{LARGE}
+\textbf{SUJET A}
+
+\bigskip
+
+\textbf{\MakeUppercase{\TitreMatiere}}
+\end{LARGE}
+
+\end{center}
+
+\vfillLast
+
+\end{document}

@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AIDE MEMOIRE AU CAS OU %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+
+%{\Large \textbf{Aide Mémoire}}
+
+%\vspace{30px}
+
+%\noindent Le travail doit être rendu au format \textbf{\textit{.zip}}, c'est-à-dire une archive \textbf{zip} compressée avec un outil adapté (les logiciels \textit{7zip} ou \textit{Keka} sont gratuits et adaptés).
+\noindent Le travail doit être rendu au format \textbf{\textit{.tar.bz2}}, c'est-à-dire une archive \textbf{bz2} compressée avec un outil adapté (voir \TTBF{man 1 tar} et \TTBF{man 1 bz2}).
+
+%\noindent Tout autre format d'archive (rar, 7zip, gz, gzip, bzip, ...) ne sera pas pris en compte, et votre travail ne sera pas corrigé (entraînant la note de 0).
+\noindent Tout autre format d'archive (zip, rar, 7zip, gz, gzip, ...) ne sera pas pris en compte, et votre travail ne sera pas corrigé (entraînant la note de 0).
+
+\bigskip
+
+\noindent Pour générer une archive \textit{tar} en y mettant les dossiers \textit{folder1} et \textit{folder2}, vous devez taper :
+
+\begin{tabular}{l}
+\TTBF{tar cvf MyTarball.tar folder1 folder2}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour générer une archive \textit{tar} et la compresser avec GZip, vous devez taper :
+
+\begin{tabular}{l}
+\TTBF{tar cvzf MyTarball.tar.gz folder1 folder2}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour générer une archive \textit{tar} et la compresser avec BZip2, vous devez taper :
+
+\begin{tabular}{l}
+\TTBF{tar cvjf MyTarball.tar.bz2 folder1 folder2}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour lister le contenu d'une archive \textit{tar}, vous devez taper :
+
+\begin{tabular}{l}
+\TTBF{tar tf MyTarball.tar.bz2}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour extraire le contenu d'une archive \textit{tar}, vous devez taper :
+
+\begin{tabular}{l}
+\TTBF{tar xvf MyTarball.tar.bz2}\\
+\end{tabular}
+
+
+\vspace*{1cm}
+
+\noindent Pour générer des exécutables avec les symboles de debug, vous devez utiliser les flags \TTBF{-g -ggdb} avec le compilateur.
+N'oubliez pas d'appliquer ces flags sur \textit{l'ensemble} des fichiers sources transformés en fichiers objets, et d'éventuellement utiliser les bibliothèques compilées en mode debug.\\
+
+\begin{tabular}{l}
+\TTBF{gcc -g -ggdb -c file1.c file2.c}\\
+\end{tabular}
+
+\bigskip
+
+\noindent Pour produire des exécutables avec les symboles de debug, il est conseillé de fournir un script \TTBF{configure} prenant en paramètre une option permettant d'ajouter ces flags aux \TTBF{CFLAGS} habituels.\\
+
+\begin{tabular}{l}
+\TTBF{./configure}\\
+\TTBF{cat Makefile.rules}\\
+\TTBF{CFLAGS=-W -Wall -Werror -std=c99 -pedantic}\\
+\end{tabular}
+
+\smallskip
+
+\begin{tabular}{l}
+\TTBF{./configure debug}\\
+\TTBF{cat Makefile.rules}\\
+\TTBF{CFLAGS=-W -Wall -Werror -std=c99 -pedantic -g -ggdb}\\
+\end{tabular}
+
+
+%\vspace*{1cm}
+
+
+%\noindent Pour produire une bibliothèque statique \textit{libtest.a} à partir des fichiers \textit{test1.c} et \textit{file.c}, vous devez taper :\\
+%
+%\begin{tabular}{l}
+%\TTBF{cc -c test1.c file.c}\\
+%\TTBF{ar cr libtest.a test1.o file.o}\\
+%\end{tabular}
+%
+%\bigskip
+%
+%\noindent Pour produire une bibliothèque dynamique \textit{libtest.so} à partir des fichiers \textit{test1.c} et \textit{file.c}, vous devez taper (pensez aussi à \TTBF{-fpic} ou \TTBF{-fPIC}) :\\
+%
+%\begin{tabular}{l}
+%\TTBF{cc -c test1.c file.c} \\
+%\TTBF{cc test1.o file.o -shared -o libtest.so} \\
+%\end{tabular}
+%
+%
+%\vspace*{1cm}
+%
+%
+%\noindent Pour compiler un fichier en utilisant une bibliothèque dont le \TTBF{.h} se trouve dans un dossier spécifique, par exemple la \textit{libxml2}, vous devez taper (pensez à vous assurer que les \textit{includes} de la bibliothèque ont été entourés de chevrons \TTBF{<  >}) : \\
+%
+%\begin{tabular}{l}
+%\TTBF{cc -c -I/usr/include test1.c}\\
+%\end{tabular}
+%
+%\bigskip
+%
+%\noindent Pour lier plusieurs fichiers objets ensemble et avec une bibliothèque, par exemple la \textit{libxml2}, vous devez d'abord indiquer dans quel dossier trouver la bibliothèque avec l'option \TTBF{-L}, puis indiquer quelle bibliothèque utiliser avec l'option \TTBF{-l} (n'oubliez pas de retirer le préfixe \textit{lib} au nom de la bibliothèque, et surtout, que l'ordre des fichiers objets et bibliothèques est important) :\\
+%
+%\begin{tabular}{l}
+%\TTBF{cc -L/usr/lib test1.o -lxml2 file.o -o executable.exe} \\
+%\end{tabular}
+%
+%\bigskip
+%
+%\noindent Si la bibliothèque existe en version \textit{dynamique} (\TTBF{.so}) et en version \textit{statique} (\TTBF{.a}) dans le système, l'éditeur de lien choisira en priorité la version \textit{dynamique}.
+%Pour forcer la version \textit{statique}, vous devez l'indiquer dans la ligne de commande avec l'option \TTBF{-static} :\\
+%
+%\begin{tabular}{l}
+%\TTBF{cc -static -L/usr/lib test1.o -lxml2 file.o -o executable.exe} \\
+%\end{tabular}
+%
+
+\vspace*{1cm}
+
+
+\noindent Dans ce sujet précis, \underline{\textbf{\textit{vous ferez du code en C et en Python}}}, et des appels à des scripts shell qui afficheront les résultats dans le terminal (donc des flux de sortie qui pourront être redirigés vers un fichier texte).
+
+%\noindent Dans ce sujet précis, vous ferez du code en script shell, qui affichera les résultats dans le terminal (donc des flux de sortie qui pourront être redirigés vers un fichier texte).
+
+%\noindent Dans ce sujet précis, vous ferez du code en PHP, qui affichera les résultats dans une page HTML. Les valeurs seront affichées dans une \textit{textarea} dont le texte est généré par des outils multiplateformes supportant les retours à la ligne UNIX (\textbf{\textbackslash n}). Il ne faut donc pas inclure de balise \TTBF{"<br />"} pour retourner à la ligne, mais un \TTBF{"\textbackslash n"}.
+
+%\vspace*{1cm}
+
+%\noindent Pour réaliser le travail demandé, nous vous fournirons pour chaque exercice au moins 2 fichiers : \TTBF{exoN\_res.php} (le fichier qui sera appelé pour voir le résultat de votre travail), et \TTBF{exoN\_fun.php} (le fichier contenant la fonction que vous devez coder dans chaque exercice).
+%Optionnellement, un fichier \TTBF{exoN\_data.php} peut être fourni pour indiquer le format de données en entrée.
+%Le \TTBF{N} correspond au numéro de l'exercice.
+
+%\medskip
+
+%\noindent Dans tous les cas, vous ne devez rendre que le fichier \TTBF{exoN\_fun.php} avec au moins la fonction demandée remplie (qui peut faire appel à d'autres fonctions que vous définirez dans le \textbf{même} fichier). Les autres fichiers seront générés par nos soins pour tester vos fonctions.
+
+%\vspace*{1cm}
+
+%\noindent Vous ne devez \textbf{PAS} utiliser la fonction \TTBF{echo} pour écrire !
+%Il faut retourner une chaîne de caractères correctement formattée.

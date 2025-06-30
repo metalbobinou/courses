@@ -1,0 +1,394 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\NomAuteur}{Fabrice BOISSIER}
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\NomUniv}{EPITA - Bachelor Cyber Sécurité}
+\newcommand{\NiveauUniv}{CYBER1}
+\newcommand{\NumGroupe}{CYBER1}
+\newcommand{\AnneeUniv}{2024-2025}
+\newcommand{\DateExam}{Novembre 2024}
+\newcommand{\TypeExam}{Examen (Sujet B)}
+\newcommand{\TitreExam}{\TitreMatiere}
+\newcommand{\DureeExam}{1h30}
+\newcommand{\MyWaterMark}{\AnneeUniv} % Watermark de protection
+
+% Ajout de mes classes & definitions
+\usepackage{MetalExam} % Appelle un .sty
+
+% "Tableau" et pas "Table"
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{\TypeExam}							%Gauche Haut
+\chead{\NomUniv}							%Centre Haut
+\rhead{\NumGroupe}							%Droite Haut
+\lfoot{\DateExam}							%Gauche Bas
+\cfoot{\thepage{} / \pageref*{LastPage}}	%Centre Bas
+\rfoot{\texttt{\TitreMatiere}}				%Droite Bas
+
+%%%%%
+
+\usepackage{tabularx}
+
+\newlength{\LabelWidth}%
+%\setlength{\LabelWidth}{1.3in}%
+\setlength{\LabelWidth}{1cm}%
+%\settowidth{\LabelWidth}{Employee E-mail:}%  Specify the widest text here.
+
+% Optional first parameter here specifies the alignment of
+% the text within the \makebox.  Default is [l] for left
+% alignment. Other options are [r] and [c] for right and center
+\newcommand*{\AdjustSize}[2][l]{\makebox[\LabelWidth][#1]{#2}}%
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
+
+
+\hyphenation{op-tical net-works SIGKILL}
+
+
+\begin{document}
+
+%\MakeExamTitleDuree     % Pour afficher la duree
+\MakeExamTitle                   % Ne pas afficher la duree
+
+%% \MakeStudentName    %% A reutiliser sur chaque nouvelle page
+
+\bigskip
+%\bigskip
+
+Vous devez respecter les consignes suivantes, sous peine de 0 :
+
+\begin{itemize}
+\item Lisez le sujet en entier avec attention
+\item Répondez sur le sujet
+\item Ne détachez pas les agrafes du sujet
+\item \'Ecrivez lisiblement vos réponses (si nécessaire en majuscules)
+%\item Vous devez écrire dans le langage algorithmique classique ou en C (donc pas de Python ou autre)
+\item Ne trichez pas
+\end{itemize}
+
+%\bigskip
+
+%\vfillFirst
+
+% Questions cours
+\section{Questions (6 points)}
+
+\subsection{(2 points) Sélectionnez les conditions vraies pour A = 6 et B = 2 : }
+
+% Compter pour chaque réponse 0,5 points : si bonne ou pas bonne
+\bigskip
+%\medskip
+
+\begin{itemize}  
+  \item[\CaseCoche] ((A + 2) >= (B + 6)) et (B < A)   % Vrai
+  \item[\CaseCoche] ((A - 2) >= (B + 2)) et (A < B)   % Faux
+  \item[\CaseCoche] ((A + B) <= 9) et ((6 - B) < 4)   % Faux
+  \item[\CaseCoche] ((B + 3) > (A - 1)) ou (B == (A - 4)) % Vrai
+\end{itemize}
+
+% \checkmark
+% \cmark
+% \xmark
+
+%\bigskip
+\medskip
+%\smallskip
+
+
+\subsection{(4 points) Exécutez cet algorithme avec les valeurs (x = 9) (y = 3) et (z = 3) en remplissant le tableau, puis donnez les caractéristiques de cet algorithme : }
+
+%\bigskip
+
+\begin{table}[!ht]
+  \centering
+  \begin{minipage}{0.645\textwidth}
+    \centering
+
+% %*   *)
+\begin{lstlisting}[style=algorithmique]
+algorithme fonction Calc : entier
+  parametres locaux
+    entier    x, y, z
+debut
+si (x <= 1)
+  retourne (1)
+sinon
+  si ((x %*\texttt{\%}*) z) == 0)
+    retourne (y + Calc((x - y), (y + 1), z))
+  sinon
+    retourne (Calc((x - y), (y - 1), z))
+  fin si
+fin si
+fin algorithme fonction Calc \end{lstlisting}
+
+\begin{itemize}
+  \item[\CaseCoche] Il est récursif  \phantom{Lg}\\
+  \item[\CaseCoche] Il est même récursif terminal  \phantom{Lg}\\
+  \item[\CaseCoche] Il s'agit d'une fonction  \phantom{Lg}\\
+  \item[\CaseCoche] Il s'agit d'une procédure  \phantom{Lg}\\
+\end{itemize}
+
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.33\textwidth}
+    \centering
+
+    \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |}
+        \hline
+   \textit{tour}  &  \textbf{x}  &  \textbf{y}  &  \textbf{z}    \\
+        \hline
+ \multirow{3}{*}{\begin{minipage}{1.1cm}\centering \textit{\'Etat Initial} \end{minipage}} & & & \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+                  &     &     &       \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \hline
+     \end{tabular}
+     \begin{tabular}{| C{1cm} | C{1cm} | C{1cm}  C{1cm} }
+        \cline{1-2}
+ \multirow{3}{*}{\begin{minipage}{1.1cm}\centering \textit{Total :} \end{minipage}} & & & \\
+                  &     &     &       \\
+                  &     &     &       \\
+        \cline{1-2}
+    \end{tabular}
+  \end{minipage}
+
+% x : [9] - y : [3] - z : [3]
+% x : [6] - y : [4] - z : [3]
+% x : [2] - y : [5] - z : [3]
+% x : [-3] - y : [4] - z : [3]
+% Total : 8
+
+\end{table}
+
+
+%\vfillLast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\section{Algorithmes (14 points)}
+
+\subsection{(1 point) \'Ecrivez une fonction \og \textit{Facto} \fg{} récursive calculant la factorielle du nombre N. (Vous décrirez d'abord le ou les cas d'arrêts, puis le cas général) }
+
+% 1 point pour les cas d'arrêts
+% 1 point pour l'algorihtme récursif
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{equation*}
+n! \, = \, n \, \times \, (n - 1) \, \times \, \ldots \, \times 1
+\end{equation*}
+%
+\vspace*{-0.5cm}
+%
+\begin{equation*}
+0! \, = \, 1! \, = \, 1
+\end{equation*}
+
+Explications du/des cas d'arrêts, puis du cas général :
+\GrilleReponseN{6}
+
+\bigskip
+
+Algorithme :
+\GrilleReponseN{14}
+\end{center}
+
+
+\clearpage
+
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{SommePairs} \fg{} itérative calculant la somme des N premiers nombres pairs. (Vous décrirez d'abord le ou les cas d'arrêts, puis le cas général) }
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{equation*}
+SommePairs(4)  \, = \,  6 \, + \, 4 \, + \, 2 \, + \, 0  \, = \,  12
+\end{equation*}
+
+Explications du/des cas d'arrêts, puis du cas général :
+\GrilleReponseN{6}
+
+\bigskip
+
+Algorithme :
+\GrilleReponseN{15.5}
+\end{center}
+
+\smallskip
+%\medskip
+%\bigskip
+
+
+\clearpage
+
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{strlen} \fg{} itérative calculant la taille d'une chaîne de caractères. (Vous décrirez d'abord le fonctionnement général) }
+
+%\bigskip
+\vspace*{-0.5cm}
+
+\begin{center}
+
+\begin{equation*}
+strlen("Dino")  \, = \,  4
+\end{equation*}
+
+Explications du fonctionnement :
+\GrilleReponseN{6}
+
+\bigskip
+
+Algorithme :
+\GrilleReponseN{15.5}
+\end{center}
+
+\smallskip
+%\medskip
+%\bigskip
+
+
+\clearpage
+
+
+\subsection{(2 points) \'Ecrivez une fonction \og \textit{RechercheMinTab} \fg{} cherchant l'emplacement de l'élément le plus petit dans un tableau d'entiers. Si tous les éléments sont les mêmes, vous renverrez la position de votre choix du tableau (tant que cette position existe). (Vous décrirez d'abord le fonctionnement général) }
+
+%\bigskip
+
+\begin{center}
+Explications du fonctionnement :
+\GrilleReponseN{5.5}
+
+Algorithme :
+\GrilleReponseN{16.5}
+\end{center}
+
+
+\clearpage
+
+
+\subsection{(3 points) \'Ecrivez une fonction \og \textit{AfficheVoy} \fg{} affichant chaque voyelle contenue dans une chaîne de caractères, et renvoyant le nombre de voyelles trouvées. Si la chaîne n'en contient aucune, vous n'afficherez rien et vous renverrez \textit{0}. }
+
+%\bigskip
+
+\noindent \textit{Vous pourrez utiliser la fonction \TTBF{IsVoyelle} qui prend un caractère en paramètre et renvoie si oui ou non il s'agit d'une voyelle, ainsi que \TTBF{Print} qui affiche le paramètre qui lui est donné.}
+
+\begin{center}
+Algorithme :
+\GrilleReponseN{21.5}
+\end{center}
+
+
+\clearpage
+
+
+\subsection{(4 points) \'Ecrivez une fonction \og \textit{IntToTab} \fg{} transformant un entier en un tableau d'entiers. Chaque case contiendra un chiffre. On admettra que le tableau où vous devrez écrire est déjà alloué, et sa taille est également donnée en paramètre. }
+
+%\medskip
+
+\begin{center}
+  Le nombre $ 3204 $ doit devenir le tableau suivant
+
+  \smallskip
+
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    3 & 2 & 0 & 4 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+%\bigskip
+
+\begin{center}
+Algorithme :
+\GrilleReponseN{21}
+%\GrilleReponseTextUp{21}{4.1}{\TTBF{\textcolor{blue}{int} *IntToTab(\textcolor{blue}{int} num, \textcolor{blue}{int} tab[], \textcolor{blue}{int} len)}}
+\end{center}
+
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\thispagestyle{empty}
+
+\vfillFirst
+
+\begin{center}
+
+\begin{LARGE}
+\textbf{SUJET B}
+
+\bigskip
+
+\textbf{\MakeUppercase{\TitreMatiere}}
+\end{LARGE}
+
+\end{center}
+
+\vfillLast
+
+\end{document}

@@ -1,0 +1,8 @@
+A = YES
+B = NOT
+C = AND
+D = NAND
+E = OR
+F = NOR
+G = XOR
+H = XNOR

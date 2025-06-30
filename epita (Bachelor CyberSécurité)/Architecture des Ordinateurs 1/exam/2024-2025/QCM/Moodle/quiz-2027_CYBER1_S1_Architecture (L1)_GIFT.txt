@@ -1,0 +1,539 @@
+// question: 0  name: Switch category to $course$/top/Architecture (L1)
+$CATEGORY: $course$/top/Architecture (L1)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions
+$CATEGORY: $course$/top/Architecture (L1)/Conversions
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 2
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 2
+
+
+// question: 173770  name: 115 -> Base 2
+::115 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 115 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0111 0011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 1111<br></p>#<p dir\="ltr" style\="text-align\: left;">% 0111 0110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1101<br></p>
+}
+
+
+// question: 173771  name: 133 -> Base 2
+::133 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 133 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1000 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 1101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1001<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1000 1101<br></p>
+}
+
+
+// question: 173772  name: 142 -> Base 2
+::142 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 142 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1000 1110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 1000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 1100<br></p>
+}
+
+
+// question: 173773  name: 172 -> Base 2
+::172 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 172 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1010 1100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1100 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1110<br></p>
+}
+
+
+// question: 173774  name: 234 -> Base 2
+::234 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 234 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1110 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0111 1010<br></p>
+}
+
+
+// question: 173775  name: 42 -> Base 2
+::42 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en base 2<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0000 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1000<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 2 -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 2 -> 10
+
+
+// question: 173776  name: %00101010 -> Base 10
+::%00101010 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0010 1010 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">38<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">30<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">210<br></p>
+}
+
+
+// question: 173777  name: %01101101 -> Base 10
+::%01101101 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0110 1101 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">109<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">613<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">119<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">103<br></p>
+}
+
+
+// question: 173778  name: %01111100 -> Base 10
+::%01111100 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0111 1100 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">124<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">248<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">126<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">250<br></p>
+}
+
+
+// question: 173779  name: %10111011 -> Base 10
+::%10111011 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1011 1011 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">187<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">251<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">123<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">191<br></p>
+}
+
+
+// question: 187391  name: %11001011 -> Base 10
+::%11001011 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1100 1011 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">203<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">184<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">183<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1211<br></p>
+}
+
+
+// question: 173781  name: %11010111 -> Base 10
+::%11010111 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1101 0111 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">215<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">231<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">183<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">240<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 16
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> 16
+
+
+// question: 173782  name: 238 -> base 16
+::238 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 238 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ EE<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 1414<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ E4<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 4E<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ DD<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ CC<br></p>
+}
+
+
+// question: 173783  name: 42 -> base 16
+::42 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ 2A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ A2<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 24<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 28<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 82<br></p>
+}
+
+
+// question: 173784  name: 56 -> base 16
+::56 -> base 16::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 56 en base 16<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">$ 38<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 83<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 3A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ A3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">$ 24<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 16 -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 16 -> 10
+
+
+// question: 173785  name: $34 -> base 10
+::$34 -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $34 en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">52<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">484<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">34<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">48<br></p>
+}
+
+
+// question: 173786  name: $5E -> base 10
+::$5E -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $5E en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">94<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">64<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">90<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">74<br></p>
+}
+
+
+// question: 173787  name: $AB -> base 10
+::$AB -> base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $AB en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">171<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">170<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">172<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions BCD -> 10
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions BCD -> 10
+
+
+// question: 173788  name: BCD %01011001 -> Base 10
+::BCD %01011001 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0101 1001 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">59<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">89<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">105<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">Ce n'est pas un nombre correct en BCD<br></p>
+}
+
+
+// question: 173789  name: BCD %01100111 -> Base 10
+::BCD %01100111 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 0110 0111 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">67<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">103<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">107<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">83<br></p>
+}
+
+
+// question: 173790  name: BCD %11001001 -> Base 10
+::BCD %11001001 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez % 1100 1001 du BCD vers la base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">Ce n'est pas un nombre correct en BCD<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">129<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">21<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">1209<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> BCD
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversions d'Entiers (non signés)/Conversions 10 -> BCD
+
+
+// question: 173791  name: 42 -> BCD
+::42 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 42 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0100 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 0101<br></p>
+}
+
+
+// question: 173792  name: 72 -> BCD
+::72 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 72 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 0111 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0100 1000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 0010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0100 0110<br></p>
+}
+
+
+// question: 173793  name: 96 -> BCD
+::96 -> BCD::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez 96 en BCD<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1001 0110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 0000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0101 1110<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 0110 0100<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 10 -> 16 (s)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 10 -> 16 (s)
+
+
+// question: 173794  name: -108 -> Base 2
+::-108 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez -108 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1001 0100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1001 0011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1100<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1110 1011<br></p>
+}
+
+
+// question: 173795  name: -37 -> Base 2
+::-37 -> Base 2::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez -37 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1101 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1101 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1010 0100<br></p>
+}
+
+
+// question: 173796  name: -53 -> Base 2
+::-53 -> Base 2::[html]<p dir\="ltr">Convertissez -53 en binaire signé sur 8 bits<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">% 1100 1011<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1100 1010<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0101<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">% 1011 0100<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 16 -> 10 (s)
+$CATEGORY: $course$/top/Architecture (L1)/Conversions/Conversion d'Entiers (signés)/Conversions 16 -> 10 (s)
+
+
+// question: 173797  name: $B4 -> Base 10
+::$B4 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $B4 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-76<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-54<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-75<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-53<br></p>
+}
+
+
+// question: 173798  name: $C4 -> Base 10
+::$C4 -> Base 10::[html]<p dir\="ltr" style\="text-align\: left;">Convertissez $C4 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-60<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-59<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-68<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-67<br></p>
+}
+
+
+// question: 173799  name: $D8 -> Base 10
+::$D8 -> Base 10::[html]<p dir\="ltr">Convertissez $D8 comme un nombre signé en base 10<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">-40<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-39<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-88<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-87<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Flottants IEEE 754
+$CATEGORY: $course$/top/Architecture (L1)/Flottants IEEE 754
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Flottants IEEE 754/Valeurs Réservées
+$CATEGORY: $course$/top/Architecture (L1)/Flottants IEEE 754/Valeurs Réservées
+
+
+// question: 187371  name: Infini (1)
+::Infini (1)::[html]<p dir\="ltr" style\="text-align\: left;">L'infini peut être codé par \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">$ FF80 0000<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">$ 7FF8 0000<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">L'exposant et la mantisse binaires ne contenant que des 1<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">L'exposant binaire ne contenant que des 1, et la mantisse binaire ne contenant que des 0<br></p>
+}
+
+
+// question: 187372  name: NaN (1)
+::NaN (1)::[html]<p dir\="ltr" style\="text-align\: left;">Les NaN (Not a Number) peuvent être codés par \:<br></p>{
+	~%50%<p dir\="ltr" style\="text-align\: left;">$ FF80 0001<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;">$ 0F80 0001<br></p>
+	~%50%<p dir\="ltr" style\="text-align\: left;">L'exposant et à la mantisse binaires ne contenant que des 1<br></p>
+	~%-100%<p dir\="ltr" style\="text-align\: left;"></p><p dir\="ltr">L'exposant binaire ne contenant que des 1, et la mantisse binaires ne contenant que des 0<br></p><p></p>
+}
+
+
+// question: 187373  name: Zéro (1)
+::Zéro (1)::[html]<p dir\="ltr" style\="text-align\: left;">Zéro peut être codé par \:<br></p>{
+	~%25%<p dir\="ltr" style\="text-align\: left;">$ 0000 0000<br></p>
+	~%25%<p dir\="ltr" style\="text-align\: left;">$ 8000 0000<br></p>
+	~%25%<p dir\="ltr" style\="text-align\: left;">L'exposant et la mantisse binaires ne contenant que des 0<br></p>
+	~%25%<p dir\="ltr" style\="text-align\: left;">&nbsp;L'exposant, le signe, et la mantisse ne contenant que des 0<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Flottants IEEE 754/Conversions IEEE754 -> Base 10
+$CATEGORY: $course$/top/Architecture (L1)/Flottants IEEE 754/Conversions IEEE754 -> Base 10
+
+
+// question: 187374  name: 1337 (base 16)
+::1337 (base 16)::[html]A quel nombre en base 10 correspond le flottant IEEE754 suivant \: 0x44a72000{
+	=<p dir\="ltr" style\="text-align\: left;">1337<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-1998,974<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">2^(-142)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">NaN<br></p>
+}
+
+
+// question: 187375  name: 32 (16)
+::32 (16)::[html]<p dir\="ltr" style\="text-align\: left;">A quel nombre en base 10 correspond le flottant IEEE754 suivant \: 0x42000000<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">32<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-2048<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">2^(-142)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">+ l'infini<br></p>
+}
+
+
+// question: 187376  name: 42 (base 16)
+::42 (base 16)::[html]<p dir\="ltr" style\="text-align\: left;">A quel nombre en base 10 correspond le flottant IEEE754 suivant \: 0x42280000<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">42<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">2^(-135)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">-138,5<br></p>
+}
+
+
+// question: 187377  name: NaN 1 (base 16)
+::NaN 1 (base 16)::[html]<p dir\="ltr" style\="text-align\: left;">A quelle valeur base 10 correspond ce flottant IEEE 754 \: 0x7F86AE00<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">NaN<br></p>
+	~4242133700000<br>
+	~<p dir\="ltr" style\="text-align\: left;">-18,59<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">2(-138)<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Flottants IEEE 754/Conversions Base 10 -> IEEE754
+$CATEGORY: $course$/top/Architecture (L1)/Flottants IEEE 754/Conversions Base 10 -> IEEE754
+
+
+// question: 187378  name: 0,5 (base 10)
+::0,5 (base 10)::[html]<p dir\="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 0.5 ?<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">0x3F000000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0xBF000000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x3F11A2F3<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0xBF11A2F3<br></p>
+}
+
+
+// question: 187379  name: 123 (base 10)
+::123 (base 10)::[html]<p dir\="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 123 ?<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">0x42F60000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0xC2F60000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x042F6000<br></p>
+}
+
+
+// question: 187380  name: 12.5475692749 (base 10)
+::12.5475692749 (base 10)::[html]<p dir\="ltr">A quelle valeur IEEE 754 correspond le nombre décimal 12.5475692749 ?<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">0x4148c2d8<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0xC148c2d8<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x41800000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0xC148c2d8<br></p>
+}
+
+
+// question: 187381  name: 42 (base 10)
+::42 (base 10)::[html]<p dir\="ltr" style\="text-align\: left;">A quelle valeur IEEE 754 correspond le nombre décimal 42 ?<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">0x42280000<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x7F80002A<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x42752A01<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">0x05A12892<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Portes Logiques
+$CATEGORY: $course$/top/Architecture (L1)/Portes Logiques
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Portes Logiques/Schémas Portes Logiques
+$CATEGORY: $course$/top/Architecture (L1)/Portes Logiques/Schémas Portes Logiques
+
+
+// question: 187382  name: Schémas (1)
+::Schémas (1)::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez le nom de chaque porte logique selon son équivalent en schéma<br></p>{
+	=<img src\="@@PLUGINFILE@@/A_eur.png" alt\="Porte A" width\="106" height\="46" class\="img-fluid atto_image_button_text-bottom"><br> -> YES
+	=<img src\="@@PLUGINFILE@@/B_eur.png" alt\="Porte B" width\="106" height\="46" class\="img-fluid atto_image_button_text-bottom"><br> -> NOT
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/C_eur.png" alt\="Porte C" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br></p> -> AND
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/D_eur.png" alt\="Porte D" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br></p> -> NAND
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/E_eur.png" alt\="Porte E" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br></p> -> OR
+	=<img src\="@@PLUGINFILE@@/F_eur.png" alt\="Porte F" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br> -> NOR
+	=<img src\="@@PLUGINFILE@@/G_eur.png" alt\="Porte G" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br> -> XOR
+	=<img src\="@@PLUGINFILE@@/H_eur.png" alt\="Porte H" width\="96" height\="81" class\="img-fluid atto_image_button_text-bottom"><br> -> XNOR
+}
+
+
+// question: 187383  name: Schémas (2)
+::Schémas (2)::[html]<p dir\="ltr">Sélectionnez le nom de chaque porte logique selon son équivalent en schéma<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/A_usa.png" alt\="Porte A" width\="106" height\="42" class\="img-fluid atto_image_button_text-bottom"><br></p> -> YES
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/B_usa.png" alt\="Porte B" width\="106" height\="42" class\="img-fluid atto_image_button_text-bottom"><br></p> -> NOT
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/C_usa.png" alt\="Porte C" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> AND
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/D_usa.png" alt\="Porte D" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> NAND
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/E_usa.png" alt\="Porte E" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> OR
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/F_usa.png" alt\="Porte F" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> NOR
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/G_usa.png" alt\="Porte G" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> XOR
+	=<p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/H_usa.png" alt\="Porte H" width\="96" height\="50" class\="img-fluid atto_image_button_text-bottom"><br></p> -> XNOR
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Portes Logiques/Transformation Circuit//Formule Logique
+$CATEGORY: $course$/top/Architecture (L1)/Portes Logiques/Transformation Circuit//Formule Logique
+
+
+// question: 187384  name: Schéma A
+::Schéma A::[html]<p>Choisissez la formule logique à laquelle correspond ce schéma \:</p><p><br></p><p><img src\="@@PLUGINFILE@@/schema_A.png" alt\="Schéma A" width\="385" height\="229" class\="img-fluid atto_image_button_text-bottom"><br></p><br>{
+	=<p dir\="ltr" style\="text-align\: left;">X \= (A ET (A OU B)) OU ((A ET B) OU (B ET C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A OU (A ET B)) ET ((A OU B) ET (B OU C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A OU (A ET B)) NON-ET ((A OU B) ET (B OU C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A XOR (A ET B)) ET ((A XOR B) ET (B XOR C))<br></p>
+}
+
+
+// question: 187385  name: Schéma B
+::Schéma B::[html]<p dir\="ltr" style\="text-align\: left;">Choisissez la formule logique à laquelle correspond ce schéma \:</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/schema_B.png" alt\="Schéma B" width\="385" height\="229" class\="img-fluid atto_image_button_text-bottom"><br></p>{
+	=X \= (A OU (A NON-OU B)) ET ((A NON-OU B) ET (B XOR C))<br>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A ET (A NON-ET B)) OU ((A NON-ET B) OU (B XOR C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A ET (A NON-ET B)) XOR ((A NON-ET B) XOR (B OU C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A XOR (A XNOR B)) ET ((A XNOR B) ET (B OU C))<br></p>
+}
+
+
+// question: 187386  name: Schéma C
+::Schéma C::[html]<p dir\="ltr" style\="text-align\: left;">Choisissez la formule logique à laquelle correspond ce schéma \:</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/schema_C.png" alt\="Schéma C" width\="385" height\="229" class\="img-fluid atto_image_button_text-bottom"><br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">X \= (A OU (A NON-OU C)) ET ((B NON-OU C) ET (B XOR C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A ET (A NON-ET C)) OU ((B NON-ET C) OU (B XOR C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A XOR (A XNOR C)) ET ((B XNOR C) ET (B OU C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A OU (A XOR C)) ET ((B XOR C) ET (B OU C))<br></p>
+}
+
+
+// question: 187387  name: Schéma D
+::Schéma D::[html]<p dir\="ltr" style\="text-align\: left;">Choisissez la formule logique à laquelle correspond ce schéma \:</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;"><img src\="@@PLUGINFILE@@/schema_D.png" alt\="Schéma D" width\="385" height\="229" class\="img-fluid atto_image_button_text-bottom"><br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">X \= (A NON-ET (A ET C)) XOR ((B OU C) NON-ET (B OU C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A NON-OU (A OU C)) NON-ET ((B ET C) NON-OU (B ET C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A NON-ET (A ET C)) OU ((B XOR C) NON-ET (B XOR C))<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">X \= (A XNOR (A OU C)) ET ((B OU C) XNOR (B OU C))<br></p>
+}
+
+
+// question: 0  name: Switch category to $course$/top/Architecture (L1)/Portes Logiques/Formules Logiques
+$CATEGORY: $course$/top/Architecture (L1)/Portes Logiques/Formules Logiques
+
+
+// question: 187388  name: Formule 1
+::Formule 1::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez la formule équivalente à celle-ci \:</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">- ( ( (A et B) ou (C et A) ) et (B ou C) )<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">( (-A ou -B) et (-C ou -A) ) ou (-B et -C)<br></p>
+	~<p dir\="ltr">( (-A et -B) et (-C et -A) ) ou (-B ou -C)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">- ( (A et B) ou (C et A) ) et (- (B ou C) )<br></p>
+}
+
+
+// question: 187389  name: Formule 2
+::Formule 2::[html]<p dir\="ltr" style\="text-align\: left;">Sélectionnez la formule équivalente à celle-ci \:</p><p dir\="ltr" style\="text-align\: left;"><br></p><p dir\="ltr" style\="text-align\: left;">- ( ( (A ou B) et (- (A et B) ) ) ou (-A et B) )<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">( (-A et -B) ou (A et B) ) et (A ou -B)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">( (-A et -B) ou (-A ou -B) ) et (A ou -B)<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">( (-A et -B) ou (-A et -B) ) ou (A et -B) )<br></p>
+}
+
+
+// question: 187390  name: Formule 3
+::Formule 3::[html]<p>Sélectionnez la formule équivalente à celle-ci \:</p><p><br></p><p>( (A et C) ou (B et C) ) et (A et B)<br></p>{
+	=<p dir\="ltr" style\="text-align\: left;">- ( ( (-A ou -C) et (-B ou -C) ) ou (-A ou -B) )<br></p>
+	~<p dir\="ltr" style\="text-align\: left;">- ( - ( (-A ou -C) et (-B ou -C) ) ou ( - (-A ou -B) ) )<br></p>
+	~( - (A et C) et (-B et -C) ) ou (-A ou -B)
+}
+
+

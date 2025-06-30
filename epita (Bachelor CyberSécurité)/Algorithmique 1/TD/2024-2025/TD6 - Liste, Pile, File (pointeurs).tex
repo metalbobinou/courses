@@ -1,0 +1,141 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{Liste - Pile - File (pointeurs)}
+\newcommand{\SousTitreSeance}{TD6}
+\newcommand{\DateCours}{Décembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Pointeurs ; Liste ; Pile ; File ; API}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document est le TD adjoint au cours sur les tris.
+
+\medskip
+
+Vous devez avoir lu le cours sur les différents tris afin de de réaliser ces exercices.
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Swap}
+
+\bigskip
+
+\question{Écrivez une fonction qui inverse la position de deux éléments. Vous ne devez pas construire de nouveau tableau, mais uniquement modifier en place le tableau (en utilisant des variables temporaires). Par exemple, pour un tableau contenant [ A B C D ], si l'on inverse la position des éléments $ 0 $ et $ 1 $, le tableau doit devenir [ B A C D ]. \textit{SwapEltTab(tab, len, pos1, pos2)} }
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri à bulles}
+
+\bigskip
+
+Le tri à bulles vise à faire remonter tour à tour les plus grandes valeurs vers la fin du tableau.
+Si deux valeurs côté à côté sont dans le désordre, on les inverse, et on teste les suivantes jusqu'à la fin du tableau.
+Avec cette méthode, dès que l'on trouve la plus grande valeur du tableau, celle-ci avancera progressivement jusqu'à la fin.
+Avant d'atteindre la plus grande valeur, on peut également faire remonter les autres valeurs plus grandes.
+Cependant, à chaque fois que l'on parcourt intégralement le tableau de gauche à droite, on est sûr que la valeur la plus à droite est à sa place finale.
+Ainsi, on réduit la zone à parcourir à chaque tour : une fois la plus grande valeur du tableau trouvée à la fin du premier tour et placée à la dernière case, on n'a plus besoin de chercher dans cette case (l'élément étant maintenant à sa place).
+
+\bigskip
+
+\question{Écrivez une procédure de tri respectant l'algorithme du tri à bulles (ou \textit{bubble sort} en anglais). Vous devez modifier la position des éléments dans le tableau créer de tableau supplémentaire. \textit{BubbleSort(tab, len)} }
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri par sélection}
+
+\medskip
+
+Le tri par sélection est le tri le plus évident humainement parlant : on cherche le plus grand élément dans le tableau en parcourant toutes les cases, puis, on échange la place de cet élément avec le tout dernier du tableau (pour le placer à sa place définitive).
+On recommence ce traitement (sans lire la dernière case à chaque fois) jusqu'à avoir ordonné tous les éléments.
+
+\bigskip
+
+\question{Écrivez une procédure de tri respectant l'algorithme du tri par sélection (ou \textit{selection sort} en anglais). Vous devez modifier la position des éléments dans le tableau sans créer de tableau supplémentaire. \textit{SelectionSort(tab, len)} }
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri par insertion}
+
+Le tri par insertion considère que le tableau donné en paramètre n'est pas trié, et seuls les éléments qu'il a manipulé successivement le sont.
+Ainsi, chaque élément du tableau est comparé à tous ceux déjà triés, et on le place là où il devrait être.
+Pour le premier élément, celui-ci est considéré comme déjà trié, on peut donc passer au deuxième.
+Le deuxième est comparé avec l'unique élément déjà trié : on échange leurs deux places si nécessaire.
+Le troisième élément est comparé au plus grand des deux éléments triés, s'il est plus grand ou égal, il reste à sa place, sinon on le décale vers la gauche d'un cran, et on le compare à l'élément suivant (et ainsi de suite).
+Chaque élément du tableau est donc \textit{inséré} à sa place parmi les éléments considérés comme triés.
+
+\bigskip
+
+\question{Écrivez une procédure de tri respectant l'algorithme du tri par insertion (ou \textit{insertion sort} en anglais). Vous devez modifier la position des éléments dans le tableau créer de tableau supplémentaire. \textit{InsertionSort(tab, len)} }
+
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2022.\\
+La plupart des exercices sont inspirés du cahier d'algo de Nathalie "Junior" BOUQUET et Christophe "Krisboul" BOULLAY.}
+
+\textit{(dernière mise à jour octobre 2023)}
+\end{center}
+
+\end{document}

@@ -1,0 +1,489 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{[PROF] Introduction à l'Algorithmique}
+\newcommand{\SousTitreSeance}{Fiche 1}
+\newcommand{\DateCours}{Septembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Introduction}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de guider les enseignants pour le cours d'algorithmique.
+Il est déconseillé de le fournir aux étudiants, car il vise surtout à vous permettre de guider la séance.
+Vous n'êtes évidemment pas obligé de le suivre à la lettre (c'est même déconseillé, car cela va autant vous perturber vous que la classe : suivez votre chemin de pensée et/ou celui de la classe, et ensuite vérifiez que vous n'avez rien oublié).
+
+\medskip
+
+La première partie vise à faire découvrir les fondements de l'algorithmique aux personnes n'en ayant absolument jamais faite.
+Les algorithmes étudiés sont donc littéralement ce qui est enseigné en mathématiques dans l'enseignement primaire ou secondaire.
+Aucun ordinateur n'est nécessaire : vous pouvez les interdire pendant cette séance.
+Il faut uniquement du papier et de quoi écrire (et cela permet de ne pas perdre la capacité d'écrire).
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problèmes, Solutions, et Types de données}
+
+\bigskip
+
+\subsection{Définition algorithme}
+
+\begin{itemize}
+\item Demandez à la classe comment les étudiants définiraient ce qu'est un "algorithme"
+\item Rappelez enfin la définition suivante :
+\end{itemize}
+
+\smallskip
+
+Définition informelle d'un algorithme~\footnote{Introduction à l'Algorithmique. 2001 ($2^{e}$ édition) T.Cormen et al.} : \og \textit{procédure de calcul bien définie qui prend en entrée une valeur, ou un ensemble de valeurs, et qui donne en sortie une valeur, ou un ensemble de valeurs. Un algorithme est donc une séquence d'étapes de calcul qui transforment l'entrée en sortie} \fg .
+
+\begin{itemize}
+\item Insistez sur les mots clés : \textit{procédure}, \textit{valeur d'entrée}, \textit{valeur de sortie}, \textit{séquence d'étapes}, \textit{calculs}, \textit{transformer l'entrée en sortie}
+\end{itemize}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bien spécifier le problème}
+
+\begin{itemize}
+\item Rappeler qu'un algorithme vise à résoudre un problème (même si cela peut simplement être d'exécuter un traitement simple)
+\item Pour résoudre le problème, on va devoir bien analyser les choses et phénomènes pour pouvoir les représenter
+\item 3 questions à constamment se poser dans cet ordre précis (les mêmes qu'en recherche) :
+  \begin{enumerate}
+  \item \textbf{Pourquoi} ?
+  \item \textbf{Quoi} ?
+  \item \textbf{Comment} ?
+  \end{enumerate}
+\end{itemize}
+
+
+Exemple : une usine de retraitement de déchets récupère des gravats et doit les séparer pour les réutiliser.
+
+\begin{itemize}
+\item Pourquoi ? Trier des gravats
+\item Quoi ? Pierres de différentes tailles
+\item Comment ? Tamis de différentes tailles pour séparer les pierres, les cailloux, et le gravier
+\end{itemize}
+
+
+\subsubsection{Pourquoi ?}
+
+\begin{itemize}
+\item \textbf{Objectif} ou \textbf{but} à atteindre
+\item Souvent c'est un verbe : \textit{Trier}, \textit{Filtrer}, \textit{Retrouver}, \textit{Calculer}, ...
+\item Il s'agit, en général, du nom de la fonction
+\end{itemize}
+
+
+\subsubsection{Quoi ?}
+
+\begin{itemize}
+\item \textbf{Objets} manipulés, \textbf{qualités} observées, \textbf{quantités} mesurées
+\item Souvent ce sont des noms : \textit{Personne}, \textit{Fruits}, \textit{Distance}, \textit{Taille}, \textit{\'Etat d'un système}, ...
+\item Il s'agit des variables et des paramètres de chaque algorithme
+\end{itemize}
+
+
+\subsubsection{Comment ?}
+
+\begin{itemize}
+\item Combinaison des mesures et objets précédents permettant de répondre au problème (ou formules mathématiques), ou combinaison d'outils existants
+\item Il s'agit de la suite d'instructions/la formule appliquée OU la/les fonction(s) d'une bibliothèque
+\end{itemize}
+
+
+\bigskip
+
+Bien expliciter que le \textit{pourquoi} est le plus important et permet de ne pas partir vers la mauvaise direction : lorsque l'on est embrouillé dans l'écriture d'un algo ou de code... il faut s'arrêter 2 minutes et se reposer la question :
+\begin{itemize}
+\item \textit{Pourquoi je fais cela ?}
+\item \textit{Quel problème est-ce que je cherche à régler ?}
+\item \textit{Quel est l'objectif du code que j'écris ?}
+\end{itemize}
+
+
+
+\subsection{Types de données}
+
+\bigskip
+
+Une fois le \textit{pourquoi} intégré, on peut passer au \textit{quoi} et donc aux types de données :
+
+\begin{center}
+\begin{tabular}{ | c | c | l | c | }
+\hline
+\textbf{entier}                    & \textbf{integer} & Entiers relatifs (+ et -) & \TTBF{42} \\
+\hline
+\multirow{2}{*}{\textbf{flottant}} & \textbf{float}   & Nombres à virgule             & \multirow{2}{*}{\TTBF{13.37}} \\
+                                   & \textbf{double}  & (attention aux comparaisons)  & \\
+\hline
+\textbf{caractère}                 & \textbf{char}    & Lettres / Caractères (un seul à la fois) & \TTBF{'b'} \\
+\hline
+\textbf{chaîne de caractères}      & \textbf{string}  & \multirow{1}{*}{Suite de caractères} & \TTBF{"lol"} \\
+\hline
+\textbf{booléen}                   & \textbf{bool}    & \multirow{1}{*}{Valeur booléenne (Vrai/Faux)} & \TTBF{True} \\
+\hline
+\end{tabular}
+\end{center}
+
+Donnez des exemples de données et demandez à quel type ils appartiennent.
+Rappelez que le type \textit{bool} n'existe pas dans tous les langages et qu'il est parfois un entier : \og 0 \fg{} indiquant \textit{faux}, et \og tout sauf 0 \fg{} indiquant \textit{vrai}.
+
+\bigskip
+
+\textbf{Attention : } indiquez bien qu'en C et dans la plupart des langages de programmation :
+\begin{itemize}
+\item les caractères sont encadrées par des \textit{simple quotes} (apostrophes simples) [ \TTBF{'} ]
+\item les chaînes de caractères sont encadrées par des \textit{double quotes} (apostrophes doubles) [ \TTBF{"} ]
+\end{itemize}
+
+(La \textit{back quote} ou \textit{backtick} (accent grave) [ \TTBF{\textasciigrave} ] (Alt Gr + 7 sur les claviers français) est utilisée dans le développement, mais pas pour les types)
+
+\medskip
+
+\textbf{Attention : } de même, les flottants s'écrivent généralement avec la notation anglaise, à savoir un \textit{point} entre les unités et les décimales, et très rarement avec une virgule comme en français.
+
+\medskip
+
+Demandez comment mettre \TTBF{"} entre des doubles apostrophes ou comment manipuler le caractère \TTBF{'}.
+Expliquez l'usage du \textit{backslash} (anti-slash) [ \TTBF{\textbackslash} ] : $ \; $ \TTBF{\textbackslash{}'} $ \; $ \TTBF{\textbackslash{}"} $ \; $ \TTBF{\textbackslash{}\textasciigrave} $ \; $ \TTBF{\textbackslash{}n} $ \; $ \TTBF{\textbackslash{}r} $ \; $ \TTBF{\textbackslash{}r\textbackslash{}n} $ \; $ ...
+
+Exemples : '\TTBF{\textbackslash{}'}' $ \; $ "\TTBF{\textbackslash{}"Texte\textbackslash{}"}" $ \; $ ... mais : \TTBF{'"'} $ \; $ \TTBF{"Tex't'e"}
+
+\bigskip
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exécution pas à pas}
+
+\subsection{Somme des N premiers entiers}
+
+\bigskip
+
+\begin{itemize}
+\item Projettez le PDF au tableau pour n'avoir qu'à écrire dans les cases, tout en permettant à la classe de voir l'algorithme
+\item N'hésitez pas à créer des cases autour au feutre pour montrer les variables qui évoluent
+\item ...attention à ne pas écrire sur le mur avec le feutre...
+\end{itemize}
+
+\begin{itemize}
+\item Chaque case du tableau permet de connaître l'état des variables au moment d'effectuer la condition du \textit{while}
+\item \og \'Etat Initial \fg{} sert juste à indiquer l'état des variable au moment d'entrer dans la boucle
+\item Les cases suivantes indiquent l'état des variables à la fin de chaque tour
+\item (La case \og 1 \fg{} contient donc l'état des variables à la fin du 1\up{er} tour de boucle/juste après avoir exécuté une fois chaque instruction de la boucle)
+\end{itemize}
+
+\vfillFirst
+
+\vfillLast
+
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Multiplication égyptienne}
+
+\bigskip
+
+\begin{itemize}
+\item Projetez l'algorithme au tableau, mais ne l'expliquez pas
+\item Laissez les étudiants exécuter l'algorithme, et demandez-leur après d'expliquer le fonctionnement
+\end{itemize}
+
+
+\medskip
+
+\begin{itemize}
+\item Demandez comment cela peut être possible de savoir diviser par 2 et détecter des nombres pairs/impaires sans savoir faire de multiplication
+\item Une fois des solutions présentées par les étudiants, montrez cette technique au tableau :
+\end{itemize}
+
+
+Comment diviser 7 par 2 quand on ne sait que dénombrer ? (Voire, sans même avoir la notion de dénombrement)
+
+\begin{table}[h!]
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+    \begin{tabular}{  C{1cm}  C{1cm}  C{1cm}  C{1cm}  }
+$ \bullet $ & & $ \bullet $ & \\
+$ \bullet $ & $ \bullet $ & & \\
+ & & $ \bullet $ & \\
+ & & $ \bullet $ & $ \bullet $ \\
+    \end{tabular}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.2\textwidth}
+  \centering
+
+  \begin{tikzpicture}[ultra thick]
+%    \draw [-] (0,0) -- (0,4);
+    \draw [->] (0,0) -- +(1.5,0);
+  \end{tikzpicture}
+
+  \end{minipage}
+  \hfillx
+  \begin{minipage}{0.4\textwidth}
+    \centering
+
+    \begin{tabular}{  C{1cm}  C{1cm}  C{1cm}  C{1cm}  }
+$ \bullet $ & $ \bullet $ & $ \bullet $ & $ \bullet $ \\
+ & & & \\
+\hline
+ & & & \\
+$ \bullet $ & $ \bullet $ & $ \bullet $ &  \\
+    \end{tabular}
+
+  \end{minipage}
+\end{table}
+
+\begin{enumerate}
+\item On prend les objets deux à deux, on les aligne, et on répète jusqu'à ne plus avoir que un ou zéro objets.
+\item \begin{itemize}
+      \item S'il ne reste aucun objet : on avait une quantité paire d'objets
+      \item S'il reste un objet : alors on avait une quantité impaire.
+      \end{itemize}
+\item Le dividende/La moitié "entière" est le côté avec le moins de points (ici la zone du bas avec 3 objhets)
+\end{enumerate}
+
+\bigskip
+
+C'est un algorithme purement visuel qui ne nécessite aucune connaissance mathématique théorique, ni même de savoir lire, écrire, ou compter : on a divisé par 2 le tas d'objets sans même savoir combien il y en avait.
+
+\bigskip
+
+\begin{itemize}
+\item L'algorithmique correspond à peu près à cela :
+\item Trouver une méthode pour résoudre un problème
+\item (et pouvoir réutiliser cette méthode si le problème est rencontré de nouveau)
+\item Ainsi qu'optimiser au mieux la méthode
+\end{itemize}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Division euclidienne}
+
+\bigskip
+
+\begin{itemize}
+\item L'algorithme a un problème : les étudiants doivent le corriger
+\item C'est plus simple de corriger/débugger avec des valeurs
+\end{itemize}
+
+\bigskip
+
+\begin{itemize}
+\item Présentez les effets de $ > $ et $ >= $ sur la boucle
+\item Demandez comment gérer le cas 0...
+\end{itemize}
+
+
+\vspace*{1.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\'Ecriture d'algorithmes simples}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Multiplication classique}
+
+\bigskip
+
+\begin{itemize}
+\item Faire écrire un premier algorithme aux étudiants
+\item Insister sur le fait de faire avec une addition au milieu de l'algorithme
+\item \textit{Nous on sait faire la multiplication, mais comment le processeur a "appris" à le faire ?}
+\item Expliquez la différence entre $ \; $ \TTBF{i = i + 1} $ \; $ et $\; $ \TTBF{i += 1} $ \; $ (et pour les bons : \TTBF{i++} et \TTBF{++i})
+\end{itemize}
+
+\medskip
+
+\begin{itemize}
+\item Demandez comment gérer le cas 0...
+\item ...Puis le cas des nombres négatifs
+\item Présentez le système de \textit{fonction chapeau} (fonction filtrant les paramètres avant l'exécution de l'algorithme principal)
+\item Faites leur écrire une fonction chapeau filtrant le cas 0 et permettant de gérer les nombres négatifs
+\end{itemize}
+
+\medskip
+
+\begin{itemize}
+\item Exercice de calligraphie : apprenez aux étudiants à écrire le symbole \og \& \fg{} (et \og \{ \fg{} \og \} \fg{})
+
+\textit{(Quelques-uns savent le faire, mais certains bloquent jusqu'à la fin de l'année)}
+\end{itemize}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Puissance}
+
+\begin{itemize}
+\item Même chose : insister sur le fait qu'il faille utiliser des multiplications, et particulièrement la fonction réalisée juste avant
+\item Demandez aux étudiants à quoi doit ressembler la \textit{pile d'appels} et combien d'additions ont réellement été effectuées
+\item Indiquez que le calcul d'une puissance n'est pas du tout une opération facile pour un CPU : il n'y a pas toujours d'instruction POW dans les processeurs... ce sont souvent des fonctions dans les logiciels/bibliothèques, mais pas internes aux processeurs
+
+[\textit{Chez Intel x86/x86-64 il n'existe que l'instruction F2XM1 qui s'en rapproche en calculant $ 2^{x} - 1 $ Donnez un point à celui qui arrivera à la citer sans que vous ne parliez de cette instruction}]
+
+\end{itemize}
+
+\bigskip
+
+\textbf{WARNING : } indiquez aux étudiants que s'ils ont besoin de calculer une puissance lors des examens ou dans les projets... ils devront réécrire eux-mêmes la fonction \textit{pow} (elle ne sera \textit{jamais} autorisée durant toute l'année, sauf s'ils l'écrivent au moins une fois à chaque examen sur leur copie).
+L'accent circonflexe ne sera PAS accepté dans les examens en tant qu'opérateur calculant la puissance.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parité}
+
+--RAS--
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Réécriture de boucles}
+
+\begin{itemize}
+\item Rappelez les différences entre boucles For et While
+\item Précisez que la boucle For peut être optimisée de différentes manières par le compilateur (même si les étudiants ne comprennent pas encore cela, ils entendent le terme une première fois)
+\item \`A l'inverse, la boucle While ne peut pas être optimisée aussi facilement
+\end{itemize}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fonctions, Procédures, et Effets de bord}
+
+\begin{itemize}
+\item Rappelez la différence entre \textit{algorithmique} et \textit{programmation}
+\item Précisez succinctement qu'un ordinateur contient un ou des processeurs qui sont les vrais exécutants du code
+\end{itemize}
+
+
+\subsection{Portée des Variables}
+
+\begin{itemize}
+\item Expliquez les termes \textit{variables} et \textit{paramètres}
+\item Expliquez la durée de vie des variables et leurs portées (fonction, boucles, ...)
+\item Indiquez oralement que certaines normes de programmation autorise ou interdisent certaines pratiques
+
+Exemple : en C89, il est impossible de déclarer des variables dont la portée se limite à une boucle, mais en C99 oui.
+\item Illustrez le terme \textit{scope} à l'aide de l'indentation dans les codes exemples
+\item Précisez qu'en Python c'est justement l'indentation qui explicite ces scopes, alors qu'en C, ce sont les accolades
+\end{itemize}
+
+
+\subsection{Fonctions et Procédures}
+
+\begin{itemize}
+\item Une \textit{fonction} retourne une valeur
+\item Une \textit{procédure} ne retourne aucune valeur
+\end{itemize}
+
+\subsection{Effets de bord}
+
+\begin{itemize}
+\item Reprendre les remarques sur la portée des variables
+\item \'Ecrivez une fonction simple au tableau, et écrivez une deuxième fonction simple qui appelle la première (au hasard addition et multiplication)
+\item Demandez quelle variable peut agir et où
+\item Retirez le "retourne" final pour y mettre un "print" : demandez la différence avant/après
+\item Explicitez qu'afficher à l'écran est beaucoup plus complexe que ce que l'on croit...
+\item Indiquez que "print" produit donc des effets de bords
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Propriétés des fonctions}
+
+L'art de la programmation réside en partie dans l'écriture de fonctions possédant certaines propriétés :
+
+\begin{itemize}
+\item \textit{Déterminisme} : fonction renvoyant toujours le même résultat pour les mêmes paramètres
+
+\item \textit{Pure} : une fonction est dite pure si elle est déterministe \textit{ET} ne produit aucun effet de bord
+\end{itemize}
+
+(Citez succinctement les autres propriétés sans les détailler : fonctions réentrantes, idempotentes, ...)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en septembre 2024}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}

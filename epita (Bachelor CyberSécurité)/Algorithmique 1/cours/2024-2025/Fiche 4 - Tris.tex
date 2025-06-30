@@ -1,0 +1,243 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{[PROF] Tris}
+\newcommand{\SousTitreSeance}{Fiche 4}
+\newcommand{\DateCours}{Novembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Tris ; Tri ; Sort ; Tri à Bulles ; Bubble Sort ; Tri par Sélection ; Selection Sort ; Tri par Insertion ; Insertion Sort}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de guider les enseignants pour le cours d'algorithmique.
+Il est déconseillé de le fournir aux étudiants, car il vise surtout à vous permettre de guider la séance.
+Vous n'êtes évidemment pas obligé de le suivre à la lettre (c'est même déconseillé, car cela va autant vous perturber vous que la classe : suivez votre chemin de pensée et/ou celui de la classe, et ensuite vérifiez que vous n'avez rien oublié).
+
+\medskip
+
+La quatrième partie présente les tris.
+Vous pouvez introduire cette séance par la vidéo suivante : \href{https://www.youtube.com/watch?v=kPRA0W1kECg}{YouTube - 15 Sorting Algorithms in 6 Minutes} \textit{(attention au son et au risque d'épilepsie)}.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Définitions}
+
+Rappelez les informations classiques suivantes :
+
+\bigskip
+
+Définition informelle d'un algorithme de tri~\footnote{Wikipedia (octobre 2023) : \href{https://fr.wikipedia.org/wiki/Algorithme_de_tri}{Algorithme de tri}} : \og \textit{Un algorithme de tri est, en informatique ou en mathématiques, un algorithme qui permet d'organiser une collection d'objets selon une relation d'ordre déterminée.} \fg .
+
+\bigskip
+
+En pratique cela implique d'organiser des objets comparables les uns avec les autres selon un critère.
+On peut ordonner des fruits selon leur taille, leur poids, etc.
+Le critère pour ordonner doit absolument disposer d'une \textit{relation d'ordre} du type \og plus grand que \fg{} ou \og inférieur ou égal à \fg{}, afin de trier les objets (c'est-à-dire leur donner un numéro d'ordre).
+
+\bigskip
+
+Très concrètement, les algorithmes de tri ont comme objectif de réorganiser en ordre croissant ou décroissant un tableau composé d'éléments comparables deux à deux.
+Les principaux problèmes rencontrés concernent :
+\begin{itemize}
+\item la \textit{complexité temporelle}, c'est-à-dire le temps nécessaire pour trier (souvent associé au nombre de comparaisons et déplacements nécessaires),
+\item la \textit{complexité spatiale}, c'est-à-dire l'espace nécessaire pour réorganiser le tableau (déplacement d'au plus 2 éléments à la fois, ou construction complète d'un nouveau tableau en mémoire en parallèle de l'ancien),
+\item la \textit{stabilité}, c'est-à-dire que l'on conserve l'ordre des éléments considérés comme égaux dans le tableau initial (si deux pommes P1 suivie de P2 ont le même poids, on doit conserver l'ordre en sortie P1 suivie de P2 et surtout pas P2 suivie de P1 : en effet, un tri sur un autre critère que le poids a peut être été effectué préalablement, et ainsi, les pommes seront triées principalement sur leur poids, et ensuite sur chaque critère précédent).
+\end{itemize}
+
+\bigskip
+
+Rappelez que l'on travaille sur des tableaux.
+
+\medskip
+
+Définissez le \textit{tri en place} : on modifie le tableau donné en paramètre sans jamais créer de tableau supplémentaire ou intermédiaire.
+
+\smallskip
+
+Explicitez pourquoi les tris ne sont en fait que des procédures qui ne renvoient rien : les tris sont \textit{en place}.
+
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Swap}
+
+
+\begin{itemize}
+\item Expliquez que puisque les tris se font en place, alors il faut une procédure ou fonction qui permette d'échanger deux valeurs entre elles dans un tableau \\
+\item Demandez aux étudiants de rédiger une telle fonction (elle renvoie faux si les index à échanger sont hors du tableau)
+\end{itemize}
+
+
+%\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri à Bulles}
+
+
+\begin{itemize}
+\item Donnez la logique générale oralement : \\
+  \og \textit{Le tri à bulles vise à faire remonter tour à tour les plus grandes valeurs vers la fin du tableau.} \fg{} \\
+  \og \textit{Si deux valeurs côte à côte sont dans le désordre, on les inverse, et on teste les suivantes jusqu'à la fin du tableau. On recommence ce traitement sur chaque case du tableau autant de fois que nécessaire (c'est-à-dire autant de fois qu'il y a de cases).} \fg{}
+
+\medskip
+
+\item Faire un exemple en démarrant avec le tableau suivant, et en faisant 3-4 tours de tris :
+\end{itemize}
+
+\medskip
+
+\begin{center}
+{ \huge
+\begin{tabular}{ | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | C{1cm} | }
+\hline
+\multirow{2}{*}[0pt]{18} &
+\multirow{2}{*}[0pt]{22} &
+\multirow{2}{*}[0pt]{15} &
+\multirow{2}{*}[0pt]{32} &
+\multirow{2}{*}[0pt]{42} &
+\multirow{2}{*}[0pt]{10} &
+\multirow{2}{*}[0pt]{24} &
+\multirow{2}{*}[0pt]{29} \\
+ & & & & & & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+\medskip
+
+\begin{itemize}
+\item Faire remarquer aux étudiants que la dernière case se retrouve fixée à chaque tour, car la plus grande valeur y a été placée \\
+\item Demandez aux étudiants de réfléchir à comment faire l'algorithme \\
+\item Au bout de quelques minutes, indiquez qu'il \textit{faut} utiliser 2 boucles imbriquées, et explicitez-les :
+  \begin{itemize}
+  \item Une boucle pour comparer toutes les cases 2 à 2
+  \item Une boucle pour répéter cette opération autant de fois qu'il y a de cases
+    \textit{(mais aussi pour limiter le nombre de cases testées à chaque fois)}
+  \end{itemize}
+\item Implémentez le tri / Faire la correction
+\end{itemize}
+
+
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri par Sélection}
+
+
+\begin{itemize}
+\item Donnez la logique générale oralement : \\
+  \og \textit{Le tri par sélection est le tri le plus évident humainement parlant : il suffit de chercher à chaque tour le plus grand élément restant, pour le placer en fin de tableau.} \fg{} \\
+  \og \textit{On cherche donc la valeur la plus grande en parcourant toutes les cases, puis, on échange la place de cet élément avec le tout dernier du tableau (pour le mettre à sa place définitive). Et on recommence ce traitement (sans lire la dernière case à chaque fois) jusqu'à avoir ordonné tous les éléments.} \fg{} \\
+\item Faire un exemple en démarrant avec le tableau précédent, en faisant 3-4 tours de tris \\
+\item Faire remarquer aux étudiants que tous les algorithmes de tri ont au moins 2 boucles \\
+\item Demandez aux étudiants de réfléchir à comment faire l'algorithme \\
+\item Implémentez le tri / Faire la correction \\
+\item Demandez aux étudiants le cas d'un tableau à 1 élément, 2 éléments... 0 élément \\
+\item Faire remarquer que ce tri ne peut pas bien gérer le cas à 2 éléments, et qu'il faut donc faire une fonction chapeau :
+  \begin{itemize}
+  \item La fonction chapeau doit vérifier si le tableau a suffisamment de cases pour faire un tri (donc cas 1 et 0 sont laissés intacts)
+  \item La fonction chapeau doit regarder si, dans le cas à 2 cases, les cases sont dans le désordre, et si oui, il faut les inverser
+  \item Dans tous les autres cas, on doit appeler la fonction de tri précédemment écrite
+  \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tri par Insertion}
+
+
+\begin{itemize}
+\item Donnez la logique générale oralement : \\
+  \og \textit{Le tri par insertion considère que le tableau donné en paramètre n'est pas trié, et seuls les éléments qu'il a manipulé successivement le sont. Ainsi, chaque élément du tableau est comparé à tous ceux déjà triés, et on le place là où il devrait être.} \fg{} \\
+  \og \textit{Pour le premier élément, celui-ci est considéré comme déjà trié, on peut donc passer au deuxième. Le deuxième est comparé avec l'unique élément déjà trié : on échange leurs deux places si nécessaire. Le troisième élément est comparé au plus grand des deux éléments triés, s'il est plus grand ou égal, il reste à sa place, sinon on le décale vers la gauche d'un cran, et on le compare à l'élément suivant (et ainsi de suite pour trouver sa place finale).} \fg{} \\
+\item Faire un exemple en démarrant avec le tableau précédent, en faisant 3-4 tours de tris \\
+\item Faire remarquer aux étudiants que tous les algorithmes de tri ont au moins 2 boucles \\
+\item Demandez aux étudiants de réfléchir à comment faire l'algorithme \\
+\item Implémentez le tri / Faire la correction \\
+\item Demandez aux étudiants si l'algorithme arrive à traiter le cas à 2 éléments
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Les fonctions de tri dans nos outils}
+
+Le début de cette partie est accessible à tous, mais la suite est optionnelle (elle peut être rapidement abordée avec les étudiants ayant déjà vu les tris).
+
+\begin{itemize}
+\item Demandez comment faire pour trier dans l'ordre \textit{descendant}
+\item Demandez comment faire pour trier autre chose que des nombres (ou des caractères) : comment trier des structures de données ?
+\item \textit{[Optionnel]} Présentez l'idée d'une fonction renvoyant vrai/faux si \textit{elt1} est plus grand que \textit{elt2}
+\item \textit{[Optionnel]} Présentez comment rendre la fonction de tri indépendante de la fonction de comparaison
+\item \textit{[Optionnel]} Montrez le manuel de \textit{qsort(3)}, et mentionnez les \textit{pointeurs sur fonction}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en décembre 2024}
+
+\textit{(dernière mise à jour décembre 2024)}
+\end{center}
+
+\end{document}

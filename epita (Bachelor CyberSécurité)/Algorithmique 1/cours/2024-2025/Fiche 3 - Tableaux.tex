@@ -1,0 +1,307 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Algorithmique 1}
+\newcommand{\TitreSeance}{[PROF] Tableaux}
+\newcommand{\SousTitreSeance}{Fiche 3}
+\newcommand{\DateCours}{Octobre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Algorithmique ; Algorithmes ; Tableaux}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalCourseBooklet}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de guider les enseignants pour le cours d'algorithmique.
+Il est déconseillé de le fournir aux étudiants, car il vise surtout à vous permettre de guider la séance.
+Vous n'êtes évidemment pas obligé de le suivre à la lettre (c'est même déconseillé, car cela va autant vous perturber vous que la classe : suivez votre chemin de pensée et/ou celui de la classe, et ensuite vérifiez que vous n'avez rien oublié).
+
+\medskip
+
+La troisième partie vise à faire découvrir les tableaux aux étudiants, ainsi que les chaînes de caractères (qui en découlent).
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tableaux}
+
+\bigskip
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{| C{0.77cm} | C{0.77cm} | C{0.77cm} | C{0.77cm} | C{0.77cm} |}
+  \hline
+$ 42 $ & $ 14 $ & $ 18 $ & $ 666 $ & $ 1337 $ \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{itemize}
+\item Montrer un exemple de tableau d'entiers très simple
+\item Faire remarquer que ce tableau ne contient QUE des entiers...
+\item ...les tableaux des langages bas niveaux/proches de la machine ne contiennent que le même type de données...
+\item ...les langages plus abstraits (comme Python) autorisent à stocker des types différents dans les tableaux
+\item En pratique, c'est plus rapide de ne gérer \textit{que} le même type de données
+\item Indiquer que l'on verra plus tard comment stocker plusieurs types distincts de données dans une liste
+\end{itemize}
+
+\medskip
+
+\begin{itemize}
+\item Demander aux étudiants l'index de démarrage du tableau
+\item Rappeler que \textit{la plupart} des langages font démarrer à $ 0 $...
+\item ...mais que certains langages font démarrer à $ 1 $
+\end{itemize}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ C{0.77cm}  C{0.77cm}  C{0.77cm}  C{0.77cm}  C{0.77cm} }
+% 0    &   1    &    2   &    3    &    4     \\
+\textit{1} & \textit{2} & \textit{3} & \textit{4} & \textit{5} \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} & \textit{4} \\
+  \end{tabular}
+
+  \begin{tabular}{| C{0.77cm} | C{0.77cm} | C{0.77cm} | C{0.77cm} | C{0.77cm} |}
+  \hline
+$ 42 $ & $ 14 $ & $ 18 $ & $ 666 $ & $ 1337 $ \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{itemize}
+\item Faites une double numérotation du tableau (démarrant à 0 et à 1)
+\item Indiquez la longueur du tableau
+\item Indiquez le numéro de la dernière case
+\item Expliquez l'avantage des deux numérotations :
+  \begin{itemize}
+  \item démarrer à $ 0 $ permet de faire une boucle s'arrêtant \textit{avant} la longueur du tableau ( $ < len $ )
+  \item démarrer à $ 1 $ permet de n'avoir que des valeurs entières/non nulles comme index + la dernière case sera celle de la longueur
+  \end{itemize}
+\end{itemize}
+
+
+\bigskip
+
+\begin{itemize}
+\item Présenter le format des types : \TTBF{int tab[]}
+\item Présenter le format des types : \TTBF{int tab[5]}
+\item Demander aux étudiants comment accéder à la case 3 du tableau
+\item Indiquer qu'en algorithmique, si on donne un tableau en paramètre, sa taille sera \textit{toujours} indiquée dans un autre paramètre (\TTBF{tab} et \TTBF{len})
+\end{itemize}
+
+\bigskip
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Chaînes de caractères}
+
+\begin{itemize}
+\item Demander aux étudiants comment sont stockées les chaînes de caractères
+\item Expliquer qu'en C, et dans beaucoup de langages, c'est un tableau de caractères
+\item Indiquer que la dernière case contient '\textbackslash 0'
+\item Expliquer la différence entre les 2 mondes :
+  \begin{itemize}
+  \item dans les années 50-60, on imposait des formulaires de taille prédéfinie (30 caractères pour les noms, ...)\\
+        c'est plus simple à gérer, peu de possibilité de \textit{casser} le système (car tout est données), mais extrêmement peu flexible (l'humain s'adapte à la machine)
+  \item dans les années 60-70, on cherche un délimiteur de fin de chaîne de caractères\\
+        beaucoup plus flexible et orienté utilisateur (la machine s'adapte à l'humain), dépend des limitations techniques de la machine (que faire si on envoie un roman dans le champ nom ?), le programme cherche une \textit{fin} de ligne, donc la donnée agit sur les chemins d'exécution
+  \end{itemize}
+\end{itemize}
+
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ C{0.7cm} C{0.7cm} C{0.7cm} C{0.7cm} }
+% 0  &  1  &  2  &  3 \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} \\
+  \end{tabular}
+
+  \begin{tabular}{| C{0.7cm} | C{0.7cm} | C{0.7cm} | C{0.7cm} |}
+  \hline
+'l' & 'o' & 'l' & '\textbackslash 0' \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{itemize}
+\item Demander la taille de la chaîne et la taille du tableau
+\item Faire remarquer que la taille de la chaîne donne l'index de la dernière case du tableau
+\item Indiquer qu'il ne faut pas oublier de prévoir de la place pour le '\textbackslash 0' lorsque l'on recopie des chaînes de carcatères
+\end{itemize}
+
+\bigskip
+
+\begin{itemize}
+\item Indiquer qu'il y a une différence entre \TTBF{char str[]} et \TTBF{char *str}, mais que l'on utilise le deuxième pour simplifier
+\item Indiquer que lorsque l'on parle de chaînes de caractères, l'accès à la chaîne sera donné avec \TTBF{str}, mais pas sa taille
+\item Indiquer que néanmoins, si on parle explicitement de \textit{tableaux} de caractères, alors leur taille sera fournie, car ceux-ci peuvent contenir plusieurs '\textbackslash 0' et ne pas se terminer par l'un d'eux (car il ne s'agit pas d'une \textit{chaîne de caractères} mais d'un \textit{tableau de caractères})
+\end{itemize}
+
+\bigskip
+
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ C{0.7cm} C{0.7cm} C{0.7cm} C{0.7cm} C{0.7cm} C{0.7cm} C{0.7cm} }
+% 0  &  1  &  2  &          3         &  4  &  5  &  6  \\
+\textit{0} & \textit{1} & \textit{2} & \textit{3} & \textit{4} & \textit{5} & \textit{6} \\
+  \end{tabular}
+
+  \begin{tabular}{| C{0.7cm} | C{0.7cm} | C{0.7cm} | C{0.7cm} | C{0.7cm} | C{0.7cm} | C{0.7cm} |}
+  \hline
+'A' & 'b' & 'C' & '\textbackslash 0' & 'D' & 'e' & 'F' \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercices variés}
+
+\bigskip
+
+
+\question{Écrivez maintenant une fonction vérifiant que les éléments d'un tableau forment un palindrome (la longueur est donnée en paramètre). \textit{PalindromeTab(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction testant si une chaîne de caractères est un palindrome (le '\textbackslash 0' final ne sera bien entendu pas pris en compte dans le palindrome). \textit{PalindromeStr(str)} }
+
+\bigskip
+
+\question{Écrivez une fonction comparant deux tableaux. Si les tableaux sont les mêmes, alors vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. \textit{CompareTab(tab1, tab2, len1, len2)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui renvoie la valeur la plus grande/petite du tableau. Vous ferez une version itérative et une version récursive pour Min et Max. \textit{MinTabIter(tab, len)} \textit{MaxTabIter(tab, len)} \textit{MinTabRec(tab, len)} \textit{MaxTabRec(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui calcule la somme de tous les éléments d'un tableau. Vous ferez une version itérative et une version récursive. \textit{SommeTabIter(tab, len)} \textit{SommeTabRec(tab, len)} }
+
+Améliorez l'algorithme pour n'utiliser qu'un seul itérateur tout en ajoutant à chaque fois le début et la fin du tableau (n'oubliez pas de vous arrêter là où il faut et de ne pas ajouter trop d'éléments).
+
+\bigskip
+
+\question{Écrivez une fonction qui calcule la taille d'une chaîne de caractères (sans compter le '\textbackslash 0' final : "lol" a une taille de $ 3 $). Vous ferez une version itérative et une version récursive. \textit{StrlenIter(str)} \textit{StrlenRec(str)} }
+
+\bigskip
+%\clearpage
+
+\question{Écrivez une fonction qui compare deux chaînes de caractères et renvoie \textit{vrai} si elles sont similaires et \textit{faux} si elles diffèrent. Vous ferez une version itérative et une version récursive. \textit{StrcmpIter(str1, str2)} \textit{StrcmpRec(str1, str2)} }
+
+Essayez d'écrire une version itérative qui teste d'abord la longueur des chaînes, puis, une autre version sans ce test.
+
+\bigskip
+
+\question{Écrivez une fonction qui recherche un élément dans un tableau. Vous ferez une version itérative et une version récursive. \textit{RechercheEltTabIter(tab, len, elt)} \textit{RechercheEltTabRec(tab, len, elt)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui compare deux tableaux. Si les deux tableaux contiennent les mêmes éléments aux mêmes positions, vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. Vous ferez une version itérative et une version récursive. \textit{CompareTabIter(tab1, tab2, len1, len2)} \textit{CompareTabRec(tab1, tab2, len1, len2)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui teste si les éléments d'un tableau sont tous en ordre croissant. Si tous les éléments sont ordonnés du plus petit au plus grand, alors vous renverrez \textit{vrai}, sinon vous renverrez \textit{faux}. Si les éléments sont tous égaux, alors le résultat sera \textit{vrai}. Vous ferez une version itérative et une version récursive. \textit{TestCroissantTabIter(tab, len)} \textit{TestCroissantTabRec(tab, len)} }
+
+Faites la même chose pour tester la décroissance.
+
+\bigskip
+
+\question{Écrivez une fonction qui insère un élément dans un tableau à une position précise, et décale les éléments vers la fin. Le dernier élément qui devrait disparaître du tableau sera renvoyé par la fonction. Par exemple, pour un tableau contenant [ A B C D ], si l'on y insère 'Z' en position $ 1 $, le tableau doit devenir [ A Z B C ] et la fonction doit renvoyer D. \textit{InsertionTab(tab, len, elt, pos)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui supprime un élément dans un tableau à une position précise, et décale les éléments vers le début. L'élément supprimé du tableau sera renvoyé par la fonction. De plus, pour éviter que le dernier élément soit dupliqué, vous prendrez un élément en paramètre qui sera inséré à la fin. Par exemple, pour un tableau contenant [ A B C D ], si l'on supprime l'élément en position $ 1 $ tout en ajoutant 'Z', le tableau doit devenir [ A C D Z ] et la fonction doit renvoyer B. \textit{SuppressionTab(tab, len, pos, elt)} }
+
+\bigskip
+
+\question{Écrivez une procédure qui inverse la position de tous les éléments. Vous ne devez pas construire de nouveau tableau, mais uniquement modifier en place le tableau (en utilisant des variables temporaires). Par exemple, pour un tableau contenant [ A B C D ], si l'on inverse la position des éléments, le tableau doit devenir [ D C B A ]. \textit{InverserTab(tab, len)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est bien un préfixe d'une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si le prefixe est bon et \textit{faux} si ce n'est pas le cas. Par exemple, "abc" est un préfixe à "abcdef", mais pas "bcd" ni "def". Vous ferez une version itérative et une version récursive. \textit{PrefixStrIter(str, prefix)} \textit{PrefixStrRec(str, prefix)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est bien un suffixe d'une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si le suffixe est bon et \textit{faux} si ce n'est pas le cas. Par exemple, "def" est un suffixe à "abcdef", mais pas "cde" ni "abc". Vous ferez une version itérative et une version récursive. \textit{SuffixStrIter(str, suffix)} \textit{SuffixStrRec(str, suffix)} }
+
+\bigskip
+
+\question{Écrivez une fonction qui vérifie sur une chaîne de caractères est contenue dans une autre chaîne de caractères. Cette fonction renvoie \textit{vrai} si la sous-chaîne est contenue dans la chaîne principale et \textit{faux} si ce n'est pas le cas. Par exemple, "abc" est contenue dans "ababc", mais pas "cde" ni "cba". Vous ferez une version itérative et une version récursive. \textit{SubStrIter(str, sub)} \textit{SubStrRec(str, sub)} }
+
+Attention, certains cas sont difficiles à détecter.
+Dans certains cas, il sera plus difficile de détecter "abc" dans "abcbc" que "abc" dans "ababc".
+N'oubliez pas de vérifier plusieurs cas complexes tels que : rechercher "abc" dans "abababc" ou "abcbcbc".
+
+\bigskip
+
+\bigskip
+
+%Pimentez votre expérience des tableaux en réécrivant ces fonctions et procédures en récursif, voire en récursif terminal pour les moins complexes (certaines sont plus naturelles en récursif terminal).
+
+
+\vfillFirst
+
+\vfillLast
+
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en octobre 2022.\\
+La plupart des exercices sont inspirés du cahier d'algo de Nathalie "Junior" BOUQUET et Christophe "Krisboul" BOULLAY.}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+
+\end{document}

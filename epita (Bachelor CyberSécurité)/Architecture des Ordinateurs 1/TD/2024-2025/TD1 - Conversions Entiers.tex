@@ -1,0 +1,515 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\TitreMatiere}{Architecture des Ordinateurs 1}
+\newcommand{\TitreSeance}{TD1 - Conversions des Entiers}
+\newcommand{\SousTitreSeance}{Non-Signés et Signés}
+\newcommand{\DateCours}{Septembre 2024}
+\newcommand{\AnneeScolaire}{2024-2025}
+\newcommand{\Organisation}{EPITA}
+\newcommand{\NomAuteurA}{Fabrice BOISSIER}
+\newcommand{\MailAuteurA}{fabrice.boissier@epita.fr}
+\newcommand{\NomAuteurB}{ }
+\newcommand{\MailAuteurB}{ }
+\newcommand{\DocKeywords}{Architecture ; Conversion Entiers ; Entiers Non-Signés ; Entiers Signés ; Binaire ; Hexadécimal ; Octal}
+\newcommand{\DocLangue}{fr} % "en", "fr", ...
+
+\usepackage{MetalQuickLabs}
+
+% Babel ne traduit pas toujours bien les tableaux et autres
+\renewcommand*\frenchfigurename{%
+    {\scshape Figure}%
+}
+\renewcommand*\frenchtablename{%
+    {\scshape Tableau}%
+}
+
+% Ne pas afficher le numéro de la légende sur tableaux et figures
+\captionsetup{format=sanslabel}
+
+
+\begin{document}
+
+\EncadreTitre
+
+\bigskip
+
+
+%\begin{center}
+%\begin{tabular}{p{5cm} p{11cm}}
+%\textbf{Commandes étudiées :} & \texttt{sh}, \texttt{bash}, \texttt{man}, \texttt{ls}, \texttt{mkdir}, \texttt{touch}, \texttt{chmod}, \texttt{mv}, \texttt{rm}, \texttt{rmdir}, \texttt{cat}, \texttt{file}, \texttt{which}, \texttt{which}\\
+%
+%\textbf{Builtins étudiées :} & \texttt{pwd}, \texttt{cd}, \texttt{exit}, \texttt{logout}, \texttt{echo}, \texttt{umask}, \texttt{type}, \texttt{>}, \texttt{>{}>}, \texttt{<}, \texttt{<{}<}, \texttt{|}\\
+%
+%\textbf{Notions étudiées :} & Shell, Manuels, Fichiers, Répertoires, Droits, Redirections\\
+%\end{tabular}
+%\end{center}
+
+\bigskip
+
+
+Ce document a pour objectif de vous familiariser avec les conversions entre plusieurs bases dans le cas des entiers.
+
+\bigskip
+
+La plupart des conversions que nous effectuerons seront entre les bases 2, 8, 10, et 16 pour les entier.
+
+Pour rappel, plusieurs notations pour représenter les bases existent : celles où l'on explicite par un indice en suffixe de nombre dans quelle base celui-ci a été écrit, ou par un caractère en préfixe du nombre.
+
+\medskip
+
+\begin{tabular}{c l}
+$ 42_{(10)} $ & indique l'on écrit le nombre \og $42$ \fg{} en base $ 10 $. \\
+$ 1010_{(2)} $ & indique que l'on écrit le nombre \og $6$ \fg{} en base $ 2 $. \\
+\end{tabular}
+
+\bigskip
+
+Parmi les caractères servant de préfixe, on retrouvera : \og $ \% $ \fg{} \og $ 0o $ \fg{} \og $ \$  $ \fg{}
+
+\smallskip
+
+\begin{tabular}{c l}
+$ \% 00101111 $ & le pourcentage indique que l'on manipule un nombre binaire (ici $ 47 $) \\
+$ 0o 42 $ & le zéro suivi d'un O minuscule indiquent que l'on manipule un nombre octal (ici $ 34 $) \\
+$ \$ 15AB $ & le dollar indique l'on manipule un nombre hexadécimal (ici $ 5547 $) \\
+\end{tabular}
+
+\smallskip
+
+Un nombre sans préfixe est considéré par défaut comme un nombre décimal.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bornes des Entiers}
+
+%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Rappelez tout d'abord les bornes inférieures et supérieures (le plus petit/grand nombre) pour les différents cas : \textit{[au delà de 1 million, arrondissez à un chiffre et une puissance de 10]}
+
+\medskip
+
+\begin{center}
+\centerline{
+\begin{tabular}{ | c || C{3.5cm} | C{3.5cm} || C{3.5cm} | C{3.5cm} | }
+\hline
+  &  \multicolumn{2}{ c ||}{entier non-signé}  &  \multicolumn{2}{ c |}{entier signé} \\
+\hline
+  &  borne inférieure  &  borne supérieure  &  borne inférieure  &  borne supérieure \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 4 bits\end{minipage}} & & & & \\
+ & & & & \\
+% 4 bits & & & & \\
+ & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 8 bits\end{minipage}} & & & & \\
+ & & & & \\
+% 8 bits & & & & \\
+ & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 16 bits\end{minipage}} & & & & \\
+ & & & & \\
+% 16 bits & & & & \\
+ & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 24 bits\end{minipage}} & & & & \\
+ & & & & \\
+% 24 bits & & & & \\
+ & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 32 bits\end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ - \, 2 \; \times 10^{9} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ + \, 2 \; \times 10^{9} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering 0 \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$   \, 4 \; \times 10^{9} $} \end{minipage}} \\
+ & & & & \\
+ & & & & \\
+% & (approx.) & (approx.) & & (approx.) \\
+% 32 bits & & &  0  & \\
+% &  $ - \, 2 \; \times 10^{9} $  &  $ + \, 2 \; \times 10^{9} $  & &  $ 4 \; \times 10^{9} $ \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 48 bits\end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ - \, 1.4 \; \times 10^{14} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ + \, 1.4 \; \times 10^{14} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering 0 \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$   \, 2.8 \; \times 10^{14} $} \end{minipage}} \\
+ & & & & \\
+ & & & & \\
+% & & & & \\
+%48 bits &  (approx.) $ - \, 1.4 \; \times 10^{14} $  &  (approx.) $ + \, 1.4 \; \times 10^{14} $  &  0  &  (approx.) $ 2.8 \; \times 10^{14} $ \\
+% & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 64 bits\end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ - \, 9.2 \; \times 10^{18} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ + \, 9.2 \; \times 10^{18} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering 0 \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$   \, 1.8 \; \times 10^{19} $} \end{minipage}} \\
+ & & & & \\
+ & & & & \\
+% & & & & \\
+%64 bits &  (approx.) $ - \, 9.2 \; \times 10^{18} $  &  (approx.) $ + \, 9.2 \; \times 10^{18} $  &  0  &  (approx.) $ 1.8 \; \times 10^{19} $ \\
+% & & & & \\
+\hline
+ \multirow{3}{*}{\begin{minipage}{1.5cm}\centering 128 bits\end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ - \, 1.7 \; \times 10^{38} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$ + \, 1.7 \; \times 10^{38} $} \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering 0 \end{minipage}} &
+   \multirow{3}{*}{\begin{minipage}{3.5cm}\centering (approx.) {$   \, 3.4 \; \times 10^{38} $} \end{minipage}} \\
+ & & & & \\
+ & & & & \\
+% & & & & \\
+%128 bits &  (approx.) $ - \, 1.7 \; \times 10^{38} $  &  (approx.) $ + \, 1.7 \; \times 10^{38} $  &  0  &  (approx.) $ 3.4 \; \times 10^{38} $ \\
+% & & & & \\
+\hline
+\end{tabular}
+}
+\end{center}
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions des Entiers avec la Base 2}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 2 \textrightarrow{} Base 10}
+
+\smallskip
+
+Convertissez vers la base 10 ces valeurs binaires représentées sur 8 bits :
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ | c || C{2.5cm} | C{2.5cm} || c | C{2.5cm} | C{2.5cm} | }
+\hline
+ & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} & & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 0110 \, 1101 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0101 \, 0101 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 0011 \, 1010 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0111 \, 1111 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 1101 \, 0111 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1011 \, 1000 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 1110 \, 0111 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1100 \, 0011 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 1010 \, 1110 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1110 \, 1101 } $} & & \\
+ & & & & & \\
+\hline
+\end{tabular}
+}
+
+\bigskip
+
+Convertissez vers la base 10 ces valeurs binaires représentées sur 12 bits :
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ | c || C{2.5cm} | C{2.5cm} || c | C{2.5cm} | C{2.5cm} | }
+\hline
+ & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} & & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 0001 \, 1101 \, 1011 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0001 \, 0110 \, 1010 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 0011 \, 1101 \, 1011 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 0010 \, 0111 \, 1001 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 0110 \, 0110 \, 1100 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1101 \, 1011 \, 1101 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \% \, 1111 \, 1111 \, 1011 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \% \, 1011 \, 0111 \, 1011 } $} & & \\
+ & & & & & \\
+\hline
+\end{tabular}
+}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 10 \textrightarrow{} Base 2}
+
+\smallskip
+
+Convertissez ces valeurs vers la base 2 sur 8 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ 0_{(10)} = } $   & &  & $ \Scale[1.25]{ -1_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 42_{(10)} = } $  & &  & $ \Scale[1.25]{ -42_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 10_{(10)} = } $  & &  & $ \Scale[1.25]{ -10_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 142_{(10)} = } $ & &  & $ \Scale[1.25]{ -113_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 143_{(10)} = } $ & &  & $ \Scale[1.25]{ -112_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 88_{(10)} = } $  & &  & $ \Scale[1.25]{ -88_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 255_{(10)} = } $ & &  & $ \Scale[1.25]{ -203_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 203_{(10)} = } $ & &  & $ \Scale[1.25]{ -8_{(10)}  = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 77_{(10)} = } $  & &  & $ \Scale[1.25]{ -127_{(10)}  = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 56_{(10)} = } $  & &  & $ \Scale[1.25]{ 127_{(10)}  = } $ \\
+\end{tabular}
+%}
+
+%\bigskip
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions des Entiers avec la Base 16}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 2 \textrightarrow{} Base 16}
+
+\smallskip
+
+Convertissez ces valeurs binaires vers la base 16 sur 8 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ \% \, 0101 \, 1110 = } $  & &  & $ \Scale[1.25]{ \% \, 1101 \, 0111 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ \% \, 1110 \, 1001 = } $  & &  & $ \Scale[1.25]{ \% \, 0010 \, 1101 = } $ \\
+\end{tabular}
+%}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 16 \textrightarrow{} Base 2}
+
+\smallskip
+
+Convertissez ces valeurs hexadécimales vers la base 2 sur 16 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ \$ \, \text{DEB1} = } $  & &  & $ \Scale[1.25]{ \$ \, \text{CAFE} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ \$ \, \text{0110} = } $  & &  & $ \Scale[1.25]{ \$ \, \text{1337} = } $ \\
+\end{tabular}
+%}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 10 \textrightarrow{} Base 16}
+
+\smallskip
+
+Convertissez ces valeurs vers la base 16 sur 8 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ 0_{(10)} = } $   & &   & $ \Scale[1.25]{ -1_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 42_{(10)} = } $  & &   & $ \Scale[1.25]{ -42_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 68_{(10)} = } $  & &   & $ \Scale[1.25]{ -83_{(10)} = } $ \\
+ & & & & \\
+%  & $ \Scale[1.25]{ 156_{(10)} = } $ & &   & $ \Scale[1.25]{ -138_{(10)} = } $ \\
+% & & & & \\
+  & $ \Scale[1.25]{ 224_{(10)} = } $ & &   & $ \Scale[1.25]{ -231_{(10)} = } $ \\
+\end{tabular}
+%}
+
+\bigskip
+
+Convertissez ces valeurs vers la base 16 sur 16 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ 224_{(10)} = } $   & &   & $ \Scale[1.25]{ -231_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 1283_{(10)} = } $  & &   & $ \Scale[1.25]{ -734_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 1515_{(10)} = } $  & &   & $ \Scale[1.25]{ -1515_{(10)} = } $ \\
+ & & & & \\
+%  & $ \Scale[1.25]{ 1789_{(10)} = } $  & &   & $ \Scale[1.25]{ -1234_{(10)} = } $ \\
+% & & & & \\
+  & $ \Scale[1.25]{ 2468_{(10)} = } $  & &   & $ \Scale[1.25]{ -2000_{(10)} = } $ \\
+% & & & & \\
+%  & $ \Scale[1.25]{ 3523_{(10)} = } $  & &   & $ \Scale[1.25]{ -1898_{(10)} = } $ \\
+\end{tabular}
+%}
+
+\bigskip
+
+%\vfillFirst
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 16 \textrightarrow{} Base 10}
+
+\smallskip
+
+Convertissez vers la base 10 ces valeurs représentées en hexadécimal sur 16 bits :
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ | c || C{2.5cm} | C{2.5cm} || c | C{2.5cm} | C{2.5cm} | }
+\hline
+ & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} & & \multirow{2}{*}{Non-Signé} & \multirow{2}{*}{Signé} \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{1234} } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{ABCD} } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{4242} } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{CAFE} } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{DEAD} } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{BEEF} } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{C700} } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{1337} } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{FAB4} } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ \$ \, \text{DADA} } $} & & \\
+ & & & & & \\
+\hline
+\end{tabular}
+}
+
+%\vfillLast
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conversions des Entiers avec la Base 8}
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base X \textrightarrow{} Base 8}
+
+\smallskip
+
+Convertissez ces valeurs vers la base 8 (sur 12 bits dans le cas décimal) :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ 42_{(10)} = } $   & &   & $ \Scale[1.25]{ -1_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 114_{(10)} = } $  & &   & $ \Scale[1.25]{ -42_{(10)} = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ \% \, 1001 \, 1100 = } $  & &   & $ \Scale[1.25]{ \% \, 1110 \, 1101 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ \% \, 0111 \, 0110 = } $ & &   & $ \Scale[1.25]{ \% \, 1101 \, 0011 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ \$ \, \text{F1F0} = } $ & &   & $ \Scale[1.25]{ \$ \, \text{BA0B} = } $ \\
+\end{tabular}
+%}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 8 \textrightarrow{} Base X}
+
+\smallskip
+
+Convertissez ces valeurs depuis la base 8 :
+
+\bigskip
+
+\centerline{
+\begin{tabular}{ | c || C{2.5cm} | C{2.5cm} || c | C{2.5cm} | C{2.5cm} | }
+\hline
+ & \multirow{2}{*}{Base 2} & \multirow{2}{*}{Base 16} & & \multirow{2}{*}{Base 2} & \multirow{2}{*}{Base 16} \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 42 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 1337 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 24 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 1516 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 63 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 2442 } $} & & \\
+ & & & & & \\
+\hline
+\multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 77 } $} & & & \multirow{2}{*}{$ \Scale[1.25]{ 0\text{o} \, 5150 } $} & & \\
+ & & & & & \\
+\hline
+\end{tabular}
+}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base 8 \textrightarrow{} Base 10}
+
+\smallskip
+
+Convertissez vers la base 10 ces valeurs représentées en octal sur 12 bits :
+
+\bigskip
+
+%\centerline{
+\begin{tabular}{ l l  C{4.5cm}  l l }
+  & $ \Scale[1.25]{ 0\text{o} \, 0042 = } $   & &   & $ \Scale[1.25]{ 0\text{o} \, 1337 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 0\text{o} \, 2442 = } $   & &   & $ \Scale[1.25]{ 0\text{o} \, 1234 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 0\text{o} \, 4365 = } $   & &   & $ \Scale[1.25]{ 0\text{o} \, 3280 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 0\text{o} \, 2675 = } $   & &   & $ \Scale[1.25]{ 0\text{o} \, 1512 = } $ \\
+ & & & & \\
+  & $ \Scale[1.25]{ 0\text{o} \, 5150 = } $   & &   & $ \Scale[1.25]{ 0\text{o} \, 5250 = } $ \\
+\end{tabular}
+%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\vfillFirst
+
+\vfillLast
+
+\begin{center}
+\textit{Ce document et ses illustrations ont été réalisés par Fabrice BOISSIER en novembre 2022}
+
+\textit{(dernière mise à jour octobre 2024)}
+\end{center}
+
+\end{document}
