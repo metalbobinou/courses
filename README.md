@@ -1,9 +1,11 @@
 # Courses / Cours
-My Computer Science courses (mainly in french) / Mes cours d'Informatique (principalement en français)
+__My Computer Science courses (mainly in french) / Mes cours d'Informatique (principalement en français)__
 
+__[EN]__
 The courses are given with their sources and/or the original files for creating the pictures.
 You can reuse them as long as you cite the origin.
 
+__[FR]__
 Les cours sont données avec leurs sources et/ou les fichiers originaux ayant servi aux images.
 Vous pouvez les réutiliser tant que vous citez leur provenance.
 
@@ -11,10 +13,9 @@ Vous pouvez les réutiliser tant que vous citez leur provenance.
 # Contents / Contenus
 
 ## EPITA (Bachelor CyberSécurité)
-- Algorithmique 2 [CYBER1] (2024-...)
-- Algorithmique 1 [CYBER1] (2023-...)
-- Architecture des Ordinateurs 2 [CYBER1] (2024-...)
-- Architecture des Ordinateurs 1 [CYBER1] (2022-...)
+- Algorithmique 2 [CYBER1] (2024-2025)
+- Algorithmique 1 [CYBER1] (2023-2025)
+- Architecture des Ordinateurs 1 [CYBER1] (2022-2025)
 - Systèmes - Linux & Windows [CYBER1] (2021-2022)
 - C avancé [CYBER1] (2021-2022)
 
@@ -25,7 +26,7 @@ _[merged/obsolete]_
 
 
 ## EPITA (Apprentissage)
-- Python [AppIng1] (2022-...)
+- Python [AppIng1] (2022-2024)
 
 ## EPITA
 - Systèmes d'Exploitation [Ing1] (2021-2022)
